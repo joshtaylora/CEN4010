@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="Vector3DTest" project="pa1" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="cen4010.pa1.Vector3DTest" time="0.024" displayname="Vector3DTest" uniqueid="[engine:junit-jupiter]/[class:cen4010.pa1.Vector3DTest]">
-    <testcase name="testDot" classname="cen4010.pa1.Vector3DTest" time="0.018" displayname="testDot()" uniqueid="[engine:junit-jupiter]/[class:cen4010.pa1.Vector3DTest]/[method:testDot()]"/>
-    <testcase name="testMagnitude" classname="cen4010.pa1.Vector3DTest" time="0.006" displayname="testMagnitude()" uniqueid="[engine:junit-jupiter]/[class:cen4010.pa1.Vector3DTest]/[method:testMagnitude()]"/>
-  </testsuite>
-</testrun>
