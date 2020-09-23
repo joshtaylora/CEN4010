@@ -1,30 +1,21 @@
-package cen4010.pa1;
+import java.lang.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+class Vector3DTest{
 
-import org.junit.jupiter.api.Test;
+  @Test
+  void testEquals(){
+    boolean equivalent;
+    Vector3D vector1 = new Vector3D(1.0, 2.0, 3.0);
+    Vector3D2 vector2 = new Vector3D(2.0, 4.0, 6.0);
+    equivalent = equals(vector1, vector2);
+    assertFalse(equivalent);
 
-import cen4010.pa1.Vector3D;
+  }
 
-class Vector3DTest {
-
-	@Test
-	void testDot() {
-		Vector3D v1 = new Vector3D(5.00, 3.60, 4.50);
-		Vector3D v2 = new Vector3D(5.00, 3.60, 4.50);
-		double testD = 5.00 * 5.00 + 3.60 * 3.60 + 4.50 *4.50;
-		double result = v1.dot(v2);
-		System.out.println(result);
-		assertEquals(result, testD);
-	}
-	
-	@Test
-	void testMagnitude() {
-		Vector3D v1 = new Vector3D(5.00, 3.60, 4.50);
-		double magnitude = v1.magnitude();
-		double testM = Math.sqrt(5.00 * 5.00 + 3.60 * 3.60 + 4.50 * 4.50);
-		assertEquals(magnitude, testM);
-	}
-	
-
+  @Test
+  void testToString(){
+    Vector3D vector = new Vector3D(1.0, 2.0, 3.0);
+    String expected = "X coordinate: 1.0 \n Y coordinate: 2.0 \n Z coordinate: 3.0 \n";
+    assertEquals(expected, vector.toString());
+  }
 }
