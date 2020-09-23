@@ -1,18 +1,31 @@
 package cen4010.pa1;
 
+import java.lang.*;
+
 public class Vector3D {
+	
 	private double x;
 	private double y;
 	private double z;
+
+	public Vector3D(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
 	
-	//default constructor(unused)
-	public Vector3D() {}
+	public double dot(Vector3D v){
+		double dotP = this.x * v.x 
+				+ this.y * v.y 
+				+ this.z * v.z;
+		return dotP;
+	}
 	
-	//constructor to set vector values
-	public Vector3D(double givex, double givey, double givez) {
-		x = givex;
-		y = givey;
-		z = givez;
+	public double magnitude() {
+		double mag = Math.sqrt(this.x * this.x 
+				+ this.y * this.y 
+				+ this.z * this.z);
+		return mag;
 	}
 	
 	//scales each vector coordinate by value "f"
@@ -28,4 +41,5 @@ public class Vector3D {
 		Vector3D created = new Vector3D(this.x+v.x, this.y+v.y, this.z+v.z);
 		return created;
 	}
+
 }
