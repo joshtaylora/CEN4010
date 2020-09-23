@@ -2,3 +2,7 @@
 ###########################
 .metadata/*
 .metadata
+pa1/.settings
+pa1/.classpath
+pa1/.project
+.project
