@@ -1,0 +1,7 @@
+Breeona: I contributed by writing the scale() and add() functions, as well as the testScale() and testAdd() functions. I took thirty minutes to complete my portion. I had no troubkle with the coding part, but I did have an issue with pushing to the repo at first.
+
+Alex:
+
+Josh:
+
+Elisha:
