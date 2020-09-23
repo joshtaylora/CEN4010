@@ -1,0 +1,4 @@
+# IGNORE ECLIPSE METADATA #
+###########################
+.metadata/*
+.metadata
