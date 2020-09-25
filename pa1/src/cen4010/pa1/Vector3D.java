@@ -1,5 +1,7 @@
-import java.lang.*;
 package cen4010.pa1;
+import cen4010.pa1.*;
+import java.lang.*;
+
 
 import cen4010.pa1;
 
