@@ -65,6 +65,5 @@ public class Vector3D{
                 Vector3D result = new Vector3D(this.x * -1, this.y * -1, this.z * -1);
                 return result;
         }
->>>>>>> 306408780ccc2394caa0e08981d6fa83c4ba768d
 }
 
