@@ -2,6 +2,6 @@ Breeona: I contributed by writing the scale() and add() functions, as well as th
 
 Alex:
 
-Josh:
+Josh: I contributed to writing the JUnit test functions for the dot() and magnitude() functions, as well as implementing those functions in the main Vector3D class itself. The function of these functions was to compute the dot product of two vectors and the magnitude of a vector, respectively. All in all the functionality testing of the test and driver functions took aproximately 24 minutes. The 3 meetings that our team held totaled 3 hours and were used to primarily fix and address issues with merging branches as well as pulling and pushing conflicts. In the final meeting I spent ~15 minutes fixing a build path/ package-import conflict.
 
 Elisha:
