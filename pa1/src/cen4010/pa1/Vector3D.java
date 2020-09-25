@@ -1,6 +1,8 @@
 import java.lang.*;
 package cen4010.pa1;
 
+import cen4010.pa1;
+
 public class Vector3D{
   private double x;
   private double y;
