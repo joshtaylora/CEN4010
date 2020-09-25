@@ -1,6 +1,7 @@
 Breeona: I contributed by writing the scale() and add() functions, as well as the testScale() and testAdd() functions. I took thirty minutes to complete my portion. I had no trouble with the coding part, but I did have an issue with pushing to the repo at first.
 
-Alex: I contributed by writing the toString and equals() methods, as well as testToString() and testEquals() methods. I took thirty minutes to complete my methods. I had some trouble with the coding just from what was asked from the rubric, other than that I encountered no problems
+Alex: I contributed by writing the toString and equals() methods, as well as testToString() and testEquals() methods. I took thirty minutes to complete my methods. 
+I had some trouble with the coding just from what was asked from the rubric, other than that I encountered no problems.
 
 Josh: I contributed to writing the JUnit test functions for the dot() and magnitude() functions, as well as implementing those functions in the main Vector3D class
 itself. The function of these functions was to compute the dot product of two vectors and the magnitude of a vector, respectively. All in all the functionality 
