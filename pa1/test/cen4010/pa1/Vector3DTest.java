@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import cen4010.pa1.Vector3D;
+import cen4010.pa1.*;
 
 class Vector3DTest {
 
@@ -92,5 +92,56 @@ class Vector3DTest {
 		
 		//third coordinate wrong
 		assertFalse(testee.equals(zWrong));
+	}
+
+	@Test
+	void testEquals(){
+		boolean equivalent;
+		Vector3D vector = new Vector3D(1.0, 2.0, 3.0);
+		Vector3D vector1 = new Vector3D(2.0, 4.0, 6.0);
+		Vector3D vector2 = new Vector3D(1.0, 2.0, 9.0);
+		equivalent = vector.equals(vector1);
+		assertFalse(equivalent);
+		equivalent = vector.equals(vector);
+		assertTrue(equivalent);
+		equivalent = vector.equals(vector2);
+		assertFalse(equivalent);
+
+	}
+	
+	@Test
+	void testToString(){
+		Vector3D vector = new Vector3D(1.0, 2.0, 3.0);
+		String expected = "X coordinate: 1.0\nY coordinate: 2.0\nZ coordinate: 3.0\n";
+		assertEquals(expected, vector.toString());
+	}
+
+	@Test
+	void testSubtract() {
+		Vector3D sub = new Vector3D(6, 5, 4);
+		Vector3D otherSub = new Vector3D(3, 2, 7);
+		Vector3D resultSub = sub.subtract(otherSub);
+		Vector3D correctAnswer = new Vector3D(3, 3, -3);
+		Vector3D falseAnswer = new Vector3D(1, 2, 3);
+		//Base check for correctness
+		assertTrue(resultSub.equals(correctAnswer));
+		//Base check for incorrect result
+		assertFalse(resultSub.equals(falseAnswer));
+		//Checking to make sure the function is immutable
+		assertFalse(sub.equals(resultSub));
+	}
+	
+	@Test
+	void testNegate() {
+		Vector3D neg = new Vector3D(4, 5, 6);
+		Vector3D resultNeg = neg.negate();
+		Vector3D correctAnswer = new Vector3D(-4, -5, -6);
+		Vector3D falseAnswer = new Vector3D(1, 2, 3);
+		//Base check for correctness
+		assertTrue(resultNeg.equals(correctAnswer));
+		//Base check for incorrect result
+		assertFalse(resultNeg.equals(falseAnswer));
+		//Checking to make sure the function is immutable
+		assertFalse(neg.equals(resultNeg));
 	}
 }
