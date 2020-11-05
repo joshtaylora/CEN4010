@@ -4,4 +4,7 @@
 */.classpath
 */.idea
 */.iml
-
+*/*/bin/
+*/*/out
+*/*.iml
+*/*/*/*.fxml
