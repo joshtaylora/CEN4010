@@ -1,10 +1,10 @@
 .metadata
 */.settings
-*/.project
+.project
 */.classpath
 */.idea
 */.iml
-*/*/bin/
-*/*/out
+*/bin/
+*/out
 */*.iml
 */*/*/*.fxml
