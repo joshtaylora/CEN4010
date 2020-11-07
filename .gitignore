@@ -1,14 +1,10 @@
-# IGNORE ECLIPSE METADATA #
-###########################
-.metadata/*
 .metadata
-pa1/.settings
-pa1/.classpath
-pa1/.project
-pa3/.project
-pa3/.settings
-pa3/.classpath
-pa3/pa3.iml
-pa3/.idea/
+*/.settings
 .project
-/bin/
+*/.classpath
+*/.idea
+*/.iml
+*/bin/
+*/out
+*/*.iml
+*/*/*/*.fxml
