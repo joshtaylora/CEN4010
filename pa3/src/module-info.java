@@ -1,6 +1,6 @@
-module pa3 {
+module pa3Monopoly {
+
     requires javafx.fxml;
     requires javafx.controls;
 
-    opens cen4010.pa3;
 }
