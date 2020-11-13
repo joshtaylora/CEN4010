@@ -1,7 +1,12 @@
 package Models;
+/**
+ * @author Joshua
+ * @version 1.0.1
+ */
 
 import java.util.LinkedList;
 import java.util.ArrayList;
+
 public class Game {
 
 	// Class variables
@@ -20,11 +25,15 @@ public class Game {
      * -
      */
     // Class Constructor
-    Game(int numPlayers, int timeLimit, ArrayList<Token> tokenList) {
+    public Game(int numPlayers, int timeLimit) {
     	// assign the number of players
     	this.numPlayers = numPlayers;
     	this.timeLimit = timeLimit;
-    	this.tokenList = tokenList;
+    	// TODO need to add initializer for tokenList
+    	this.gameBoard = new Board();
+    	this.playerList = new LinkedList<Player>();
+
+
 
 
     }

@@ -1,6 +1,7 @@
+package Models;
 
 public class Token{
-  string name = "";
+  String name = "";
 
   public int getLocation(Tile tile){
     return tile.getPosition();
