@@ -27,6 +27,18 @@ public class PropertySet {
 	}
 	
 	/**
+	 * This method is to remove a property from a player, mainly used with the trade class.
+	 */
+	public void removeProperty(Deed property) {
+		//foreach property check if it is the correct property if so remove
+		
+		currentNumProperties--;
+		
+		return;
+	}
+	
+	
+	/**
 	 * This method is a little bit kinky, it shouldn't need to take in a player type as it should be going
 	 * through a specific player to get here and be on a specific color set.
 	 * @return true if they have a monopoly and false if they don't.

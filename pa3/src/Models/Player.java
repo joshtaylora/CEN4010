@@ -10,9 +10,9 @@ public class Player {
 	static final int INITIALMONEY = 1500; //players always start with 1500 cash
 	
 	//the variables that are part of the Player class
-	private int account;
+	public int account;
 	private Token playerToken;
-	private PropertySet[] playerDeeds;
+	public PropertySet[] playerDeeds;
 	private Tile currentTile;
 	private boolean inJail;
 	//private int numDoubleRolls;		REMOVE THIS
@@ -46,11 +46,44 @@ public class Player {
 		return;	
 	}
 	
+	
+	
 	/**
-	 * this method is to initiate a trade to another player, trading properties, money or both.
+	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the 
+	 * player they would like to trade with. After that the current players properties and money will pull up and they can choose what they want to trade.
+	 * After that the other players properties and money will pop up and the current player then chooses what they want to trade in return. Then all the 
+	 * trade information will be sent to the other player using their object and the receiveTrade() method. They the other player either accepts or rejects.
+	 * Upon accepting the method will transfer all properties and money. Upon rejection the method will just return.
 	 */
-	public void initiateTrade(Player other) {
+	public void initiateTrade() {
+		int i;
+		int cPlayerMoney;
+		int tPlayerMoney;
+		Deed cPlayerDeeds[];
+		Deed tPlayerDeeds[];
+		int cDeedsSize = cPlayerDeeds.length;
+		int tDeedsSize = tPlayerDeeds.length;
+		Player tradePlayer; //Prompt
+		//TODO display a list of players and prompt currentplayer to which player they would like to trade with.
 		
+		//TODO display and prompt current player for the properties and money to trade
+		
+		boolean tradeResults = tradePlayer.receiveTrade(cPlayerDeeds, tPlayerDeeds, cPlayerMoney, tPlayerMoney);
+		
+		if (tradeResults) {
+			account += tPlayerMoney;
+			account -= cPlayerMoney;
+			tradePlayer.account += cPlayerMoney;
+			tradePlayer.account -= tPlayerMoney;
+			
+			//removing the properties from currentPlayer and adding them to tradePlayer
+			for (i = 0; i < cDeedsSize; i++) {
+				
+			}
+		}
+		else {
+			return;
+		}
 	}
 	
 	
@@ -62,10 +95,10 @@ public class Player {
 		 * TODO somehow display all of this information for the Player to choose if they like the deal or not
 		 */
 		
-		if(/*Player accepts the deal through a button click*/) {
+		if(true/*Player accepts the deal through a button click*/) {
 			return true;
 		}
-		else if(/*Player declines the deal through a decline button click*/) {
+		else if(false/*Player declines the deal through a decline button click*/) {
 			return false;
 		}
 	}
