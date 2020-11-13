@@ -1,4 +1,8 @@
-package Models;
 
-public class Token {
+public class Token{
+  string name = "";
+
+  public int getLocation(Tile tile){
+    return tile.getPosition();
+  }
 }
