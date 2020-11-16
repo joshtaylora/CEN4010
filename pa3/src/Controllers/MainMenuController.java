@@ -28,8 +28,12 @@ public class MainMenuController extends Application {
         * Step 3) Set the scene using primaryStage.setScene
         *
          */
-        Parent root = FXMLLoader.load(getClass().getResource("Views/MainMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader();
 
+        String pathToOpeningView = "src/Views/OpeningView.fxml";
+        FileInputStream fxmlStream = new FileInputStream(pathToOpeningView);
+
+        Parent root = loader.load(fxmlStream);
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);

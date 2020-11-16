@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="100.0" layoutY="70.0" prefHeight="250.0" prefWidth="145.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox layoutX="-2.0" layoutY="38.0" prefWidth="150.0" >
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="2 Players"/>
+                           <String fx:value="3 Players"/>
+                           <String fx:value="4 Players"/>
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label layoutX="3.0" layoutY="14.0" text="Choose Number of Players" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox layoutX="300.0" layoutY="70.0" prefHeight="250.0" prefWidth="145.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox layoutX="9.0" layoutY="39.0" prefWidth="150.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="10 Minutes"/>
+                           <String fx:value="20 Minutes"/>
+                           <String fx:value="30 Minutes"/>
+                           <String fx:value="45 Minutes"/>
+                           <String fx:value="60 Minutes"/>
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label layoutX="14.0" layoutY="14.0" text="Choose Length of Game" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
