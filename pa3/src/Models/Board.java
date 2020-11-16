@@ -53,4 +53,16 @@ public class Board {
         here = (here+spaces)%40;
         return tiles[here];
     }
+    
+    //given a tile's name(case insensitive), return the Tile object. If Tile is not found, return null
+    public Tile searchTile(String name) {
+    	for(int i=0; i<40; i++) {
+    		if(tiles[i].getName().equalsIgnoreCase(name)) {
+    			return tiles[i];
+    		}
+    		else {
+    			return null;
+    		}
+    	}
+    }
 }

@@ -7,7 +7,6 @@ public class RailRoad extends Tile{
 
     //ownership variables
     private Player owner = null;
-    private int rrs = 1;
 
     //constructor
     public RailRoad(String name, int position){
@@ -35,6 +34,15 @@ public class RailRoad extends Tile{
     public int getPrice(){
         return 200;
     }
+    
+  //returns owner of space if there is an owner, or returns null if there is no owner
+    public Player getOwner(){
+        if (owner != null){
+            return owner;
+        }
+        else
+            return null;
+    }
 
     //****************SETTERS************************************
     //sets owner of property
@@ -42,18 +50,10 @@ public class RailRoad extends Tile{
         owner = possessor;
     }
 
-    //TODO: do this better when you can think, include reducing
-    //increases rent on all owned railroads
-    public void setRRS(RailRoad added){
-        if(this.rrs < 5){
-            this.rrs++;
-            added.rrs++;
-        }
-    }
 
     //****************METHODS************************************
     //returns the rent amount, depending on the number of houses/hotels present on a property
-    public int calcRent(){
+    public int calcRent(int rrs){
         final int baseRent = 25;
         final int rentWithTwo = 50;
         final int rentWithThree = 100;
@@ -72,12 +72,4 @@ public class RailRoad extends Tile{
         }
     }
 
-    //returns owner of space if there is an owner, or returns null if there is no owner
-    public Player isOwned(){
-        if (owner != null){
-            return owner;
-        }
-        else
-            return null;
-    }
 }
