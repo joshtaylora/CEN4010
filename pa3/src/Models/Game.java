@@ -32,9 +32,14 @@ public class Game {
     	// TODO need to add initializer for tokenList
     	this.gameBoard = new Board();
     	this.playerList = new LinkedList<Player>();
+    	this.gameTimer = new Timer(this.timeLimit);
 
-
-
-
+    	/* add the players to the list of players
+        for (int i = 0; i < numPlayers; i++)
+        {
+            Player newPlayer = new Player(1500, Token playerToken, Tile startTile, PropertySet[] playerDeeds);
+        }
+        this.playerList.add()
+        */
     }
 }
