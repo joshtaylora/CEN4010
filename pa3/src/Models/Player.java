@@ -1,11 +1,5 @@
-/**
- * 
- */
+package Models;
 
-/**
- * @author Elisha
- * @version 11/5/20
- */
 public class Player {
 	
 	//the variables that are part of the Player class
@@ -79,7 +73,13 @@ public class Player {
 			
 			//removing the properties from currentPlayer and adding them to tradePlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				
+				this.playerDeeds[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
+				tradePlayer.playerDeeds[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
+			}
+			//removing the properties from tradePlayer and adding them to currentPlayer
+			for (i = 0; i < cDeedsSize; i++) {
+				tradePlayer.playerDeeds[tPlayerDeeds[i].getPropertySet()].removeProperty(PlayerDeeds[i]);
+				this.playerDeeds[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
 			}
 		}
 		else {
