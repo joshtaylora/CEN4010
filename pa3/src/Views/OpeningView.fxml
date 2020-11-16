@@ -49,9 +49,11 @@
                   <ChoiceBox layoutX="81.0" layoutY="59.0" prefWidth="150.0">
                       <items>
                           <FXCollections fx:factory="observableArrayList">
-                              <String fx:value="2 Players" />
-                              <String fx:value="3 Players" />
-                              <String fx:value="4 Players" />
+                              <String fx:value="10 Minutes" />
+                              <String fx:value="20 Minutes" />
+                              <String fx:value="30 Minutes" />
+                              <String fx:value="45 Minutes" />
+                              <String fx:value="60 Minutes" />
                           </FXCollections>
                       </items>
                   </ChoiceBox>
@@ -65,7 +67,7 @@
          <children>
             <ImageView fitHeight="165.0" fitWidth="399.0" layoutX="101.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Resources/Images/monopoly_banner.png" />
+                  <Image url="@../Resources/monopoly_banner.png" />
                </image>
             </ImageView>
          </children>

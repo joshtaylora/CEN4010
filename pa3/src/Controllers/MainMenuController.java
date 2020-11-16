@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 
 public class MainMenuController extends Application {
 
@@ -30,10 +31,9 @@ public class MainMenuController extends Application {
          */
         FXMLLoader loader = new FXMLLoader();
 
-        String pathToOpeningView = "src/Views/OpeningView.fxml";
-        FileInputStream fxmlStream = new FileInputStream(pathToOpeningView);
-
-        Parent root = loader.load(fxmlStream);
+        URL pathToOpeningView = new URL("file:src/Views/OpeningView.fxml");
+        loader.setLocation(pathToOpeningView);
+        Parent root = loader.load();
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
