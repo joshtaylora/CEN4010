@@ -199,7 +199,14 @@ public class Player {
 		
 		return playerToken;
 	}
-	
+
+	/*
+	 * -------------------------------------------------------------------------------
+	 * JOSH COMMENT BELOW
+	 * @TODO REMOVE this method because the token is attached to a player and th
+	 * -------------------------------------------------------------------------------
+	 */
+
 	/**
 	 * sets the player's token using the tok param
 	 * @param tok
