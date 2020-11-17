@@ -14,8 +14,8 @@ public class PropertySet {
 	 */
 	public PropertySet(int pInSet) {
 		setSize = pInSet;
-		this.propertiesInSet = new Deed[pInSet];
-		this.currentNumProperties = 0;
+		propertiesInSet = new Deed[pInSet];
+		currentNumProperties = 0;
 	}
 	
 	/**
@@ -25,7 +25,8 @@ public class PropertySet {
 	public void addProperty(Deed property) {
 		propertiesInSet[currentNumProperties] = property;
 		currentNumProperties++;
-
+		
+		return;
 	}
 	
 	/**
@@ -69,7 +70,8 @@ public class PropertySet {
 			}
 		}
 		currentNumProperties--;
-
+		
+		return;
 	}
 	
 	/**
