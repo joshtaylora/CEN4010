@@ -84,6 +84,15 @@ public class Deed extends Tile{
     public int getHotelCost(){
         return hotelCost;
     }
+    
+  //returns owner of space if there is an owner, or returns null if there is no owner
+    public Player getOwner(){
+        if (owner != null){
+            return owner;
+        }
+        else
+            return null;
+    }
 
     //****************SETTERS************************************
     //sets owner of property
@@ -122,12 +131,4 @@ public class Deed extends Tile{
         }
     }
 
-    //returns owner of space if there is an owner, or returns null if there is no owner
-    public Player isOwned(){
-        if (owner != null){
-            return owner;
-        }
-        else
-            return null;
-    }
 }

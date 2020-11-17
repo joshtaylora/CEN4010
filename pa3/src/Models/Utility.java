@@ -8,7 +8,6 @@ public class Utility extends Tile{
 
         //ownership variables
         private Player owner = null;
-        private int us = 1;
 
         //constructor
         public Utility(String name, int position){
@@ -31,6 +30,15 @@ public class Utility extends Tile{
         public int getPrice(){
             return saleValue;
         }
+        
+      //returns owner of space if there is an owner, or returns null if there is no owner
+        public Player getOwner(){
+            if (owner != null){
+                return owner;
+            }
+            else
+                return null;
+        }
 
         //****************SETTERS************************************
         //sets owner of property
@@ -38,18 +46,9 @@ public class Utility extends Tile{
             owner = possessor;
         }
 
-        //TODO: do this better when you can think, include reducing
-        //increases rent on all owned utilities
-        public void setRRS(Utility added){
-            if(this.us < 2){
-                this.us++;
-                added.us++;
-            }
-        }
-
         //****************METHODS************************************
         //returns the rent amount, depending on the number of utilities owned and dice roll
-        public int calcRent(int roll){
+        public int calcRent(int roll, int us){
             switch(us){
                 case 1:
                     return baseRentMult*roll;
@@ -61,13 +60,5 @@ public class Utility extends Tile{
             }
         }
 
-        //returns owner of space if there is an owner, or returns null if there is no owner
-        public Player isOwned(){
-            if (owner != null){
-                return owner;
-            }
-            else
-                return null;
-        }
 }
 
