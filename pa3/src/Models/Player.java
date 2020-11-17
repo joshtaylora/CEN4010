@@ -58,13 +58,11 @@ public class Player {
 	 * @param cPlayerDeeds
 	 * @param tPlayerDeeds
 	 */
-	public void initiateTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[]) {
+	public void initiateTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[], boolean tradeResults) {
 		int i;
 		int cDeedsSize = cPlayerDeeds.length;
 		int tDeedsSize = tPlayerDeeds.length;
-		
-		boolean tradeResults; /* = ////tradePlayer.receiveTrade////(tradePlayer, cPlayerDeeds, tPlayerDeeds, cPlayerMoney, tPlayerMoney); TODO Josh what am I calling for the Controller? */
-		
+
 		if (tradeResults) {
 			account += tPlayerMoney;
 			account -= cPlayerMoney;
