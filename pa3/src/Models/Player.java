@@ -93,7 +93,7 @@ public class Player {
 	 * @param controllerResponse
 	 * @return boolean true/false
 	 */
-	public boolean receiveTrade(boolean controllerResponse) {
+	/*public boolean receiveTrade(boolean controllerResponse) {
 		
 		if(controllerResponse) {
 			return true;
@@ -101,7 +101,7 @@ public class Player {
 		else {
 			return false;
 		}
-	}
+	}*/
 	
 	/**
 	 * returns the current number of railroads the player has
