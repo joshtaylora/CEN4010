@@ -4,14 +4,12 @@ import Models.Game;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -47,5 +45,14 @@ public class MainMenuController extends Application {
         launch(args);
     }
 
-
+    @FXML
+    ChoiceBox<String> playerChoiceBox;
+    /*
+    *   TODO Add FXML event event handler for the ChoiceBox for number of players
+    *    - The ID for the choicebox is playerChoiceBox
+     */
+    @FXML
+    void initialize() {
+        playerChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> ());
+    }
 }

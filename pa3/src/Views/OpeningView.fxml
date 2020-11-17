@@ -32,7 +32,7 @@
          <children>
             <AnchorPane prefHeight="114.0" prefWidth="300.0">
                <children>
-                  <ChoiceBox layoutX="78.0" layoutY="59.0" prefWidth="150.0">
+                  <ChoiceBox fx:id="playerChoiceBox" layoutX="78.0" layoutY="59.0" prefWidth="150.0" onAction="#playerChoiceBox">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="2 Players" />
