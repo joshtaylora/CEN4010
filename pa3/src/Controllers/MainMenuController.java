@@ -53,6 +53,5 @@ public class MainMenuController extends Application {
      */
     @FXML
     void initialize() {
-        playerChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> ());
     }
 }

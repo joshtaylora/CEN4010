@@ -22,13 +22,11 @@ public class Player {
 	 * they shouldn't start in jail.
 	 * and they don't have any doubles yet.
 	 * @param initial
-	 * @param playerToken
 	 * @param currentTile
 	 * @param playerDeeds
 	 */
-	public Player(int initial, Token playerToken, Tile currentTile, PropertySet[] playerDeeds) {
+	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds) {
 		account = initial;
-		this.playerToken = playerToken;
 		this.playerDeeds = playerDeeds;
 		this.currentTile = currentTile;
 		inJail = false;

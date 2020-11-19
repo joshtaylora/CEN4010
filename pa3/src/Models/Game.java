@@ -31,31 +31,45 @@ public class Game {
      * - LinkedList of Player objects
      * -
      */
-    // Class Constructor
+    /** Class Constructor
+     * @param numPlayers: retrieved from the main menu view, denotes the number of players that will be playing
+     * @param timeLimit: retrieved from the main menu view, denotes the starting value for the timer
+     */
     public Game(int numPlayers, int timeLimit) {
     	// assign the number of players
     	this.numPlayers = numPlayers;
+    	// initialize to
     	this.timeLimit = timeLimit;
-    	// TODO need to add initializer for tokenList
+        // initialize the board to a new board object
     	this.gameBoard = new Board();
+    	// initialize the player list to an empty linked list of player objects
     	this.playerList = new LinkedList<Player>();
+        // set the initial timer to the specified timer value
     	this.gameTimer = new Timer(this.timeLimit);
 
+        // store the images for the tokens in an easily accessible array
         tokenImages[0] = new Image("@../Resources/dog.png");
         tokenImages[1] = new Image("@../Resources/hat.png");
         tokenImages[2] = new Image("@../Resources/racecar.png");
         tokenImages[3] = new Image("@../Resources/thimble.png");
 
-        switch(this.numPlayers) {
-            case(2):
-                Player player1 = new Player(initialAccountBalance,
-                        this.gameBoard.searchTile("Go"),
-                        propertySetInitializer(),
-
-                        );
+        // for the number of players specified in the main menu, add that many player and corresponding token
+        //      objects to the appropriate list
+        for (int i = 0; i < this.numPlayers; i++) {
+            Player player = new Player(initialAccountBalance,
+                    this.gameBoard.searchTile("Go"),
+                    propertySetInitializer());
+            Token pToken = new Token(player, tokenImages[i]);
+            playerList.add(player);
+            tokenList.add(pToken);
         }
 
+
+
     }
+    /*
+     * initializes the property set array for each player
+     */
     private PropertySet[] propertySetInitializer() {
         // initialize all of the property sets that will go in the array
         PropertySet brown = new PropertySet(2);
