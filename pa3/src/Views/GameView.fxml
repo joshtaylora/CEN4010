@@ -5,19 +5,32 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainMenuController">
    <children>
-      <AnchorPane layoutX="158.0" layoutY="64.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="600.0" prefHeight="600.0" prefWidth="200.0">
          <children>
-            <VBox layoutX="434.0" prefHeight="400.0" prefWidth="166.0">
+            <AnchorPane>
                <children>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="200.0" />
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="200.0" />
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="200.0" />
-                  <HBox prefHeight="75.0" prefWidth="200.0" />
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" />
                </children>
-            </VBox>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
+      </VBox>
+      <AnchorPane layoutX="31.0" layoutY="64.0" prefHeight="403.0" prefWidth="542.0" />
    </children>
 </AnchorPane>

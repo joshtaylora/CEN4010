@@ -60,7 +60,12 @@ public class Player {
 	 * @param cPlayerDeeds
 	 * @param tPlayerDeeds
 	 */
-	public void initiateTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[], boolean tradeResults) {
+	public void initiateTrade(Player tradePlayer,
+							  int cPlayerMoney,
+							  int tPlayerMoney,
+							  Deed cPlayerDeeds[],
+							  Deed tPlayerDeeds[],
+							  boolean tradeResults) {
 		int i;
 		int cDeedsSize = cPlayerDeeds.length;
 		int tDeedsSize = tPlayerDeeds.length;
