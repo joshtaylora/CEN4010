@@ -5,4 +5,5 @@ module pa3Monopoly {
 
     exports Controllers;
     exports Models;
+    opens Controllers to javafx.fxml;
 }

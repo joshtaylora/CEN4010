@@ -80,6 +80,12 @@ public class Player {
 			return;
 		}
 	}
+
+	/**
+	 * TODO add a method in controller that splits the inputs from trade into playerA and playerB
+	 */
+
+
 	
 	/**
 	 * This method is to receive a trade from another player through th controller, be it properties, money or both. Takes in the result from the controller

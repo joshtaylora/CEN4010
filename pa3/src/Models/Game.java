@@ -26,11 +26,18 @@ public class Game {
 
     private static Image[] tokenImages;
     /**
+     * TODO 1) Board needs Tokens to move around the board
+     * TODO 2) get a functional model for a turn going and implement it
+     */
+
+    /**
      * What should the main menu pass to the game class to instantiate the game object
      * - Timer object
      * - LinkedList of Player objects
      * -
      */
+
+
     /** Class Constructor
      * @param numPlayers: retrieved from the main menu view, denotes the number of players that will be playing
      * @param timeLimit: retrieved from the main menu view, denotes the starting value for the timer
@@ -67,8 +74,10 @@ public class Game {
 
 
     }
-    /*
+    /**
      * initializes the property set array for each player
+     * @param -> no args needed, function purely used to create & initialize array of property sets
+     *              for each player
      */
     private PropertySet[] propertySetInitializer() {
         // initialize all of the property sets that will go in the array
@@ -95,8 +104,6 @@ public class Game {
                 railRoad,
                 utility
         };
-
-
         return propertySetArray;
     }
 }
