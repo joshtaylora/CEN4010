@@ -13,11 +13,17 @@ import java.util.ArrayList;
 
 public class Game {
 
+    public static int minuteToMilliS = 60000;
+
 	// Class variables
     private Player startingPlayer;
     private LinkedList<Player> playerList;
     private int numPlayers;
-    private int timeLimit;
+
+    private long timeLimit;
+    private long startTime;
+    private long endTime;
+
     private Board gameBoard;
     private Dice gameDice;
     private long gameTimer;
@@ -31,14 +37,6 @@ public class Game {
      * TODO 3) Implement Timer class as long value using System.currentTimeMillis()
      */
 
-    /**
-     * What should the main menu pass to the game class to instantiate the game object
-     * - Timer object
-     * - LinkedList of Player objects
-     * -
-     */
-
-
     /** Class Constructor
      * @param numPlayers: retrieved from the main menu view, denotes the number of players that will be playing
      * @param timeLimit: retrieved from the main menu view, denotes the starting value for the timer
@@ -46,14 +44,19 @@ public class Game {
     public Game(int numPlayers, int timeLimit) {
     	// assign the number of players
     	this.numPlayers = numPlayers;
-    	// initialize to
-    	this.timeLimit = timeLimit;
+    	// initialize the start time
+    	this.startTime = System.currentTimeMillis();
+    	// initialize to the number of minutes specified * the number of milliseconds in a minute
+    	this.timeLimit = timeLimit * minuteToMilliS;
+
+        //this.endTime = this.timeLimit + startTime;
+
+
         // initialize the board to a new board object
     	this.gameBoard = new Board();
     	// initialize the player list to an empty linked list of player objects
     	this.playerList = new LinkedList<Player>();
         // set the initial timer to the specified timer value
-    	this.gameTimer = timeLimit * 60000;
 
         // store the images for the tokens in an easily accessible array
         tokenImages[0] = new Image("@../Resources/dog.png");
@@ -84,9 +87,10 @@ public class Game {
 
         Dice gameDice = new Dice();
         // while the timer has not run out ...
-        while ((System.currentTimeMillis() - gameTimer) > 0) {
+        while (System.currentTimeMillis() < this.endTime ) {
             for (int i = 0; i < this.numPlayers; i++) {
                 int playerRoll = gameDice.roll();
+                System.out.println("Player rolled: " + playerRoll);
             }
         }
 

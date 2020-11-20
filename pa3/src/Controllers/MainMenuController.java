@@ -102,7 +102,7 @@ public class MainMenuController extends Application {
 
         System.out.println("Game timer length Selected: " + timerVal);
 
-        /*
+
         // initialize the game
         this.game = new Game(numPlayers, timerVal);
         try {
@@ -111,7 +111,6 @@ public class MainMenuController extends Application {
             e.printStackTrace();
         }
 
-         */
      }
     /**
      * Function to move Token's around the board
