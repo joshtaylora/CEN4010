@@ -20,7 +20,7 @@ public class Game {
     private int timeLimit;
     private Board gameBoard;
     private Dice gameDice;
-    private Timer gameTimer;
+    private long gameTimer;
     private ArrayList<Token> tokenList;
     private int initialAccountBalance = 1500;
 
@@ -28,6 +28,7 @@ public class Game {
     /**
      * TODO 1) Board needs Tokens to move around the board
      * TODO 2) get a functional model for a turn going and implement it
+     * TODO 3) Implement Timer class as long value using System.currentTimeMillis()
      */
 
     /**
@@ -52,7 +53,7 @@ public class Game {
     	// initialize the player list to an empty linked list of player objects
     	this.playerList = new LinkedList<Player>();
         // set the initial timer to the specified timer value
-    	this.gameTimer = new Timer(this.timeLimit);
+    	this.gameTimer = timeLimit * 60000;
 
         // store the images for the tokens in an easily accessible array
         tokenImages[0] = new Image("@../Resources/dog.png");
@@ -71,9 +72,37 @@ public class Game {
             tokenList.add(pToken);
         }
 
+        // NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
+        /**
+         * Roll for each player to determine first player
+         * for each player, roll
+         * set max roll = first roll,
+         * - > algo to check who rolled highest
+         * set currentPlayer initially to the index for loop condition and then just increment after that for each turn
+         */
 
+
+        Dice gameDice = new Dice();
+        // while the timer has not run out ...
+        while ((System.currentTimeMillis() - gameTimer) > 0) {
+            for (int i = 0; i < this.numPlayers; i++) {
+                int playerRoll = gameDice.roll();
+            }
+        }
 
     }
+
+    // Intermediate view that displays buttons for players roll dice
+
+    /**
+     * Initiall players do not have names/ numbers
+     * have buttons in intermediate view that roll for who goes first
+     * The token attached to that roll gets to become player1 thus defining the order for players
+     * @return
+     */
+
+
+
     /**
      * initializes the property set array for each player
      * @param -> no args needed, function purely used to create & initialize array of property sets

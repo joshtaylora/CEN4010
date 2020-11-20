@@ -38,6 +38,15 @@ public class MainMenuController extends Application {
 
     private Scene gameScene;
 
+    /**
+     * TODO Add inside of while loop a check for the timer value
+     *  - LocalDateTime initialTimer = LocalDateTime.now();
+     *  - while( (LocalDateTime.now() - initialTimer) > 0 ) ----> game is still in progress {}
+     *  - GameOver();
+     * @param primaryStage
+     * @throws Exception
+     */
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         /*
@@ -104,5 +113,12 @@ public class MainMenuController extends Application {
 
          */
      }
+    /**
+     * Function to move Token's around the board
+     * Need to determine width + height of each tile and be able to move tokens on the board according
+     *      to set width and height dimensions for each tile while also maintinaing a relation to the
+     *      orientation of the board
+     * Need to define word
+     */
 
 }

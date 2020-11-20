@@ -6,7 +6,7 @@ import java.lang.Math;
 //includes rolling and checking for doubles
 public class Dice{
   //Int Array of size two to store the random dice values 
-  int dice[];
+  int dice[] = new int[2];
   
   //Roll() randomizes the values for index 0 and 1 for the dice array
   public int roll(){
