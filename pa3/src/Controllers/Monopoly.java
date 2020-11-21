@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class Monopoly extends Application {
 
@@ -23,15 +24,20 @@ public class Monopoly extends Application {
    }
    public void start(Stage primaryStage) throws Exception {
       Scene scene = new Scene(new StackPane());
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TabbedView.fxml"));
-      scene.setRoot(loader.load());
+      try {
+         URL location = getClass().getResource("/Views/TabbedView.fxml");
+         FXMLLoader loader = new FXMLLoader(location);
+         scene.setRoot(loader.load());
+         MainController controller = loader.getController();
 
-      MainController controller = loader.getController();
-      controller.init();
+         primaryStage.setScene(scene);
+         primaryStage.setTitle("Monopoly");
+         primaryStage.show();
 
-      primaryStage.setScene(scene);
-      primaryStage.setTitle("Monopoly");
-      primaryStage.show();
+      } catch(Exception e) {
+         e.printStackTrace();
+
+      }
    }
 
 }

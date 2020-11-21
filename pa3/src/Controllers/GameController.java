@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Deed;
 import Models.Game;
 import Models.Player;
 import javafx.event.Event;
@@ -14,7 +15,7 @@ public class GameController {
     @FXML private TabPane tabPane;
     @FXML private Tab gameTab;
 //  ListView object that will display the properties the player owns
-    @FXML private ListView<Models.Deed> gamePropertyListView;
+    @FXML private ListView<String> gamePropertyListView;
 
 //    Buttons for trading with each player
     @FXML private Button tradeWithPlayer1;
@@ -32,13 +33,15 @@ public class GameController {
 
 
     }
-
+//  when the turn changes, remove the properties in the list view from the other player and add the properties for the
+//  new current player
     private void addPlayerPropertiesToListView(Player tradePlayer) {
         int deedArrayLength = tradePlayer.playerDeeds.length;
 
         for (int i = 0; i < deedArrayLength; i++) {
             for (int j = 0; j < tradePlayer.playerDeeds[i].getCurrentNumProperties(); j++) {
-                gamePropertyListView.getItems().add(tradePlayer.playerDeeds[i].getPropertiesInSet()[i]);
+                Deed playerDeed  = tradePlayer.playerDeeds[i].getPropertiesInSet()[i];
+                gamePropertyListView.getItems().add(playerDeed.getName());
             }
         }
     }
