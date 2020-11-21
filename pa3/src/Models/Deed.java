@@ -104,7 +104,7 @@ public class Deed extends Tile{
     //1 indicates full propertySet
     //6 indicates hotel
     public void setHouses(){
-        if(houses < 7){
+        if(houses < 6){
             houses++;
         }
     }
