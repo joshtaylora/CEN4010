@@ -3,9 +3,9 @@ package Models;
 public class Player {
 	
 	//the variables that are part of the Player class
-	public int account;
+	private int account;
 	private Token playerToken;
-	public PropertySet[] playerDeeds;
+	private PropertySet[] playerDeeds;
 	private Tile currentTile;
 	private boolean inJail;
 	private int numRailroads;
