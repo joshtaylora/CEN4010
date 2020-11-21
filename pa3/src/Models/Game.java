@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class Game {
 
-	public static int minuteToMilliS = 60000;
-
 	// Class variables
 	private Player startingPlayer;
 	private LinkedList<Player> playerList;
@@ -59,6 +57,7 @@ public class Game {
 		this.startTime = System.currentTimeMillis();
 		// initialize to the number of minutes specified * the number of milliseconds in
 		// a minute
+		int minuteToMilliS = 60000;
 		this.timeLimit = timeLimit * minuteToMilliS;
 
 		// this.endTime = this.timeLimit + startTime;
@@ -130,22 +129,6 @@ public class Game {
 
 	}
 
-	// Intermediate view that displays buttons for players roll dice
-
-	/**
-	 * Initiall players do not have names/ numbers have buttons in intermediate view
-	 * that roll for who goes first The token attached to that roll gets to become
-	 * player1 thus defining the order for players
-	 * 
-	 * @return
-	 */
-
-	/**
-	 * initializes the property set array for each player
-	 * 
-	 * @param -> no args needed, function purely used to create & initialize array
-	 *           of property sets for each player
-	 */
 	private PropertySet[] propertySetInitializer() {
 		// initialize all of the property sets that will go in the array
 		PropertySet brown = new PropertySet(2);
@@ -162,5 +145,13 @@ public class Game {
 		PropertySet[] propertySetArray = { brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
 				utility };
 		return propertySetArray;
+	}
+//	GETTER METHODS FOR PRIVATE CLASS VARIABLES
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+
+	public Player getStartingPlayer() {
+		return startingPlayer;
 	}
 }

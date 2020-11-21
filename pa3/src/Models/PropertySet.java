@@ -114,7 +114,6 @@ public class PropertySet {
 	public void setSetSize(int size) {
 		setSize = size;
 
-		return;
 	}
 
 	/**

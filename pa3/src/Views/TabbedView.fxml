@@ -15,20 +15,16 @@
 <?import javafx.scene.control.TabPane?>
 
 <?import javafx.scene.control.Tab?>
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity"
+<TabPane fx:id="tabPane"  maxHeight="-Infinity" maxWidth="-Infinity"
          minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="Controllers.MainMenuController">
+         fx:controller="Controllers.MainController">
     <tabs>
-        <Tab fx:id="mainMenuTabPage" text="Main Menu">
-            <content>
-                <fx:include fx:id="MainMenuView" source="MainMenuView.fxml" />
-            </content>
+        <Tab fx:id="menuTab" text="Main Menu">
+                <fx:include fx:id="menuTabPage" source="MenuView.fxml" />
         </Tab>
-        <Tab fx:id="gameViewTabPage" text="Game">
-            <content>
-                <fx:include fx:id="GameView" source="GameView.fxml"/>
-            </content>
+        <Tab fx:id="gameTab" text="Game">
+                <fx:include fx:id="gameTabPage" source="GameView.fxml"/>
         </Tab>
     </tabs>
 </TabPane>
