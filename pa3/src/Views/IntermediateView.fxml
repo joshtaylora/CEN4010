@@ -31,7 +31,7 @@
                <children>
                   <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieOne">
                       <image>
-                          <Image url="@Resources/die1.png" />
+                          <Image url="@../Resources/die1.png" />
                       </image>
                   </ImageView>
                </children></AnchorPane>
@@ -39,7 +39,7 @@
                <children>
                   <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieTwo">
                       <image>
-                          <Image url="@Resources/die1.png" />
+                          <Image url="@../Resources/die1.png" />
                       </image>
                   </ImageView>
                </children></AnchorPane>
@@ -47,7 +47,7 @@
                <children>
                   <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieOThree">
                       <image>
-                          <Image url="@Resources/die1.png" />
+                          <Image url="@../Resources/die1.png" />
                       </image>
                   </ImageView>
                </children></AnchorPane>
@@ -55,7 +55,7 @@
                <children>
                   <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieFour">
                       <image>
-                          <Image url="@Resources/die1.png" />
+                          <Image url="@../Resources/die1.png" />
                       </image>
                   </ImageView>
                </children></AnchorPane>

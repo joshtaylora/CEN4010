@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 public class InterController extends Application {
-    //@FXML
-    //private
 
     @FXML
     Button ROLL;
@@ -167,12 +165,12 @@ public class InterController extends Application {
     }
 
     private Image die(int rollVal){
-        Image one = new Image("file: Resources/die1.png");
-        Image two = new Image("file: Resources/die2.png");
-        Image thr = new Image("file: Resources/die3.png");
-        Image fou = new Image("file: Resources/die4.png");
-        Image fiv = new Image("file: Resources/die5.png");
-        Image six = new Image("file: Resources/die6.png");
+        Image one = new Image("file: ../Resources/die1.png");
+        Image two = new Image("file: ../Resources/die2.png");
+        Image thr = new Image("file: ../Resources/die3.png");
+        Image fou = new Image("file: ../Resources/die4.png");
+        Image fiv = new Image("file: ../Resources/die5.png");
+        Image six = new Image("file: ../Resources/die6.png");
         switch(rollVal){
             case 1:
                 return one;
