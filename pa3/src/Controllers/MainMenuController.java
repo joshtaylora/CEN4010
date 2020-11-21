@@ -25,99 +25,105 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MainMenuController extends Application {
+	@FXML private TabPane tabPane;
+	@FXML private Tab mainMenuTabPage;
+	@FXML private Tab gameViewTabPage;
+	@FXML private GameController gameController;
 
-    @FXML
-    ChoiceBox<String> playerChoiceBox;
+	@FXML
+	ChoiceBox<String> playerChoiceBox;
 
-    @FXML
-    ChoiceBox<String> timerChoiceBox;
+	@FXML
+	ChoiceBox<String> timerChoiceBox;
 
-    @FXML Button startGame;
+	@FXML
+	Button startGame;
 
-    private Game game;
+	private Game game;
+	private Stage primaryStage;
+	private Scene primaryScene;
+	private Scene gameScene;
 
-    private Scene gameScene;
+	/**
+	 * TODO Add inside of while loop a check for the timer value - LocalDateTime
+	 * initialTimer = LocalDateTime.now(); - while( (LocalDateTime.now() -
+	 * initialTimer) > 0 ) ----> game is still in progress {} - GameOver();
+	 * 
+	 * @param primaryStage
+	 * @throws Exception
+	 */
 
-    /**
-     * TODO Add inside of while loop a check for the timer value
-     *  - LocalDateTime initialTimer = LocalDateTime.now();
-     *  - while( (LocalDateTime.now() - initialTimer) > 0 ) ----> game is still in progress {}
-     *  - GameOver();
-     * @param primaryStage
-     * @throws Exception
-     */
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		/*
+		 * Step 1) Load FXML document as the parent (root) node Step 2) Make a new scene
+		 * using the root as the argument Step 3) Set the scene using
+		 * primaryStage.setScene
+		 *
+		 */
+		this.primaryStage = primaryStage;
+		FXMLLoader loader = new FXMLLoader();
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        /*
-        * Step 1) Load FXML document as the parent (root) node
-        * Step 2) Make a new scene using the root as the argument
-        * Step 3) Set the scene using primaryStage.setScene
-        *
-         */
+		URL pathToOpeningView = new URL("file:src/Views/MainMenuView.fxml");
+		loader.setLocation(pathToOpeningView);
+		Parent root = loader.load();
+		this.primaryScene = new Scene(root);
 
-        FXMLLoader loader = new FXMLLoader();
+		primaryStage.setScene(primaryScene);
 
-        URL pathToOpeningView = new URL("file:src/Views/MainMenuView.fxml");
-        loader.setLocation(pathToOpeningView);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+		primaryStage.setTitle("Main Menu");
 
+		primaryStage.show();
+	}
 
-        primaryStage.setScene(scene);
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-        primaryStage.setTitle("Main Menu");
+	@FXML
+	public void startButtonClicked(Event e) {
+		initGameData();
+	}
 
-        primaryStage.show();
-    }
+	/*
+	 * This initializes the Game
+	 */
+	public void initGameData() {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+		// Grab the value of the selected player choice box input
+		String playerChoiceBoxValue = playerChoiceBox.getValue();
+		// split the value into a string part and a digit part
+		String[] playerSplit = playerChoiceBoxValue.split("\\s");
+		int numPlayers = Integer.parseInt(playerSplit[0]);
 
+		System.out.println("Number of Players Selected: " + numPlayers);
 
-    @FXML
-    public void startButtonClicked(Event e) {
-        initGameData();
-    }
-    /*
-     * This initializes the Game
-     */
-     public void initGameData() {
+		// Grab the value of the selected timer choice box input
+		String timerChoiceBoxValue = timerChoiceBox.getValue();
+		// split the value into a string part and a digit part
+		String[] timerSplit = timerChoiceBoxValue.split("\\s");
+		int timerVal = Integer.parseInt(timerSplit[0]);
 
+		System.out.println("Game timer length Selected: " + timerVal);
 
-        // Grab the value of the selected player choice box input
-        String playerChoiceBoxValue = playerChoiceBox.getValue();
-        // split the value into a string part and a digit part
-        String[] playerSplit = playerChoiceBoxValue.split("\\s");
-        int numPlayers = Integer.parseInt(playerSplit[0]);
+		// initialize the game
+		this.game = new Game(numPlayers, timerVal);
 
-        System.out.println("Number of Players Selected: " + numPlayers);
+		try {
+			String pathToGameView = "src/Views/GameView.fxml";
+			Parent newRoot = FXMLLoader.load(getClass().getResource(pathToGameView));
+			primaryStage.getScene().setRoot(newRoot);
 
-        // Grab the value of the selected timer choice box input
-        String timerChoiceBoxValue = timerChoiceBox.getValue();
-        // split the value into a string part and a digit part
-        String[] timerSplit = timerChoiceBoxValue.split("\\s");
-        int timerVal = Integer.parseInt(timerSplit[0]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        System.out.println("Game timer length Selected: " + timerVal);
-
-
-        // initialize the game
-        this.game = new Game(numPlayers, timerVal);
-        try {
-            URL pathToGameView = new URL("file:src/Views/GameView.fxml");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-     }
-    /**
-     * Function to move Token's around the board
-     * Need to determine width + height of each tile and be able to move tokens on the board according
-     *      to set width and height dimensions for each tile while also maintinaing a relation to the
-     *      orientation of the board
-     * Need to define word
-     */
+	}
+	/**
+	 * Function to move Token's around the board Need to determine width + height of
+	 * each tile and be able to move tokens on the board according to set width and
+	 * height dimensions for each tile while also maintinaing a relation to the
+	 * orientation of the board Need to define word
+	 */
 
 }

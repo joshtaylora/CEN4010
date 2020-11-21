@@ -1,9 +1,9 @@
 module pa3 {
 
-    requires javafx.fxml;
-    requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.controls;
+	exports Models;
+	exports Controllers;
 
-    exports Controllers;
-    exports Models;
-    opens Controllers to javafx.fxml;
+	opens Controllers to javafx.fxml;
 }
