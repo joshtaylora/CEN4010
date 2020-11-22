@@ -62,8 +62,6 @@ public class Board {
 		for (int i = 0; i < 40; i++) {
 			if (tiles[i].getName().equalsIgnoreCase(name)) {
 				return tiles[i];
-			} else {
-				return null;
 			}
 		}
 		return null;

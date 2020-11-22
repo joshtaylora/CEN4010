@@ -31,7 +31,7 @@ public class Tile {
     -Jail
     -GoToJail
     -RailRoad
-    -Utility
+    -Utilityz
     -None (nothing to do on this tile)
      */
     public String getType(){

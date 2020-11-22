@@ -37,10 +37,8 @@ class UtilityTests {
     void testSetOwner (){
         Utility test = new Utility("Electric Company" ,12);
         //initialize a random player object
-        Token tok = new Token();
-        PropertySet set = new PropertySet(3);
-        //TODO: make sure this player constructor is up to date
-        Player dummy = new Player(1500, tok, test, set);
+        PropertySet[] arry = new PropertySet[1];
+        Player dummy = new Player(1500, test, arry);
 
         //set ownership to player
         test.setOwner(dummy);
