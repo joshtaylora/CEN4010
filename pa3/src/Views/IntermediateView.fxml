@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InterController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane GridPane.rowIndex="2">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="88.0" prefWidth="145.0">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieOne">
+                      <image>
+                          <Image url="@../Resources/die1.png" />
+                      </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieTwo">
+                      <image>
+                          <Image url="@../Resources/die1.png" />
+                      </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieOThree">
+                      <image>
+                          <Image url="@../Resources/die1.png" />
+                      </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" fx:id="dieFour">
+                      <image>
+                          <Image url="@../Resources/die1.png" />
+                      </image>
+                  </ImageView>
+               </children></AnchorPane>
+         </children>
+      </GridPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Text layoutX="7.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roll the Dice to Find Out Turn Order!">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="172.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everyone pick which die is yours before rolling!!!" />
+         </children></AnchorPane>
+      <GridPane GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="labelOne" layoutX="65.0" layoutY="40.0" text="???">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Label fx:id="labelTwo" layoutX="65.0" layoutY="40.0" text="???">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="87.0" prefWidth="152.0" GridPane.columnIndex="2">
+               <children>
+                  <Label fx:id="labelThree" layoutX="65.0" layoutY="40.0" text="???">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <Label fx:id="labelFour" layoutX="65.0" layoutY="40.0" text="???">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
+               </children></AnchorPane>
+         </children>
+      </GridPane>
+      <GridPane GridPane.rowIndex="3">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="ROLL" layoutX="228.0" layoutY="6.0" mnemonicParsing="false" onAction="#orderDice" prefHeight="88.0" prefWidth="145.0" text="ROLL" textFill="#069024">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

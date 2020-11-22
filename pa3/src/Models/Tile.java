@@ -21,14 +21,22 @@ public class Tile {
 		return name;
 	}
 
-	// returns the subclass of the tile
-	/*
-	 * Types are as follows: -Deed -LuxuryTax -IncomeTax -Go -Jail -GoToJail -None
-	 * (nothing to do on this tile)
-	 */
-	public String getType() {
-		return type;
-	}
+    //returns the subclass of the tile
+    /*
+    Types are as follows:
+    -Deed
+    -LuxuryTax
+    -IncomeTax
+    -Go
+    -Jail
+    -GoToJail
+    -RailRoad
+    -Utility
+    -None (nothing to do on this tile)
+     */
+    public String getType(){
+        return type;
+    }
 
 	// returns the index of a tile in Board's tile array
 	public int getPosition() {
