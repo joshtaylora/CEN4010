@@ -24,13 +24,19 @@ public class GameController {
     @FXML private Button tradeWithPlayer4;
 
     private Game game;
+    private int numberOfPlayers;
+    private int timerValue;
 
+    private MainMenuController mainMenuController;
 
-    public void init(Game game) {
-        this.game = game;
-        int numPlayers = game.getNumPlayers();
-        Player startingPlayer = game.getStartingPlayer();
+    public void injectMainMenuController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
+    }
 
+    @FXML
+    public void initialize() {
+        this.numberOfPlayers = this.mainMenuController.numberOfPlayers;
+        this.timerValue = this.mainMenuController.timerValue;
 
     }
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the

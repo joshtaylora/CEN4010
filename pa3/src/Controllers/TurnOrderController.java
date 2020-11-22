@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,6 +17,12 @@ public class TurnOrderController {
 
     @FXML
     Tab turnOrderTab; // the tab for the turn order view
+
+    @FXML
+    TabPane tabPane;
+
+    @FXML
+    Tab gameTab;
 
     @FXML
     Button rollButton;
@@ -43,20 +50,22 @@ public class TurnOrderController {
 
     private int numberOfPlayers;
 
-    TurnOrderController(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    private MainMenuController mainMenuController;
+
+    public void injectMainMenuController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
     }
 
+    @FXML
+    public void initialize() {
+        this.numberOfPlayers = mainMenuController.numberOfPlayers;
+    }
 
     @FXML
     public void rollDiceButtonClicked(Event e){
         displayDice();
     }
 
-    @FXML
-    public void nextTab(Event e){
-
-    }
 
     private void displayDice(){
         //initialize Dice
@@ -204,7 +213,7 @@ public class TurnOrderController {
 
     @FXML
     public void continueToGameButtonClicked(Event e) {
-        MainMenuController.tabPane.getSelectionModel().select(MainMenuController.gameTab);
+        this.tabPane.getSelectionModel().select(this.gameTab);
     }
 
 }

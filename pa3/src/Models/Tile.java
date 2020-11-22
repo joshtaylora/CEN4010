@@ -1,9 +1,9 @@
 package Models;
 
 public class Tile {
-	protected String name;
-	protected String type;
-	protected int position;
+	String name;
+	String type;
+	int position;
 
 	// default constructor
 	public Tile() {

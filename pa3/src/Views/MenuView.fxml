@@ -58,7 +58,7 @@
                       </items>
                   </ChoiceBox>
                   <Label layoutX="110.0" layoutY="29.0" text="Choose Length of Game" />
-                  <Button fx:id="startGame" layoutX="-38.0" layoutY="125.0" mnemonicParsing="false" onAction="#startButtonClicked" text="Start Game" />
+                  <Button fx:id="startGameButton" layoutX="-38.0" layoutY="125.0" mnemonicParsing="false" onAction="#startButtonClicked" text="Start Game" />
                </children>
             </AnchorPane>
          </children>

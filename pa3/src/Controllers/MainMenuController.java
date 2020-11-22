@@ -16,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
@@ -31,59 +33,53 @@ import java.net.URL;
 public class MainMenuController extends Application {
 // =====================================================================================================================
 // ========================================= FXML elements for the main TabPane ========================================
-    @FXML
-    public static TabPane tabPane;
+    @FXML TabPane tabPane;
 
-    @FXML
-    Tab menuTab;
+    @FXML Tab menuTab;
 
-    @FXML
-    public static Tab gameTab;
+    @FXML Tab gameTab;
+    @FXML  GameController gameViewController;
 
-    @FXML
-    Tab turnOrderTab;
+    @FXML Tab turnOrderTab;
+    @FXML  TurnOrderController turnOrderViewController;
 
-    @FXML
-    private GameController gameTabPageController;
 
-    @FXML
-    private
-    TurnOrderController turnOrderController;
 
-    @FXML
-    private ChoiceBox<String> playerChoiceBox;
+    @FXML private ChoiceBox<String> playerChoiceBox;
 
-    @FXML
-    private ChoiceBox<String> timerChoiceBox;
+    @FXML private ChoiceBox<String> timerChoiceBox;
 
-    @FXML Button startGame;
-
+    @FXML Button startGameButton;
 
 // =====================================================================================================================
 //  ===================================== Class variables needed for start method ======================================
-    private FXMLLoader loader;
 
-    private Game game;
+    Game game;
 
-    private int numberOfPlayers;
+    int numberOfPlayers;
 
-    private int timerVal;
+    int timerValue;
+
 
     /**
      * @param primaryStage The stage that is passed from the JavaFX runtime
      * @throws Exception Exceptions that can occur in this method are mostly dealing with the URL of the view being loaded
      */
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        this.loader = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();
+        Scene scene = new Scene(new StackPane());
 
         URL pathToOpeningView = new URL("file:src/Views/TabbedView.fxml");
         loader.setLocation(pathToOpeningView);
+        scene.setRoot(loader.load());
+        MainMenuController controller = loader.getController();
+        controller.init();
+        /*
         Parent root = loader.load();
         Scene scene = new Scene(root);
-
+         */
 
         primaryStage.setScene(scene);
 
@@ -96,29 +92,35 @@ public class MainMenuController extends Application {
         launch(args);
     }
 
+    @FXML
+    private void initialize() {
+        gameViewController.injectMainMenuController(this);
+        turnOrderViewController.injectMainMenuController(this);
+    }
 
     /**
      * Event handler for when the start button has been clicked
-     * @param e event for when the start button gets clicked
      */
     @FXML
     public void startButtonClicked(Event e) {
         // initialize the data for the Game object that will be used by the GameController
         initGameData();
+        // initialize the TurnOrderViewController with the number of players so that it can roll the correct amount of
+        //      dice
         // switch active tab to the TurnOrderView tab
         tabPane.getSelectionModel().select(turnOrderTab);
         // initialize the TurnOrderController with the number of players in the game
-        this.turnOrderController = new TurnOrderController(this.numberOfPlayers);
 
 
         // Select the game tab
         tabPane.getSelectionModel().select(gameTab);
         // Transfer controller ownership to the GameController
-        this.loader.setController(gameTabPageController);
         // call the game tab page controller's init function
-        gameTabPageController.init(this.game);
+//        this.gameTabPageController = new GameController(this.game);
+//        gameTabPageController.init();
 
     }
+
 
     /*
      * This initializes the Game object for use by the game controller
@@ -137,14 +139,14 @@ public class MainMenuController extends Application {
         String timerChoiceBoxValue = timerChoiceBox.getValue();
         // split the value into a string part and a digit part
         String[] timerSplit = timerChoiceBoxValue.split("\\s");
-        this.timerVal = Integer.parseInt(timerSplit[0]);
+        this.timerValue = Integer.parseInt(timerSplit[0]);
 
-        System.out.println("Game timer length Selected: " + this.timerVal);
+        System.out.println("Game timer length Selected: " + this.timerValue);
 
 
 
         // initialize the game
-        this.game = new Game(this.numberOfPlayers, this.timerVal);
+        this.game = new Game(this.numberOfPlayers, this.timerValue);
 
     }
 

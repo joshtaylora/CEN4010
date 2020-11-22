@@ -13,13 +13,13 @@
 >
     <tabs>
         <Tab fx:id="menuTab" text="Main Menu">
-            <fx:include fx:id="menuTabPage" source="MenuView.fxml" />
+            <fx:include fx:id="menuView" source="MenuView.fxml" />
         </Tab>
         <Tab fx:id="gameTab" text="Game">
-            <fx:include fx:id="gameTabPage" source="GameView.fxml" />
+            <fx:include fx:id="gameView" source="GameView.fxml" />
         </Tab>
         <Tab fx:id="turnOrderTab" text="Roll for player turn order">
-            <fx:include fx:id="turnOrderTabPage" source="TurnOrderView.fxml" />
+            <fx:include fx:id="turnOrderView" source="TurnOrderView.fxml" />
         </Tab>
     </tabs>
 </TabPane>
