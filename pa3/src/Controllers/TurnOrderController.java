@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Dice;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,64 +9,54 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+
 public class TurnOrderController {
 
 // =====================================================================================================================
 // ====================================== FXML elements for the Turn Order tab =========================================
 
-    @FXML
-    Tab turnOrderTab; // the tab for the turn order view
+    @FXML Tab turnOrderTab; // the tab for the turn order view
 
-    @FXML
-    TabPane tabPane;
+    @FXML TabPane tabPane;
 
-    @FXML
-    Tab gameTab;
+    @FXML Tab gameTab;
 
-    @FXML
-    Button rollButton;
+    @FXML Button rollButton;
 
-    @FXML
-    Button continueToGameButton;
+    @FXML Button continueToGameButton;
 
-    @FXML
-    private ImageView dieOne;
-    @FXML
-    private ImageView dieTwo;
-    @FXML
-    private ImageView dieThree;
-    @FXML
-    private ImageView dieFour;
+    @FXML private ImageView dieOne;
+    @FXML private ImageView dieTwo;
+    @FXML private ImageView dieThree;
+    @FXML private ImageView dieFour;
 
-    @FXML
-    private Label labelOne;
-    @FXML
-    private Label labelTwo;
-    @FXML
-    private Label labelThree;
-    @FXML
-    private Label labelFour;
+    @FXML private Label labelOne;
+    @FXML private Label labelTwo;
+    @FXML private Label labelThree;
+    @FXML private Label labelFour;
 
     private int numberOfPlayers;
 
-    private MainMenuController mainMenuController;
+    private MenuController menuController;
 
-    public void injectMainMenuController(MainMenuController mainMenuController) {
-        this.mainMenuController = mainMenuController;
+    public void injectMenuController(MenuController menuController) {
+        this.menuController = menuController;
     }
 
-    @FXML
-    public void initialize() {
-        this.numberOfPlayers = mainMenuController.numberOfPlayers;
-    }
 
     @FXML
-    public void rollDiceButtonClicked(Event e){
+    public void rollDiceButtonClicked(Event e) throws MalformedURLException {
+        this.numberOfPlayers = this.menuController.numberOfPlayers;
         displayDice();
     }
 
 
-    private void displayDice(){
+    private void displayDice() throws MalformedURLException {
         //initialize Dice
         Models.Dice order = new Models.Dice ();
 
@@ -77,7 +66,7 @@ public class TurnOrderController {
         int three;
         int four;
         // switch on the numberOfPlayers global var that we got from parsing the choice box's input
-        switch(this.numberOfPlayers){
+        switch(this.numberOfPlayers) {
             case 2:
                 one = order.roll()/2;
                 two = order.roll()/2;
@@ -165,17 +154,40 @@ public class TurnOrderController {
         return sort;
     }
 
-    private Image die(int rollVal){
+    private Image die(int rollVal) throws MalformedURLException {
         return getImage(rollVal);
     }
 
-    private static Image getImage(int rollVal) {
-        Image one = new Image("file: ../Resources/die1.png");
-        Image two = new Image("file: ../Resources/die2.png");
-        Image thr = new Image("file: ../Resources/die3.png");
-        Image fou = new Image("file: ../Resources/die4.png");
-        Image fiv = new Image("file: ../Resources/die5.png");
-        Image six = new Image("file: ../Resources/die6.png");
+    private static Image getImage(int rollVal) throws MalformedURLException {
+        // store the system path as a string
+        String sysPath = System.getProperty("user.dir");
+        System.out.println(sysPath);
+        String diePath = sysPath.concat("\\src\\Resources\\");
+
+        File oneFile = new File(diePath.concat("die1.png"));
+        String oneURL = oneFile.toURI().toURL().toString();
+
+        File twoFile = new File(diePath.concat("die2.png"));
+        String twoURL = twoFile.toURI().toURL().toString();
+
+        File threeFile = new File(diePath.concat("die3.png"));
+        String threeURL = threeFile.toURI().toURL().toString();
+
+        File fourFile = new File(diePath.concat("die4.png"));
+        String fourURL = fourFile.toURI().toURL().toString();
+
+        File fiveFile = new File(diePath.concat("die5.png"));
+        String fiveURL = fiveFile.toURI().toURL().toString();
+
+        File sixFile = new File(diePath.concat("die6.png"));
+        String sixURL = sixFile.toURI().toURL().toString();
+
+        Image one = new Image(oneURL);
+        Image two = new Image(twoURL);
+        Image thr = new Image(threeURL);
+        Image fou = new Image(fourURL);
+        Image fiv = new Image(fiveURL);
+        Image six = new Image(sixURL);
         switch(rollVal){
             case 1:
                 return one;
@@ -213,7 +225,8 @@ public class TurnOrderController {
 
     @FXML
     public void continueToGameButtonClicked(Event e) {
-        this.tabPane.getSelectionModel().select(this.gameTab);
+        this.menuController.initGameViewController();
+        this.menuController.switchToGameTab();
     }
 
 }

@@ -3,7 +3,6 @@ package Controllers;
 import Models.Deed;
 import Models.Game;
 import Models.Player;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -27,18 +26,23 @@ public class GameController {
     private int numberOfPlayers;
     private int timerValue;
 
-    private MainMenuController mainMenuController;
+    private MenuController menuController;
 
-    public void injectMainMenuController(MainMenuController mainMenuController) {
-        this.mainMenuController = mainMenuController;
+    public void injectMenuController(MenuController menuController) {
+        this.menuController = menuController;
     }
 
-    @FXML
-    public void initialize() {
-        this.numberOfPlayers = this.mainMenuController.numberOfPlayers;
-        this.timerValue = this.mainMenuController.timerValue;
+//    @FXML
+//    public void initialize() {
+//        this.numberOfPlayers = this.menuController.numberOfPlayers;
+//        this.timerValue = this.menuController.timerValue;
+//
+//    }
+
+    FXML private void beginButtonClicked() {
 
     }
+
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the
 //  new current player
     private void addPlayerPropertiesToListView(Player tradePlayer) {
