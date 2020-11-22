@@ -100,6 +100,14 @@ public class Deed extends Tile{
         }
     }
 
+    //returns the number of houses of a property
+    public int getHouses() {
+        if (houses > 0) {
+            return (houses - 1);
+        }
+        else return 0;
+    }
+
     //****************METHODS************************************
     //returns the rent amount, depending on the number of houses/hotels present on a property
     public int calcRent(){
