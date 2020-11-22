@@ -13,3 +13,7 @@ pa3/.idea/
 .project
 /bin/
 .idea/*
+.idea
+/out
+/lib
+/bin
