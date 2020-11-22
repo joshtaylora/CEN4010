@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ToggleGroup?>
+
+<?import javafx.scene.text.Text?>
+
+<?import javafx.collections.FXCollections?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="Controllers.MainMenuController"
+          prefHeight="400.0" prefWidth="600.0">
+    <fx:define>
+        <ToggleGroup fx:id="timerGroup"/>
+    </fx:define>
+    <Text text="Welcome to Monopoly by T4!"
+          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnSpan="2"
+    />
+
+    <Label text="Please choose how long you want to play: "
+           GridPane.columnIndex="0" GridPane.rowIndex="1"
+    />
+    <RadioButton fx:id="timerButton10" text="10 Minutes" toggleGroup="$timerGroup"
+                 GridPane.columnIndex="0" GridPane.rowIndex="2" selected="">
+    </RadioButton>
+
+    <RadioButton fx:id="timerButton20" text="20 minutes" toggleGroup="$timerGroup"
+                 GridPane.columnIndex="0" GridPane.rowIndex="3">
+    </RadioButton>
+
+    <RadioButton fx:id="timerButton30" text="30 minutes" toggleGroup="$timerGroup"
+                 GridPane.columnIndex="0" GridPane.rowIndex="4">
+    </RadioButton>
+
+    <RadioButton fx:id="timerButton45" text="45 minutes" toggleGroup="$timerGroup"
+                 GridPane.columnIndex="0" GridPane.rowIndex="5">
+    </RadioButton>
+
+    <Label text="Input number of players between 2 and 8: "
+           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <ComboBox fx:id="numPlayers"
+              GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <Integer fx:value="2" />
+                <Integer fx:value="3" />
+                <Integer fx:value="4" />
+                <Integer fx:value="5" />
+                <Integer fx:value="6" />
+                <Integer fx:value="7" />
+                <Integer fx:value="8" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+</GridPane>
