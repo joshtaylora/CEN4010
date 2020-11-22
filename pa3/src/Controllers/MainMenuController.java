@@ -47,6 +47,7 @@ public class MainMenuController extends Application {
     private GameController gameTabPageController;
 
     @FXML
+    private
     TurnOrderController turnOrderController;
 
     @FXML
