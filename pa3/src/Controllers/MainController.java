@@ -14,11 +14,11 @@ public class MainController {
 //   The controller will be injected to a field with "Controller" appended to the value of fx:id
 //   To inject the actual tab as well, we need a separate fx:id for that as well
 
-    @FXML private Tab menuTab;
-    @FXML private MenuController menuTabPageController;
+    @FXML
+    private Tab menuTab;
 
-    @FXML private Tab gameTab;
-    @FXML private GameController gameTabPageController;
+    @FXML
+    private Tab gameTab;
 
     public void init() {
         // Remove the game tab until the players have input the required fields to start the game

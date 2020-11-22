@@ -52,7 +52,15 @@ public class MenuController{
 		// initialize the data for the Game object that will be used by the GameController
 		initGameData();
 
-		if (!tabPane.getTabs().contains(gameTab)) {
+		boolean gameTabNotNull = false;
+		try {
+			gameTabNotNull = !tabPane.getTabs().contains(gameTab);
+		} catch (NullPointerException nullPE) {
+			nullPE.printStackTrace();
+		}
+
+
+		if (gameTabNotNull) {
 			// add the game tab to the view now that the necessary data to start the game has been received
 			tabPane.getTabs().add(gameTab);
 			// set the selected tab to the game tab

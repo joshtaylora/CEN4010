@@ -23,21 +23,19 @@ public class Monopoly extends Application {
       launch(args);
    }
    public void start(Stage primaryStage) throws Exception {
+      // Make the scene
       Scene scene = new Scene(new StackPane());
-      try {
-         URL location = getClass().getResource("/Views/TabbedView.fxml");
-         FXMLLoader loader = new FXMLLoader(location);
-         scene.setRoot(loader.load());
-         MainController controller = loader.getController();
+      String resource = "/Views/MenuView.fxml";
+      URL location = getClass().getResource(resource);
 
-         primaryStage.setScene(scene);
-         primaryStage.setTitle("Monopoly");
-         primaryStage.show();
 
-      } catch(Exception e) {
-         e.printStackTrace();
+      FXMLLoader loader = new FXMLLoader(location);
+      scene.setRoot(loader.load());
+      MainController controller = loader.getController();
 
-      }
+      primaryStage.setScene(scene);
+      primaryStage.setTitle("Monopoly");
+      primaryStage.show();
    }
 
 }

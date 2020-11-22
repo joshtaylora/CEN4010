@@ -46,9 +46,11 @@ public class GameController {
         }
     }
 
-    @FXML
-    private void addPropertyToTrade(Event e) {
-        // handle the event here and add the selected item to the set of property's involved in the trade
+    // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 
-    }
+//    @FXML
+//    private void addPropertyToTrade(Event e) {
+//        // handle the event here and add the selected item to the set of property's involved in the trade
+//
+//    }
 }
