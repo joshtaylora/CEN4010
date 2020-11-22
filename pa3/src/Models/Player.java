@@ -10,6 +10,7 @@ public class Player {
 	private boolean inJail;
 	private int numRailroads;
 	private int numUtilities;
+	private int doubles;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an initial player.
@@ -30,6 +31,7 @@ public class Player {
 		inJail = false;
 		numRailroads = 0;
 		numUtilities = 0;
+		doubles = 0;
 	}
 	
 	/**
@@ -86,7 +88,31 @@ public class Player {
 			return;
 		}
 	}
-	
+
+	/**
+	 * basic get method for the doubles variable
+	 * @return int doubles
+	 */
+	public int getDoubles() {
+
+		return doubles;
+	}
+
+	/**
+	 * basic set method for the doubles variable
+	 */
+	public void setDoubles() {
+		doubles = 0;
+
+		return;
+	}
+
+	public void incrementDoubles() {
+		doubles++;
+
+		return;
+	}
+
 	/**
 	 * returns the current number of railroads the player has
 	 * @return int
