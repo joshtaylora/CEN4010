@@ -15,160 +15,163 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Controllers.GameController">
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="boardImage" stylesheets="@PlayerBoardView.css">
          <children>
-            <AnchorPane>
-               <children>
-                  <GridPane prefHeight="793.0" prefWidth="793.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="135.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="140.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="228.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="246.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="0.0" prefWidth="0.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="86.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <ImageView fitHeight="800.0" fitWidth="793.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Resources/board.jpg" />
-                     </image>
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <VBox prefHeight="600.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <AnchorPane>
                      <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: green;">
-                                 <children>
-                                    <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
-                                    <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 1" textFill="#282828">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="2.0" right="2.0" />
-                                       </padding>
-                                    </Label>
-                                    <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/dog.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="1.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
-                           </children></HBox>
+                        <GridPane prefHeight="793.0" prefWidth="793.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="135.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="140.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="228.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="246.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="0.0" prefWidth="0.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="86.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <ImageView fitHeight="800.0" fitWidth="793.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/board.jpg" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane>
+                  <VBox prefHeight="600.0" prefWidth="200.0">
                      <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                        <AnchorPane>
                            <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: green; -fx-border-width: 4;">
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
-                                    <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 2" textFill="#282828">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="2.0" right="2.0" />
-                                       </padding>
-                                    </Label>
-                                    <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/dog.png" />
-                                       </image>
-                                    </ImageView>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="player" stylesheets="@ActivePlayer.css">
+                                       <children>
+                                          <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
+                                          <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 1" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/dog.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets bottom="1.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
+                              </HBox>
                            </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane>
-                     <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                        </AnchorPane>
+                        <AnchorPane>
                            <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: green;">
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
-                                    <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 3" textFill="#282828">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="2.0" right="2.0" />
-                                       </padding>
-                                    </Label>
-                                    <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/dog.png" />
-                                       </image>
-                                    </ImageView>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="player1" stylesheets="@InactivePlayer.css">
+                                       <children>
+                                          <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
+                                          <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 2" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/dog.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets bottom="1.0" />
-                                 </HBox.margin>
-                              </AnchorPane>
+                              </HBox>
                            </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane>
-                     <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                        </AnchorPane>
+                        <AnchorPane>
                            <children>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: green;">
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
-                                    <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 4" textFill="#282828">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="2.0" right="2.0" />
-                                       </padding>
-                                    </Label>
-                                    <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/dog.png" />
-                                       </image>
-                                    </ImageView>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: green;">
+                                       <children>
+                                          <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
+                                          <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 3" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/dog.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
                                  </children>
-                              </AnchorPane>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 4; -fx-background-color: green;">
+                                       <children>
+                                          <Button layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardView.css" text="Trade" />
+                                          <Label layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardView.css" text="Player 4" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/dog.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="393.0" prefWidth="201.0">
+                           <children>
+                              <ListView fx:id="gamePropertyListView" prefHeight="393.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="393.0" prefWidth="201.0">
-                     <children>
-                        <ListView fx:id="gamePropertyListView" prefHeight="393.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

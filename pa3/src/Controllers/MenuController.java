@@ -82,12 +82,6 @@ public class MenuController {
         this.timerValue = Integer.parseInt(timerSplit[0]);
 
         System.out.println("Game timer length Selected: " + this.timerValue);
-
-
-
-        // initialize the game
-        this.game = new Game(this.numberOfPlayers, this.timerValue);
-
     }
 
 }

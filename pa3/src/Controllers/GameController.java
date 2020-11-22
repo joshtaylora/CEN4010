@@ -3,6 +3,9 @@ package Controllers;
 import Models.Deed;
 import Models.Game;
 import Models.Player;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -22,25 +25,35 @@ public class GameController {
     @FXML private Button tradeWithPlayer3;
     @FXML private Button tradeWithPlayer4;
 
+
     private Game game;
     private int numberOfPlayers;
     private int timerValue;
 
     private MenuController menuController;
 
+//  Injects the menu controller into the game controller and begins the game
     public void injectMenuController(MenuController menuController) {
         this.menuController = menuController;
+        this.numberOfPlayers = menuController.numberOfPlayers;
+        this.timerValue = menuController.timerValue;
+        startGame();
+
     }
 
-//    @FXML
-//    public void initialize() {
-//        this.numberOfPlayers = this.menuController.numberOfPlayers;
-//        this.timerValue = this.menuController.timerValue;
-//
-//    }
+    public void startGame() {
+        this.game = new Game(this.numberOfPlayers, this.timerValue);
 
-    FXML private void beginButtonClicked() {
+    }
 
+//  Logic for things that must be changed when the next players turn arrives:
+//      - Change the current player in game class
+//      - Change the
+
+    public void setActivePlayer(Game game) {
+        for (int i = 0; i < game.getNumPlayers(); i++) {
+
+        }
     }
 
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the
