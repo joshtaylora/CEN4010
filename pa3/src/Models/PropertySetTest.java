@@ -8,6 +8,7 @@ public class PropertySetTest {
 
     @Test
     void testAddSearchProperty() {
+        //This test checks the add and search property methods
         PropertySet testPropSet = new PropertySet(3);
         Deed testDeed = new Deed(100, 1, 6, 12, 24, 48, 96, 192, 50, 50 ,50 ,"Blue", 8);
 
@@ -20,6 +21,7 @@ public class PropertySetTest {
 
     @Test
     void testRemoveProperty() {
+        //This test checks the remove and search property methods
         PropertySet testPropSet = new PropertySet(3);
         Deed testDeed = new Deed(100, 1, 6, 12, 24, 48, 96, 192, 50, 50 ,50 ,"Blue", 8);
         testPropSet.addProperty(testDeed);
@@ -33,6 +35,7 @@ public class PropertySetTest {
 
     @Test
     void testCheckMonopoly() {
+        //This test checks the checkMonopoly method
         PropertySet testPropSet = new PropertySet(1);
         Deed testDeed = new Deed(100, 1, 6, 12, 24, 48, 96, 192, 50, 50 ,50 ,"Blue", 8);
 
@@ -45,6 +48,7 @@ public class PropertySetTest {
 
     @Test
     void testGetSetSetSize() {
+        //This test checks the Get and Set methods for SetSize variable
         PropertySet testPropSet = new PropertySet(1);
 
         assertEquals(testPropSet.getSetSize(), 1);
@@ -56,6 +60,7 @@ public class PropertySetTest {
 
     @Test
     void testGetSetCurrentNumProperties() {
+        //This test checks the Get and Set methods for CurrentNumProperties variable
         PropertySet testPropSet = new PropertySet(1);
 
         assertEquals(testPropSet.getCurrentNumProperties(), 0);
@@ -67,6 +72,7 @@ public class PropertySetTest {
 
     @Test
     void testGetSetPropertiesInSet() {
+        //This test checks the Get and Set methods for PropertiesInSet array
         PropertySet testPropSet = new PropertySet(1);
         Deed[] testDeeds = {new Deed(100, 1, 6, 12, 24, 48, 96, 192, 50, 50 ,50 ,"Blue", 8)};
 
