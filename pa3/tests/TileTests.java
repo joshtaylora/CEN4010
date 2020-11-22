@@ -1,7 +1,8 @@
-package tests;
-
+import Models.*;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TileTests {
 
     //test all getters on children of Tile, as well as Tile itself
@@ -13,24 +14,24 @@ public class TileTests {
         assertFalse(test1.getName().equals(""));
 
         Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
-        assertTrue(test1.getName().equals("Mediterranean Ave."));
-        assertFalse(test1.getName().equals(""));
+        assertTrue(test2.getName().equals("Mediterranean Ave."));
+        assertFalse(test2.getName().equals(""));
 
         RailRoad test3 = new RailRoad("Reading Railroad", 5);
-        assertTrue(test1.getName().equals("Reading Railroad"));
-        assertFalse(test1.getName().equals(""));
+        assertTrue(test3.getName().equals("Reading Railroad"));
+        assertFalse(test3.getName().equals(""));
 
         Utility test4 = new Utility("Electric Company" ,12);
-        assertTrue(test1.getName().equals("Electric Company"));
-        assertFalse(test1.getName().equals(""));
+        assertTrue(test4.getName().equals("Electric Company"));
+        assertFalse(test4.getName().equals(""));
 
         IncomeTax test5 = new IncomeTax("Income Tax", "IncomeTax", 4);
-        assertTrue(test1.getName().equals("Income Tax"));
-        assertFalse(test1.getName().equals(""));
+        assertTrue(test5.getName().equals("Income Tax"));
+        assertFalse(test5.getName().equals(""));
 
         LuxuryTax test6 = new LuxuryTax("Luxury Tax", "LuxuryTax", 38);
-        assertTrue(test1.getName().equals("Luxury Tax"));
-        assertFalse(test1.getName().equals(""));
+        assertTrue(test6.getName().equals("Luxury Tax"));
+        assertFalse(test6.getName().equals(""));
 
     }
 
@@ -41,24 +42,24 @@ public class TileTests {
         assertFalse(test1.getType().equals(""));
 
         Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
-        ssertTrue(test1.getType().equals("Deed"));
-        assertFalse(test1.getType().equals(""));
+        assertTrue(test2.getType().equals("Deed"));
+        assertFalse(test2.getType().equals(""));
 
         RailRoad test3 = new RailRoad("Reading Railroad", 5);
-        ssertTrue(test1.getType().equals("RailRoad"));
-        assertFalse(test1.getType().equals(""));
+        assertTrue(test3.getType().equals("RailRoad"));
+        assertFalse(test3.getType().equals(""));
 
         Utility test4 = new Utility("Electric Company" ,12);
-        ssertTrue(test1.getType().equals("Utility"));
-        assertFalse(test1.getType().equals(""));
+        assertTrue(test4.getType().equals("Utility"));
+        assertFalse(test4.getType().equals(""));
 
         IncomeTax test5 = new IncomeTax("Income Tax", "IncomeTax", 4);
-        ssertTrue(test1.getType().equals("IncomeTax"));
-        assertFalse(test1.getType().equals(""));
+        assertTrue(test5.getType().equals("IncomeTax"));
+        assertFalse(test5.getType().equals(""));
 
         LuxuryTax test6 = new LuxuryTax("Luxury Tax", "LuxuryTax", 38);
-        ssertTrue(test1.getType().equals("LuxuryTax"));
-        assertFalse(test1.getType().equals(""));
+        assertTrue(test6.getType().equals("LuxuryTax"));
+        assertFalse(test6.getType().equals(""));
 
     }
 
@@ -69,24 +70,24 @@ public class TileTests {
         assertFalse(test1.getPosition() == 1);
 
         Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
-        assertTrue(test1.getPosition() == 1);
-        assertFalse(test1.getPosition() == 0);
+        assertTrue(test2.getPosition() == 1);
+        assertFalse(test2.getPosition() == 0);
 
         RailRoad test3 = new RailRoad("Reading Railroad", 5);
-        assertTrue(test1.getPosition() == 5);
-        assertFalse(test1.getPosition() == 1);
+        assertTrue(test3.getPosition() == 5);
+        assertFalse(test3.getPosition() == 1);
 
         Utility test4 = new Utility("Electric Company" ,12);
-        assertTrue(test1.getPosition() == 12);
-        assertFalse(test1.getPosition() == 5);
+        assertTrue(test4.getPosition() == 12);
+        assertFalse(test4.getPosition() == 5);
 
         IncomeTax test5 = new IncomeTax("Income Tax", "IncomeTax", 4);
-        assertTrue(test1.getPosition() == 4);
-        assertFalse(test1.getPosition() == 12);
+        assertTrue(test5.getPosition() == 4);
+        assertFalse(test5.getPosition() == 12);
 
         LuxuryTax test6 = new LuxuryTax("Luxury Tax", "LuxuryTax", 38);
-        assertTrue(test1.getPosition() == 38);
-        assertFalse(test1.getPosition() == 4);
+        assertTrue(test6.getPosition() == 38);
+        assertFalse(test6.getPosition() == 4);
 
     }
 }

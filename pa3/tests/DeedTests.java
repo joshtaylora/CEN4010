@@ -1,7 +1,8 @@
-package tests;
-import org.junit.Test;
+import Models.*;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 public class DeedTests {
 
     @Test
@@ -55,10 +56,8 @@ public class DeedTests {
     void testSetOwner (){
         Deed test = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
         //initialize a random player object
-        Token tok = new Token();
-        PropertySet set = new PropertySet(3);
-        //TODO: make sure this player constructor is up to date
-        Player dummy = new Player(1500, tok, test, set);
+        PropertySet[] arry = new PropertySet[1];
+        Player dummy = new Player(1500, test, arry);
 
         //set ownership to player
         test.setOwner(dummy);

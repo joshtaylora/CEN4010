@@ -1,5 +1,7 @@
-package tests;
-
+import Models.Board;
+import Models.Deed;
+import Models.RailRoad;
+import Models.Tile;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class BoardTest {
@@ -13,16 +15,16 @@ public class BoardTest {
 
         Tile test = game.move(input, 6);
 
-        assertEquals(test, output);
+        assertEquals(output.getName(), test.getName());
     }
 
     @Test
     void testSearchTile(){
         Board game =  new Board();
-        Tile output = tiles[20] = new Tile("Free Parking", "none", 20);
+        Tile output = new Tile("Free Parking", "none", 20);
 
         Tile test = game.searchTile("free parking");
 
-        assertEquals(test, output);
+        assertEquals(output.getName(), test.getName());
     }
 }
