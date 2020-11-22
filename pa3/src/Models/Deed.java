@@ -94,6 +94,13 @@ public class Deed extends Tile{
             return null;
     }
 
+    public int getHouses(){
+        if(houses >= 1)
+            return houses-1;
+        else
+            return houses;
+    }
+
     //****************SETTERS************************************
     //sets owner of property
     public void setOwner(Player possessor){

@@ -69,11 +69,16 @@ public class InterController extends Application {
         displayDice();
     }
 
+    @FXML
+    public void nextTab(Event e){
+
+    }
+
     private void displayDice(){
         //get number of players somehow
         int numPlayers = 2;
         //initialize Dice
-        Dice order = new Dice();
+        Models.Dice order = new Models.Dice ();
 
         //roll dice relevant to number of players
         int one;
