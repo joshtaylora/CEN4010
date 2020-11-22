@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Dice;
 import Models.Game;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.MalformedURLException;
@@ -25,18 +29,25 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MainMenuController extends Application {
+// =====================================================================================================================
+// ========================================= FXML elements for the main TabPane ========================================
+    @FXML
+    public static TabPane tabPane;
 
     @FXML
-    private TabPane tabPane;
+    Tab menuTab;
 
     @FXML
-    private Tab menuTab;
+    public static Tab gameTab;
 
     @FXML
-    private Tab gameTab;
+    Tab turnOrderTab;
 
     @FXML
     private GameController gameTabPageController;
+
+    @FXML
+    TurnOrderController turnOrderController;
 
     @FXML
     private ChoiceBox<String> playerChoiceBox;
@@ -46,23 +57,26 @@ public class MainMenuController extends Application {
 
     @FXML Button startGame;
 
+
+// =====================================================================================================================
+//  ===================================== Class variables needed for start method ======================================
+    private FXMLLoader loader;
+
     private Game game;
 
-    private Scene gameScene;
+    private int numberOfPlayers;
+
+    private int timerVal;
 
     /**
-     * TODO Add inside of while loop a check for the timer value
-     *  - LocalDateTime initialTimer = LocalDateTime.now();
-     *  - while( (LocalDateTime.now() - initialTimer) > 0 ) ----> game is still in progress {}
-     *  - GameOver();
-     * @param primaryStage
-     * @throws Exception
+     * @param primaryStage The stage that is passed from the JavaFX runtime
+     * @throws Exception Exceptions that can occur in this method are mostly dealing with the URL of the view being loaded
      */
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader();
+        this.loader = new FXMLLoader();
 
         URL pathToOpeningView = new URL("file:src/Views/TabbedView.fxml");
         loader.setLocation(pathToOpeningView);
@@ -90,17 +104,19 @@ public class MainMenuController extends Application {
     public void startButtonClicked(Event e) {
         // initialize the data for the Game object that will be used by the GameController
         initGameData();
+        // switch active tab to the TurnOrderView tab
+        tabPane.getSelectionModel().select(turnOrderTab);
+        // initialize the TurnOrderController with the number of players in the game
+        this.turnOrderController = new TurnOrderController(this.numberOfPlayers);
 
-        if (!tabPane.getTabs().contains(gameTab)) {
-            // add the game tab to the view now that the necessary data to start the game has been received
-            tabPane.getTabs().add(gameTab);
-            // set the selected tab to the game tab
-            tabPane.getSelectionModel().select(gameTab);
-            // remove the menu tab now that we don't need it
-            tabPane.getTabs().remove(menuTab);
-            // pass the game object to the controller responsible for the game logic and view
-            gameTabPageController.init(this.game);
-        }
+
+        // Select the game tab
+        tabPane.getSelectionModel().select(gameTab);
+        // Transfer controller ownership to the GameController
+        this.loader.setController(gameTabPageController);
+        // call the game tab page controller's init function
+        gameTabPageController.init(this.game);
+
     }
 
     /*
@@ -112,20 +128,26 @@ public class MainMenuController extends Application {
         String playerChoiceBoxValue = playerChoiceBox.getValue();
         // split the value into a string part and a digit part
         String[] playerSplit = playerChoiceBoxValue.split("\\s");
-        int numPlayers = Integer.parseInt(playerSplit[0]);
+        this.numberOfPlayers = Integer.parseInt(playerSplit[0]);
 
-        System.out.println("Number of Players Selected: " + numPlayers);
+        System.out.println("Number of Players Selected: " + this.numberOfPlayers);
 
         // Grab the value of the selected timer choice box input
         String timerChoiceBoxValue = timerChoiceBox.getValue();
         // split the value into a string part and a digit part
         String[] timerSplit = timerChoiceBoxValue.split("\\s");
-        int timerVal = Integer.parseInt(timerSplit[0]);
+        this.timerVal = Integer.parseInt(timerSplit[0]);
 
-        System.out.println("Game timer length Selected: " + timerVal);
+        System.out.println("Game timer length Selected: " + this.timerVal);
+
+
 
         // initialize the game
-        this.game = new Game(numPlayers, timerVal);
+        this.game = new Game(this.numberOfPlayers, this.timerVal);
 
     }
+
+
+
+
 }

@@ -142,9 +142,8 @@ public class Game {
 		PropertySet railRoad = new PropertySet(4);
 		PropertySet utility = new PropertySet(2);
 
-		PropertySet[] propertySetArray = { brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
+		return new PropertySet[]{ brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
 				utility };
-		return propertySetArray;
 	}
 //	GETTER METHODS FOR PRIVATE CLASS VARIABLES
 	public int getNumPlayers() {

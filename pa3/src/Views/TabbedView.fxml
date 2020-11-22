@@ -3,13 +3,23 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainMenuController">
+<TabPane fx:id="tabPane"
+         maxHeight="-Infinity" maxWidth="-Infinity"
+         minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="822.0" prefWidth="994.0"
+         xmlns="http://javafx.com/javafx/11.0.1"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="Controllers.MainMenuController"
+>
     <tabs>
         <Tab fx:id="menuTab" text="Main Menu">
-                <fx:include fx:id="menuTabPage" source="MenuView.fxml" />
+            <fx:include fx:id="menuTabPage" source="MenuView.fxml" />
         </Tab>
         <Tab fx:id="gameTab" text="Game">
-                <fx:include fx:id="gameTabPage" source="GameView.fxml" />
+            <fx:include fx:id="gameTabPage" source="GameView.fxml" />
+        </Tab>
+        <Tab fx:id="turnOrderTab" text="Roll for player turn order">
+            <fx:include fx:id="turnOrderTabPage" source="TurnOrderView.fxml" />
         </Tab>
     </tabs>
 </TabPane>

@@ -1,8 +1,14 @@
-package tests;
-import org.junit.Test;
+package pa3;
+
+import Models.Player;
+import Models.PropertySet;
+import Models.Token;
+import Models.Utility;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class UtilityTests {
+
+class UtilityTests {
 
     @Test
     void testGetPropertySet (){

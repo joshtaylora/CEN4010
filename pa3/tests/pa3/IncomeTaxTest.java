@@ -1,8 +1,10 @@
-package tests;
-import org.junit.Test;
+package pa3;
 
+import Models.IncomeTax;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-public class IncomeTaxTest {
+
+class IncomeTaxTest {
 
     @Test
     void testGetTax (){
