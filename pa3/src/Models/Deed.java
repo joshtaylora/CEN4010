@@ -116,6 +116,7 @@ public class Deed extends Tile{
         }
     }
 
+
     //****************METHODS************************************
     //returns the rent amount, depending on the number of houses/hotels present on a property
     public int calcRent(){
