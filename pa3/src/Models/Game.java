@@ -144,6 +144,7 @@ public class Game {
 		 */
 
 		Dice gameDice = new Dice();
+		this.gameDice = gameDice;
 		// while the timer has not run out ...
 		while (System.currentTimeMillis() < this.endTime) {
 			for (int i = 0; i < this.numPlayers; i++) {

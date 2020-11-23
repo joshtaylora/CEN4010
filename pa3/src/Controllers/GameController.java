@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Deed;
-import Models.Game;
-import Models.Player;
-import Models.Token;
+import Models.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -94,6 +91,14 @@ public class GameController {
         }
     }
 
+   @FXML
+   void rollDiceButtonClicked(Event e) {
+        int playerRoll = game.gameDice.roll();
+        rollDiceButton.setText("You rolled: " + playerRoll);
+
+
+
+   }
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 
 //    @FXML
