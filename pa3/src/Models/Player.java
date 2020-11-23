@@ -1,7 +1,8 @@
+
 package Models;
 
 public class Player {
-	
+
 	//the variables that are part of the Player class
 	private int account;
 	private Token playerToken;
@@ -33,7 +34,7 @@ public class Player {
 		numUtilities = 0;
 		doubles = 0;
 	}
-	
+
 	/**
 	 * This program currently takes in a Deed and removes its cost from the player's account and then adds
 	 * the property to their playerDeeds array.
@@ -44,14 +45,14 @@ public class Player {
 		int cost = property.getPrice();
 		account -= cost;
 		playerDeeds[property.getPropertySet()].addProperty(property); //we need some way of knowing which set is which i.e SOMEVALUE
-	
-		return;	
+
+		return;
 	}
-	
+
 	/**
-	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the 
+	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the
 	 * player they would like to trade with. After that the current players properties and money will pull up and they can choose what they want to trade.
-	 * After that the other players properties and money will pop up and the current player then chooses what they want to trade in return. Then all the 
+	 * After that the other players properties and money will pop up and the current player then chooses what they want to trade in return. Then all the
 	 * trade information will be sent to the other player using a method through the Controller. They the other player either accepts or rejects.
 	 * Upon accepting the method will transfer all properties and money. Upon rejection the method will just return.
 	 * @param tradePlayer
@@ -72,7 +73,7 @@ public class Player {
 			tAccount += cPlayerMoney;
 			tAccount -= tPlayerMoney;
 			tradePlayer.setAccBalance(tAccount);
-			
+
 			//removing the properties from currentPlayer and adding them to tradePlayer
 			for (i = 0; i < cDeedsSize; i++) {
 				this.playerDeeds[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
@@ -118,147 +119,147 @@ public class Player {
 	 * @return int
 	 */
 	public int getNumRailroads() {
-		
+
 		return numRailroads;
 	}
-	
+
 	/**
 	 * returns the current number of utilities the player has
 	 * @return int
 	 */
 	public int getNumUtilities() {
-		
+
 		return numUtilities;
 	}
-	
+
 	/**
 	 * when called increments the number of railroads by 1
 	 */
 	public void increaseRailroads() {
 		numRailroads++;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * when called decrements the number of railroads by 1
 	 */
 	public void decreaseRailroads() {
 		numRailroads--;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * when called increments the number of utilities by 1
 	 */
 	public void increaseUtilities() {
 		numUtilities++;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * when called decrements the number of utilities by 1
 	 */
 	public void decreaseUtilities() {
 		numUtilities--;
-		
+
 		return;
 	}
-	
+
 	/**
 	 *  Simply returns the value of the player's account
 	 * @return int
 	 */
 	public int getAccBalance() {
-		
+
 		return account;
 	}
-	
+
 	/**
 	 * Sets the player's account to balance
 	 * @param balance
 	 */
 	public void setAccBalance(int balance) {
 		account = balance;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * simply returns the value of inJail as the jail status
 	 * @return boolean
 	 */
 	public boolean getJailStatus() {
-		
+
 		return inJail;
 	}
-	
+
 	/**
 	 * Sets the player's jailstatus to status param
 	 * @param status
 	 */
 	public void setJailStatus(boolean status) {
 		inJail = status;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * returns the player's token
 	 * @return Token
 	 */
 	public Token getPlayerToken() {
-		
+
 		return playerToken;
 	}
-	
+
 	/**
 	 * sets the player's token using the tok param
 	 * @param tok
 	 */
 	public void setPlayerToken(Token tok) {
 		playerToken = tok;
-	
+
 		return;
 	}
-	
+
 	/**
 	 * returns the current PropertySet of the player
 	 * @return PropertySet[]
 	 */
 	public PropertySet[] getPlayerDeeds() {
-		
+
 		return playerDeeds;
 	}
-	
+
 	/**
 	 * sets the player's PropertySet using the deeds param
 	 * @param deeds
 	 */
 	public void setPlayerDeeds(PropertySet[] deeds) {
 		playerDeeds = deeds;
-		
+
 		return;
 	}
-	
+
 	/**
 	 * returns the currentTile the player is on
 	 * @return Tile
 	 */
 	public Tile getCurrentTile() {
-		
+
 		return currentTile;
 	}
-	
+
 	/**
 	 * sets the location of the player to the Tile in params
 	 * @param spot
 	 */
 	public void setCurrentTile(Tile spot) {
 		currentTile = spot;
-		
+
 		return;
 	}
 }
