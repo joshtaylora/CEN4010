@@ -1,0 +1,18 @@
+
+.playerNum {
+    -fx-border-color: black;
+    -fx-border-width: thick;
+    -fx-color: #282828;
+    -fx-background-color: #a89984;
+
+}
+
+.tradeButton {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+.gameBoard {
+    -fx-border-width: 4px;
+    -fx-border-color: black;
+}

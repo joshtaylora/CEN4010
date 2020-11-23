@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="boardImage" stylesheets="@PlayerBoardIcon.css">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="793.0" prefWidth="793.0">
+                     <children>
+                        <ImageView fitHeight="800.0" fitWidth="793.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/board.jpg" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                        <AnchorPane stylesheets="@PlayerBoardIcon.css">
+                           <children>
+                              <GridPane fx:id="boardGridPane" prefHeight="793.0" prefWidth="793.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="103.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="65.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="8.0" prefWidth="62.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="0.0" prefWidth="66.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="64.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="66.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="65.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="66.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="64.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="0.0" prefWidth="66.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="0.0" prefWidth="104.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="689.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="689.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="689.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="690.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="64.0" prefWidth="104.0" GridPane.columnIndex="10" GridPane.rowIndex="6">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Rectangle fx:id="chance3Rectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="106.0" stylesheets="@ActivePlayerCurrentTile.css">
+                                       <children>
+                                          <AnchorPane layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="104.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="2.0">
+                                             <children>
+                                                <Rectangle fx:id="freeParkingRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" layoutX="-4.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="kentuckyAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="chance2Rectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="indianaAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="illionoisAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
+                                                <AnchorPane layoutX="-1.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="bAndORailroadRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="atlanticAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="ventnorAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="waterWorksRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="marvinGardensRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="goToJailRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="20.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="newYorkAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="tennesseeAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="communityChest2Recctangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="stJamesPlaceRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="pennsylvaniaRailroadRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="virginiaAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="statesAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="electricCompanyRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="stCharlesPlaceRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="inJailRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="34.0" layoutY="79.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="34.0" layoutY="27.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="1">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="pacificAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="2">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="northCarolinaAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="3">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="communityChest3Rectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="4">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="pennsylvaniaAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="5">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="shortLineRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="7">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="parkPlaceRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="8">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="luxuryTaxRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="9">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="baordwalkRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="66.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="26.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="104.0">
+                                             <children>
+                                                <Rectangle fx:id="goTileRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="106.0" />
+                                                <AnchorPane layoutX="20.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children></AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="connecticutAcenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="vermontAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="chance1Rectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="orientalAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="readingRailroadRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="incomeTaxRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="balticAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="communityChest1Rectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="10">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="64.0">
+                                             <children>
+                                                <Rectangle fx:id="mediteraneanAvenueRectangle" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="106.0" stroke="BLACK" strokeType="INSIDE" width="66.0" />
+                                                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="66.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <HBox layoutY="60.0" prefHeight="26.0" prefWidth="66.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <VBox prefHeight="600.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane>
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="player" stylesheets="@ActivePlayer.css">
+                                       <children>
+                                          <Button fx:id="player1TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player1Label" layoutX="14.0" layoutY="14.0" styleClass="playerLabel" stylesheets="@PlayerBoardIcon.css" text="Player 1" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/dog.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="player" stylesheets="@InactivePlayer.css">
+                                       <children>
+                                          <Button fx:id="player2TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player2Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 2" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/shoe.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="player" stylesheets="@InactivePlayer.css">
+                                       <children>
+                                          <Button fx:id="player3TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player3Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 3" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/racecar.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="player" stylesheets="@InactivePlayer.css">
+                                       <children>
+                                          <Button fx:id="player4TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player4Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 4" textFill="#282828">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="2.0" right="2.0" />
+                                             </padding>
+                                          </Label>
+                                          <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Resources/thimble.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                           <children>
+                              <Label layoutX="47.0" text="Player 1's Properties" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="393.0" prefWidth="201.0">
+                           <children>
+                              <ListView fx:id="gamePropertyListView" prefHeight="393.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
