@@ -52,23 +52,30 @@ public class RailRoad extends Tile {
 	// ****************METHODS************************************
 	// returns the rent amount, depending on the number of houses/hotels present on
 	// a property
-	public int calcRent(int rrs) {
+	public int calcRent() {
 		final int baseRent = 25;
 		final int rentWithTwo = 50;
 		final int rentWithThree = 100;
 		final int rentWithFour = 200;
 
-		switch (rrs) {
-		case 1:
-			return rentWithTwo;
-		case 2:
-			return rentWithThree;
-		case 3:
-			return rentWithFour;
-		default:
-			return baseRent;
-
+		if(getOwner() == null){
+			return 0;
 		}
+		else{
+			int rrs = getOwner().getNumRailroads();
+			switch (rrs) {
+				case 1:
+					return rentWithTwo;
+				case 2:
+					return rentWithThree;
+				case 3:
+					return rentWithFour;
+				default:
+					return baseRent;
+
+			}
+		}
+
 	}
 
 }

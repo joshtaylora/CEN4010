@@ -51,11 +51,11 @@ public class UtilityTests {
 
         //make sure rent is correct for test rolls
         for(int i=1; i<13; i++){
-            assertEquals(onerent*i, test.calcRent(i, 1));
+            assertEquals(onerent*i, test.calcRent(i));
         }
 
         for(int i=1; i<13; i++){
-            assertEquals(tworent*i, test.calcRent(i, 2));
+            assertEquals(tworent*i, test.calcRent(i));
         }
     }
 }

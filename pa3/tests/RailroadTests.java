@@ -58,7 +58,7 @@ public class RailroadTests {
 
         //make sure rent is correct for each level of railroad ownership
         for(int i=0; i<4; i++){
-            assertEquals(rent, test.calcRent(i));
+            assertEquals(rent, test.calcRent());
             rent *= 2;
         }
     }

@@ -48,15 +48,22 @@ public class Utility extends Tile {
 	// ****************METHODS************************************
 	// returns the rent amount, depending on the number of utilities owned and dice
 	// roll
-	public int calcRent(int roll, int us) {
-		switch (us) {
-		case 1:
-			return baseRentMult * roll;
-		case 2:
-			return rentWithTwoMult * roll;
-		default:
-			return 0;
+	public int calcRent(int roll) {
 
+		if(getOwner() == null){
+			return 0;
+		}
+		else {
+			int us = getOwner().getNumRailroads();
+			switch (us) {
+				case 1:
+					return baseRentMult * roll;
+				case 2:
+					return rentWithTwoMult * roll;
+				default:
+					return 0;
+
+			}
 		}
 	}
 
