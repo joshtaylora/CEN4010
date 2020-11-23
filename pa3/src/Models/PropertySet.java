@@ -17,7 +17,22 @@ public class PropertySet {
 		propertiesInSet = new Deed[pInSet];
 		currentNumProperties = 0;
 	}
-	
+
+	/**
+	 * This method takes all of the properties in this set, all of the houses in this set and sums up all of the values
+	 * to be used in determining who wins.
+	 */
+	public int propertySum() {
+		int sum = 0;
+		int i;
+
+		for(i = 0; i < currentNumProperties; i++){
+			sum += propertiesInSet[i].getPrice();
+			sum += (propertiesInSet[i].getHouses() * propertiesInSet[i].getHouseCost());
+		}
+		return sum;
+	}
+
 	/**
 	 * This method takes in a Deed type variable and adds it to the propertiesInSet array 
 	 * @param property

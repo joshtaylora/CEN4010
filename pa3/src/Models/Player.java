@@ -3,13 +3,14 @@ package Models;
 public class Player {
 	
 	//the variables that are part of the Player class
-	public int account;
+	private int account;
 	private Token playerToken;
-	public PropertySet[] playerDeeds;
+	private PropertySet[] playerDeeds;
 	private Tile currentTile;
 	private boolean inJail;
 	private int numRailroads;
 	private int numUtilities;
+	private int doubles;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an initial player.
@@ -30,6 +31,7 @@ public class Player {
 		inJail = false;
 		numRailroads = 0;
 		numUtilities = 0;
+		doubles = 0;
 	}
 	
 	/**
@@ -58,18 +60,18 @@ public class Player {
 	 * @param cPlayerDeeds
 	 * @param tPlayerDeeds
 	 */
-	public void initiateTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[]) {
+	public void performTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[], boolean tradeResults) {
 		int i;
 		int cDeedsSize = cPlayerDeeds.length;
 		int tDeedsSize = tPlayerDeeds.length;
-		
-		boolean tradeResults; /* = ////tradePlayer.receiveTrade////(tradePlayer, cPlayerDeeds, tPlayerDeeds, cPlayerMoney, tPlayerMoney); TODO Josh what am I calling for the Controller? */
-		
+		int tAccount = tradePlayer.getAccBalance();
+
 		if (tradeResults) {
 			account += tPlayerMoney;
 			account -= cPlayerMoney;
-			tradePlayer.account += cPlayerMoney;
-			tradePlayer.account -= tPlayerMoney;
+			tAccount += cPlayerMoney;
+			tAccount -= tPlayerMoney;
+			tradePlayer.setAccBalance(tAccount);
 			
 			//removing the properties from currentPlayer and adding them to tradePlayer
 			for (i = 0; i < cDeedsSize; i++) {
@@ -78,7 +80,7 @@ public class Player {
 			}
 			//removing the properties from tradePlayer and adding them to currentPlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				tradePlayer.playerDeeds[tPlayerDeeds[i].getPropertySet()].removeProperty(PlayerDeeds[i]);
+				tradePlayer.playerDeeds[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
 				this.playerDeeds[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
 			}
 		}
@@ -86,23 +88,31 @@ public class Player {
 			return;
 		}
 	}
-	
+
 	/**
-	 * This method is to receive a trade from another player through th controller, be it properties, money or both. Takes in the result from the controller
-	 * and returns the response back through.
-	 * @param controllerResponse
-	 * @return boolean true/false
+	 * basic get method for the doubles variable
+	 * @return int doubles
 	 */
-	/*public boolean receiveTrade(boolean controllerResponse) {
-		
-		if(controllerResponse) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}*/
-	
+	public int getDoubles() {
+
+		return doubles;
+	}
+
+	/**
+	 * basic set method for the doubles variable
+	 */
+	public void setDoubles() {
+		doubles = 0;
+
+		return;
+	}
+
+	public void incrementDoubles() {
+		doubles++;
+
+		return;
+	}
+
 	/**
 	 * returns the current number of railroads the player has
 	 * @return int
