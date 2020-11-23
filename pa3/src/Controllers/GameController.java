@@ -75,7 +75,7 @@ public class GameController {
         String tileString = "Current Tile: ";
         currentPlayerTileLabel.textProperty().setValue(tileString.concat(playerTile));
         currentPlayerBalanceLabel.textProperty().setValue("Account Balance: $" + Integer.toString(this.game.getCurrentPlayer().getAccBalance()));
-        addPlayerPropertiesToListView(this.game.currentPlayer);
+        addPlayerPropertiesToListView(this.game.getCurrentPlayer());
     }
 
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the
@@ -95,7 +95,7 @@ public class GameController {
    void rollDiceButtonClicked(Event e) {
         int playerRoll = game.gameDice.roll();
         rollDiceButton.setText("You rolled: " + playerRoll);
-
+        setActivePlayer();
 
 
    }

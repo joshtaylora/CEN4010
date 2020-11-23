@@ -267,6 +267,10 @@ public class Game {
 		return numPlayers;
 	}
 
+	public int getCurrentPlayerNumber() {
+		return playerList.indexOf(this.getCurrentPlayer());
+	}
+
 }
   public Tile takeTurnInJail(Player currentPlayer){
     Dice jailDice = new Dice();
