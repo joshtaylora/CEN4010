@@ -161,7 +161,7 @@ public class TurnOrderController {
     private static Image getImage(int rollVal) throws MalformedURLException {
         // store the system path as a string
         String sysPath = System.getProperty("user.dir");
-        System.out.println(sysPath);
+        //System.out.println(sysPath);
         String diePath = sysPath.concat("\\src\\Resources\\");
 
         File oneFile = new File(diePath.concat("die1.png"));

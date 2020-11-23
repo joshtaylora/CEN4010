@@ -3,6 +3,8 @@ package Controllers;
 import Models.Deed;
 import Models.Game;
 import Models.Player;
+import Models.Token;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,6 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+
+import java.util.LinkedList;
 
 public class GameController {
 
@@ -25,12 +31,16 @@ public class GameController {
     @FXML private Button tradeWithPlayer3;
     @FXML private Button tradeWithPlayer4;
 
+    @FXML
+    GridPane boardGridPane;
+
 
     private Game game;
     private int numberOfPlayers;
     private int timerValue;
 
     private MenuController menuController;
+
 
 //  Injects the menu controller into the game controller and begins the game
     public void injectMenuController(MenuController menuController) {
@@ -43,7 +53,9 @@ public class GameController {
 
     public void startGame() {
         this.game = new Game(this.numberOfPlayers, this.timerValue);
-
+//        for (int i = 0; i < this.numberOfPlayers; i++) {
+//        }
+        setActivePlayer(this.game);
     }
 
 //  Logic for things that must be changed when the next players turn arrives:
@@ -52,6 +64,8 @@ public class GameController {
 
     public void setActivePlayer(Game game) {
         for (int i = 0; i < game.getNumPlayers(); i++) {
+            Token activeToken = game.tokenList.get(i);
+            ObservableList gridChildren = this.boardGridPane.getChildren();
 
         }
     }

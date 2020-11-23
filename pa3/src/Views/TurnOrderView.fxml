@@ -11,12 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity"
-          prefHeight="400.0" prefWidth="600.0"
-          xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="Controllers.TurnOrderController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TurnOrderController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -40,7 +35,7 @@
          <children>
             <AnchorPane prefHeight="88.0" prefWidth="145.0">
                <children>
-                  <ImageView fx:id="dieOne" fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="dieOne" fitHeight="105.0" fitWidth="150.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@../Resources/die1.png" />
                       </image>
@@ -48,7 +43,7 @@
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <ImageView fx:id="dieTwo" fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="dieTwo" fitHeight="105.0" fitWidth="150.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@../Resources/die1.png" />
                       </image>
@@ -56,7 +51,7 @@
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <ImageView fx:id="dieThree" fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="dieThree" fitHeight="105.0" fitWidth="150.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@../Resources/die1.png" />
                       </image>
@@ -64,7 +59,7 @@
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <ImageView fx:id="dieFour" fitHeight="105.0" fitWidth="150.0" layoutX="23.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="dieFour" fitHeight="105.0" fitWidth="150.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@../Resources/die1.png" />
                       </image>
@@ -74,12 +69,12 @@
       </GridPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Text layoutX="7.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roll the Dice to Find Out Turn Order!">
+            <Text layoutX="204.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roll the Dice to Find Out Turn Order!">
                <font>
                   <Font size="36.0" />
                </font>
             </Text>
-            <Text layoutX="172.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everyone pick which die is yours before rolling!!!" />
+            <Text layoutX="369.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Everyone pick which die is yours before rolling!!!" />
          </children></AnchorPane>
       <GridPane GridPane.rowIndex="1">
         <columnConstraints>
@@ -94,28 +89,28 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="labelOne" layoutX="65.0" layoutY="40.0" text="???">
+                  <Label fx:id="labelOne" layoutX="114.0" layoutY="43.0" text="???">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="labelTwo" layoutX="65.0" layoutY="40.0" text="???">
+                  <Label fx:id="labelTwo" layoutX="114.0" layoutY="40.0" text="???">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
                </children></AnchorPane>
             <AnchorPane prefHeight="87.0" prefWidth="152.0" GridPane.columnIndex="2">
                <children>
-                  <Label fx:id="labelThree" layoutX="65.0" layoutY="40.0" text="???">
+                  <Label fx:id="labelThree" layoutX="114.0" layoutY="37.0" text="???">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label fx:id="labelFour" layoutX="65.0" layoutY="40.0" text="???">
+                  <Label fx:id="labelFour" layoutX="114.0" layoutY="39.0" text="???">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -132,8 +127,8 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="rollButton" layoutX="266.0" layoutY="14.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="21.0" prefWidth="68.0" text="Roll Dice" textFill="#069024" />
-                  <Button fx:id="continueToGameButton" layoutX="247.0" layoutY="50.0" mnemonicParsing="false" onAction="#continueToGameButtonClicked" text="Continue to Game" />
+                  <Button fx:id="rollButton" layoutX="463.0" layoutY="2.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="21.0" prefWidth="68.0" text="Roll Dice" textFill="#069024" />
+                  <Button fx:id="continueToGameButton" layoutX="441.0" layoutY="57.0" mnemonicParsing="false" onAction="#continueToGameButtonClicked" text="Continue to Game" />
                </children>
             </AnchorPane>
          </children>

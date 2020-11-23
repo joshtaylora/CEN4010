@@ -17,7 +17,6 @@ public class MenuController {
 
     private MainController mainController;
 
-    Game game;
 
     int numberOfPlayers;
 
