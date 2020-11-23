@@ -270,7 +270,7 @@ public class Game {
 		return playerList.indexOf(this.getCurrentPlayer());
 	}
 
-}
+
   public Tile takeTurnInJail(Player currentPlayer){
     Dice jailDice = new Dice();
     Tile temp = null;
@@ -291,12 +291,12 @@ public class Game {
     }
     return  temp;
   }
-  public void buyProperty(Tile currentTile, Player currentPlayer){
+  public void buyProperty(Deed currentTile, Player currentPlayer){
     String tileType = currentTile.getType();
     if(tileType.equals("Deed")){
       currentPlayer.purchaseDeed(currentTile);
       currentTile.setOwner(currentPlayer);
-      if(currentPlayer.getPlayerDeeds(currentTile.getPropertySet().checkMonopoly())){
+      if(currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()){
         currentTile.setHouses();
       }
 
