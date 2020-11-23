@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Game {
 
 	// Class variables
-	public Player startingPlayer;
+	public Player currentPlayer;
 	public LinkedList<Player> playerList;
 	public int numPlayers;
 
@@ -134,6 +134,7 @@ public class Game {
 				System.out.println("ERROR: Undefined number of players encountered. System terminating.");
 				System.exit(1);
 		}
+		this.currentPlayer = playerList.get(0);
 		// NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
 		/*
 		 * Roll for each player to determine first player for each player, roll set max
@@ -153,6 +154,11 @@ public class Game {
 
 	}
 
+//	====================================================================================================================
+
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
 //	====================================================================================================================
 
 	public static Image[] tokenImageArrayInitializer(int numPlayers) {
@@ -241,7 +247,4 @@ public class Game {
 		return numPlayers;
 	}
 
-	public Player getStartingPlayer() {
-		return startingPlayer;
-	}
 }
