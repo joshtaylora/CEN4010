@@ -1,10 +1,12 @@
+package pa3;
+
 import Models.Board;
 import Models.Deed;
 import Models.RailRoad;
 import Models.Tile;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-public class BoardTest {
+class BoardTest {
 
     @Test
     void testMove(){

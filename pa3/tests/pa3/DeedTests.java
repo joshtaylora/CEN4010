@@ -1,8 +1,13 @@
-import Models.*;
+package pa3;
+
+import Models.Deed;
+import Models.Player;
+import Models.PropertySet;
+import Models.Token;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class DeedTests {
 
     @Test

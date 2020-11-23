@@ -1,8 +1,10 @@
+package pa3;
+
 import Models.LuxuryTax;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-public class LuxuryTaxTest {
+import static org.junit.jupiter.api.Assertions.*;
+class LuxuryTaxTest {
 
     @Test
     void testGetTax (){

@@ -1,11 +1,14 @@
+package pa3;
+
 import Models.Player;
 import Models.PropertySet;
+import Models.Token;
 import Models.Utility;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-public class UtilityTests {
+import static org.junit.jupiter.api.Assertions.*;
+
+class UtilityTests {
 
     @Test
     void testGetPropertySet (){

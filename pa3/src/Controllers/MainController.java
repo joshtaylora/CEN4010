@@ -1,28 +1,64 @@
 package Controllers;
 
+import Models.Dice;
+import Models.Game;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import java.net.MalformedURLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
 
 public class MainController {
 
-    @FXML
-    private TabPane tabPane;
+    // =====================================================================================================================
+// ========================================= FXML elements for the main TabPane ========================================
+    @FXML TabPane tabPane;
 
-//   To inject a controller for an included FXML file, you need an fx:id attribute on the <fx:include> element
-//   The controller will be injected to a field with "Controller" appended to the value of fx:id
-//   To inject the actual tab as well, we need a separate fx:id for that as well
+    @FXML Tab menuTab;
+    @FXML MenuController menuViewController;
 
-    @FXML private Tab menuTab;
-    @FXML private MenuController menuTabPageController;
+    @FXML Tab gameTab;
+    @FXML  GameController gameViewController;
 
-    @FXML private Tab gameTab;
-    @FXML private GameController gameTabPageController;
+    @FXML Tab turnOrderTab;
+    @FXML  TurnOrderController turnOrderViewController;
+
+
+
+// =====================================================================================================================
+//  ===================================== Class variables needed for start method ======================================
+
+
 
     public void init() {
-        // Remove the game tab until the players have input the required fields to start the game
-        tabPane.getTabs().remove(gameTab);
+        menuViewController.injectMainController(this);
+        menuViewController.init();
     }
+
+
+
+
 
 }

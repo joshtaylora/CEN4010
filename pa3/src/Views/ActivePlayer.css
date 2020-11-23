@@ -1,0 +1,18 @@
+
+.player {
+    -fx-background-color: #689d6a;
+    -fx-border-color: #d79921;
+    -fx-border-width: 4px;
+}
+
+.tradeButton {
+    -fx-background-color: #d79921;
+    -fx-text-fill: black;
+}
+
+.playerLabel {
+    -fx-text-fill: black;
+    -fx-background-color: #076678;
+    -fx-border-color: #282828;
+    -fx-border-width: 2px;
+}

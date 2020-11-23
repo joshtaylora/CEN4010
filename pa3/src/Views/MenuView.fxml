@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -32,7 +32,7 @@
          <children>
             <AnchorPane prefHeight="114.0" prefWidth="300.0">
                <children>
-                  <ChoiceBox fx:id="playerChoiceBox" layoutX="78.0" layoutY="59.0" prefWidth="150.0" >
+                  <ChoiceBox fx:id="playerChoiceBox" layoutX="249.0" layoutY="47.0" prefWidth="150.0">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="2 Players" />
@@ -41,12 +41,12 @@
                         </FXCollections>
                      </items>
                   </ChoiceBox>
-                  <Label layoutX="82.0" layoutY="42.0" text="Choose Number of Players" />
+                  <Label layoutX="253.0" layoutY="30.0" text="Choose Number of Players" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <ChoiceBox fx:id="timerChoiceBox" layoutX="81.0" layoutY="59.0" prefWidth="150.0">
+                  <ChoiceBox fx:id="timerChoiceBox" layoutX="99.0" layoutY="46.0" prefWidth="150.0">
                       <items>
                           <FXCollections fx:factory="observableArrayList">
                               <String fx:value="10 Minutes" />
@@ -57,15 +57,15 @@
                           </FXCollections>
                       </items>
                   </ChoiceBox>
-                  <Label layoutX="92.0" layoutY="42.0" text="Choose Length of Game" />
-                  <Button fx:id="startGame" layoutX="-38.0" layoutY="125.0" mnemonicParsing="false" text="Start Game" onAction="#startButtonClicked"/>
+                  <Label layoutX="110.0" layoutY="29.0" text="Choose Length of Game" />
+                  <Button fx:id="startGameButton" layoutX="-38.0" layoutY="125.0" mnemonicParsing="false" onAction="#startButtonClicked" text="Start Game" />
                </children>
             </AnchorPane>
          </children>
       </GridPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="165.0" fitWidth="399.0" layoutX="101.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="280.0" fitWidth="599.0" layoutX="198.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resources/monopoly_banner.png" />
                </image>

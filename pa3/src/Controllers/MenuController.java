@@ -1,93 +1,86 @@
 package Controllers;
 
 import Models.Game;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 
-import java.net.MalformedURLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class MenuController {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
+    @FXML private ChoiceBox<String> playerChoiceBox;
 
-public class MenuController{
+    @FXML private ChoiceBox<String> timerChoiceBox;
 
-	@FXML private TabPane tabPane;
-	@FXML private Tab menuTab;
-	@FXML private Tab gameTab;
+    @FXML
+    Button startGameButton;
 
-	@FXML private GameController gameTabPageController;
+    private MainController mainController;
 
-	@FXML
-	ChoiceBox<String> playerChoiceBox;
 
-	@FXML
-	ChoiceBox<String> timerChoiceBox;
+    int numberOfPlayers;
 
-	@FXML
-	Button startGame;
+    int timerValue;
 
-	private Game game;
+    public void init() {
+        mainController.turnOrderViewController.injectMenuController(this);
 
-	/**
-	 * Event handler for when the start button has been clicked
-	 * @param e event for when the start button gets clicked
-	 */
-	@FXML
-	public void startButtonClicked(Event e) {
-		// initialize the data for the Game object that will be used by the GameController
-		initGameData();
+    }
 
-		if (!tabPane.getTabs().contains(gameTab)) {
-			// add the game tab to the view now that the necessary data to start the game has been received
-			tabPane.getTabs().add(gameTab);
-			// set the selected tab to the game tab
-			tabPane.getSelectionModel().select(gameTab);
-			// remove the menu tab now that we don't need it
-			tabPane.getTabs().remove(menuTab);
-			// pass the game object to the controller responsible for the game logic and view
-			gameTabPageController.init(this.game);
-		}
-	}
+    public void injectMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
-	/*
-	 * This initializes the Game object for use by the game controller
-	 */
-	private void initGameData() {
+    public void initGameViewController() {
+        mainController.gameViewController.injectMenuController(this);
+    }
+    /**
+     * Event handler for when the start button has been clicked
+     */
+    @FXML
+    public void startButtonClicked(Event e) {
+        // initialize the data for the Game object that will be used by the GameController
+        initGameData();
+        // initialize the TurnOrderViewController with the number of players so that it can roll the correct amount of
+        //      dice
+        // switch active tab to the TurnOrderView tab
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.turnOrderTab);
+        // initialize the TurnOrderController with the number of players in the game
 
-		// Grab the value of the selected player choice box input
-		String playerChoiceBoxValue = playerChoiceBox.getValue();
-		// split the value into a string part and a digit part
-		String[] playerSplit = playerChoiceBoxValue.split("\\s");
-		int numPlayers = Integer.parseInt(playerSplit[0]);
 
-		System.out.println("Number of Players Selected: " + numPlayers);
+        // Select the game tab
+        //this.mainController.tabPane.getSelectionModel().select(this.mainController.gameTab);
+        // Transfer controller ownership to the GameController
+        // call the game tab page controller's init function
+//        this.gameTabPageController = new GameController(this.game);
+//        gameTabPageController.init();
 
-		// Grab the value of the selected timer choice box input
-		String timerChoiceBoxValue = timerChoiceBox.getValue();
-		// split the value into a string part and a digit part
-		String[] timerSplit = timerChoiceBoxValue.split("\\s");
-		int timerVal = Integer.parseInt(timerSplit[0]);
+    }
 
-		System.out.println("Game timer length Selected: " + timerVal);
+    public void switchToGameTab() {
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.gameTab);
+    }
 
-		// initialize the game
-		this.game = new Game(numPlayers, timerVal);
+    /*
+     * This initializes the Game object for use by the game controller
+     */
+    private void initGameData() {
 
-	}
+        // Grab the value of the selected player choice box input
+        String playerChoiceBoxValue = playerChoiceBox.getValue();
+        // split the value into a string part and a digit part
+        String[] playerSplit = playerChoiceBoxValue.split("\\s");
+        this.numberOfPlayers = Integer.parseInt(playerSplit[0]);
+
+        System.out.println("Number of Players Selected: " + this.numberOfPlayers);
+
+        // Grab the value of the selected timer choice box input
+        String timerChoiceBoxValue = timerChoiceBox.getValue();
+        // split the value into a string part and a digit part
+        String[] timerSplit = timerChoiceBoxValue.split("\\s");
+        this.timerValue = Integer.parseInt(timerSplit[0]);
+
+        System.out.println("Game timer length Selected: " + this.timerValue);
+    }
 
 }

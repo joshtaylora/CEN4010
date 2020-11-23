@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ArrayList;
@@ -18,30 +19,25 @@ import java.util.ArrayList;
 public class Game {
 
 	// Class variables
-	private Player startingPlayer;
-	private LinkedList<Player> playerList;
-	private int numPlayers;
+	public Player currentPlayer;
+	public LinkedList<Player> playerList;
+	public int numPlayers;
 
-	private long timeLimit;
-	private long startTime;
-	private long endTime;
+	public long timeLimit;
+	long startTime;
+	long endTime;
 
-	private Board gameBoard;
-	private Dice gameDice;
-	private long gameTimer;
-	private ArrayList<Token> tokenList;
-	private int initialAccountBalance = 1500;
+	public Board gameBoard;
+	public Dice gameDice;
+	public long gameTimer;
+	public ArrayList<Token> tokenList;
+	public int initialAccountBalance = 1500;
 
-	private static Image[] tokenImages;
+	public Image[] tokenImages;
 
 
 
-	/**
-	 * TODO 1) Board needs Tokens to move around the board TODO 2) get a functional
-	 * model for a turn going and implement it TODO 3) Implement Timer class as long
-	 * value using System.currentTimeMillis()
-	 */
-
+//	====================================================================================================================
 	/**
 	 * Class Constructor
 	 * 
@@ -53,10 +49,9 @@ public class Game {
 	public Game(int numPlayers, int timeLimit) {
 		// assign the number of players
 		this.numPlayers = numPlayers;
-		// initialize the start time
+		// initialize the start time to current system time in minutes
 		this.startTime = System.currentTimeMillis();
-		// initialize to the number of minutes specified * the number of milliseconds in
-		// a minute
+		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
 		this.timeLimit = timeLimit * minuteToMilliS;
 
@@ -66,52 +61,82 @@ public class Game {
 		this.gameBoard = new Board();
 		// initialize the player list to an empty linked list of player objects
 		this.playerList = new LinkedList<Player>();
+		this.tokenList = new ArrayList<>();
 		// set the initial timer to the specified timer value
 
-		// print current working directory
-		System.out.println(System.getProperty("user.dir"));
 		// store the images for the tokens in an easily accessible array
-		/**
-		 * TODO add image functionality to add to tokens, right no there is no url combination that works
-
-		String sysPath = new File("").getAbsolutePath();
-
-		String dogImagePath = "file:///";
-		dogImagePath.concat(sysPath);
-		dogImagePath.concat("/src/Resources/dog.png");
-
-		String hatImagePath = "file:///";
-		hatImagePath.concat(sysPath);
-		hatImagePath.concat("/src/Resources/dog.png");
-
-		String raceCarImagePath = "file:///";
-		raceCarImagePath.concat(sysPath);
-		raceCarImagePath.concat("/src/Resources/racecar.png");
-
-		String thimbleImagePath = "file:///";
-		thimbleImagePath.concat(sysPath);
-		thimbleImagePath.concat("/src/Resources/thimble.png");
-
-		tokenImages[0] = new Image(dogImagePath);
-		tokenImages[1] = new Image(hatImagePath);
-		tokenImages[2] = new Image(raceCarImagePath);
-		tokenImages[3] = new Image(thimbleImagePath);
-
-		// for the number of players specified in the main menu, add that many player
-		// and corresponding token
-		// objects to the appropriate list
-		for (int i = 0; i < this.numPlayers; i++) {
-			Player player = new Player(initialAccountBalance, this.gameBoard.searchTile("Go"),
-					propertySetInitializer());
-			Token pToken = new Token(player, tokenImages[i]);
-			playerList.add(player);
-			tokenList.add(pToken);
+		Image[] imgArr = tokenImageArrayInitializer(this.numPlayers);
+		// Check if we could successfully grab the token images
+		if (imgArr != null) {
+			this.tokenImages = new Image[imgArr.length];
+			System.arraycopy(this.tokenImages, 0, imgArr, 0, imgArr.length);
 		}
+		else {
+			// if the token image array is null, we need to exit the program and display an error
+			System.out.println("ERROR: image URLs for tokens not found, application terminated");
+			System.exit(1);
+		}
+		// Add the appropriate number of players and tokens to their respective lists
+		Player player1 = null;
+		Player player2 = null;
+		Player player3 = null;
+		Player player4 = null;
 
-		*/
+		Token p1Token = null;
+		Token p2Token = null;
+		Token p3Token = null;
+		Token p4Token = null;
 
+		switch(this.numPlayers) {
+			case(2):
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player1);
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player2);
+				p1Token = new Token(player1, this.tokenImages[0]);
+				tokenList.add(p1Token);
+				p2Token = new Token(player2, this.tokenImages[1]);
+				tokenList.add(p2Token);
+				break;
+			case(3):
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player1);
+				p1Token = new Token(player1, this.tokenImages[0]);
+				tokenList.add(p1Token);
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player2);
+				p2Token = new Token(player2, this.tokenImages[1]);
+				tokenList.add(p2Token);
+				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player3);
+				p3Token = new Token(player3, tokenImages[2]);
+				tokenList.add(p3Token);
+				break;
+			case(4):
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player1);
+				p1Token = new Token(player1, this.tokenImages[0]);
+				tokenList.add(p1Token);
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player2);
+				p2Token = new Token(player2, this.tokenImages[1]);
+				tokenList.add(p2Token);
+				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player3);
+				p3Token = new Token(player3, tokenImages[2]);
+				tokenList.add(p3Token);
+				player4 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				playerList.add(player4);
+				p4Token = new Token(player4, tokenImages[3]);
+				tokenList.add(p4Token);
+				break;
+			default:
+				System.out.println("ERROR: Undefined number of players encountered. System terminating.");
+				System.exit(1);
+		}
+		this.currentPlayer = playerList.get(0);
 		// NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
-		/**
+		/*
 		 * Roll for each player to determine first player for each player, roll set max
 		 * roll = first roll, - > algo to check who rolled highest set currentPlayer
 		 * initially to the index for loop condition and then just increment after that
@@ -119,6 +144,7 @@ public class Game {
 		 */
 
 		Dice gameDice = new Dice();
+		this.gameDice = gameDice;
 		// while the timer has not run out ...
 		while (System.currentTimeMillis() < this.endTime) {
 			for (int i = 0; i < this.numPlayers; i++) {
@@ -128,6 +154,78 @@ public class Game {
 		}
 
 	}
+
+//	====================================================================================================================
+
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
+//	====================================================================================================================
+
+	public static Image[] tokenImageArrayInitializer(int numPlayers) {
+
+		// Grab the working directory string
+		String sysPath = System.getProperty("user.dir");
+		String tokenImagePath = sysPath.concat("\\src\\Resources\\");
+		// Initialize values to null so that we can reference them outside the scope of the try/catch
+		Image[] tokenImages = null;
+		// Wrap the image creation in a try/catch block to catch MalformedURLException
+		try {
+
+			File dogFile = new File(tokenImagePath.concat("dog.png"));
+			String dogURL = dogFile.toURI().toURL().toString();
+			//System.out.println("tokenImagePath: " + tokenImagePath);
+
+			File shoeFile = new File(tokenImagePath.concat("shoe.png"));
+			String shoeURL = shoeFile.toURI().toURL().toString();
+			//System.out.println("tokenImagePath: " + tokenImagePath);
+
+			File raceCarFile = new File(tokenImagePath.concat("racecar.png"));
+			String raceCarURL = raceCarFile.toURI().toURL().toString();
+			//System.out.println("tokenImagePath: " + tokenImagePath);
+
+			File thimbleFile = new File(tokenImagePath.concat("thimble.png"));
+			String thimbleURL = thimbleFile.toURI().toURL().toString();
+			//System.out.println("tokenImagePath: " + tokenImagePath);
+
+			// initialize the tokenImages array to the number of players playing and if an error occurs and no players
+			// are in the game, initialize it to null
+			switch(numPlayers) {
+				case(2):
+					tokenImages = new Image[2];
+					tokenImages[0] = new Image(dogURL);
+					tokenImages[1] = new Image(shoeURL);
+					break;
+				case(3):
+					tokenImages = new Image[3];
+					tokenImages[0] = new Image(dogURL);
+					tokenImages[1] = new Image(shoeURL);
+					tokenImages[2] = new Image(raceCarURL);
+					break;
+				case(4):
+					tokenImages = new Image[4];
+					//System.out.println("tokenImages.length: " + tokenImages.length);
+					tokenImages[0] = new Image(dogURL);
+					//System.out.println("Path to tokenImages[0]: " + dogURL);
+					tokenImages[1] = new Image(shoeURL);
+					//System.out.println("Path to tokenImages[1]: " + shoeURL);
+					tokenImages[2] = new Image(raceCarURL);
+					//System.out.println("Path to tokenImages[2]: " + raceCarURL);
+					tokenImages[3] = new Image(thimbleURL);
+					//System.out.println("Path to tokenImages[3]: " + thimbleURL);
+					break;
+				default:
+					tokenImages = null;
+			}
+		} catch(MalformedURLException malformedE) {
+			System.out.println("ERROR: image URLs for token images not found, system terminating");
+			System.exit(1);
+		}
+		return tokenImages;
+
+	}
+
+//	====================================================================================================================
 
 	private PropertySet[] propertySetInitializer() {
 		// initialize all of the property sets that will go in the array
@@ -142,16 +240,12 @@ public class Game {
 		PropertySet railRoad = new PropertySet(4);
 		PropertySet utility = new PropertySet(2);
 
-		PropertySet[] propertySetArray = { brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
+		return new PropertySet[]{ brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
 				utility };
-		return propertySetArray;
 	}
 //	GETTER METHODS FOR PRIVATE CLASS VARIABLES
 	public int getNumPlayers() {
 		return numPlayers;
 	}
 
-	public Player getStartingPlayer() {
-		return startingPlayer;
-	}
 }
