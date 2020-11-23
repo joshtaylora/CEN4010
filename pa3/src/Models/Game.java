@@ -146,8 +146,7 @@ public class Game {
 		this.gameDice = gameDice;
 		// while the timer has not run out ...
         while(System.currentTimeMillis() < this.endTime){
-            takeTurn(this.currentPlayer);
-            currentPlayer = currentPlayer.next();
+            currentPlayer = this.playerList.get(1 + this.playerList.indexOf(this.currentPlayer));
         }
         //checkWinner();
         //hSystem.out.println("The winner is: " + currentPlayer.name);

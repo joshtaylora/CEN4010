@@ -94,6 +94,8 @@ public class GameController {
    @FXML
    void rollDiceButtonClicked(Event e) {
         int playerRoll = game.gameDice.roll();
+        boolean bool = game.gameDice.checkDoubles();
+        this.game.takeTurn(this.game.getCurrentPlayer(), playerRoll, bool);
         rollDiceButton.setText("You rolled: " + playerRoll);
         setActivePlayer();
 
