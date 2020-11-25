@@ -741,7 +741,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="93.0" prefWidth="201.0">
                            <children>
-                              <TextArea fx:id="diceRollResultsTextArea" editable="false" prefHeight="200.0" prefWidth="201.0" text="Results of roll: 6 &amp; 6&#10;Congradulations you rolled &#10;doubles! &#10;Advance straight to Jail!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TextArea fx:id="diceRollResultsTextArea" editable="false" prefHeight="200.0" prefWidth="201.0" text="Press the Roll Dice button!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

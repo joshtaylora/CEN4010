@@ -245,7 +245,12 @@ public class Game {
 
 //	====================================================================================================================
 
-	public static Image[] tokenImageArrayInitializer(int numPlayers) {
+	/**
+	 * Function used to populate the tokenImages array with the proper image URL and Image objects
+	 * @param numPlayers integer specifying the number of players that will need images for their tokens
+	 * @return the array of images with the number of images specified by the number of players
+	 */
+	private static Image[] tokenImageArrayInitializer(int numPlayers) {
 
 		// Grab the working directory string
 		String sysPath = System.getProperty("user.dir");
