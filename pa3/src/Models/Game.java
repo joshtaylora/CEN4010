@@ -4,6 +4,7 @@ package Models;
  * @version 1.0.1
  */
 
+import Resources.OSvalidation;
 import javafx.scene.image.Image;
 
 import java.io.File;
@@ -254,9 +255,33 @@ public class Game {
 
 		// Grab the working directory string
 		String sysPath = System.getProperty("user.dir");
-		String tokenImagePath = sysPath.concat("\\src\\Resources\\");
+		OSvalidation oSvalidation = new OSvalidation();
+		String os = oSvalidation.os;
+		String resourcesPath = null;
+
+		if (os.equals("windows")) {
+			if (sysPath.contains("pa3")) {
+				resourcesPath = "\\src\\Resources\\";
+			} else {
+				resourcesPath = "\\pa3\\src\\Resources\\";
+			}
+		}
+		else if (os.equals("mac")) {
+			if (sysPath.contains("pa3")) {
+				resourcesPath = "/src/Resources/";
+			}
+			else {
+				resourcesPath = sysPath.concat("/pa3/src/Resources/");
+			}
+		}
+		else {
+			System.out.println("ERROR: operating system not supported");
+			System.exit(1);
+		}
+
 		// Initialize values to null so that we can reference them outside the scope of the try/catch
 		Image[] tokenImages = null;
+		String tokenImagePath = sysPath.concat(resourcesPath);
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
 		try {
 

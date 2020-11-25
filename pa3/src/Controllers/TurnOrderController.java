@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Dice;
+import Resources.OSvalidation;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -172,7 +173,19 @@ public class TurnOrderController {
         // store the system path as a string
         String sysPath = System.getProperty("user.dir");
         //System.out.println(sysPath);
-        String diePath = sysPath.concat("\\src\\Resources\\");
+        OSvalidation operatingSystem = new OSvalidation();
+        String os = operatingSystem.os;
+        String diePath = null;
+        if (os.equals("windows")) {
+            diePath = sysPath.concat("\\src\\Resources\\");
+        }
+        else if (os.equals("mac")) {
+            diePath = sysPath.concat("/pa3/src/Resources/");
+        }
+        else {
+            System.out.println("ERROR: operating system not supported");
+            System.exit(1);
+        }
 
         File oneFile = new File(diePath.concat("die1.png"));
         String oneURL = oneFile.toURI().toURL().toString();

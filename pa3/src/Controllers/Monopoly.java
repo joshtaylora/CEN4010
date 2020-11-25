@@ -1,11 +1,13 @@
 package Controllers;
 
+import Resources.OSvalidation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 
 public class Monopoly extends Application {
@@ -20,8 +22,38 @@ public class Monopoly extends Application {
         FXMLLoader loader = new FXMLLoader();
         Scene scene = new Scene(new StackPane());
 
-        URL pathToOpeningView = new URL("file:src/Views/TabbedView.fxml");
-        loader.setLocation(pathToOpeningView);
+        String sysPath = System.getProperty("user.dir");
+        //System.out.println(sysPath);
+
+
+        OSvalidation oSvalidation = new OSvalidation();
+        String os = oSvalidation.os;
+        String tabbedViewPath = null;
+
+        if (os.equals("windows")) {
+            if (sysPath.contains("pa3")) {
+                tabbedViewPath = "\\src\\Views\\TabbedView.fxml";
+            } else {
+                tabbedViewPath = "\\pa3\\src\\Views\\TabbedView.fxml";
+            }
+        }
+        else if (os.equals("mac")) {
+            if (sysPath.contains("pa3")) {
+                tabbedViewPath = "src/Views/TabbedView.fxml";
+            }
+            else {
+                tabbedViewPath = sysPath.concat("/pa3/src/Views/TabbedView.fxml");
+            }
+        }
+        else {
+            System.out.println("ERROR: operating system not supported");
+            System.exit(1);
+        }
+
+        File tabbedViewFile = new File(tabbedViewPath);
+        URL tabbedViewURL = tabbedViewFile.toURI().toURL();
+
+        loader.setLocation(tabbedViewURL);
         scene.setRoot(loader.load());
         MainController controller = loader.getController();
         controller.init();
