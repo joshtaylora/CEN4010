@@ -4,15 +4,11 @@ package Models;
  * @version 1.0.1
  */
 
-import Resources.OSvalidation;
+import Resources.OSValidator;
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -255,50 +251,29 @@ public class Game {
 
 		// Grab the working directory string
 		String sysPath = System.getProperty("user.dir");
-		OSvalidation oSvalidation = new OSvalidation();
-		String os = oSvalidation.os;
+		OSValidator osValidator = new OSValidator();
+		String os = osValidator.os;
 		String resourcesPath = null;
-
-		if (os.equals("windows")) {
-			if (sysPath.contains("pa3")) {
-				resourcesPath = "\\src\\Resources\\";
-			} else {
-				resourcesPath = "\\pa3\\src\\Resources\\";
-			}
-		}
-		else if (os.equals("mac")) {
-			if (sysPath.contains("pa3")) {
-				resourcesPath = "/src/Resources/";
-			}
-			else {
-				resourcesPath = sysPath.concat("/pa3/src/Resources/");
-			}
-		}
-		else {
-			System.out.println("ERROR: operating system not supported");
-			System.exit(1);
-		}
 
 		// Initialize values to null so that we can reference them outside the scope of the try/catch
 		Image[] tokenImages = null;
-		String tokenImagePath = sysPath.concat(resourcesPath);
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
 		try {
 
-			File dogFile = new File(tokenImagePath.concat("dog.png"));
+			File dogFile = new File(osValidator.getPathToFile("dog.png","Resources"));
 			String dogURL = dogFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File shoeFile = new File(tokenImagePath.concat("shoe.png"));
+			File shoeFile = new File(osValidator.getPathToFile("shoe.png","Resources"));
 			String shoeURL = shoeFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File raceCarFile = new File(tokenImagePath.concat("racecar.png"));
+			File raceCarFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
 			String raceCarURL = raceCarFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
 
-			File thimbleFile = new File(tokenImagePath.concat("thimble.png"));
+			File thimbleFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
 			String thimbleURL = thimbleFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 

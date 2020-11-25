@@ -1,0 +1,44 @@
+
+.activePlayerSection {
+    -fx-background-color: #689d6a;
+    -fx-border-color: #d79921;
+    -fx-border-width: 4px;
+}
+
+.inactivePlayerSection {
+    -fx-background-color: #3c3836;
+    -fx-border-color: #9d0006;
+    -fx-border-width: 4px;
+}
+
+.accountBalance {
+    -fx-text-fill: black;
+    -fx-font-style: bold;
+}
+
+.activePlayerTradeButton {
+    -fx-opacity: 25%;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+.rollButtonActive {
+    -fx-background-color: #d79921;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+.playerLabel {
+    -fx-text-fill: black;
+    -fx-background-color: #076678;
+    -fx-border-color: #282828;
+    -fx-border-width: 2px;
+}
+
+.endTurnButton {
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-background-color: #9d0006;
+    -fx-text-fill: black;
+    -fx-font-style: bold;
+}

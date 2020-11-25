@@ -1,7 +1,7 @@
 package Controllers;
 
 import Models.Dice;
-import Resources.OSvalidation;
+import Resources.OSValidator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 
 public class TurnOrderController {
@@ -173,7 +170,7 @@ public class TurnOrderController {
         // store the system path as a string
         String sysPath = System.getProperty("user.dir");
         //System.out.println(sysPath);
-        OSvalidation operatingSystem = new OSvalidation();
+        OSValidator operatingSystem = new OSValidator();
         String os = operatingSystem.os;
         String diePath = null;
         if (os.equals("windows")) {

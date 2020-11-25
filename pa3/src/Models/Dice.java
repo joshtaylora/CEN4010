@@ -1,10 +1,14 @@
 package Models;
 
+import Resources.OSValidator;
+import javafx.scene.image.Image;
+
 import java.lang.Math;
 
 //This class handles the Dice for the game which 
 //includes rolling and checking for doubles
 public class Dice {
+	Image[] diceImages;
 	private int[] dice;
 	private boolean doubleRoll;
 
@@ -13,6 +17,15 @@ public class Dice {
 		// initialize the array that stores the results of the dice roll
 		this.dice = new int[2];
 		this.doubleRoll = false;
+		diceImages = new Image[6];
+		OSValidator osV = new OSValidator();
+		diceImages[0] = new Image(osV.getPathToFile("die1.png", "Resources"));
+		diceImages[1] = new Image(osV.getPathToFile("die2.png", "Resources"));
+		diceImages[2] = new Image(osV.getPathToFile("die3.png", "Resources"));
+		diceImages[3] = new Image(osV.getPathToFile("die4.png", "Resources"));
+		diceImages[4] = new Image(osV.getPathToFile("die5.png", "Resources"));
+		diceImages[5] = new Image(osV.getPathToFile("die6.png", "Resources"));
+
 	}
 
 	// Roll() randomizes the values for index 0 and 1 for the dice array

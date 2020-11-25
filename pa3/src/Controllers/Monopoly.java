@@ -1,6 +1,6 @@
 package Controllers;
 
-import Resources.OSvalidation;
+import Resources.OSValidator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,8 +26,8 @@ public class Monopoly extends Application {
         //System.out.println(sysPath);
 
 
-        OSvalidation oSvalidation = new OSvalidation();
-        String os = oSvalidation.os;
+        OSValidator osValidator = new OSValidator();
+        String os = osValidator.os;
         String tabbedViewPath = null;
 
         if (os.equals("windows")) {
@@ -49,8 +49,8 @@ public class Monopoly extends Application {
             System.out.println("ERROR: operating system not supported");
             System.exit(1);
         }
-
-        File tabbedViewFile = new File(tabbedViewPath);
+        String systemPathURL = sysPath.concat(tabbedViewPath);
+        File tabbedViewFile = new File(systemPathURL);
         URL tabbedViewURL = tabbedViewFile.toURI().toURL();
 
         loader.setLocation(tabbedViewURL);

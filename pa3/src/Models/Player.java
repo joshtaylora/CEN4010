@@ -23,9 +23,10 @@ public class Player {
 	 * start them there. There are 10 different sets so start that with an empty set
 	 * of 10 they shouldn't start in jail. and they don't have any doubles yet.
 	 *
-	 * @param initial
-	 * @param currentTile
-	 * @param playerDeeds
+	 * @param initial the amount of money to initialize the player's account with
+	 * @param currentTile the tile that the player will start on
+	 * @param playerDeeds an array of property sets that are initially empty but initialized to hold the correct number
+	 *                    of deeds
 	 */
 	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds) {
 		account = initial;
@@ -151,8 +152,6 @@ public class Player {
 	 */
 	public void increaseUtilities() {
 		numUtilities++;
-		
-		return;
 	}
 	
 	/**
@@ -160,8 +159,6 @@ public class Player {
 	 */
 	public void decreaseUtilities() {
 		numUtilities--;
-		
-		return;
 	}
 	
 	/**
@@ -169,7 +166,6 @@ public class Player {
 	 * @return int
 	 */
 	public int getAccBalance() {
-		
 		return account;
 	}
 	
@@ -179,8 +175,6 @@ public class Player {
 	 */
 	public void setAccBalance(int balance) {
 		account = balance;
-		
-		return;
 	}
 	
 	/**
@@ -188,7 +182,6 @@ public class Player {
 	 * @return boolean
 	 */
 	public boolean getJailStatus() {
-		
 		return inJail;
 	}
 	
@@ -198,8 +191,6 @@ public class Player {
 	 */
 	public void setJailStatus(boolean status) {
 		inJail = status;
-		
-		return;
 	}
 	
 	/**
@@ -207,7 +198,6 @@ public class Player {
 	 * @return Token
 	 */
 	public Token getPlayerToken() {
-		
 		return playerToken;
 	}
 	
@@ -217,8 +207,6 @@ public class Player {
 	 */
 	public void setPlayerToken(Token tok) {
 		playerToken = tok;
-	
-		return;
 	}
 	
 	/**
@@ -226,7 +214,6 @@ public class Player {
 	 * @return PropertySet[]
 	 */
 	public PropertySet[] getPlayerDeeds() {
-		
 		return playerDeeds;
 	}
 	
@@ -236,8 +223,6 @@ public class Player {
 	 */
 	public void setPlayerDeeds(PropertySet[] deeds) {
 		playerDeeds = deeds;
-		
-		return;
 	}
 	
 	/**
