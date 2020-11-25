@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -707,7 +708,7 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                        <AnchorPane  style="-fx-border-color: black;" >
+                        <AnchorPane style="-fx-border-color: black;">
                            <children>
                               <Label fx:id="currentPlayerTileLabel" layoutX="13.0" text="Current Tile:" />
                            </children>
@@ -715,12 +716,12 @@
                               <Insets top="1.0" />
                            </padding>
                         </AnchorPane>
-                        <AnchorPane  prefHeight="53.0" prefWidth="201.0" style="-fx-border-color: black;">
+                        <AnchorPane prefHeight="53.0" prefWidth="201.0" style="-fx-border-color: black;">
                            <children>
                               <Label fx:id="currentPlayerBalanceLabel" layoutX="11.0" layoutY="1.0" text="Account Balance: " />
                            </children>
                         </AnchorPane>
-                        <AnchorPane  style="-fx-border-color: black;">
+                        <AnchorPane style="-fx-border-color: black;">
                            <children>
                               <Label fx:id="currentPlayerPropertyListViewLabel" layoutX="13.0" text="Properties" />
                            </children>
@@ -728,14 +729,19 @@
                               <Insets top="1.0" />
                            </padding>
                         </AnchorPane>
-                        <AnchorPane prefHeight="393.0" prefWidth="201.0">
+                        <AnchorPane prefHeight="178.0" prefWidth="201.0">
                            <children>
                               <ListView fx:id="gamePropertyListView" prefHeight="393.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button fx:id="rollDiceButton" layoutX="67.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="201.0" styleClass="tradeButton" stylesheets="@ActivePlayer.css" text="Roll Dice" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onAction="#rollDiceButtonClicked"/>
+                              <Button fx:id="rollDiceButton" layoutX="67.0" layoutY="1.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="30.0" prefWidth="201.0" styleClass="tradeButton" stylesheets="@ActivePlayer.css" text="Roll Dice" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="93.0" prefWidth="201.0">
+                           <children>
+                              <TextArea fx:id="diceRollResultsTextArea" editable="false" prefHeight="200.0" prefWidth="201.0" text="Results of roll: 6 &amp; 6&#10;Congradulations you rolled &#10;doubles! &#10;Advance straight to Jail!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

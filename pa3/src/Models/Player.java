@@ -7,7 +7,7 @@ package Models;
 public class Player {
 
 	// the variables that are part of the Player class
-	public int account;
+	private int account;
 	private Token playerToken;
 	public PropertySet[] playerDeeds;
 	private Tile currentTile;
@@ -15,6 +15,7 @@ public class Player {
 	private int numRailroads;
 	private int numUtilities;
 	private int doubles;
+	private boolean rollStatus;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an
@@ -23,7 +24,6 @@ public class Player {
 	 * of 10 they shouldn't start in jail. and they don't have any doubles yet.
 	 *
 	 * @param initial
-	 * @param playerToken
 	 * @param currentTile
 	 * @param playerDeeds
 	 */
@@ -35,6 +35,7 @@ public class Player {
 		numRailroads = 0;
 		numUtilities = 0;
 		doubles = 0;
+		rollStatus = false;
 	}
 	
 	/**
@@ -63,7 +64,7 @@ public class Player {
 	 * @param cPlayerDeeds
 	 * @param tPlayerDeeds
 	 */
-	public void performTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed cPlayerDeeds[], Deed tPlayerDeeds[], boolean tradeResults) {
+	public void performTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed[] cPlayerDeeds, Deed[] tPlayerDeeds, boolean tradeResults) {
 		int i;
 		int cDeedsSize = cPlayerDeeds.length;
 		int tDeedsSize = tPlayerDeeds.length;
@@ -87,9 +88,6 @@ public class Player {
 				this.playerDeeds[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
 			}
 		}
-		else {
-			return;
-		}
 	}
 
 	/**
@@ -104,16 +102,12 @@ public class Player {
 	/**
 	 * basic set method for the doubles variable
 	 */
-	public void setDoubles() {
+	public void resetDoubles() {
 		doubles = 0;
-
-		return;
 	}
 
 	public void incrementDoubles() {
 		doubles++;
-
-		return;
 	}
 
 	/**
@@ -251,7 +245,6 @@ public class Player {
 	 * @return Tile
 	 */
 	public Tile getCurrentTile() {
-		
 		return currentTile;
 	}
 	
@@ -261,7 +254,21 @@ public class Player {
 	 */
 	public void setCurrentTile(Tile spot) {
 		currentTile = spot;
-		
-		return;
+	}
+
+	/**
+	 * Method to set the rollstatus variable used to check if the player has rolled yet
+	 * @param rollStatus a boolean that specifies if the player has rolled this turn yet
+	 */
+	public void setRollStatus(boolean rollStatus) {
+		this.rollStatus = rollStatus;
+	}
+
+	/**
+	 * Public method used to check if the player has rolled yet this turn
+	 * @return boolean signifying if the player has rolled this turn yet or not
+	 */
+	public boolean getRollStatus() {
+		return this.rollStatus;
 	}
 }

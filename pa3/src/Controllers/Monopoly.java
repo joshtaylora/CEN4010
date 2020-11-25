@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 public class Monopoly extends Application {
-
+    Stage primaryStage;
     /**
      * @param primaryStage The stage that is passed from the JavaFX runtime
      * @throws Exception Exceptions that can occur in this method are mostly dealing with the URL of the view being loaded
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-
+    public void start(final Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         Scene scene = new Scene(new StackPane());
 
@@ -30,11 +30,11 @@ public class Monopoly extends Application {
         Scene scene = new Scene(root);
          */
 
-        primaryStage.setScene(scene);
+        this.primaryStage.setScene(scene);
 
-        primaryStage.setTitle("Main Menu");
+        this.primaryStage.setTitle("Main Menu");
 
-        primaryStage.show();
+        this.primaryStage.show();
     }
 
     public static void main(String[] args) {

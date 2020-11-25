@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.LinkedList;
 
@@ -30,6 +32,8 @@ public class GameController {
     private Button tradeWithPlayer4;
     @FXML
     Button rollDiceButton;
+    @FXML
+    TextArea diceRollResultsTextArea;
 // =====================================================================================================================
 // ============================================ Label FXML fields ======================================================
     @FXML
@@ -46,12 +50,13 @@ public class GameController {
     private Game game;
     private int numberOfPlayers;
     private int timerValue;
+    int currentPlayerIndex;
 
     private MenuController menuController;
 
 
 //  Injects the menu controller into the game controller and begins the game
-    public void injectMenuController(MenuController menuController) {
+    void injectMenuController(MenuController menuController) {
         this.menuController = menuController;
         this.numberOfPlayers = menuController.numberOfPlayers;
         this.timerValue = menuController.timerValue;
@@ -59,21 +64,39 @@ public class GameController {
 
     }
 
-    public void startGame() {
+    private void startGame() {
+        currentPlayerIndex = 0;
         this.game = new Game(this.numberOfPlayers, this.timerValue);
-//        for (int i = 0; i < this.numberOfPlayers; i++) {
-//        }
         setActivePlayer();
+        //gameLoop();
+    }
+    /*
+    // loop in which the game is run
+    private void gameLoop() {
+        while(System.currentTimeMillis() < game.timeLimit) {
+            // roll for the player
+
+            // update the board to show the player's new position
+            updateTokenPositionOnBoard(playerRoll);
+        }
+    }
+    */
+    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
+        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
+        String tilePrompt = "Current Tile: ";
+        // set the label for the tile the current player is on
+        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
     }
 
 //  Logic for things that must be changed when the next players turn arrives:
 //      - Change the current player in game class
 //      - Change the
 
-    public void setActivePlayer() {
+    private void setActivePlayer() {
         String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
-        String tileString = "Current Tile: ";
-        currentPlayerTileLabel.textProperty().setValue(tileString.concat(playerTile));
+        String tilePrompt = "Current Tile: ";
+        // set the label for the tile the current player is on
+        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
         currentPlayerBalanceLabel.textProperty().setValue("Account Balance: $" + Integer.toString(this.game.getCurrentPlayer().getAccBalance()));
         addPlayerPropertiesToListView(this.game.getCurrentPlayer());
     }
@@ -93,14 +116,22 @@ public class GameController {
 
    @FXML
    void rollDiceButtonClicked(Event e) {
-        int playerRoll = game.gameDice.roll();
-        boolean bool = game.gameDice.checkDoubles();
-        this.game.takeTurn(this.game.getCurrentPlayer(), playerRoll, bool);
-        rollDiceButton.setText("You rolled: " + playerRoll);
-        setActivePlayer();
-
-
+        // check to make sure that the player hasn't already rolled
+        if (!game.getCurrentPlayer().getRollStatus()) {
+            int spacesAdvanced = game.playerRoll();
+            // advance the player on the board
+            Tile tileToAdvanceTo = game.advancePlayerTile(spacesAdvanced);
+            diceRollResultsTextArea.setText("Player advanced " + spacesAdvanced + " tiles.\nPlayer's current tile is now "
+                    + tileToAdvanceTo.getName());
+            // Now set the player's roll status to true so we don't roll for them again
+            game.getCurrentPlayer().setRollStatus(true);
+            setActivePlayer();
+        }
+        else {
+            diceRollResultsTextArea.setText("Player already rolled this turn");
+        }
    }
+
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 
 //    @FXML

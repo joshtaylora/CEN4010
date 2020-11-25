@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Dice;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +21,7 @@ public class TurnOrderController {
 // =====================================================================================================================
 // ====================================== FXML elements for the Turn Order tab =========================================
 
-    @FXML Tab turnOrderTab; // the tab for the turn order view
+    @FXML Tab turnOrderTab; // the tab for the turn orderDice view
 
     @FXML TabPane tabPane;
 
@@ -58,7 +59,7 @@ public class TurnOrderController {
 
     private void displayDice() throws MalformedURLException {
         //initialize Dice
-        Models.Dice order = new Models.Dice ();
+        Dice orderDice = new Dice ();
 
         //roll dice relevant to number of players
         int one;
@@ -68,14 +69,16 @@ public class TurnOrderController {
         // switch on the numberOfPlayers global var that we got from parsing the choice box's input
         switch(this.numberOfPlayers) {
             case 2:
-                one = order.roll()/2;
-                two = order.roll()/2;
+                orderDice.roll();
+                one = orderDice.getDiceRollValue()/2;
+                orderDice.roll();
+                two = orderDice.getDiceRollValue()/2;
 
                 //display correct die image
                 dieOne.setImage(die(one));
                 dieTwo.setImage(die(two));
 
-                //display player order on labels
+                //display player orderDice on labels
                 if(one>=two){
                     labelOne.setText("Player 1");
                     labelTwo.setText("Player 2");
@@ -86,16 +89,19 @@ public class TurnOrderController {
                 }
                 break;
             case 3:
-                one = order.roll()/2;
-                two = order.roll()/2;
-                three = order.roll()/2;
+                orderDice.roll();
+                one = orderDice.getDiceRollValue()/2;
+                orderDice.roll();
+                two = orderDice.getDiceRollValue()/2;
+                orderDice.roll();
+                three = orderDice.getDiceRollValue()/2;
 
                 //display correct die image
                 dieOne.setImage(die(one));
                 dieTwo.setImage(die(two));
                 dieThree.setImage(die(three));
 
-                //determine player order, then update labels
+                //determine player orderDice, then update labels
                 int[] sort3 = {3, 3, 3};
                 int[] comp3 = {one, two, three};
                 int[] sorted3 = sortOrder(sort3, comp3);
@@ -105,10 +111,14 @@ public class TurnOrderController {
 
                 break;
             case 4:
-                one = order.roll()/2;
-                two = order.roll()/2;
-                three = order.roll()/2;
-                four = order.roll()/2;
+                orderDice.roll(); // roll for the first player
+                one = orderDice.getDiceRollValue()/2;
+                orderDice.roll(); // roll for the second player
+                two = orderDice.getDiceRollValue()/2;
+                orderDice.roll(); // roll for the third player
+                three = orderDice.getDiceRollValue()/2;
+                orderDice.roll(); // roll for the fourth player
+                four = orderDice.getDiceRollValue()/2;
 
                 //display correct die image
                 dieOne.setImage(die(one));
@@ -116,7 +126,7 @@ public class TurnOrderController {
                 dieThree.setImage(die(three));
                 dieFour.setImage(die(four));
 
-                //determine player order, then update labels
+                //determine player orderDice, then update labels
                 int[] sort4 = {4, 4, 4, 4};
                 int[] comp4 = {one, two, three, four};
                 int[] sorted4 = sortOrder(sort4, comp4);
@@ -133,11 +143,11 @@ public class TurnOrderController {
     }
 
     /**
-     * Helper function that is used to sort the order of players based on their dice roll values
-     * @param sort an area containing the max value for the order that a player can be in based on their roll.
+     * Helper function that is used to sort the orderDice of players based on their dice roll values
+     * @param sort an area containing the max value for the orderDice that a player can be in based on their roll.
      *             Will be decremented as the roll is compared to the other player's values
-     * @param comp The roll values for each player. This array is used to determine the order of the players.
-     * @return we return the sorted array containing the proper order for the players
+     * @param comp The roll values for each player. This array is used to determine the orderDice of the players.
+     * @return we return the sorted array containing the proper orderDice for the players
      */
     private static int[] sortOrder(int[] sort, int[] comp) {
         int sortLen = sort.length;

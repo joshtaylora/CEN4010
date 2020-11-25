@@ -35,7 +35,6 @@ public class Game {
 	public Image[] tokenImages;
 
 
-
 //	====================================================================================================================
 	/**
 	 * Class Constructor
@@ -142,8 +141,7 @@ public class Game {
 		 * for each turn
 		 */
 
-		Dice gameDice = new Dice();
-		this.gameDice = gameDice;
+		this.gameDice = new Dice();
 		// while the timer has not run out ...
         while(System.currentTimeMillis() < this.endTime){
             currentPlayer = this.playerList.get(1 + this.playerList.indexOf(this.currentPlayer));
@@ -151,7 +149,98 @@ public class Game {
         //checkWinner();
         //hSystem.out.println("The winner is: " + currentPlayer.name);
 
+	}
 
+	/**
+	 * Method used to perform the roll for the player
+	 * @return returns the number of spaces to advance the player. If they have rolled doubles 3 times in a row, then
+	 * return the number of spaces to advance the player until they arrive in the Jail tile
+	 */
+	public int playerRoll() {
+		int spacesToAdvanceToken = 0;
+		Player rollingPlayer = this.getCurrentPlayer();
+		this.gameDice.roll();
+		//		check if the player rolled doubles
+		if (!this.gameDice.getDoubleResults()) {
+			spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+		} // else if they roll doubles but haven't rolled enough times for this roll to send them to jail
+		else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
+			// The player has rolled doubles but they do not go to jail for this double roll, yet
+			// increment the Player's counter storing the number of double rolls the player has had in a row
+			rollingPlayer.incrementDoubles();
+			// update the number of spaces to advance the token
+			spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+			// roll again
+			this.gameDice.roll();
+			// if the player's second roll was not a double roll
+			if (!this.gameDice.getDoubleResults()) {
+				spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+			}
+			else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
+				// now the player can roll again but if they land doubles this time they go to jail
+				rollingPlayer.incrementDoubles();
+				spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+				this.gameDice.roll();
+				if (!this.gameDice.getDoubleResults()) {
+					spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+				}
+				else {
+					// send the player to jail by returning the number of spaces to advance the player to send them
+					// to the jail tile
+					int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
+					spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
+				}
+			}
+			else {
+				// send the player to jail by returning the number of spaces to advance the player to send them
+				// to the jail tile
+				int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
+				spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
+			}
+		}
+		else {
+		// send the player to jail by returning the number of spaces to advance the player to send them
+		// to the jail tile
+		int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
+		spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
+		}
+		return spacesToAdvanceToken;
+	}
+
+	/**
+	 * Advance the player the number of spaces specified
+	 * @param spaces the number of tiles you wish to advance the player
+	 */
+	public Tile advancePlayerTile(int spaces) {
+		this.currentPlayer.setCurrentTile(this.gameBoard.move(this.currentPlayer.getCurrentTile(), spaces));
+		return this.currentPlayer.getCurrentTile();
+	}
+
+
+
+	/**
+	 * Method used to retrieve the Player object for the player whose turn it currently is
+	 * @return returns the Player whose turn it currently is
+	 */
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
+
+	/**
+	 * Method to retrieve the index in the playerList LinkedList of the currentPlayer
+	 * @return the integer value of the current player's index in the playerList LinkedList
+	 */
+	public int getCurrentPlayerIndex() {
+		return this.playerList.indexOf(this.currentPlayer);
+	}
+
+	/**
+	 * Method to retrieve the index of a specific player
+	 * @param player the player whose index you wish to retrieve
+	 * @return the integer index of that player in the playerList LinkedList
+	 */
+	public int getPlayerIndex(Player player) {
+		return this.playerList.indexOf(player);
 	}
 
 //	====================================================================================================================
@@ -219,30 +308,7 @@ public class Game {
 		return tokenImages;
 
 	}
-    public Tile takeTurn(Player currentPlayer, int spaces, boolean doubles){
-        Tile temp;
-        //Check doubles to see if another turn should occur
-        if(doubles){
-            currentPlayer.incrementDoubles();
-            //If number of doubles rolled = 3, player goes to jail
-            if(currentPlayer.getDoubles() == 3){
-                temp = gameBoard.searchTile("In Jail/ Just Visiting");
-                currentPlayer.setCurrentTile(temp);
-                currentPlayer.setDoubles();
-                return temp;
-            }
-            //Change currentTile and return the tile
-            temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-            currentPlayer.setCurrentTile(temp);
-            return temp;
 
-        }
-        //Change currentTile and return the tile
-        temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-        currentPlayer.setCurrentTile(temp);
-        currentPlayer.setDoubles();
-        return temp;
-    }
 //	====================================================================================================================
 
 	private PropertySet[] propertySetInitializer() {
@@ -270,48 +336,48 @@ public class Game {
 		return playerList.indexOf(this.getCurrentPlayer());
 	}
 
+	/*
+	public Tile takeTurnInJail(){
+		Tile temp = null;
 
-  public Tile takeTurnInJail(Player currentPlayer){
-    Dice jailDice = new Dice();
-    Tile temp = null;
-    int spaces = jailDice.roll();
-    if(jailDice.checkDoubles()){
-      temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-      currentPlayer.setCurrentTile(temp);
-      currentPlayer.setDoubles();
-    }
-    else{
-      currentPlayer.incrementDoubles();
-      if(currentPlayer.getDoubles() == 3){
-        currentPlayer.setAccBalance(currentPlayer.getAccBalance() - 50);
-        temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-        currentPlayer.setCurrentTile(temp);
-        currentPlayer.setDoubles();
-      }
-    }
-    return  temp;
-  }
-  public void buyProperty(Deed currentTile, Player currentPlayer){
-    String tileType = currentTile.getType();
-    if(tileType.equals("Deed")){
-      currentPlayer.purchaseDeed(currentTile);
-      currentTile.setOwner(currentPlayer);
-      if(currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()){
-        currentTile.setHouses();
-      }
+    	if(gameDice.checkDoubles()){
+    		temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
+    		currentPlayer.setCurrentTile(temp);
+    		currentPlayer.setDoubles();
+    	}
+    	else{
+    		currentPlayer.incrementDoubles();
+    		if(currentPlayer.getDoubles() == 3){
+    			currentPlayer.setAccBalance(currentPlayer.getAccBalance() - 50);
+    			temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
+    			currentPlayer.setCurrentTile(temp);
+    			currentPlayer.setDoubles();
+    		}
+    	}
+    	return  temp;
+	}
+	public void buyProperty(){
+		Tile propertyToBuy = this.currentPlayer.getCurrentTile();
+		String tileType = propertyToBuy.getType();
+		switch (tileType) {
+			case "Deed":
+				this.currentPlayer.purchaseDeed(propertyToBuy);
+				currentTile.setOwner(currentPlayer);
+				if (currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()) {
+					currentTile.setHouses();
+				}
+				break;
+			case "RailRoad":
+				currentTile.setOwner(currentPlayer);
+				currentPlayer.increaseRailroads();
+				break;
+			case "Utility":
+				currentTile.setOwner(currentPlayer);
+				currentPlayer.increaseUtilities();
+				break;
+		  }
+	}
 
-    }
-    else if(tileType.equals("RailRoad")){
-      currentTile.setOwner(currentPlayer);
-      currentPlayer.increaseRailroads();
-    }
-    else if(tileType.equals("Utility")){
-      currentTile.setOwner(currentPlayer);
-      currentPlayer.increaseUtilities();
-    }
-  }
-
-/*k
   public String checkWinner(){
     //Check winner by finding out sum of houses, hotels, properties, and currentMoney
     //propertySum is the method to use
@@ -377,7 +443,5 @@ public class Game {
 
 //	====================================================================================================================
 
-  public Player getCurrentPlayer(){
-    return currentPlayer;
-  }
+
 }
