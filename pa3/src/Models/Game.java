@@ -31,6 +31,9 @@ public class Game {
 
 	public Image[] tokenImages;
 
+	public Image dieImage1;
+	public Image dieImage2;
+
 
 //	====================================================================================================================
 	/**
@@ -57,6 +60,9 @@ public class Game {
 		// initialize the player list to an empty linked list of player objects
 		this.playerList = new LinkedList<Player>();
 		this.tokenList = new ArrayList<>();
+
+		this.dieImage1 = null;
+		this.dieImage2 = null;
 		// set the initial timer to the specified timer value
 
 		// store the images for the tokens in an easily accessible array
@@ -140,68 +146,56 @@ public class Game {
 
 		this.gameDice = new Dice();
 		// while the timer has not run out ...
-        while(System.currentTimeMillis() < this.endTime){
-            currentPlayer = this.playerList.get(1 + this.playerList.indexOf(this.currentPlayer));
-        }
         //checkWinner();
-        //hSystem.out.println("The winner is: " + currentPlayer.name);
-
 	}
 
 	/**
 	 * Method used to perform the roll for the player
-	 * @return returns the number of spaces to advance the player. If they have rolled doubles 3 times in a row, then
-	 * return the number of spaces to advance the player until they arrive in the Jail tile
 	 */
-	public int playerRoll() {
+	public void playerRoll() {
 		int spacesToAdvanceToken = 0;
 		Player rollingPlayer = this.getCurrentPlayer();
+
 		this.gameDice.roll();
+
+		this.dieImage1 = gameDice.getDiceRollImages()[0];
+		this.dieImage2 = gameDice.getDiceRollImages()[1];
+
 		//		check if the player rolled doubles
 		if (!this.gameDice.getDoubleResults()) {
-			spacesToAdvanceToken += this.gameDice.getDiceRollValue();
+
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setRollStatus(true);
 		} // else if they roll doubles but haven't rolled enough times for this roll to send them to jail
 		else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
-			// The player has rolled doubles but they do not go to jail for this double roll, yet
 			// increment the Player's counter storing the number of double rolls the player has had in a row
 			rollingPlayer.incrementDoubles();
-			// update the number of spaces to advance the token
-			spacesToAdvanceToken += this.gameDice.getDiceRollValue();
-			// roll again
-			this.gameDice.roll();
-			// if the player's second roll was not a double roll
-			if (!this.gameDice.getDoubleResults()) {
-				spacesToAdvanceToken += this.gameDice.getDiceRollValue();
-			}
-			else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
-				// now the player can roll again but if they land doubles this time they go to jail
-				rollingPlayer.incrementDoubles();
-				spacesToAdvanceToken += this.gameDice.getDiceRollValue();
-				this.gameDice.roll();
-				if (!this.gameDice.getDoubleResults()) {
-					spacesToAdvanceToken += this.gameDice.getDiceRollValue();
-				}
-				else {
-					// send the player to jail by returning the number of spaces to advance the player to send them
-					// to the jail tile
-					int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
-					spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
-				}
-			}
-			else {
-				// send the player to jail by returning the number of spaces to advance the player to send them
-				// to the jail tile
-				int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
-				spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
-			}
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setRollStatus(false);
+
+		}
+		else if (rollingPlayer.getJailStatus() && this.gameDice.getDoubleResults()) {
+			// player is in jail and rolling to try to get out of doubles
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setJailStatus(false);
+
 		}
 		else {
-		// send the player to jail by returning the number of spaces to advance the player to send them
-		// to the jail tile
-		int jailTilePosition= this.gameBoard.searchTile("Jail").getPosition();
-		spacesToAdvanceToken = 40 - rollingPlayer.getCurrentTile().getPosition() + jailTilePosition;
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			// sets the player's current tile to the jail tile
+			if (!rollingPlayer.getJailStatus()) {
+				rollingPlayer.setJailStatus(true);
+				rollingPlayer.resetDoubles();
+			}
+			rollingPlayer.setRollStatus(true);
 		}
-		return spacesToAdvanceToken;
+	}
+
+	public boolean checkPlayerRollResults() {
+		boolean rollAgain;
+		// if the player did NOT roll doubles
+		rollAgain = this.gameDice.getDoubleResults();
+		return rollAgain;
 	}
 
 	/**

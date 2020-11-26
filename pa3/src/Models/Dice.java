@@ -3,7 +3,9 @@ package Models;
 import Resources.OSValidator;
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.lang.Math;
+import java.net.MalformedURLException;
 
 //This class handles the Dice for the game which 
 //includes rolling and checking for doubles
@@ -19,13 +21,34 @@ public class Dice {
 		this.doubleRoll = false;
 		diceImages = new Image[6];
 		OSValidator osV = new OSValidator();
-		diceImages[0] = new Image(osV.getPathToFile("die1.png", "Resources"));
-		diceImages[1] = new Image(osV.getPathToFile("die2.png", "Resources"));
-		diceImages[2] = new Image(osV.getPathToFile("die3.png", "Resources"));
-		diceImages[3] = new Image(osV.getPathToFile("die4.png", "Resources"));
-		diceImages[4] = new Image(osV.getPathToFile("die5.png", "Resources"));
-		diceImages[5] = new Image(osV.getPathToFile("die6.png", "Resources"));
-
+		File die1File = new File(osV.getPathToFile("die1.png", "Resources"));
+		File die2File = new File(osV.getPathToFile("die2.png", "Resources"));
+		File die3File = new File(osV.getPathToFile("die3.png", "Resources"));
+		File die4File = new File(osV.getPathToFile("die4.png", "Resources"));
+		File die5File = new File(osV.getPathToFile("die5.png", "Resources"));
+		File die6File = new File(osV.getPathToFile("die6.png", "Resources"));
+		Image[] testDieArray = null;
+		try {
+			testDieArray = new Image[6];
+			testDieArray[0] = new Image(die1File.toURI().toURL().toString());
+			testDieArray[1] = new Image(die2File.toURI().toURL().toString());
+			testDieArray[2] = new Image(die3File.toURI().toURL().toString());
+			testDieArray[3] = new Image(die4File.toURI().toURL().toString());
+			testDieArray[4] = new Image(die5File.toURI().toURL().toString());
+			testDieArray[5] = new Image(die6File.toURI().toURL().toString());
+		} catch (MalformedURLException urlE) {
+			System.out.println("ERROR: dice image could not be found. System terminating");
+			urlE.printStackTrace();
+			System.exit(1);
+		}
+		if (testDieArray == null) {
+			System.out.println("ERROR: dice images could not be found. System terminating");
+			System.exit(1);
+		}
+		else {
+			this.diceImages = new Image[6];
+			this.diceImages = testDieArray;
+		}
 	}
 
 	// Roll() randomizes the values for index 0 and 1 for the dice array
@@ -56,5 +79,10 @@ public class Dice {
 	public int getDiceTwoResult() {
 		return this.dice[1];
 	}
-
+	public Image[] getDiceRollImages() {
+		Image[] returnImages = new Image[2];
+		returnImages[0] = this.diceImages[getDiceOneResult() - 1];
+		returnImages[1] = this.diceImages[getDiceTwoResult() - 1];
+		return returnImages;
+	}
 }

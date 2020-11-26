@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 public class GameController {
 
@@ -28,15 +29,15 @@ public class GameController {
     @FXML
     private Button tradeWithPlayer4;
     @FXML
-    Button rollDiceButton;
+    private Button rollDiceButton;
     @FXML
-    TextArea diceRollResultsTextArea;
+    private TextArea diceRollResultsTextArea;
     @FXML
-    Button endTurnButton;
+    private Button endTurnButton;
     @FXML
-    ImageView rollDiceImage1;
+    private ImageView rollDiceImage1;
     @FXML
-    ImageView rollDiceImage2;
+    private ImageView rollDiceImage2;
 // =====================================================================================================================
 // ============================================ Label FXML fields ======================================================
     @FXML
@@ -53,12 +54,8 @@ public class GameController {
     private int timerValue;
     int currentPlayerIndex;
 
-    private MenuController menuController;
-
-    // TODO add button under turn TextArea to end turn
 //  Injects the menu controller into the game controller and begins the game
     void injectMenuController(MenuController menuController) {
-        this.menuController = menuController;
         this.numberOfPlayers = menuController.numberOfPlayers;
         this.timerValue = menuController.timerValue;
         startGame();
@@ -116,27 +113,51 @@ public class GameController {
 // =====================================================================================================================
    @FXML
    void rollDiceButtonClicked(Event e) {
-        // check to make sure that the player hasn't already rolled
-        if (!game.getCurrentPlayer().getRollStatus()) {
-            int spacesAdvanced = game.playerRoll();
+        int spacesAdvanced = 0;
+        Player rollingPlayer = game.getCurrentPlayer();
+        int numPlayerDoubleRolls = rollingPlayer.getDoubles();
+       // check to make sure that the player hasn't already rolled
+        if (!rollingPlayer.getRollStatus()) {
+            //int spacesAdvanced = game.playerRoll();
+            // if the player is not jail
+            if (!rollingPlayer.getJailStatus()) {
+                if (numPlayerDoubleRolls > 0) {
+                    if (numPlayerDoubleRolls == 1) {
+                        // player has rolled doubles the previous turn
+                        game.playerRoll();
+                        spacesAdvanced = rollingPlayer.getDiceRollResults();
+                    }
+                    else if(numPlayerDoubleRolls == 2) {
+                        // player has rolled doubles the previous two turns
+                        game.playerRoll();
+                        if (game.checkPlayerRollResults()) {
+                            spacesAdvanced = 40 - rollingPlayer.getCurrentTile().getPosition() + 10;
+                        } else {
+                            spacesAdvanced = rollingPlayer.getDiceRollResults();
+                        }
+                    }
+                }
+                else if (numPlayerDoubleRolls == 0) {
+                    game.playerRoll();
+                    spacesAdvanced = rollingPlayer.getDiceRollResults();
+                }
+            }
+            else {
+                spacesAdvanced = game.getCurrentPlayer().getDiceRollResults();
+            }
             // advance the player on the board
             Tile tileToAdvanceTo = game.advancePlayerTile(spacesAdvanced);
             //Update the urls for the image vies to the correct dice
-            Image diceImage1 = getImage(getPathToDiceRollImage(game.gameDice.getDiceOneResult()));
-            Image diceImage2 = getImage(getPathToDiceRollImage(game.gameDice.getDiceTwoResult()));
-            if (diceImage1 == null && diceImage2 == null) {
-                System.out.println("ERROR finding image file for dice rolls");
-                System.exit(1);
-            }
-            rollDiceImage1.setImage(diceImage1);
-            rollDiceImage2.setImage(diceImage2);
+
+            rollDiceImage1.setImage(game.dieImage1);
+            rollDiceImage2.setImage(game.dieImage2);
             // Now set the player's roll status to true so we don't roll for them again
-            game.getCurrentPlayer().setRollStatus(true);
-            rollDiceButton.getStyleClass().remove("");
+            rollDiceButton.getStyleClass().remove("rollButtonActive");
+            rollDiceButton.getStyleClass().add("rollButtonInactive");
             setActivePlayer();
         }
         else {
-            diceRollResultsTextArea.setText("Player already rolled this turn");
+            // add functionality here to stop player from rolling
         }
    }
 
@@ -145,6 +166,13 @@ public class GameController {
         // Player has opted to end their turn
 
    }
+
+    /**
+     * Function called from diceRollButtonClicked method that handles dice roll events
+     */
+    void diceRollInJail() {
+
+    }
 
    private String getPathToDiceRollImage(int roll) {
         String rollImageFileName = null;

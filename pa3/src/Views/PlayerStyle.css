@@ -27,6 +27,12 @@
     -fx-border-color: black;
     -fx-border-width: 2px;
 }
+.rollButtonInactive {
+    -fx-background-color: #282828;
+    -fx-text-fill: #a89984;
+    -fx-border-color: #9d0006;
+    -fx-border-width: 2px;
+}
 
 .playerLabel {
     -fx-text-fill: black;

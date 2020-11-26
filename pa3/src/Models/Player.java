@@ -16,6 +16,7 @@ public class Player {
 	private int numUtilities;
 	private int doubles;
 	private boolean rollStatus;
+	private int diceRollResults;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an
@@ -37,6 +38,7 @@ public class Player {
 		numUtilities = 0;
 		doubles = 0;
 		rollStatus = false;
+		diceRollResults = 0;
 	}
 	
 	/**
@@ -242,6 +244,7 @@ public class Player {
 	}
 
 	/**
+	 * Josh added 11/24/2020
 	 * Method to set the rollstatus variable used to check if the player has rolled yet
 	 * @param rollStatus a boolean that specifies if the player has rolled this turn yet
 	 */
@@ -250,10 +253,29 @@ public class Player {
 	}
 
 	/**
+	 * Josh added 11/24/2020
 	 * Public method used to check if the player has rolled yet this turn
 	 * @return boolean signifying if the player has rolled this turn yet or not
 	 */
 	public boolean getRollStatus() {
 		return this.rollStatus;
+	}
+
+	/**
+	 * Josh added 11/25/2020 @7:43PM
+	 * @param diceRollResults the number of tiles to add to the counter storing the number of tiles that the player
+	 *                            will advance after their last roll for the current turn
+	 */
+	public void setDiceRollResults(int diceRollResults) {
+		this.diceRollResults = diceRollResults;
+	}
+
+	/**
+	 * Josh added 11/25/2020 @ 7:45PM
+	 * method to retrieve the number of tiles that the player will advance this turn
+	 * @return the total number of tiles that the player's dice rolls this turn will advance them
+	 */
+	public int getDiceRollResults() {
+		return this.diceRollResults;
 	}
 }

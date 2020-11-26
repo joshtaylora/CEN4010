@@ -64,17 +64,25 @@ public class TurnOrderController {
         int two;
         int three;
         int four;
+
+        Image playerAImage = null;
+        Image playerBImage = null;
+        Image playerCImage = null;
+        Image playerDImage = null;
         // switch on the numberOfPlayers global var that we got from parsing the choice box's input
         switch(this.numberOfPlayers) {
             case 2:
                 orderDice.roll();
-                one = orderDice.getDiceRollValue()/2;
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
+
                 orderDice.roll();
-                two = orderDice.getDiceRollValue()/2;
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
 
                 //display correct die image
-                dieOne.setImage(die(one));
-                dieTwo.setImage(die(two));
+                dieOne.setImage(playerAImage);
+                dieTwo.setImage(playerBImage);
 
                 //display player orderDice on labels
                 if(one>=two){
@@ -88,11 +96,16 @@ public class TurnOrderController {
                 break;
             case 3:
                 orderDice.roll();
-                one = orderDice.getDiceRollValue()/2;
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
+
                 orderDice.roll();
-                two = orderDice.getDiceRollValue()/2;
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
+
                 orderDice.roll();
-                three = orderDice.getDiceRollValue()/2;
+                three = orderDice.getDiceOneResult();
+                playerCImage = orderDice.getDiceRollImages()[0];
 
                 //display correct die image
                 dieOne.setImage(die(one));
@@ -109,20 +122,26 @@ public class TurnOrderController {
 
                 break;
             case 4:
-                orderDice.roll(); // roll for the first player
-                one = orderDice.getDiceRollValue()/2;
-                orderDice.roll(); // roll for the second player
-                two = orderDice.getDiceRollValue()/2;
-                orderDice.roll(); // roll for the third player
-                three = orderDice.getDiceRollValue()/2;
-                orderDice.roll(); // roll for the fourth player
-                four = orderDice.getDiceRollValue()/2;
+                orderDice.roll();
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
 
+                orderDice.roll();
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                three = orderDice.getDiceOneResult();
+                playerCImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                four = orderDice.getDiceOneResult();
+                playerDImage = orderDice.getDiceRollImages()[0];
                 //display correct die image
-                dieOne.setImage(die(one));
-                dieTwo.setImage(die(two));
-                dieThree.setImage(die(three));
-                dieFour.setImage(die(four));
+                dieOne.setImage(playerAImage);
+                dieTwo.setImage(playerBImage);
+                dieThree.setImage(playerCImage);
+                dieFour.setImage(playerDImage);
 
                 //determine player orderDice, then update labels
                 int[] sort4 = {4, 4, 4, 4};
