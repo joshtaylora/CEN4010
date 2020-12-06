@@ -1,5 +1,7 @@
 package Controllers;
 
+import Models.Dice;
+import Resources.OSValidator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 
 public class TurnOrderController {
@@ -20,7 +19,7 @@ public class TurnOrderController {
 // =====================================================================================================================
 // ====================================== FXML elements for the Turn Order tab =========================================
 
-    @FXML Tab turnOrderTab; // the tab for the turn order view
+    @FXML Tab turnOrderTab; // the tab for the turn orderDice view
 
     @FXML TabPane tabPane;
 
@@ -58,24 +57,34 @@ public class TurnOrderController {
 
     private void displayDice() throws MalformedURLException {
         //initialize Dice
-        Models.Dice order = new Models.Dice ();
+        Dice orderDice = new Dice ();
 
         //roll dice relevant to number of players
         int one;
         int two;
         int three;
         int four;
+
+        Image playerAImage = null;
+        Image playerBImage = null;
+        Image playerCImage = null;
+        Image playerDImage = null;
         // switch on the numberOfPlayers global var that we got from parsing the choice box's input
         switch(this.numberOfPlayers) {
             case 2:
-                one = order.roll()/2;
-                two = order.roll()/2;
+                orderDice.roll();
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
 
                 //display correct die image
-                dieOne.setImage(die(one));
-                dieTwo.setImage(die(two));
+                dieOne.setImage(playerAImage);
+                dieTwo.setImage(playerBImage);
 
-                //display player order on labels
+                //display player orderDice on labels
                 if(one>=two){
                     labelOne.setText("Player 1");
                     labelTwo.setText("Player 2");
@@ -86,16 +95,24 @@ public class TurnOrderController {
                 }
                 break;
             case 3:
-                one = order.roll()/2;
-                two = order.roll()/2;
-                three = order.roll()/2;
+                orderDice.roll();
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                three = orderDice.getDiceOneResult();
+                playerCImage = orderDice.getDiceRollImages()[0];
 
                 //display correct die image
                 dieOne.setImage(die(one));
                 dieTwo.setImage(die(two));
                 dieThree.setImage(die(three));
 
-                //determine player order, then update labels
+                //determine player orderDice, then update labels
                 int[] sort3 = {3, 3, 3};
                 int[] comp3 = {one, two, three};
                 int[] sorted3 = sortOrder(sort3, comp3);
@@ -105,18 +122,28 @@ public class TurnOrderController {
 
                 break;
             case 4:
-                one = order.roll()/2;
-                two = order.roll()/2;
-                three = order.roll()/2;
-                four = order.roll()/2;
+                orderDice.roll();
+                one = orderDice.getDiceOneResult();
+                playerAImage = orderDice.getDiceRollImages()[0];
 
+                orderDice.roll();
+                two = orderDice.getDiceOneResult();
+                playerBImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                three = orderDice.getDiceOneResult();
+                playerCImage = orderDice.getDiceRollImages()[0];
+
+                orderDice.roll();
+                four = orderDice.getDiceOneResult();
+                playerDImage = orderDice.getDiceRollImages()[0];
                 //display correct die image
-                dieOne.setImage(die(one));
-                dieTwo.setImage(die(two));
-                dieThree.setImage(die(three));
-                dieFour.setImage(die(four));
+                dieOne.setImage(playerAImage);
+                dieTwo.setImage(playerBImage);
+                dieThree.setImage(playerCImage);
+                dieFour.setImage(playerDImage);
 
-                //determine player order, then update labels
+                //determine player orderDice, then update labels
                 int[] sort4 = {4, 4, 4, 4};
                 int[] comp4 = {one, two, three, four};
                 int[] sorted4 = sortOrder(sort4, comp4);
@@ -133,11 +160,11 @@ public class TurnOrderController {
     }
 
     /**
-     * Helper function that is used to sort the order of players based on their dice roll values
-     * @param sort an area containing the max value for the order that a player can be in based on their roll.
+     * Helper function that is used to sort the orderDice of players based on their dice roll values
+     * @param sort an area containing the max value for the orderDice that a player can be in based on their roll.
      *             Will be decremented as the roll is compared to the other player's values
-     * @param comp The roll values for each player. This array is used to determine the order of the players.
-     * @return we return the sorted array containing the proper order for the players
+     * @param comp The roll values for each player. This array is used to determine the orderDice of the players.
+     * @return we return the sorted array containing the proper orderDice for the players
      */
     private static int[] sortOrder(int[] sort, int[] comp) {
         int sortLen = sort.length;
@@ -162,7 +189,19 @@ public class TurnOrderController {
         // store the system path as a string
         String sysPath = System.getProperty("user.dir");
         //System.out.println(sysPath);
-        String diePath = sysPath.concat("\\src\\Resources\\");
+        OSValidator operatingSystem = new OSValidator();
+        String os = operatingSystem.os;
+        String diePath = null;
+        if (os.equals("windows")) {
+            diePath = sysPath.concat("\\src\\Resources\\");
+        }
+        else if (os.equals("mac")) {
+            diePath = sysPath.concat("/pa3/src/Resources/");
+        }
+        else {
+            System.out.println("ERROR: operating system not supported");
+            System.exit(1);
+        }
 
         File oneFile = new File(diePath.concat("die1.png"));
         String oneURL = oneFile.toURI().toURL().toString();

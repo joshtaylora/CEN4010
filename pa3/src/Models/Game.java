@@ -1,18 +1,14 @@
 package Models;
-
 /**
  * @author Joshua
  * @version 1.0.1
  */
 
+import Resources.OSValidator;
 import javafx.scene.image.Image;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -35,12 +31,14 @@ public class Game {
 
 	public Image[] tokenImages;
 
+	public Image dieImage1;
+	public Image dieImage2;
 
 
 //	====================================================================================================================
 	/**
 	 * Class Constructor
-	 * 
+	 *
 	 * @param numPlayers: retrieved from the main menu view, denotes the number of
 	 *                    players that will be playing
 	 * @param timeLimit:  retrieved from the main menu view, denotes the starting
@@ -62,6 +60,9 @@ public class Game {
 		// initialize the player list to an empty linked list of player objects
 		this.playerList = new LinkedList<Player>();
 		this.tokenList = new ArrayList<>();
+
+		this.dieImage1 = null;
+		this.dieImage2 = null;
 		// set the initial timer to the specified timer value
 
 		// store the images for the tokens in an easily accessible array
@@ -143,48 +144,130 @@ public class Game {
 		 * for each turn
 		 */
 
-		Dice gameDice = new Dice();
-		this.gameDice = gameDice;
+		this.gameDice = new Dice();
 		// while the timer has not run out ...
-		while (System.currentTimeMillis() < this.endTime) {
-			for (int i = 0; i < this.numPlayers; i++) {
-				int playerRoll = gameDice.roll();
-				System.out.println("Player rolled: " + playerRoll);
-			}
-		}
-
+        //checkWinner();
 	}
 
-//	====================================================================================================================
+	/**
+	 * Method used to perform the roll for the player
+	 */
+	public void playerRoll() {
+		int spacesToAdvanceToken = 0;
+		Player rollingPlayer = this.getCurrentPlayer();
 
+		this.gameDice.roll();
+
+		this.dieImage1 = gameDice.getDiceRollImages()[0];
+		this.dieImage2 = gameDice.getDiceRollImages()[1];
+
+		//		check if the player rolled doubles
+		if (!this.gameDice.getDoubleResults()) {
+
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setRollStatus(true);
+		} // else if they roll doubles but haven't rolled enough times for this roll to send them to jail
+		else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
+			// increment the Player's counter storing the number of double rolls the player has had in a row
+			rollingPlayer.incrementDoubles();
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setRollStatus(false);
+
+		}
+		else if (rollingPlayer.getJailStatus() && this.gameDice.getDoubleResults()) {
+			// player is in jail and rolling to try to get out of doubles
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			rollingPlayer.setJailStatus(false);
+
+		}
+		else {
+			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
+			// sets the player's current tile to the jail tile
+			if (!rollingPlayer.getJailStatus()) {
+				rollingPlayer.setJailStatus(true);
+				rollingPlayer.resetDoubles();
+			}
+			rollingPlayer.setRollStatus(true);
+		}
+	}
+
+	public boolean checkPlayerRollResults() {
+		boolean rollAgain;
+		// if the player did NOT roll doubles
+		rollAgain = this.gameDice.getDoubleResults();
+		return rollAgain;
+	}
+
+	/**
+	 * Advance the player the number of spaces specified
+	 * @param spaces the number of tiles you wish to advance the player
+	 */
+	public Tile advancePlayerTile(int spaces) {
+		this.currentPlayer.setCurrentTile(this.gameBoard.move(this.currentPlayer.getCurrentTile(), spaces));
+		return this.currentPlayer.getCurrentTile();
+	}
+
+
+
+	/**
+	 * Method used to retrieve the Player object for the player whose turn it currently is
+	 * @return returns the Player whose turn it currently is
+	 */
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
+
+	/**
+	 * Method to retrieve the index in the playerList LinkedList of the currentPlayer
+	 * @return the integer value of the current player's index in the playerList LinkedList
+	 */
+	public int getCurrentPlayerIndex() {
+		return this.playerList.indexOf(this.currentPlayer);
+	}
+
+	/**
+	 * Method to retrieve the index of a specific player
+	 * @param player the player whose index you wish to retrieve
+	 * @return the integer index of that player in the playerList LinkedList
+	 */
+	public int getPlayerIndex(Player player) {
+		return this.playerList.indexOf(player);
+	}
+
 //	====================================================================================================================
 
-	public static Image[] tokenImageArrayInitializer(int numPlayers) {
+	/**
+	 * Function used to populate the tokenImages array with the proper image URL and Image objects
+	 * @param numPlayers integer specifying the number of players that will need images for their tokens
+	 * @return the array of images with the number of images specified by the number of players
+	 */
+	private static Image[] tokenImageArrayInitializer(int numPlayers) {
 
 		// Grab the working directory string
 		String sysPath = System.getProperty("user.dir");
-		String tokenImagePath = sysPath.concat("\\src\\Resources\\");
+		OSValidator osValidator = new OSValidator();
+		String os = osValidator.os;
+		String resourcesPath = null;
+
 		// Initialize values to null so that we can reference them outside the scope of the try/catch
 		Image[] tokenImages = null;
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
 		try {
 
-			File dogFile = new File(tokenImagePath.concat("dog.png"));
+			File dogFile = new File(osValidator.getPathToFile("dog.png","Resources"));
 			String dogURL = dogFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File shoeFile = new File(tokenImagePath.concat("shoe.png"));
+			File shoeFile = new File(osValidator.getPathToFile("shoe.png","Resources"));
 			String shoeURL = shoeFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File raceCarFile = new File(tokenImagePath.concat("racecar.png"));
+			File raceCarFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
 			String raceCarURL = raceCarFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File thimbleFile = new File(tokenImagePath.concat("thimble.png"));
+
+			File thimbleFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
 			String thimbleURL = thimbleFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
@@ -247,5 +330,117 @@ public class Game {
 	public int getNumPlayers() {
 		return numPlayers;
 	}
+
+	public int getCurrentPlayerNumber() {
+		return playerList.indexOf(this.getCurrentPlayer());
+	}
+
+	/*
+	public Tile takeTurnInJail(){
+		Tile temp = null;
+
+    	if(gameDice.checkDoubles()){
+    		temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
+    		currentPlayer.setCurrentTile(temp);
+    		currentPlayer.setDoubles();
+    	}
+    	else{
+    		currentPlayer.incrementDoubles();
+    		if(currentPlayer.getDoubles() == 3){
+    			currentPlayer.setAccBalance(currentPlayer.getAccBalance() - 50);
+    			temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
+    			currentPlayer.setCurrentTile(temp);
+    			currentPlayer.setDoubles();
+    		}
+    	}
+    	return  temp;
+	}
+	public void buyProperty(){
+		Tile propertyToBuy = this.currentPlayer.getCurrentTile();
+		String tileType = propertyToBuy.getType();
+		switch (tileType) {
+			case "Deed":
+				this.currentPlayer.purchaseDeed(propertyToBuy);
+				currentTile.setOwner(currentPlayer);
+				if (currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()) {
+					currentTile.setHouses();
+				}
+				break;
+			case "RailRoad":
+				currentTile.setOwner(currentPlayer);
+				currentPlayer.increaseRailroads();
+				break;
+			case "Utility":
+				currentTile.setOwner(currentPlayer);
+				currentPlayer.increaseUtilities();
+				break;
+		  }
+	}
+
+  public String checkWinner(){
+    //Check winner by finding out sum of houses, hotels, properties, and currentMoney
+    //propertySum is the method to use
+    //make an array to store the property set array
+    int sum = 0;
+    PropertySet[] tempArray = currentPlayer.getPlayerDeeds();
+    String winner = "Player" + this.playerList.indexOf(this.currentPlayer);
+    for(int i = 0; i < 9; i++){
+      sum = sum + tempArray[i].propertySum();
+    }
+    int sum1 = 0;
+    currentPlayer = this.playerList.get(1 + (this.playerList.indexOf(this.currentPlayer)));
+    String temp1 = currentPlayer.name();
+    tempArray = currentPlayer.getPlayerDeeds();
+    for(int i = 0; i < 9; i++){
+      sum1 = sum1 + tempArray[i].propertySum;
+    }
+    int sum2;
+    currentPlayer = currentPlayer.next();
+    String temp2 = currentPlayer.name();
+    tempArray = currentPlayer.getPlayerDeeds();
+    for(int i = 0; i < 9; i++){
+      sum2 = sum2 + tempArray[i].propertySum;
+    }
+    int sum3;
+    currentPlayer = currentPlayer.next();
+    String temp3 = currentPlayer.name();
+    tempArray = currentPlayer.getPlayerDeeds();
+    for(int i = 0; i < 9; i++){
+      sum3 = sum3 + tempArray[i].propertySum;
+    }
+    if(sum > sum1){
+      if(sum > sum2){
+        if(sum > sum3){
+          return winner;
+        }
+      }
+    }
+    if( sum1 > sum){
+      if(sum1 > sum2){
+        if(sum1 > sum3){
+          return temp1;
+        }
+      }
+    }
+    if( sum2 > sum){
+      if(sum2 > sum1){
+        if(sum2 > sum3){
+          return temp2;
+        }
+      }
+    }
+    if(sum3 > sum){
+      if(sum3 > sum1){
+        if(sum3 > sum2){
+          return temp3;
+        }
+      }
+    }
+  }
+
+ */
+
+//	====================================================================================================================
+
 
 }

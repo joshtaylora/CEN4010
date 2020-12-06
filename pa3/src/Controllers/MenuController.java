@@ -15,7 +15,7 @@ public class MenuController {
     @FXML
     Button startGameButton;
 
-    private MainController mainController;
+    MainController mainController;
 
 
     int numberOfPlayers;

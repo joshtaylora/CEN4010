@@ -13,7 +13,11 @@ pa3/.idea/
 .project
 /bin/
 .idea/*
+<<<<<<< HEAD
 .idea
 /out
 /lib
 /bin
+=======
+out/
+>>>>>>> Joshua

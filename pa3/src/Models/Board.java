@@ -16,12 +16,12 @@ public class Board {
 		tiles[7] = new Tile("Chance", "none", 7);
 		tiles[8] = new Deed(100, 1, 6, 30, 90, 270, 400, 550, 50, 50, 50, "Vermont Ave.", 8);
 		tiles[9] = new Deed(120, 1, 8, 40, 100, 300, 450, 600, 60, 50, 50, "Connecticut Ave.", 9);
-		tiles[10] = new Tile("In Jail/ Just Visiting", "Jail", 10);
+		tiles[10] = new Tile("Jail", "Jail", 10);
 		tiles[11] = new Deed(140, 2, 10, 50, 150, 450, 625, 750, 70, 100, 100, "St. Charles Place", 11);
 		tiles[12] = new Utility("Electric Company", 12);
 		tiles[13] = new Deed(140, 2, 10, 50, 150, 450, 625, 750, 70, 100, 100, "States Ave.", 13);
 		tiles[14] = new Deed(160, 2, 12, 60, 180, 500, 700, 900, 80, 100, 100, "Virginia Ave.", 14);
-		tiles[15] = new RailRoad("Pennsylvania RailRoad", 15);
+		tiles[15] = new RailRoad("Pennsylvania Railroad", 15);
 		tiles[16] = new Deed(180, 3, 14, 70, 200, 550, 750, 950, 90, 100, 100, "St. James Place", 16);
 		tiles[17] = new Tile("Community Chest", "none", 17);
 		tiles[18] = new Deed(180, 3, 14, 70, 200, 550, 750, 950, 90, 100, 100, "Tennessee Avenue", 18);
@@ -31,7 +31,7 @@ public class Board {
 		tiles[22] = new Tile("Chance", "none", 22);
 		tiles[23] = new Deed(220, 4, 18, 90, 250, 700, 875, 1050, 110, 150, 150, "Indiana Ave.", 23);
 		tiles[24] = new Deed(240, 4, 20, 100, 300, 750, 925, 1100, 120, 150, 150, "Illinois Ave.", 24);
-		tiles[25] = new RailRoad("B. & o. RailRoad", 25);
+		tiles[25] = new RailRoad("B&O Railroad", 25);
 		tiles[26] = new Deed(260, 5, 22, 110, 330, 800, 975, 1150, 130, 150, 150, "Atlantic Ave.", 26);
 		tiles[27] = new Deed(260, 5, 22, 110, 330, 800, 975, 1150, 130, 150, 150, "Ventnor Ave.", 27);
 		tiles[28] = new Utility("Water Works", 28);

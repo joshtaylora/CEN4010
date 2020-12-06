@@ -7,7 +7,7 @@ import Models.Token;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class RailroadTests {
+public class RailroadTest {
 
     @Test
     void testGetMortgageValue (){
@@ -44,8 +44,8 @@ public class RailroadTests {
     void testSetOwner (){
         RailRoad test = new RailRoad("Reading Railroad", 5);
         //initialize a random player object
-        PropertySet[] arry = new PropertySet[1];
-        Player dummy = new Player(1500, test, arry);
+        PropertySet[] array = new PropertySet[1];
+        Player dummy = new Player(1500, test, array);
 
         //set ownership to player
         test.setOwner(dummy);

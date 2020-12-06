@@ -6,8 +6,8 @@ import javafx.animation.*;
 
 
 public class Token {
-	private Player tokenPlayer;
-	private Image tokenImage;
+	private final Player tokenPlayer;
+	private final Image tokenImage;
 
 
 	public Token(Player tokenPlayer, Image tokenImage) {
