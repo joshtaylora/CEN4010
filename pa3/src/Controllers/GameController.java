@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
@@ -48,6 +49,16 @@ public class GameController {
 
     @FXML
     GridPane boardGridPane;
+
+    @FXML
+    AnchorPane playerdog;
+    @FXML
+    AnchorPane playershoe;
+    @FXML
+    AnchorPane playercar;
+    @FXML
+    AnchorPane playerthim;
+
 
 
     private Game game;
@@ -157,21 +168,83 @@ public class GameController {
 
             rollDiceImage1.setImage(game.dieImage1);
             rollDiceImage2.setImage(game.dieImage2);
-            // Now set the player's roll status to true so we don't roll for them again
-            rollDiceButton.getStyleClass().remove("rollButtonActive");
-            rollDiceButton.getStyleClass().add("rollButtonInactive");
-            setActivePlayer();
+
+            //setActivePlayer();
         }
         else {
-            // add functionality here to stop player from rolling
+            //TODO: add functionality here to stop player from rolling
+            //Now set the player's roll status to true so we don't roll for them again
+            rollDiceButton.getStyleClass().remove("rollButtonActive");
+            rollDiceButton.getStyleClass().add("rollButtonInactive");
+            //set message if player keeps trying to press roll
+            rollDiceButton.setText("PRESS END TURN BUTTON");
         }
    }
 
    @FXML
     void endTurnButtonClicked(Event e) {
         // Player has opted to end their turn
+        this.game.getCurrentPlayer().setRollStatus(false);
         this.game.setNextPlayer();
         setActivePlayer();
+
+       //change active player css
+       switch(currentPlayerIndex){
+           case 0:
+               playerdog.getStyleClass().remove("activePlayerSection");
+               playerdog.getStyleClass().add("inactivePlayerSection");
+               playershoe.getStyleClass().remove("inactivePlayerSection");
+               playershoe.getStyleClass().add("activePlayerSection");
+               break;
+           case 1:
+               playershoe.getStyleClass().remove("activePlayerSection");
+               playershoe.getStyleClass().add("inactivePlayerSection");
+               if(game.getNumPlayers() > 2) {
+                   playercar.getStyleClass().remove("inactivePlayerSection");
+                   playercar.getStyleClass().add("activePlayerSection");
+               }
+               else{
+                   playerdog.getStyleClass().remove("inactivePlayerSection");
+                   playerdog.getStyleClass().add("activePlayerSection");
+               }
+               break;
+           case 2:
+               playercar.getStyleClass().remove("activePlayerSection");
+               playercar.getStyleClass().add("inactivePlayerSection");
+               if(game.getNumPlayers() == 4) {
+                   playerthim.getStyleClass().remove("inactivePlayerSection");
+                   playerthim.getStyleClass().add("activePlayerSection");
+               }
+               else{
+                   playerdog.getStyleClass().remove("inactivePlayerSection");
+                   playerdog.getStyleClass().add("activePlayerSection");
+               }
+               break;
+           case 3:
+               playerthim.getStyleClass().remove("activePlayerSection");
+               playerthim.getStyleClass().add("inactivePlayerSection");
+               playerdog.getStyleClass().remove("inactivePlayerSection");
+               playerdog.getStyleClass().add("activePlayerSection");
+               break;
+           default:
+               break;
+       }
+
+       //set currentPlayerIndex
+       if(currentPlayerIndex < game.getNumPlayers()-1){
+           currentPlayerIndex++;
+       }
+       else{
+           currentPlayerIndex = 0;
+       }
+
+       //reset buttons
+       rollDiceButton.setText("Roll Dice");
+       rollDiceButton.getStyleClass().remove("rollButtonInactive");
+       rollDiceButton.getStyleClass().add("rollButtonActive");
+       rollDiceButton.getStyleClass().remove("rollButtonInActive");
+       rollDiceButton.getStyleClass().add("rollButtonActive");
+
 
    }
 

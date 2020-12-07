@@ -66,7 +66,8 @@ public class Game {
 		this.dieImage2 = null;
 		// set the initial timer to the specified timer value
 
-		// store the images for the tokens in an easily accessible array
+		//TODO: check if this is needed anymore(lines 78-81)
+		//store the images for the tokens in an easily accessible array
 		Image[] imgArr = tokenImageArrayInitializer(this.numPlayers);
 		// Check if we could successfully grab the token images
 		if (imgArr != null) {
@@ -137,7 +138,7 @@ public class Game {
 				System.exit(1);
 		}
 		this.currentPlayer = playerList.get(0);
-		// NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
+		//TODO: NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
 		/*
 		 * Roll for each player to determine first player for each player, roll set max
 		 * roll = first roll, - > algo to check who rolled highest set currentPlayer

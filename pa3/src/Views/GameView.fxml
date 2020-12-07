@@ -598,7 +598,7 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="activePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playerdog" prefHeight="200.0" prefWidth="200.0" styleClass="activePlayerSection" stylesheets="@PlayerStyle.css">
                                        <children>
                                           <Button fx:id="player1TradeButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" styleClass="activePlayerTradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
                                           <Label fx:id="player1Label" layoutX="14.0" layoutY="14.0" styleClass="playerLabel" stylesheets="@PlayerBoardIcon.css" text="Player 1" textFill="#282828">
@@ -628,7 +628,7 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playershoe" maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
                                        <children>
                                           <Button fx:id="player2TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
                                           <Label fx:id="player2Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 2" textFill="#282828">
@@ -658,7 +658,7 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playercar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
                                        <children>
                                           <Button fx:id="player3TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
                                           <Label fx:id="player3Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 3" textFill="#282828">
@@ -688,7 +688,7 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playerthim" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
                                        <children>
                                           <Button fx:id="player4TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
                                           <Label fx:id="player4Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 4" textFill="#282828">

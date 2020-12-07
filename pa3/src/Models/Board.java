@@ -16,7 +16,7 @@ public class Board {
 		tiles[7] = new Tile("Chance", "none", 7);
 		tiles[8] = new Deed(100, 1, 6, 30, 90, 270, 400, 550, 50, 50, 50, "Vermont Ave.", 8);
 		tiles[9] = new Deed(120, 1, 8, 40, 100, 300, 450, 600, 60, 50, 50, "Connecticut Ave.", 9);
-		tiles[10] = new Tile("Jail", "Jail", 10);
+		tiles[10] = new Tile("Jail/Just Visiting", "Jail", 10);
 		tiles[11] = new Deed(140, 2, 10, 50, 150, 450, 625, 750, 70, 100, 100, "St. Charles Place", 11);
 		tiles[12] = new Utility("Electric Company", 12);
 		tiles[13] = new Deed(140, 2, 10, 50, 150, 450, 625, 750, 70, 100, 100, "States Ave.", 13);
