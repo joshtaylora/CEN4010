@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 public class GameController {
 
@@ -53,6 +54,7 @@ public class GameController {
     private int numberOfPlayers;
     private int timerValue;
     int currentPlayerIndex;
+    ArrayList<Integer> playerTurnList;
 
 //  Injects the menu controller into the game controller and begins the game
     void injectMenuController(MenuController menuController) {
@@ -62,9 +64,13 @@ public class GameController {
 
     }
 
+    void initPlayerTurns(ArrayList<Integer> playerTurnList) {
+        this.playerTurnList = playerTurnList;
+    }
+
     private void startGame() {
         currentPlayerIndex = 0;
-        this.game = new Game(this.numberOfPlayers, this.timerValue);
+        this.game = new Game(this.numberOfPlayers, this.timerValue, playerTurnList);
         setActivePlayer();
         //gameLoop();
     }
@@ -116,7 +122,7 @@ public class GameController {
         int spacesAdvanced = 0;
         Player rollingPlayer = game.getCurrentPlayer();
         int numPlayerDoubleRolls = rollingPlayer.getDoubles();
-       // check to make sure that the player hasn't already rolled
+        // check to make sure that the player hasn't already rolled
         if (!rollingPlayer.getRollStatus()) {
             //int spacesAdvanced = game.playerRoll();
             // if the player is not jail
@@ -164,6 +170,8 @@ public class GameController {
    @FXML
     void endTurnButtonClicked(Event e) {
         // Player has opted to end their turn
+        this.game.setNextPlayer();
+        setActivePlayer();
 
    }
 

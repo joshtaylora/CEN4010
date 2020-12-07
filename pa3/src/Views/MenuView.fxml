@@ -32,7 +32,7 @@
          <children>
             <AnchorPane prefHeight="114.0" prefWidth="300.0">
                <children>
-                  <ChoiceBox fx:id="playerChoiceBox" layoutX="249.0" layoutY="47.0" prefWidth="150.0">
+                  <ChoiceBox fx:id="playerChoiceBox" layoutX="249.0" layoutY="47.0" prefWidth="150.0" value="4 Players">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="2 Players" />
@@ -46,9 +46,9 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <ChoiceBox fx:id="timerChoiceBox" layoutX="99.0" layoutY="46.0" prefWidth="150.0">
+                  <ChoiceBox fx:id="timerChoiceBox" layoutX="99.0" layoutY="46.0" prefWidth="150.0" value="30 Minutes">
                       <items>
-                          <FXCollections fx:factory="observableArrayList">
+                          <FXCollections fx:factory="observableArrayList" >
                               <String fx:value="10 Minutes" />
                               <String fx:value="20 Minutes" />
                               <String fx:value="30 Minutes" />

@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
+import java.util.ArrayList;
+
 public class MenuController {
 
     @FXML private ChoiceBox<String> playerChoiceBox;
@@ -31,8 +33,9 @@ public class MenuController {
         this.mainController = mainController;
     }
 
-    public void initGameViewController() {
+    public void initGameViewController(ArrayList<Integer> playerTurnList) {
         mainController.gameViewController.injectMenuController(this);
+        mainController.gameViewController.initPlayerTurns(playerTurnList);
     }
     /**
      * Event handler for when the start button has been clicked
@@ -79,7 +82,6 @@ public class MenuController {
         // split the value into a string part and a digit part
         String[] timerSplit = timerChoiceBoxValue.split("\\s");
         this.timerValue = Integer.parseInt(timerSplit[0]);
-
         System.out.println("Game timer length Selected: " + this.timerValue);
     }
 

@@ -18,6 +18,7 @@ public class Game {
 	public Player currentPlayer;
 	public LinkedList<Player> playerList;
 	public int numPlayers;
+	public ArrayList<Integer> playerTurnList;
 
 	public long timeLimit;
 	long startTime;
@@ -44,7 +45,7 @@ public class Game {
 	 * @param timeLimit:  retrieved from the main menu view, denotes the starting
 	 *                    value for the timer
 	 */
-	public Game(int numPlayers, int timeLimit) {
+	public Game(int numPlayers, int timeLimit, ArrayList<Integer> playerTurnList) {
 		// assign the number of players
 		this.numPlayers = numPlayers;
 		// initialize the start time to current system time in minutes
@@ -52,7 +53,7 @@ public class Game {
 		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
 		this.timeLimit = timeLimit * minuteToMilliS;
-
+		this.playerTurnList = playerTurnList;
 		// this.endTime = this.timeLimit + startTime;
 
 		// initialize the board to a new board object
@@ -207,7 +208,9 @@ public class Game {
 		return this.currentPlayer.getCurrentTile();
 	}
 
+	public void endCurrentPlayerTurn() {
 
+	}
 
 	/**
 	 * Method used to retrieve the Player object for the player whose turn it currently is
@@ -331,10 +334,19 @@ public class Game {
 		return numPlayers;
 	}
 
-	public int getCurrentPlayerNumber() {
-		return playerList.indexOf(this.getCurrentPlayer());
-	}
 
+	/**
+	 * Function called by the GameController class after a player has clicked the End Turn button
+	 */
+	public void setNextPlayer() {
+		int currentPlayerIndex = getCurrentPlayerIndex();
+		if (currentPlayerIndex < this.numPlayers - 1) {
+			this.currentPlayer = playerList.get(currentPlayerIndex+1);
+		}
+		else {
+			this.currentPlayer = playerList.get(0);
+		}
+	}
 	/*
 	public Tile takeTurnInJail(){
 		Tile temp = null;

@@ -89,32 +89,74 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="labelOne" layoutX="114.0" layoutY="43.0" text="???">
+                  <Label fx:id="labelOne" layoutX="103.0" layoutY="14.0" text="Player A">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
+                  <AnchorPane layoutX="85.0" layoutY="47.0" prefHeight="81.0" prefWidth="80.0">
+                     <children>
+                        <ImageView fitHeight="83.0" fitWidth="89.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/dog.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                </children></AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label fx:id="labelTwo" layoutX="114.0" layoutY="40.0" text="???">
+                  <Label fx:id="labelTwo" layoutX="98.0" layoutY="14.0" text="Player B">
                      <font>
                         <Font size="15.0" />
-                     </font></Label>
-               </children></AnchorPane>
-            <AnchorPane prefHeight="87.0" prefWidth="152.0" GridPane.columnIndex="2">
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="85.0" layoutY="47.0" prefHeight="81.0" prefWidth="80.0">
+                     <children>
+                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/shoe.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Label fx:id="labelThree" layoutX="114.0" layoutY="37.0" text="???">
+                  <Label fx:id="labelThree" layoutX="97.0" layoutY="14.0" text="Player C">
                      <font>
                         <Font size="15.0" />
-                     </font></Label>
-               </children></AnchorPane>
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="85.0" layoutY="47.0" prefHeight="81.0" prefWidth="80.0">
+                     <children>
+                        <ImageView fitHeight="83.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/racecar.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label fx:id="labelFour" layoutX="114.0" layoutY="39.0" text="???">
+                  <Label fx:id="labelFour" layoutX="98.0" layoutY="14.0" text="Player D">
                      <font>
                         <Font size="15.0" />
-                     </font></Label>
-               </children></AnchorPane>
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="85.0" layoutY="47.0" prefHeight="81.0" prefWidth="80.0">
+                     <children>
+                        <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/thimble.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="3">
