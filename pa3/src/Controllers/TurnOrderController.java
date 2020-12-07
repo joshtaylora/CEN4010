@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 public class TurnOrderController {
 
@@ -40,6 +41,7 @@ public class TurnOrderController {
     @FXML private Label labelFour;
 
     private int numberOfPlayers;
+    private ArrayList<Integer> playerTurnList;
 
     private MenuController menuController;
 
@@ -51,6 +53,7 @@ public class TurnOrderController {
     @FXML
     public void rollDiceButtonClicked(Event e) throws MalformedURLException {
         this.numberOfPlayers = this.menuController.numberOfPlayers;
+        this.playerTurnList = new ArrayList<>(this.numberOfPlayers);
         displayDice();
     }
 
@@ -247,15 +250,19 @@ public class TurnOrderController {
         switch (position) {
             case 1:
                 label.setText("Player 1");
+                this.playerTurnList.add(position);
                 break;
             case 2:
                 label.setText("Player 2");
+                this.playerTurnList.add(position);
                 break;
             case 3:
                 label.setText("Player 3");
+                this.playerTurnList.add(position);
                 break;
             case 4:
                 label.setText("Player 4");
+                this.playerTurnList.add(position);
                 break;
             default:
                 break;
@@ -264,7 +271,7 @@ public class TurnOrderController {
 
     @FXML
     public void continueToGameButtonClicked(Event e) {
-        this.menuController.initGameViewController();
+        this.menuController.initGameViewController(this.playerTurnList);
         this.menuController.switchToGameTab();
     }
 
