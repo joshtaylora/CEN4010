@@ -40,6 +40,11 @@ public class TurnOrderController {
     @FXML private Label labelThree;
     @FXML private Label labelFour;
 
+    @FXML private ImageView tokOne;
+    @FXML private ImageView tokTwo;
+    @FXML private ImageView tokThree;
+    @FXML private ImageView tokFour;
+
     private int numberOfPlayers;
     private ArrayList<Integer> playerTurnList;
 
@@ -89,12 +94,12 @@ public class TurnOrderController {
 
                 //display player orderDice on labels
                 if(one>=two){
-                    labelOne.setText("Player 1");
-                    labelTwo.setText("Player 2");
+                    labeling(labelOne, tokOne, 1);
+                    labeling(labelTwo, tokTwo, 2);
                 }
                 else{
-                    labelOne.setText("Player 2");
-                    labelTwo.setText("Player 1");
+                    labeling(labelOne, tokOne, 2);
+                    labeling(labelTwo, tokTwo, 1);
                 }
                 break;
             case 3:
@@ -119,9 +124,9 @@ public class TurnOrderController {
                 int[] sort3 = {3, 3, 3};
                 int[] comp3 = {one, two, three};
                 int[] sorted3 = sortOrder(sort3, comp3);
-                labeling(labelOne, sorted3[0]);
-                labeling(labelTwo, sorted3[1]);
-                labeling(labelThree, sorted3[2]);
+                labeling(labelOne, tokOne, sorted3[0]);
+                labeling(labelTwo, tokTwo, sorted3[1]);
+                labeling(labelThree, tokThree, sorted3[2]);
 
                 break;
             case 4:
@@ -150,10 +155,10 @@ public class TurnOrderController {
                 int[] sort4 = {4, 4, 4, 4};
                 int[] comp4 = {one, two, three, four};
                 int[] sorted4 = sortOrder(sort4, comp4);
-                labeling(labelOne, sorted4[0]);
-                labeling(labelTwo, sorted4[1]);
-                labeling(labelThree, sorted4[2]);
-                labeling(labelFour, sorted4[3]);
+                labeling(labelOne, tokOne, sorted4[0]);
+                labeling(labelTwo, tokTwo, sorted4[1]);
+                labeling(labelThree, tokThree, sorted4[2]);
+                labeling(labelFour, tokFour, sorted4[3]);
 
                 break;
             default:
@@ -246,22 +251,60 @@ public class TurnOrderController {
         }
     }
 
-    private void labeling(Label label, int position) {
+    //updates labels, token images, and adds player to player list
+    private void labeling(Label label, ImageView imgvw, int position) throws MalformedURLException {
+        // store the system path as a string
+        String sysPath = System.getProperty("user.dir");
+        //System.out.println(sysPath);
+        OSValidator operatingSystem = new OSValidator();
+        String os = operatingSystem.os;
+        String diePath = null;
+        if (os.equals("windows")) {
+            diePath = sysPath.concat("\\src\\Resources\\");
+        }
+        else if (os.equals("mac")) {
+            diePath = sysPath.concat("/pa3/src/Resources/");
+        }
+        else {
+            System.out.println("ERROR: operating system not supported");
+            System.exit(1);
+        }
+
+        File oneFile = new File(diePath.concat("dog.png"));
+        String oneURL = oneFile.toURI().toURL().toString();
+
+        File twoFile = new File(diePath.concat("shoe.png"));
+        String twoURL = twoFile.toURI().toURL().toString();
+
+        File threeFile = new File(diePath.concat("racecar.png"));
+        String threeURL = threeFile.toURI().toURL().toString();
+
+        File fourFile = new File(diePath.concat("thimble.png"));
+        String fourURL = fourFile.toURI().toURL().toString();
+
+        Image one = new Image(oneURL);
+        Image two = new Image(twoURL);
+        Image thr = new Image(threeURL);
+        Image fou = new Image(fourURL);
         switch (position) {
             case 1:
                 label.setText("Player 1");
+                imgvw.setImage(one);
                 this.playerTurnList.add(position);
                 break;
             case 2:
                 label.setText("Player 2");
+                imgvw.setImage(two);
                 this.playerTurnList.add(position);
                 break;
             case 3:
                 label.setText("Player 3");
+                imgvw.setImage(thr);
                 this.playerTurnList.add(position);
                 break;
             case 4:
                 label.setText("Player 4");
+                imgvw.setImage(fou);
                 this.playerTurnList.add(position);
                 break;
             default:
