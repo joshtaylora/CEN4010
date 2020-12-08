@@ -67,7 +67,7 @@
          <children>
             <ImageView fitHeight="280.0" fitWidth="599.0" layoutX="198.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Resources/monopoly_banner.png" />
+                  <Image url="@../Resources/Images/monopoly_banner.png" />
                </image>
             </ImageView>
          </children>

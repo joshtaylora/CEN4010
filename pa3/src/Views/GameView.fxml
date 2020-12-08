@@ -18,7 +18,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="boardImage" stylesheets="@PlayerBoardIcon.css">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="boardImage" stylesheets="@CSS/PlayerBoardIcon.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -26,13 +26,13 @@
                      <children>
                         <ImageView fitHeight="800.0" fitWidth="793.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Resources/board.jpg" />
+                              <Image url="@../Resources/Images/board.jpg" />
                            </image>
                            <viewport>
                               <Rectangle2D />
                            </viewport>
                         </ImageView>
-                        <AnchorPane stylesheets="@PlayerBoardIcon.css">
+                        <AnchorPane stylesheets="@CSS/PlayerBoardIcon.css">
                            <children>
                               <GridPane prefHeight="793.0" prefWidth="793.0">
                                  <columnConstraints>
@@ -75,7 +75,7 @@
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="106.0" stylesheets="@ActivePlayerCurrentTile.css">
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="106.0" stylesheets="@CSS/ActivePlayerCurrentTile.css">
                                        <children>
                                           <AnchorPane layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="104.0" prefWidth="104.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="2.0">
                                              <children>
@@ -598,10 +598,10 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane fx:id="playerdog" prefHeight="200.0" prefWidth="200.0" styleClass="activePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playerdog" prefHeight="200.0" prefWidth="200.0" styleClass="activePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player1TradeButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" styleClass="activePlayerTradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
-                                          <Label fx:id="player1Label" layoutX="14.0" layoutY="14.0" styleClass="playerLabel" stylesheets="@PlayerBoardIcon.css" text="Player 1" textFill="#282828">
+                                          <Button fx:id="player1TradeButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" styleClass="activePlayerTradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player1Label" layoutX="14.0" layoutY="14.0" styleClass="playerLabel" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 1" textFill="#282828">
                                              <padding>
                                                 <Insets left="2.0" right="2.0" />
                                              </padding>
@@ -611,10 +611,10 @@
                                           </Label>
                                           <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../Resources/dog.png" />
+                                                <Image url="@../Resources/Images/dog.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="145.0" layoutY="63.0" styleClass="accountBalance" stylesheets="@PlayerStyle.css" text="\$1500" />
+                                          <Label layoutX="145.0" layoutY="63.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -628,10 +628,10 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane fx:id="playershoe" maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playershoe" maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player2TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
-                                          <Label fx:id="player2Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 2" textFill="#282828">
+                                          <Button fx:id="player2TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player2Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 2" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -641,10 +641,10 @@
                                           </Label>
                                           <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../Resources/shoe.png" />
+                                                <Image url="@../Resources/Images/shoe.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="145.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@PlayerStyle.css" text="\$1500" />
+                                          <Label layoutX="145.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -658,10 +658,10 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane fx:id="playercar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playercar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player3TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
-                                          <Label fx:id="player3Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 3" textFill="#282828">
+                                          <Button fx:id="player3TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player3Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 3" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -671,10 +671,10 @@
                                           </Label>
                                           <ImageView fitHeight="67.0" fitWidth="73.0" layoutX="120.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../Resources/racecar.png" />
+                                                <Image url="@../Resources/Images/racecar.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="148.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@PlayerStyle.css" text="\$1500" />
+                                          <Label layoutX="148.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -688,10 +688,10 @@
                            <children>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane fx:id="playerthim" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@PlayerStyle.css">
+                                    <AnchorPane fx:id="playerthim" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player4TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@PlayerBoardIcon.css" text="Trade" />
-                                          <Label fx:id="player4Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@PlayerBoardIcon.css" text="Player 4" textFill="#282828">
+                                          <Button fx:id="player4TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Label fx:id="player4Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 4" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -701,10 +701,10 @@
                                           </Label>
                                           <ImageView fitHeight="57.0" fitWidth="50.0" layoutX="143.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../Resources/thimble.png" />
+                                                <Image url="@../Resources/Images/thimble.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="148.0" layoutY="62.0" styleClass="accountBalance" stylesheets="@PlayerStyle.css" text="\$1500" />
+                                          <Label layoutX="148.0" layoutY="62.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -734,7 +734,7 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Button fx:id="rollDiceButton" layoutX="67.0" layoutY="1.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="30.0" prefWidth="201.0" styleClass="rollButtonActive" stylesheets="@PlayerStyle.css" text="Roll Dice" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="rollDiceButton" layoutX="67.0" layoutY="1.0" mnemonicParsing="false" onAction="#rollDiceButtonClicked" prefHeight="30.0" prefWidth="201.0" styleClass="rollButtonActive" stylesheets="@CSS/PlayerStyle.css" text="Roll Dice" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="100.0" prefWidth="200.0">
@@ -743,12 +743,12 @@
                                  <children>
                                     <ImageView fx:id="rollDiceImage1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Resources/die1.png" />
+                                          <Image url="@../Resources/Images/die1.png" />
                                        </image>
                                     </ImageView>
                                     <ImageView fx:id="rollDiceImage2" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Resources/die2.png" />
+                                          <Image url="@../Resources/Images/die2.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -757,7 +757,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="38.0" prefWidth="201.0">
                            <children>
-                              <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#endTurnButtonClicked" prefHeight="38.0" prefWidth="201.0" styleClass="endTurnButton" stylesheets="@PlayerStyle.css" text="End Turn" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="endTurnButton" mnemonicParsing="false" onAction="#endTurnButtonClicked" prefHeight="38.0" prefWidth="201.0" styleClass="endTurnButton" stylesheets="@CSS/PlayerStyle.css" text="End Turn" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </children>

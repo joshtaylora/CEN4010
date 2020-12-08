@@ -75,13 +75,11 @@ public class GameController {
 
     }
 
-    void initPlayerTurns(ArrayList<Integer> playerTurnList) {
-        this.playerTurnList = playerTurnList;
-    }
+
 
     private void startGame() {
         currentPlayerIndex = 0;
-        this.game = new Game(this.numberOfPlayers, this.timerValue, playerTurnList);
+        this.game = new Game(this.numberOfPlayers, this.timerValue);
         setActivePlayer();
         //gameLoop();
     }
@@ -127,7 +125,7 @@ public class GameController {
             }
         }
     }
-// =====================================================================================================================
+/* ================================================================================================================== */
    @FXML
    void rollDiceButtonClicked(Event e) {
         int spacesAdvanced = 0;
@@ -169,7 +167,7 @@ public class GameController {
             rollDiceImage1.setImage(game.dieImage1);
             rollDiceImage2.setImage(game.dieImage2);
 
-            //setActivePlayer();
+            setActivePlayer();
         }
         else {
             //TODO: add functionality here to stop player from rolling
@@ -186,7 +184,7 @@ public class GameController {
         // Player has opted to end their turn
         this.game.getCurrentPlayer().setRollStatus(false);
         this.game.setNextPlayer();
-        setActivePlayer();
+        /* setActivePlayer(); */
 
        //change active player css
        switch(currentPlayerIndex){
@@ -242,9 +240,6 @@ public class GameController {
        rollDiceButton.setText("Roll Dice");
        rollDiceButton.getStyleClass().remove("rollButtonInactive");
        rollDiceButton.getStyleClass().add("rollButtonActive");
-       rollDiceButton.getStyleClass().remove("rollButtonInActive");
-       rollDiceButton.getStyleClass().add("rollButtonActive");
-
 
    }
 

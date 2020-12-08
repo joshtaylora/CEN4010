@@ -45,14 +45,14 @@ public class Game {
 	 * @param timeLimit:  retrieved from the main menu view, denotes the starting
 	 *                    value for the timer
 	 */
-	public Game(int numPlayers, int timeLimit, ArrayList<Integer> playerTurnList) {
+	public Game(int numPlayers, int timeLimit) {
 		// assign the number of players
 		this.numPlayers = numPlayers;
 		// initialize the start time to current system time in minutes
 		this.startTime = System.currentTimeMillis();
 		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
-		this.timeLimit = timeLimit * minuteToMilliS;
+		this.timeLimit = (long) timeLimit * minuteToMilliS;
 		this.playerTurnList = playerTurnList;
 		// this.endTime = this.timeLimit + startTime;
 
@@ -258,20 +258,20 @@ public class Game {
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
 		try {
 
-			File dogFile = new File(osValidator.getPathToFile("dog.png","Resources"));
+			File dogFile = new File(osValidator.getPathToFile("dog.png","Resources/Images"));
 			String dogURL = dogFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File shoeFile = new File(osValidator.getPathToFile("shoe.png","Resources"));
+			File shoeFile = new File(osValidator.getPathToFile("shoe.png","Resources/Images"));
 			String shoeURL = shoeFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
-			File raceCarFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
+			File raceCarFile = new File(osValidator.getPathToFile("racecar.png","Resources/Images"));
 			String raceCarURL = raceCarFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
 
-			File thimbleFile = new File(osValidator.getPathToFile("racecar.png","Resources"));
+			File thimbleFile = new File(osValidator.getPathToFile("racecar.png","Resources/Images"));
 			String thimbleURL = thimbleFile.toURI().toURL().toString();
 			//System.out.println("tokenImagePath: " + tokenImagePath);
 
@@ -291,15 +291,15 @@ public class Game {
 					break;
 				case(4):
 					tokenImages = new Image[4];
-					//System.out.println("tokenImages.length: " + tokenImages.length);
+					System.out.println("tokenImages.length: " + tokenImages.length);
 					tokenImages[0] = new Image(dogURL);
-					//System.out.println("Path to tokenImages[0]: " + dogURL);
+					System.out.println("Path to tokenImages[0]: " + dogURL);
 					tokenImages[1] = new Image(shoeURL);
-					//System.out.println("Path to tokenImages[1]: " + shoeURL);
+					System.out.println("Path to tokenImages[1]: " + shoeURL);
 					tokenImages[2] = new Image(raceCarURL);
-					//System.out.println("Path to tokenImages[2]: " + raceCarURL);
+					System.out.println("Path to tokenImages[2]: " + raceCarURL);
 					tokenImages[3] = new Image(thimbleURL);
-					//System.out.println("Path to tokenImages[3]: " + thimbleURL);
+					System.out.println("Path to tokenImages[3]: " + thimbleURL);
 					break;
 				default:
 					tokenImages = null;

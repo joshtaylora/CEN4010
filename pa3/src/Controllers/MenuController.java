@@ -33,9 +33,8 @@ public class MenuController {
         this.mainController = mainController;
     }
 
-    public void initGameViewController(ArrayList<Integer> playerTurnList) {
+    public void initGameViewController() {
         mainController.gameViewController.injectMenuController(this);
-        mainController.gameViewController.initPlayerTurns(playerTurnList);
     }
     /**
      * Event handler for when the start button has been clicked
