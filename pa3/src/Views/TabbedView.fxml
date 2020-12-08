@@ -21,5 +21,8 @@
         <Tab fx:id="gameTab" text="Game">
             <fx:include fx:id="gameView" source="GameView.fxml" />
         </Tab>
+        <Tab fx:id="tileTab" text="Tile">
+            <fx:include fx:id="tileView" source="TilePopView.fxml" />
+        </Tab>
     </tabs>
 </TabPane>

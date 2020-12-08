@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameController {
@@ -47,9 +47,13 @@ public class GameController {
     @FXML
     Label currentPlayerPropertyListViewLabel;
 
+// =====================================================================================================================
+// ============================================ Board FXML fields ======================================================
     @FXML
     GridPane boardGridPane;
 
+// =====================================================================================================================
+// ============================================ Player Info FXML fields ================================================
     @FXML
     AnchorPane playerdog;
     @FXML
@@ -60,7 +64,10 @@ public class GameController {
     AnchorPane playerthim;
 
 
-
+// =====================================================================================================================
+// ============================================ Global Variables =======================================================
+    MainController mainController;
+    TilePopController tileViewController;
     private Game game;
     private int numberOfPlayers;
     private int timerValue;
@@ -72,6 +79,8 @@ public class GameController {
     void injectMenuController(MenuController menuController) {
         this.numberOfPlayers = menuController.numberOfPlayers;
         this.timerValue = menuController.timerValue;
+        this.mainController = menuController.mainController;
+        this.tileViewController = menuController.mainController.tileViewController;
         startGame();
 
     }
@@ -130,7 +139,7 @@ public class GameController {
     }
 /* ================================================================================================================== */
    @FXML
-   void rollDiceButtonClicked(Event e) {
+   void rollDiceButtonClicked(Event e) throws IOException {
        if(consecutiveTurn){
            rollDiceButton.setText("Roll Dice");
        }
@@ -145,6 +154,11 @@ public class GameController {
             rollDiceImage2.setImage(game.dieImage2);
 
             setActivePlayer();
+
+            //TODO: open tilepop with appropriate elements
+            //mainController.addTileTab();
+            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile().getName());
+
 
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
@@ -235,12 +249,6 @@ public class GameController {
 
    }
 
-    /**
-     * Function called from diceRollButtonClicked method that handles dice roll events
-     */
-    void diceRollInJail() {
-
-    }
 
    private String getPathToDiceRollImage(int roll) {
         String rollImageFileName = null;
@@ -308,6 +316,8 @@ public class GameController {
         }
         return returnImage;
    }
+
+
 
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 

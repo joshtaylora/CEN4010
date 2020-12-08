@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.Dice;
 import Models.Game;
+import Resources.OSValidator;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +47,8 @@ public class MainController {
     @FXML Tab turnOrderTab;
     @FXML  TurnOrderController turnOrderViewController;
 
-
+    @FXML Tab tileTab;
+    @FXML TilePopController tileViewController;
 
 // =====================================================================================================================
 //  ===================================== Class variables needed for start method ======================================
@@ -55,6 +58,18 @@ public class MainController {
     public void init() {
         menuViewController.injectMainController(this);
         menuViewController.init();
+        //removeTileTab();
+    }
+
+    public void removeTileTab(){
+        tabPane.getTabs().remove(tileTab);
+    }
+
+
+        public void addTileTab() {
+        tabPane.getTabs().add(tileTab);
+        tileTab.setClosable(false);
+        tabPane.getSelectionModel().select(tileTab);
     }
 
 

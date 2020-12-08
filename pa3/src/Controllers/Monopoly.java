@@ -68,6 +68,8 @@ public class Monopoly extends Application {
         this.primaryStage.setTitle("Main Menu");
 
         this.primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
