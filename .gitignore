@@ -12,3 +12,5 @@ pa3/pa3.iml
 pa3/.idea/
 .project
 /bin/
+*.iml
+.idea/
