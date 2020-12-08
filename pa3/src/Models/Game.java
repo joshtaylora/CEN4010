@@ -4,6 +4,7 @@ package Models;
  * @version 1.0.1
  */
 
+import Resources.ImageContainer;
 import Resources.OSValidator;
 import javafx.scene.image.Image;
 
@@ -18,7 +19,6 @@ public class Game {
 	public Player currentPlayer;
 	public LinkedList<Player> playerList;
 	public int numPlayers;
-	public ArrayList<Integer> playerTurnList;
 
 	public long timeLimit;
 	long startTime;
@@ -35,6 +35,8 @@ public class Game {
 	public Image dieImage1;
 	public Image dieImage2;
 
+
+	public static ImageContainer imgContainer = new ImageContainer();
 
 //	====================================================================================================================
 	/**
@@ -53,7 +55,6 @@ public class Game {
 		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
 		this.timeLimit = (long) timeLimit * minuteToMilliS;
-		this.playerTurnList = playerTurnList;
 		// this.endTime = this.timeLimit + startTime;
 
 		// initialize the board to a new board object
@@ -137,13 +138,6 @@ public class Game {
 				System.exit(1);
 		}
 		this.currentPlayer = playerList.get(0);
-		//TODO: NEED TO ADD INITIAL ROLL FOR 1st PLAYER ORDER
-		/*
-		 * Roll for each player to determine first player for each player, roll set max
-		 * roll = first roll, - > algo to check who rolled highest set currentPlayer
-		 * initially to the index for loop condition and then just increment after that
-		 * for each turn
-		 */
 
 		this.gameDice = new Dice();
 		// while the timer has not run out ...
@@ -159,8 +153,8 @@ public class Game {
 		int numDoubles;
 		this.gameDice.roll();
 
-		this.dieImage1 = gameDice.getDiceRollImages()[0];
-		this.dieImage2 = gameDice.getDiceRollImages()[1];
+		this.dieImage1 = imgContainer.getDieImage(gameDice.getDiceOneResult());
+		this.dieImage2 = imgContainer.getDieImage(gameDice.getDiceTwoResult());
 
 		//TODO: tile popup(controller needs to get the tile of the player)
 
@@ -282,68 +276,36 @@ public class Game {
 	 * @return the array of images with the number of images specified by the number of players
 	 */
 	private static Image[] tokenImageArrayInitializer(int numPlayers) {
-
-		// Grab the working directory string
-		String sysPath = System.getProperty("user.dir");
-		OSValidator osValidator = new OSValidator();
-		String os = osValidator.os;
-		String resourcesPath = null;
-
 		// Initialize values to null so that we can reference them outside the scope of the try/catch
 		Image[] tokenImages = null;
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
-		try {
-
-			File dogFile = new File(osValidator.getPathToFile("dog.png","Resources/Images"));
-			String dogURL = dogFile.toURI().toURL().toString();
-			//System.out.println("tokenImagePath: " + tokenImagePath);
-
-			File shoeFile = new File(osValidator.getPathToFile("shoe.png","Resources/Images"));
-			String shoeURL = shoeFile.toURI().toURL().toString();
-			//System.out.println("tokenImagePath: " + tokenImagePath);
-
-			File raceCarFile = new File(osValidator.getPathToFile("racecar.png","Resources/Images"));
-			String raceCarURL = raceCarFile.toURI().toURL().toString();
-			//System.out.println("tokenImagePath: " + tokenImagePath);
 
 
-			File thimbleFile = new File(osValidator.getPathToFile("racecar.png","Resources/Images"));
-			String thimbleURL = thimbleFile.toURI().toURL().toString();
-			//System.out.println("tokenImagePath: " + tokenImagePath);
-
-			// initialize the tokenImages array to the number of players playing and if an error occurs and no players
-			// are in the game, initialize it to null
-			switch(numPlayers) {
-				case(2):
-					tokenImages = new Image[2];
-					tokenImages[0] = new Image(dogURL);
-					tokenImages[1] = new Image(shoeURL);
-					break;
-				case(3):
-					tokenImages = new Image[3];
-					tokenImages[0] = new Image(dogURL);
-					tokenImages[1] = new Image(shoeURL);
-					tokenImages[2] = new Image(raceCarURL);
-					break;
-				case(4):
-					tokenImages = new Image[4];
-					System.out.println("tokenImages.length: " + tokenImages.length);
-					tokenImages[0] = new Image(dogURL);
-					System.out.println("Path to tokenImages[0]: " + dogURL);
-					tokenImages[1] = new Image(shoeURL);
-					System.out.println("Path to tokenImages[1]: " + shoeURL);
-					tokenImages[2] = new Image(raceCarURL);
-					System.out.println("Path to tokenImages[2]: " + raceCarURL);
-					tokenImages[3] = new Image(thimbleURL);
-					System.out.println("Path to tokenImages[3]: " + thimbleURL);
-					break;
-				default:
-					tokenImages = null;
-			}
-		} catch(MalformedURLException malformedE) {
-			System.out.println("ERROR: image URLs for token images not found, system terminating");
-			System.exit(1);
+		// initialize the tokenImages array to the number of players playing and if an error occurs and no players
+		// are in the game, initialize it to null
+		switch(numPlayers) {
+			case(2):
+				tokenImages = new Image[2];
+				tokenImages[0] = imgContainer.getTokenImage("dog");
+				tokenImages[1] = imgContainer.getTokenImage("shoe");
+				break;
+			case(3):
+				tokenImages = new Image[3];
+				tokenImages[0] = imgContainer.getTokenImage("dog");
+				tokenImages[1] = imgContainer.getTokenImage("shoe");
+				tokenImages[2] = imgContainer.getTokenImage("racecar");
+				break;
+			case(4):
+				tokenImages = new Image[4];
+				tokenImages[0] = imgContainer.getTokenImage("dog");
+				tokenImages[1] = imgContainer.getTokenImage("shoe");
+				tokenImages[2] = imgContainer.getTokenImage("racecar");
+				tokenImages[3] = imgContainer.getTokenImage("thimble");
+				break;
+			default:
+				break;
 		}
+
 		return tokenImages;
 
 	}

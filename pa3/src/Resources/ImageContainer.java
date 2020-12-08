@@ -3,6 +3,7 @@ package Resources;
 import Models.Token;
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,51 +12,103 @@ public class ImageContainer {
     OSValidator osValidator;
     ArrayList<ArrayList<String>> imageURLCollection;
     
-    String[] diceImageURLs;
+    String[] dieImageURLs;
     String[] tokenImageURLs;
 
-    Image[] diceImages;
-    Image[] tokenImages;
+    private static Image[] dieImages;
+    private static Image[] tokenImages;
+
+    private static Image die1Image = null;
+    private static Image die2Image = null;
+    private static Image die3Image = null;
+    private static Image die4Image = null;
+    private static Image die5Image = null;
+    private static Image die6Image = null;
+
+
+    private static Image dogTokenImage = null;
+    private static Image shoeTokenImage = null;
+    private static Image racecarTokenImage = null;
+    private static Image thimbleTokenImage = null;
 
     public ImageContainer() {
-        /* Initialize the OSValidator object that will be used to retrieve correct working dir path */
+        // Initialize the OSValidator object that will be used to retrieve correct working dir path
         this.osValidator = new OSValidator();
-        /* Initialize the collection of array lists of image URLs that will be queried */
-        /* The arrays that will hold the Image objects themselves */
-        this.diceImages = new Image[6];
-        this.tokenImages = new Image[4];
+        // The arrays that will hold the Image objects themselves
+        dieImages = new Image[6];
 
-        /* Initialize the elements of the dice Image array to the proper images */
-        this.diceImages[0] = new Image(diceImageURLs[0]);
-        this.diceImages[1] = new Image(diceImageURLs[1]);
-        this.diceImages[2] = new Image(diceImageURLs[2]);
-        this.diceImages[3] = new Image(diceImageURLs[3]);
-        this.diceImages[4] = new Image(diceImageURLs[4]);
-        this.diceImages[5] = new Image(diceImageURLs[5]);
-        /* Initialize the elements of the token Image array to the proper images */
-        this.tokenImages[0] = new Image(tokenImageURLs[0]);
-        this.tokenImages[1] = new Image(tokenImageURLs[1]);
-        this.tokenImages[2] = new Image(tokenImageURLs[2]);
-        this.tokenImages[3] = new Image(tokenImageURLs[3]);
+
+        tokenImages = new Image[4];
+        initImageURLCollection();
+        initImageObjectCollection();
+
 
     }
 
     private void initImageURLCollection() {
         /* Array for the Strings containing the URLs for the dice images */
-        this.diceImageURLs = new String[6];
-        this.diceImageURLs[0] = osValidator.getPathToFile("die1.png", "Resources/Images");
-        this.diceImageURLs[1] = osValidator.getPathToFile("die2.png", "Resources/Images");
-        this.diceImageURLs[2] = osValidator.getPathToFile("die3.png", "Resources/Images");
-        this.diceImageURLs[3] = osValidator.getPathToFile("die4.png", "Resources/Images");
-        this.diceImageURLs[4] = osValidator.getPathToFile("die5.png", "Resources/Images");
-        this.diceImageURLs[5] = osValidator.getPathToFile("die6.png", "Resources/Images");
+        this.dieImageURLs = new String[6];
+        String die1File = osValidator.getPathToFile("die1.png", "Resources/Images");
+        String die2File = osValidator.getPathToFile("die2.png", "Resources/Images");
+        String die3File = osValidator.getPathToFile("die3.png", "Resources/Images");
+        String die4File = osValidator.getPathToFile("die4.png", "Resources/Images");
+        String die5File = osValidator.getPathToFile("die5.png", "Resources/Images");
+        String die6File = osValidator.getPathToFile("die6.png", "Resources/Images");
+        dieImageURLs[0] = die1File;
+        dieImageURLs[1] = die2File;
+        dieImageURLs[2] = die3File;
+        dieImageURLs[3] = die4File;
+        dieImageURLs[4] = die5File;
+        dieImageURLs[5] = die6File;
         /* Array for the Strings containing the URLs for the token images */
         this.tokenImageURLs = new String[4];
-        this.tokenImageURLs[0] = osValidator.getPathToFile("dog.png", "Resources/Images");
-        this.tokenImageURLs[1] = osValidator.getPathToFile("shoe.png", "Resources/Images");
-        this.tokenImageURLs[2] = osValidator.getPathToFile("racecar.png", "Resources/Images");
-        this.tokenImageURLs[3] = osValidator.getPathToFile("thimble.png", "Resources/Images");
+        String dogFile = osValidator.getPathToFile("dog.png", "Resources/Images");
+        String shoeFile = osValidator.getPathToFile("shoe.png", "Resources/Images");
+        String racecarFile = osValidator.getPathToFile("racecar.png", "Resources/Images");
+        String thimbleFile = osValidator.getPathToFile("thimble.png", "Resources/Images");
+        tokenImageURLs[0] = dogFile;
+        tokenImageURLs[1] = shoeFile;
+        tokenImageURLs[2] = racecarFile;
+        tokenImageURLs[3] = thimbleFile;
 
+    }
+
+    private void initImageObjectCollection() {
+        /* Initialize the elements of the dice Image array to the proper images */
+        try {
+            die1Image = new Image(dieImageURLs[0]);
+            die2Image = new Image(dieImageURLs[1]);
+            die3Image = new Image(dieImageURLs[2]);
+            die4Image = new Image(dieImageURLs[3]);
+            die5Image = new Image(dieImageURLs[4]);
+            die6Image = new Image(dieImageURLs[5]);
+            /* Initialize the elements of the token Image array to the proper images */
+            dogTokenImage = new Image(tokenImageURLs[0]);
+            shoeTokenImage = new Image(tokenImageURLs[1]);
+            racecarTokenImage = new Image(tokenImageURLs[2]);
+            thimbleTokenImage = new Image(tokenImageURLs[3]);
+        } catch(NullPointerException e) {
+            for (String dieImageURL : this.dieImageURLs) {
+                System.out.println(dieImageURL);
+            }
+            System.exit(1);
+        }
+        addImagesToClass();
+    }
+
+    private void addImagesToClass() {
+        // add the images directly to the class variable array of die image objects
+        dieImages[0] = die1Image;
+        dieImages[1] = die2Image;
+        dieImages[2] = die3Image;
+        dieImages[3] = die4Image;
+        dieImages[4] = die5Image;
+        dieImages[5] = die6Image;
+        // add the images directly to the class variable array of token image objects
+        tokenImages[0] = dogTokenImage;
+        tokenImages[1] = shoeTokenImage;
+        tokenImages[2] = racecarTokenImage;
+        tokenImages[3] = thimbleTokenImage;
     }
 
     /**
@@ -63,30 +116,16 @@ public class ImageContainer {
      * @param diceRoll the value of one of the die rolled
      * @return the Image for the appropriate roll of the die
      */
-    public Image getDiceImage(int diceRoll) {
+    public Image getDieImage(int diceRoll) {
+        // Image that will be returned
         Image returnImage = null;
-        switch (diceRoll) {
-            case 1:
-                returnImage = this.diceImages[0];
-                break;
-            case 2:
-                returnImage = this.diceImages[1];
-                break;
-            case 3:
-                returnImage = this.diceImages[2];
-                break;
-            case 4:
-                returnImage = this.diceImages[3];
-                break;
-            case 5:
-                returnImage = this.diceImages[4];
-                break;
-            case 6:
-                returnImage = this.diceImages[5];
-                break;
-            default:
-                break;
 
+        if (dieImages[diceRoll - 1] == null) {
+            System.out.println("Error with die image retrieval in ImageContainer class");
+            System.exit(1);
+        }
+        else {
+            returnImage = dieImages[diceRoll - 1];
         }
         return returnImage;
     }
@@ -95,16 +134,16 @@ public class ImageContainer {
         Image returnTokImg = null;
         switch(tokenName) {
             case "dog":
-                returnTokImg = this.tokenImages[0];
+                returnTokImg = tokenImages[0];
                 break;
             case "shoe":
-                returnTokImg = this.tokenImages[1];
+                returnTokImg = tokenImages[1];
                 break;
             case "racecar":
-                returnTokImg = this.tokenImages[2];
+                returnTokImg = tokenImages[2];
                 break;
             case "thimble":
-                returnTokImg = this.tokenImages[3];
+                returnTokImg = tokenImages[3];
                 break;
             default:
                 break;

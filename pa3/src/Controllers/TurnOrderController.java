@@ -50,6 +50,8 @@ public class TurnOrderController {
 
     private MenuController menuController;
 
+    ImageContainer imgContainer = new ImageContainer();
+
     static Image[] diceImageArray;
 
     public void injectMenuController(MenuController menuController) {
@@ -74,24 +76,24 @@ public class TurnOrderController {
         int three;
         int four;
 
-        Image playerAImage = null;
-        Image playerBImage = null;
-        Image playerCImage = null;
-        Image playerDImage = null;
+        Image playerADieImage = null;
+        Image playerBDieImage = null;
+        Image playerCDieImage = null;
+        Image playerDDieImage = null;
         // switch on the numberOfPlayers global var that we got from parsing the choice box's input
         switch(this.numberOfPlayers) {
             case 2:
                 orderDice.roll();
                 one = orderDice.getDiceOneResult();
-                playerAImage = orderDice.getDiceRollImages()[0];
+                playerADieImage = imgContainer.getDieImage(one);
 
                 orderDice.roll();
                 two = orderDice.getDiceOneResult();
-                playerBImage = orderDice.getDiceRollImages()[0];
+                playerBDieImage = imgContainer.getDieImage(two);
 
                 //display correct die image
-                dieOne.setImage(playerAImage);
-                dieTwo.setImage(playerBImage);
+                dieOne.setImage(playerADieImage);
+                dieTwo.setImage(playerBDieImage);
 
                 //display player orderDice on labels
                 if(one>=two){
@@ -106,20 +108,20 @@ public class TurnOrderController {
             case 3:
                 orderDice.roll();
                 one = orderDice.getDiceOneResult();
-                playerAImage = orderDice.getDiceRollImages()[0];
+                playerADieImage = imgContainer.getDieImage(one);
 
                 orderDice.roll();
                 two = orderDice.getDiceOneResult();
-                playerBImage = orderDice.getDiceRollImages()[0];
+                playerBDieImage = imgContainer.getDieImage(two);
 
                 orderDice.roll();
                 three = orderDice.getDiceOneResult();
-                playerCImage = orderDice.getDiceRollImages()[0];
+                playerCDieImage = imgContainer.getDieImage(three);
 
                 //display correct die image
-                dieOne.setImage(playerAImage);
-                dieTwo.setImage(playerBImage);
-                dieThree.setImage(playerCImage);
+                dieOne.setImage(playerADieImage);
+                dieTwo.setImage(playerBDieImage);
+                dieThree.setImage(playerCDieImage);
 
                 //determine player orderDice, then update labels
                 int[] sort3 = {3, 3, 3};
@@ -133,24 +135,24 @@ public class TurnOrderController {
             case 4:
                 orderDice.roll();
                 one = orderDice.getDiceOneResult();
-                playerAImage = orderDice.getDiceRollImages()[0];
+                playerADieImage = imgContainer.getDieImage(one);
 
                 orderDice.roll();
                 two = orderDice.getDiceOneResult();
-                playerBImage = orderDice.getDiceRollImages()[0];
+                playerBDieImage = imgContainer.getDieImage(two);
 
                 orderDice.roll();
                 three = orderDice.getDiceOneResult();
-                playerCImage = orderDice.getDiceRollImages()[0];
+                playerCDieImage = imgContainer.getDieImage(three);
 
                 orderDice.roll();
                 four = orderDice.getDiceOneResult();
-                playerDImage = orderDice.getDiceRollImages()[0];
+                playerDDieImage = imgContainer.getDieImage(four);
                 //display correct die image
-                dieOne.setImage(playerAImage);
-                dieTwo.setImage(playerBImage);
-                dieThree.setImage(playerCImage);
-                dieFour.setImage(playerDImage);
+                dieOne.setImage(playerADieImage);
+                dieTwo.setImage(playerBDieImage);
+                dieThree.setImage(playerCDieImage);
+                dieFour.setImage(playerDDieImage);
 
                 //determine player orderDice, then update labels
                 int[] sort4 = {4, 4, 4, 4};
@@ -277,10 +279,9 @@ public class TurnOrderController {
 //        Image two = new Image(twoURL);
 //        Image thr = new Image(threeURL);
 //        Image fou = new Image(fourURL);
-        ImageContainer imgContainer = new ImageContainer();
         Image one = imgContainer.getTokenImage("dog");
         Image two = imgContainer.getTokenImage("shoe");
-        Image thr = imgContainer.getTokenImage("reacecar");
+        Image thr = imgContainer.getTokenImage("racecar");
         Image fou = imgContainer.getTokenImage("thimble");
         switch (position) {
             case 1:
