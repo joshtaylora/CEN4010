@@ -66,7 +66,6 @@ public class Game {
 		this.dieImage2 = null;
 		// set the initial timer to the specified timer value
 
-		//TODO: check if this is needed anymore(lines 78-81)
 		//store the images for the tokens in an easily accessible array
 		Image[] imgArr = tokenImageArrayInitializer(this.numPlayers);
 		// Check if we could successfully grab the token images
@@ -155,50 +154,73 @@ public class Game {
 	 * Method used to perform the roll for the player
 	 */
 	public void playerRoll() {
-		int spacesToAdvanceToken = 0;
 		Player rollingPlayer = this.getCurrentPlayer();
-
+		boolean js = rollingPlayer.getJailStatus();
+		int numDoubles;
 		this.gameDice.roll();
 
 		this.dieImage1 = gameDice.getDiceRollImages()[0];
 		this.dieImage2 = gameDice.getDiceRollImages()[1];
 
-		//		check if the player rolled doubles
-		if (!this.gameDice.getDoubleResults()) {
+		//TODO: tile popup(controller needs to get the tile of the player)
 
-			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
-			rollingPlayer.setRollStatus(true);
-		} // else if they roll doubles but haven't rolled enough times for this roll to send them to jail
-		else if (rollingPlayer.getDoubles() < 2 && this.gameDice.getDoubleResults()) {
-			// increment the Player's counter storing the number of double rolls the player has had in a row
-			rollingPlayer.incrementDoubles();
-			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
-			rollingPlayer.setRollStatus(false);
-
-		}
-		else if (rollingPlayer.getJailStatus() && this.gameDice.getDoubleResults()) {
-			// player is in jail and rolling to try to get out of doubles
-			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
-			rollingPlayer.setJailStatus(false);
-
-		}
-		else {
-			rollingPlayer.setDiceRollResults(this.gameDice.getDiceRollValue());
-			// sets the player's current tile to the jail tile
-			if (!rollingPlayer.getJailStatus()) {
-				rollingPlayer.setJailStatus(true);
+		//if: player is currently NOT in jail===========================================================================NOT IN JAIL
+		if(!js) {
+			//if: player HAS NOT rolled doubles
+			if (!this.gameDice.getDoubleResults()) {
 				rollingPlayer.resetDoubles();
+				advancePlayerTile(this.gameDice.getDiceRollValue());
+				rollingPlayer.setRollStatus(true);
 			}
-			rollingPlayer.setRollStatus(true);
+			//else: player HAS rolled doubles
+			else{
+				rollingPlayer.incrementDoubles();
+				numDoubles = rollingPlayer.getDoubles();
+				//if: player has rolled a safe double, so move to corresponding space and give another turn
+				if(numDoubles < 3){
+					//Todo: make a message saying the player can roll again
+					advancePlayerTile(this.gameDice.getDiceRollValue());
+					rollingPlayer.setRollStatus(false);
+				}
+				//if: player has rolled a jail double, so move them to jail and end turn
+				else if(numDoubles == 3){
+					rollingPlayer.resetDoubles();
+					rollingPlayer.setCurrentTile(gameBoard.searchTile("Jail/Just Visiting"));
+					rollingPlayer.setJailStatus(true);
+					rollingPlayer.setRollStatus(true);
+				}
+			}
+		}
+		//else: player is currently IN jail=============================================================================IS IN JAIL
+		else{
+			//if: player HAS NOT rolled doubles
+			if (!this.gameDice.getDoubleResults()) {
+				rollingPlayer.incrementDoubles();
+				numDoubles = rollingPlayer.getDoubles();
+				//if: player has not rolled enough doubles to leave jail, stay in jail and end turn
+				if(numDoubles < 3){
+					advancePlayerTile(0);
+					rollingPlayer.setRollStatus(true);
+				}
+				//if: player has used all chances to roll doubles, subtract money, move them out of jail
+				else if(numDoubles == 3){
+					rollingPlayer.resetDoubles();
+					rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() - 50);
+					advancePlayerTile(this.gameDice.getDiceRollValue());
+					rollingPlayer.setJailStatus(false);
+					rollingPlayer.setRollStatus(true);
+				}
+
+			}
+			//else: player HAS rolled doubles
+			else{
+				rollingPlayer.resetDoubles();
+				advancePlayerTile(this.gameDice.getDiceRollValue());
+				rollingPlayer.setRollStatus(true);
+			}
 		}
 	}
 
-	public boolean checkPlayerRollResults() {
-		boolean rollAgain;
-		// if the player did NOT roll doubles
-		rollAgain = this.gameDice.getDoubleResults();
-		return rollAgain;
-	}
 
 	/**
 	 * Advance the player the number of spaces specified

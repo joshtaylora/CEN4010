@@ -65,6 +65,7 @@ public class GameController {
     private int numberOfPlayers;
     private int timerValue;
     int currentPlayerIndex;
+    boolean consecutiveTurn = false;
     ArrayList<Integer> playerTurnList;
 
 //  Injects the menu controller into the game controller and begins the game
@@ -83,7 +84,6 @@ public class GameController {
         currentPlayerIndex = 0;
         this.game = new Game(this.numberOfPlayers, this.timerValue, playerTurnList);
         setActivePlayer();
-        //gameLoop();
     }
     /*
     // loop in which the game is run
@@ -130,121 +130,107 @@ public class GameController {
 // =====================================================================================================================
    @FXML
    void rollDiceButtonClicked(Event e) {
-        int spacesAdvanced = 0;
+       if(consecutiveTurn){
+           rollDiceButton.setText("Roll Dice");
+       }
         Player rollingPlayer = game.getCurrentPlayer();
-        int numPlayerDoubleRolls = rollingPlayer.getDoubles();
+        int initDoubles = rollingPlayer.getDoubles();
+        int postDoubles;
         // check to make sure that the player hasn't already rolled
         if (!rollingPlayer.getRollStatus()) {
-            //int spacesAdvanced = game.playerRoll();
-            // if the player is not jail
-            if (!rollingPlayer.getJailStatus()) {
-                if (numPlayerDoubleRolls > 0) {
-                    if (numPlayerDoubleRolls == 1) {
-                        // player has rolled doubles the previous turn
-                        game.playerRoll();
-                        spacesAdvanced = rollingPlayer.getDiceRollResults();
-                    }
-                    else if(numPlayerDoubleRolls == 2) {
-                        // player has rolled doubles the previous two turns
-                        game.playerRoll();
-                        if (game.checkPlayerRollResults()) {
-                            spacesAdvanced = 40 - rollingPlayer.getCurrentTile().getPosition() + 10;
-                        } else {
-                            spacesAdvanced = rollingPlayer.getDiceRollResults();
-                        }
-                    }
-                }
-                else if (numPlayerDoubleRolls == 0) {
-                    game.playerRoll();
-                    spacesAdvanced = rollingPlayer.getDiceRollResults();
-                }
-            }
-            else {
-                spacesAdvanced = game.getCurrentPlayer().getDiceRollResults();
-            }
-            // advance the player on the board
-            Tile tileToAdvanceTo = game.advancePlayerTile(spacesAdvanced);
-            //Update the urls for the image vies to the correct dice
+            game.playerRoll();
 
             rollDiceImage1.setImage(game.dieImage1);
             rollDiceImage2.setImage(game.dieImage2);
 
-            //setActivePlayer();
-        }
-        else {
-            //TODO: add functionality here to stop player from rolling
-            //Now set the player's roll status to true so we don't roll for them again
-            rollDiceButton.getStyleClass().remove("rollButtonActive");
-            rollDiceButton.getStyleClass().add("rollButtonInactive");
-            //set message if player keeps trying to press roll
-            rollDiceButton.setText("PRESS END TURN BUTTON");
+            setActivePlayer();
+
+            //see if player rolled doubles during this turn
+            postDoubles = rollingPlayer.getDoubles();
+            if(initDoubles<postDoubles){
+                rollDiceButton.setText("Doubles!(" + postDoubles + "/3): Roll Again");
+                consecutiveTurn = true;
+            }
+            else{
+                //style roll dice button to indicate not rolling again
+                rollDiceButton.getStyleClass().remove("rollButtonActive");
+                rollDiceButton.getStyleClass().add("rollButtonInactive");
+                //set message if player keeps trying to press roll
+                rollDiceButton.setText("PRESS END TURN BUTTON");
+                //reset variable
+                consecutiveTurn = false;
+            }
         }
    }
 
+   //Player has opted to end their turn
    @FXML
     void endTurnButtonClicked(Event e) {
-        // Player has opted to end their turn
-        this.game.getCurrentPlayer().setRollStatus(false);
-        this.game.setNextPlayer();
-        setActivePlayer();
+        //check if game time limit is up
+       //if(System.currentTimeMillis() < game.timeLimit) {
+           //player cannot end their turn until they have rolled
+           if (game.getCurrentPlayer().getRollStatus()) {
+               //reset player roll status, increment player, and display their information
+               this.game.getCurrentPlayer().setRollStatus(false);
+               this.game.setNextPlayer();
+               setActivePlayer();
 
-       //change active player css
-       switch(currentPlayerIndex){
-           case 0:
-               playerdog.getStyleClass().remove("activePlayerSection");
-               playerdog.getStyleClass().add("inactivePlayerSection");
-               playershoe.getStyleClass().remove("inactivePlayerSection");
-               playershoe.getStyleClass().add("activePlayerSection");
-               break;
-           case 1:
-               playershoe.getStyleClass().remove("activePlayerSection");
-               playershoe.getStyleClass().add("inactivePlayerSection");
-               if(game.getNumPlayers() > 2) {
-                   playercar.getStyleClass().remove("inactivePlayerSection");
-                   playercar.getStyleClass().add("activePlayerSection");
+               //change active player css
+               switch (currentPlayerIndex) {
+                   case 0:
+                       playerdog.getStyleClass().remove("activePlayerSection");
+                       playerdog.getStyleClass().add("inactivePlayerSection");
+                       playershoe.getStyleClass().remove("inactivePlayerSection");
+                       playershoe.getStyleClass().add("activePlayerSection");
+                       break;
+                   case 1:
+                       playershoe.getStyleClass().remove("activePlayerSection");
+                       playershoe.getStyleClass().add("inactivePlayerSection");
+                       if (game.getNumPlayers() > 2) {
+                           playercar.getStyleClass().remove("inactivePlayerSection");
+                           playercar.getStyleClass().add("activePlayerSection");
+                       } else {
+                           playerdog.getStyleClass().remove("inactivePlayerSection");
+                           playerdog.getStyleClass().add("activePlayerSection");
+                       }
+                       break;
+                   case 2:
+                       playercar.getStyleClass().remove("activePlayerSection");
+                       playercar.getStyleClass().add("inactivePlayerSection");
+                       if (game.getNumPlayers() == 4) {
+                           playerthim.getStyleClass().remove("inactivePlayerSection");
+                           playerthim.getStyleClass().add("activePlayerSection");
+                       } else {
+                           playerdog.getStyleClass().remove("inactivePlayerSection");
+                           playerdog.getStyleClass().add("activePlayerSection");
+                       }
+                       break;
+                   case 3:
+                       playerthim.getStyleClass().remove("activePlayerSection");
+                       playerthim.getStyleClass().add("inactivePlayerSection");
+                       playerdog.getStyleClass().remove("inactivePlayerSection");
+                       playerdog.getStyleClass().add("activePlayerSection");
+                       break;
+                   default:
+                       break;
                }
-               else{
-                   playerdog.getStyleClass().remove("inactivePlayerSection");
-                   playerdog.getStyleClass().add("activePlayerSection");
-               }
-               break;
-           case 2:
-               playercar.getStyleClass().remove("activePlayerSection");
-               playercar.getStyleClass().add("inactivePlayerSection");
-               if(game.getNumPlayers() == 4) {
-                   playerthim.getStyleClass().remove("inactivePlayerSection");
-                   playerthim.getStyleClass().add("activePlayerSection");
-               }
-               else{
-                   playerdog.getStyleClass().remove("inactivePlayerSection");
-                   playerdog.getStyleClass().add("activePlayerSection");
-               }
-               break;
-           case 3:
-               playerthim.getStyleClass().remove("activePlayerSection");
-               playerthim.getStyleClass().add("inactivePlayerSection");
-               playerdog.getStyleClass().remove("inactivePlayerSection");
-               playerdog.getStyleClass().add("activePlayerSection");
-               break;
-           default:
-               break;
-       }
 
-       //set currentPlayerIndex
-       if(currentPlayerIndex < game.getNumPlayers()-1){
-           currentPlayerIndex++;
-       }
-       else{
-           currentPlayerIndex = 0;
-       }
+               //set currentPlayerIndex
+               if (currentPlayerIndex < game.getNumPlayers() - 1) {
+                   currentPlayerIndex++;
+               } else {
+                   currentPlayerIndex = 0;
+               }
 
-       //reset buttons
-       rollDiceButton.setText("Roll Dice");
-       rollDiceButton.getStyleClass().remove("rollButtonInactive");
-       rollDiceButton.getStyleClass().add("rollButtonActive");
-       rollDiceButton.getStyleClass().remove("rollButtonInActive");
-       rollDiceButton.getStyleClass().add("rollButtonActive");
-
+               //reset buttons
+               rollDiceButton.setText("Roll Dice");
+               rollDiceButton.getStyleClass().remove("rollButtonInactive");
+               rollDiceButton.getStyleClass().add("rollButtonActive");
+           }
+//       }
+//       else{
+//           //TODO:  check  winner and display
+//       }
 
    }
 
