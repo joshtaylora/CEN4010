@@ -1,6 +1,6 @@
 package Models;
 
-import Resources.OSValidator;
+import Resources.ResourceManager;
 import javafx.scene.image.Image;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class Dice {
 		this.dice = new int[2];
 		this.doubleRoll = false;
 		diceImages = new Image[6];
-		OSValidator osV = new OSValidator();
+		ResourceManager osV = new ResourceManager();
 		File die1File = new File(osV.getPathToFile("die1.png", "Resources/Images"));
 		File die2File = new File(osV.getPathToFile("die2.png", "Resources/Images"));
 		File die3File = new File(osV.getPathToFile("die3.png", "Resources/Images"));
