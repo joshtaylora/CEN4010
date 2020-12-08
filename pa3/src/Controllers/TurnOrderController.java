@@ -2,7 +2,6 @@ package Controllers;
 
 import Models.Dice;
 import Resources.ImageContainer;
-import Resources.OSValidator;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,9 +11,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 
 public class TurnOrderController {
 
@@ -200,7 +197,7 @@ public class TurnOrderController {
 //        // store the system path as a string
 //        String sysPath = System.getProperty("user.dir");
 //        //System.out.println(sysPath);
-//        OSValidator osValidator = new OSValidator();
+//        ResourceManager osValidator = new ResourceManager();
 //        String os = osValidator.os;
 //        Image[] diceImageArray = null;
 //        try {
@@ -258,8 +255,8 @@ public class TurnOrderController {
     private void labeling(Label label, ImageView imageViewContent, int position) throws MalformedURLException {
 //        // store the system path as a string
 //        String sysPath = System.getProperty("user.dir");
-//        /* Use the OSValidator class to get the right URL path for the working directory */
-//        OSValidator osValidator = new OSValidator();
+//        /* Use the ResourceManager class to get the right URL path for the working directory */
+//        ResourceManager osValidator = new ResourceManager();
 //        String os = osValidator.os;
 //        String diePath = null;
 //

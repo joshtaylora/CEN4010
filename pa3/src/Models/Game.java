@@ -5,11 +5,8 @@ package Models;
  */
 
 import Resources.ImageContainer;
-import Resources.OSValidator;
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.util.LinkedList;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package Controllers;
 
-import Resources.OSValidator;
+import Resources.ResourceManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,8 +27,8 @@ public class Monopoly extends Application {
         //System.out.println(sysPath);
 
 
-        OSValidator osValidator = new OSValidator();
-        String os = osValidator.os;
+        ResourceManager resourceManager = new ResourceManager();
+        String os = resourceManager.os;
         String tabbedViewPath = null;
 
         if (os.equals("windows")) {

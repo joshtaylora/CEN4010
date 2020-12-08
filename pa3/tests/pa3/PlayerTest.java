@@ -1,7 +1,7 @@
 package pa3;
 
 import Models.Token;
-import Resources.OSValidator;
+import Resources.ResourceManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -11,8 +11,8 @@ class PlayerTest {
     String sysPath = System.getProperty("user.dir");
     File testToken1Image;
     Token playerToken;
-    OSValidator osValidator = new OSValidator();
-    String os = osValidator.os;
+    ResourceManager resourceManager = new ResourceManager();
+    String os = resourceManager.os;
 
     @Test
     void testPlayerConstructor() {

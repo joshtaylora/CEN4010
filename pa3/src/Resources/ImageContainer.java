@@ -1,15 +1,16 @@
 package Resources;
 
-import Models.Token;
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class ImageContainer {
-    OSValidator osValidator;
+    ResourceManager resourceManager;
+
+    public ArrayList<ArrayList<String>> getImageURLCollection() {
+        return imageURLCollection;
+    }
+
     ArrayList<ArrayList<String>> imageURLCollection;
     
     String[] dieImageURLs;
@@ -32,8 +33,8 @@ public class ImageContainer {
     private static Image thimbleTokenImage = null;
 
     public ImageContainer() {
-        // Initialize the OSValidator object that will be used to retrieve correct working dir path
-        this.osValidator = new OSValidator();
+        // Initialize the ResourceManager object that will be used to retrieve correct working dir path
+        this.resourceManager = new ResourceManager();
         // The arrays that will hold the Image objects themselves
         dieImages = new Image[6];
 
@@ -48,12 +49,12 @@ public class ImageContainer {
     private void initImageURLCollection() {
         /* Array for the Strings containing the URLs for the dice images */
         this.dieImageURLs = new String[6];
-        String die1File = osValidator.getPathToFile("die1.png", "Resources/Images");
-        String die2File = osValidator.getPathToFile("die2.png", "Resources/Images");
-        String die3File = osValidator.getPathToFile("die3.png", "Resources/Images");
-        String die4File = osValidator.getPathToFile("die4.png", "Resources/Images");
-        String die5File = osValidator.getPathToFile("die5.png", "Resources/Images");
-        String die6File = osValidator.getPathToFile("die6.png", "Resources/Images");
+        String die1File = resourceManager.getPathToFile("die1.png", "Resources/Images");
+        String die2File = resourceManager.getPathToFile("die2.png", "Resources/Images");
+        String die3File = resourceManager.getPathToFile("die3.png", "Resources/Images");
+        String die4File = resourceManager.getPathToFile("die4.png", "Resources/Images");
+        String die5File = resourceManager.getPathToFile("die5.png", "Resources/Images");
+        String die6File = resourceManager.getPathToFile("die6.png", "Resources/Images");
         dieImageURLs[0] = die1File;
         dieImageURLs[1] = die2File;
         dieImageURLs[2] = die3File;
@@ -62,10 +63,10 @@ public class ImageContainer {
         dieImageURLs[5] = die6File;
         /* Array for the Strings containing the URLs for the token images */
         this.tokenImageURLs = new String[4];
-        String dogFile = osValidator.getPathToFile("dog.png", "Resources/Images");
-        String shoeFile = osValidator.getPathToFile("shoe.png", "Resources/Images");
-        String racecarFile = osValidator.getPathToFile("racecar.png", "Resources/Images");
-        String thimbleFile = osValidator.getPathToFile("thimble.png", "Resources/Images");
+        String dogFile = resourceManager.getPathToFile("dog.png", "Resources/Images");
+        String shoeFile = resourceManager.getPathToFile("shoe.png", "Resources/Images");
+        String racecarFile = resourceManager.getPathToFile("racecar.png", "Resources/Images");
+        String thimbleFile = resourceManager.getPathToFile("thimble.png", "Resources/Images");
         tokenImageURLs[0] = dogFile;
         tokenImageURLs[1] = shoeFile;
         tokenImageURLs[2] = racecarFile;
@@ -130,6 +131,11 @@ public class ImageContainer {
         return returnImage;
     }
 
+    /**
+     * Method that can be used to get an image object for a specific token
+     * @param tokenName the name of the token
+     * @return the Image object for the token specified
+     */
     public Image getTokenImage(String tokenName) {
         Image returnTokImg = null;
         switch(tokenName) {

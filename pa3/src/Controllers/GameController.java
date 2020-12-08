@@ -1,7 +1,7 @@
 package Controllers;
 
 import Models.*;
-import Resources.OSValidator;
+import Resources.ResourceManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class GameController {
@@ -273,9 +272,9 @@ public class GameController {
    private Image getImage(String fileName) {
         Image returnImage = null;
         String imagePath = null;
-        OSValidator osValidator = new OSValidator();
+        ResourceManager resourceManager = new ResourceManager();
         String sysPath = System.getProperty("user.dir");
-        if (osValidator.os.equals("windows")) {
+        if (resourceManager.os.equals("windows")) {
             if (sysPath.contains("pa3")) {
                 imagePath = sysPath.concat("\\src\\Resources\\" + fileName);
                 System.out.println(imagePath);
@@ -285,7 +284,7 @@ public class GameController {
                 System.out.println(imagePath);
            }
         }
-        else if (osValidator.os.equals("mac")) {
+        else if (resourceManager.os.equals("mac")) {
             if (sysPath.contains("pa3")) {
                 imagePath = sysPath.concat("/src/Resources/" + fileName);
             }

@@ -3,10 +3,10 @@ package Resources;
 import java.io.File;
 import java.net.MalformedURLException;
 
-public class OSValidator {
+public class ResourceManager {
     public String os;
     /* Default Constructor */
-    public OSValidator() {
+    public ResourceManager() {
         String  operatingSystem = System.getProperty("os.name").toLowerCase();
         if (operatingSystem.contains("win")) {
             /* Updates the os string field to indicate the running OS is windows */

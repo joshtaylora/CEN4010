@@ -3,11 +3,9 @@ package Resources;
 import javafx.scene.image.Image;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+class ResourceManagerTest {
 
-class OSValidatorTest {
-
-    OSValidator osValidator = new OSValidator();
+    ResourceManager resourceManager = new ResourceManager();
 
     @Test
     void getPathToFileTest() {
@@ -15,7 +13,7 @@ class OSValidatorTest {
         String badWindowsModulePath = "\\src\\Resources/Images\\";
         String dogTokenFileName = "dog.png";
         /* Get the bad file path */
-        String badFilePath1 = osValidator.getPathToFile(dogTokenFileName, badWindowsModulePath);
+        String badFilePath1 = resourceManager.getPathToFile(dogTokenFileName, badWindowsModulePath);
         /* Make the image object, will result in NullPointerException */
         Image badImage1 = new Image(badFilePath1);
 
