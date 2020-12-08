@@ -23,6 +23,7 @@ public class Monopoly extends Application {
         Scene scene = new Scene(new StackPane());
 
         String sysPath = System.getProperty("user.dir");
+        System.out.println(sysPath);
         //System.out.println(sysPath);
 
 

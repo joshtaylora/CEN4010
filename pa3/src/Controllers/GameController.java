@@ -82,8 +82,9 @@ public class GameController {
 
     private void startGame() {
         currentPlayerIndex = 0;
-        this.game = new Game(this.numberOfPlayers, this.timerValue, playerTurnList);
+        this.game = new Game(this.numberOfPlayers, this.timerValue);
         setActivePlayer();
+        //gameLoop();
     }
     /*
     // loop in which the game is run
@@ -127,7 +128,7 @@ public class GameController {
             }
         }
     }
-// =====================================================================================================================
+/* ================================================================================================================== */
    @FXML
    void rollDiceButtonClicked(Event e) {
        if(consecutiveTurn){
