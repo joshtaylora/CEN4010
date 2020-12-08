@@ -170,6 +170,12 @@ public class Game {
 			if (!this.gameDice.getDoubleResults()) {
 				rollingPlayer.resetDoubles();
 				advancePlayerTile(this.gameDice.getDiceRollValue());
+				//if: player lands on "Go to Jail"
+				if(rollingPlayer.getCurrentTile().getName().equals("Go To Jail")){
+					rollingPlayer.resetDoubles();
+					rollingPlayer.setCurrentTile(gameBoard.searchTile("Jail/Just Visiting"));
+					rollingPlayer.setJailStatus(true);
+				}
 				rollingPlayer.setRollStatus(true);
 			}
 			//else: player HAS rolled doubles
@@ -178,9 +184,17 @@ public class Game {
 				numDoubles = rollingPlayer.getDoubles();
 				//if: player has rolled a safe double, so move to corresponding space and give another turn
 				if(numDoubles < 3){
-					//Todo: make a message saying the player can roll again
 					advancePlayerTile(this.gameDice.getDiceRollValue());
-					rollingPlayer.setRollStatus(false);
+					//if: player lands on "Go to Jail"
+					if(rollingPlayer.getCurrentTile().getName().equals("Go To Jail")){
+						rollingPlayer.resetDoubles();
+						rollingPlayer.setCurrentTile(gameBoard.searchTile("Jail/Just Visiting"));
+						rollingPlayer.setJailStatus(true);
+						rollingPlayer.setRollStatus(true);
+					}
+					else {
+						rollingPlayer.setRollStatus(false);
+					}
 				}
 				//if: player has rolled a jail double, so move them to jail and end turn
 				else if(numDoubles == 3){
