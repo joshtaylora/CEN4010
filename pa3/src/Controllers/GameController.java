@@ -177,7 +177,6 @@ public class GameController {
         int initDoubles = rollingPlayer.getDoubles();
         int postDoubles;
         int ownership = 0;
-        int cost = 0;
         // check to make sure that the player hasn't already rolled
         if (!rollingPlayer.getRollStatus()) {
             int result = game.playerRoll();
@@ -188,17 +187,11 @@ public class GameController {
             setActivePlayer();
 
             //check ownership if the tile can be owned, and money involved
-            ownership = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[0];
-            cost = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[1];
+            ownership = game.checkOwnership(rollingPlayer);
 
             //open tilepop with appropriate elements
             mainController.addTileTab();
-
-            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
-            /*
-             Removed call to TilePopController method from inside of GameController, added injectMain method call to
-                the addTileTab method internal to MainController
-            */
+            this.tileViewController.initTile(rollingPlayer.getCurrentTile(), ownership, rollingPlayer, result);
 
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
@@ -354,60 +347,7 @@ public class GameController {
 
     }
 
-   private int[] checkOwnership(Tile current, Player curplay, int rollResult){
-       //[0] ownership, [1] cost
-       //0= no one owns this, 1=currentPlayer owns this, 2=another player owns this
-       int[] ret = {0, 0};
-       if(curplay.getCurrentTile().getType().equals("Deed")){
-           Deed obj = (Deed) curplay.getCurrentTile();
-           Player check = obj.getOwner();
-           if(check == null){
-               ret[0] = 0;
-               ret[1] = obj.getPrice();
-           }
-           else if(check.getName().equals(curplay.getName())){
-               ret[0] = 1;
-               ret[1] = obj.getMortgageValue();
-           }
-           else{
-               ret[0] = 2;
-               ret[1] = obj.calcRent();
-           }
-       }
-       else if(curplay.getCurrentTile().getType().equals("RailRoad")){
-           RailRoad obj = (RailRoad) curplay.getCurrentTile();
-           Player check = obj.getOwner();
-           if(check == null){
-               ret[0] = 0;
-               ret[1] = obj.getPrice();
-           }
-           else if(check.getName().equals(curplay.getName())){
-               ret[0] = 1;
-               ret[1] = obj.getMortgageValue();
-           }
-           else{
-               ret[0] = 2;
-               ret[1] = obj.calcRent();
-           }
-       }
-       else if(curplay.getCurrentTile().getType().equals("Utility")){
-           Utility obj = (Utility) curplay.getCurrentTile();
-           Player check = obj.getOwner();
-           if(check == null){
-               ret[0] = 0;
-               ret[1] = obj.getPrice();
-           }
-           else if(check.getName().equals(curplay.getName())){
-               ret[0] = 1;
-               ret[1] = 0;
-           }
-           else{
-               ret[0] = 2;
-               ret[1] = obj.calcRent(rollResult);
-           }
-       }
-       return ret;
-   }
+
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 
 //    @FXML

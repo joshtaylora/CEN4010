@@ -63,7 +63,7 @@ public class MainController {
         initMenuController();
 //        menuViewController.injectMainController(this);
 //        menuViewController.init();
-//        removeTileTab();
+        removeTileTab();
     }
 
     /**
