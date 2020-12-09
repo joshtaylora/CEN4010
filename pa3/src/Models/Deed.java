@@ -113,7 +113,7 @@ public class Deed extends Tile{
         return houses;
     }
 
-    public boolean getMortagaged(){
+    public boolean getMortgaged(){
         return mortgaged;
     }
 

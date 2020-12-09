@@ -81,7 +81,7 @@ public class TilePopController {
                 }
                 else if(ownershipStatus == 1){
                     //check property mortgage status
-                    if(obj.getMortagaged()){
+                    if(obj.getMortgaged()){
                         tileMessage.setText("Congrats, you own this! Want to unmortgage for $" + cost + "?");
                         button1.setText("Yes, unmortgage!");
                         ret[0] = 0;

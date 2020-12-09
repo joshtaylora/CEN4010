@@ -47,17 +47,17 @@
                                       <items>
                                         <MenuItem fx:id="playerAProperty1MenuItem" mnemonicParsing="false" text="Property 1">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerAProperty1ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerAProperty1ChoiceBox" prefWidth="150.0" onAction="#playerAProperty1ChoiceBoxSelected" />
                                              </graphic>
                                           </MenuItem>
                                         <MenuItem fx:id="playerAProperty2MenuItem" mnemonicParsing="false" text="Property 2">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerAProperty2ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerAProperty2ChoiceBox" prefWidth="150.0" onAction="#playerAProperty2ChoiceBoxSelected" />
                                              </graphic>
                                           </MenuItem>
                                           <MenuItem fx:id="playerAProperty3MenuItem" mnemonicParsing="false" text="Property 3">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerAProperty3ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerAProperty3ChoiceBox" prefWidth="150.0" onAction="#playerAProperty3ChoiceBoxSelected" />
                                              </graphic>
                                           </MenuItem>
                                       </items>
@@ -99,17 +99,17 @@
                                        <items>
                                           <MenuItem fx:id="playerBProperty1MenuItem" mnemonicParsing="false" text="Property 1">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerBProperty1ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerBProperty1ChoiceBox" prefWidth="150.0" onAction="#playerBProperty1ChoiceBoxSelected" />
                                              </graphic>
                                           </MenuItem>
                                           <MenuItem fx:id="playerBProperty2MenuItem" mnemonicParsing="false" text="Property 2">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerBProperty2ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerBProperty2ChoiceBox" prefWidth="150.0" onAction="#playerBProperty2ChoiceBoxSelected"/>
                                              </graphic>
                                           </MenuItem>
                                           <MenuItem fx:id="playerBProperty3MenuItem" mnemonicParsing="false" text="Property 3">
                                              <graphic>
-                                                <ChoiceBox fx:id="playerBProperty3ChoiceBox" prefWidth="150.0" />
+                                                <ChoiceBox fx:id="playerBProperty3ChoiceBox" prefWidth="150.0" onAction="#playerBProperty3ChoiceBoxSelected"/>
                                              </graphic>
                                           </MenuItem>
                                        </items>

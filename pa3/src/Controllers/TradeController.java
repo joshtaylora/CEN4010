@@ -3,6 +3,7 @@ package Controllers;
 import Models.Deed;
 import Models.Player;
 import Models.PropertySet;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,6 +61,8 @@ public class TradeController {
 // ============================================ Global Variables =======================================================
 
     MainController mainController;
+    Player initiatingPlayer;
+    Player receivingPlayer;
 // =====================================================================================================================
 
     public void initTradeController(MenuController menuController) {
@@ -77,118 +80,141 @@ public class TradeController {
         Parent parentNode = FXMLLoader.load(getClass().getResource("TradePopup.fxml"));
     }
 
-    // TODO will remove the example objects once concrete methodology fixed
     void populateTradeView(Player initiatingPlayer, Player receivingPlayer) {
+        this.initiatingPlayer = initiatingPlayer;
+        this.receivingPlayer = receivingPlayer;
+        playerALabel.setText(this.initiatingPlayer.getName());
 
-        PropertySet exPropertySet1 = new PropertySet(3);
-        Deed exDeed1 = new Deed("Marvin Gardens",
-                        280,
-                        5,
-                        24,
-                        120,
-                        360,
-                        850,
-                        1025,
-                        1200,
-                        140,
-                        150,
-                        150,
-                        29);
-        Deed exDeed2 = new Deed("North Carolina Ave.",
-                300,
-                6,
-                26,
-                130,
-                390,
-                900,
-                1100,
-                1275,
-                150,
-                200,
-                200,
-                32);
-        Deed exDeed3 = new Deed("Pennsylvania Ave.",
-                320,
-                6,
-                28,
-                150,
-                450,
-                100,
-                1200,
-                1400,
-                160,
-                200,
-                200,
-                34);
-        exPropertySet1.addProperty(exDeed1);
-        exPropertySet1.addProperty(exDeed2);
-        exPropertySet1.addProperty(exDeed3);
+        playerBLabel.setText(this.receivingPlayer.getName());
 
+        // Add all of the properties that the initiating player owns to the choice boxes for the initiating player
+        initMenuForInitiatingPlayer();
+        // Add all of the properties that the receiving player owns to the choice boxes for the receiving player
+        initMenuForReceivingPlayer();
+    }
 
-        PropertySet exPropertySet2 = new PropertySet(3);
-        Deed exDeed4 = new Deed("Marvin Gardens",
-                280,
-                5,
-                24,
-                120,
-                360,
-                850,
-                1025,
-                1200,
-                140,
-                150,
-                150,
-                29);
-        Deed exDeed5 = new Deed("North Carolina Ave.",
-                300,
-                6,
-                26,
-                130,
-                390,
-                900,
-                1100,
-                1275,
-                150,
-                200,
-                200,
-                32);
-        Deed exDeed6 = new Deed("Pennsylvania Ave.",
-                320,
-                6,
-                28,
-                150,
-                450,
-                100,
-                1200,
-                1400,
-                160,
-                200,
-                200,
-                34);
-        exPropertySet2.addProperty(exDeed4);
-        exPropertySet2.addProperty(exDeed5);
-        exPropertySet2.addProperty(exDeed6);
+    private void initMenuForInitiatingPlayer() {
+        getDeedToDisplay(this.initiatingPlayer, playerAProperty1ChoiceBox);
+        getDeedToDisplay(this.initiatingPlayer, playerAProperty2ChoiceBox);
+        getDeedToDisplay(this.initiatingPlayer, playerAProperty3ChoiceBox);
+    }
 
-        PropertySet[] exPropertySetArray = { exPropertySet1, exPropertySet2 };
+    private void initMenuForReceivingPlayer() {
+        getDeedToDisplay(this.receivingPlayer, playerBProperty1ChoiceBox);
+        getDeedToDisplay(this.receivingPlayer, playerBProperty2ChoiceBox);
+        getDeedToDisplay(this.receivingPlayer, playerBProperty3ChoiceBox);
+    }
 
-        // initiatingPlayer.getPlayerDeeds()
-        for (PropertySet propertySet : exPropertySetArray) {
+    private void getDeedToDisplay(Player initiatingPlayer, ChoiceBox<String> playerChoiceBox) {
+        for (PropertySet propertySet : initiatingPlayer.getPlayerPropertySetArray()) {
             for (Deed displayDeed : propertySet.getPropertiesInSet()) {
-                String deedName = displayDeed.getName();
-                String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
-                playerAProperty1ChoiceBox.getItems().add(displayStr);
-                playerAProperty1MenuItem.setText(deedName);
-            }
-        }
-        for (PropertySet propertySet : exPropertySetArray) {
-            for (Deed displayDeed : propertySet.getPropertiesInSet()) {
-                String deedName = displayDeed.getName();
-                String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
-                playerBProperty1ChoiceBox.getItems().add(displayStr);
-                playerBProperty1MenuItem.setText(deedName);
+                if (displayDeed != null) {
+                    String deedName = displayDeed.getName();
+                    String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
+                    playerChoiceBox.getItems().add(displayStr);
+                }
             }
         }
     }
 
+    @FXML
+    public void playerAProperty1ChoiceBoxSelected(Event e) {
+        String prop2ChoiceBoxVal = playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem();
+        String prop3ChoiceBoxVal = playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem();
+        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
+        String newMenuText;
+        if ((prop2ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
+            newMenuText =  playerAProperty1ChoiceBox.getValue().split(",")[0];
+            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
+            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
+        }
+        else {
+            newMenuText = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        }
+        playerAMenu.setText(newMenuText);
+        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
+        playerAProperty2ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
+        playerAProperty3ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
+
+    }
+    @FXML
+    public void playerAProperty2ChoiceBoxSelected(Event e) {
+        playerAMenu.setText(playerAProperty2ChoiceBox.getValue().split(",")[0]);
+        // Remove the property selected in Property1ChoiceBox from the Property 1 and 3 ChoiceBoxes
+        playerAProperty1ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
+        playerAProperty3ChoiceBox.getItems().remove(playerAProperty3ChoiceBox.getValue());
+
+    }
+
+    @FXML
+    public void playerAProperty3ChoiceBoxSelected(Event e) {
+        playerAMenu.setText(playerAProperty3ChoiceBox.getValue().split(",")[0]);
+        // Remove the property selected in Property1ChoiceBox from the Property 1 and 3 ChoiceBoxes
+        playerAProperty1ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
+        playerAProperty3ChoiceBox.getItems().remove(playerAProperty3ChoiceBox.getValue());
+
+    }
+
+
+
+    @FXML
+    public void playerBProperty1ChoiceBoxSelected(Event e) {
+        String prop2ChoiceBoxVal = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem();
+        String prop3ChoiceBoxVal = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem();
+        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
+        String newMenuText;
+        if ((prop2ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
+            newMenuText =  playerBProperty1ChoiceBox.getValue().split(",")[0];
+            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
+            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
+        }
+        else {
+            newMenuText = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        }
+        playerBMenu.setText(newMenuText);
+        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
+        playerBProperty2ChoiceBox.getItems().remove(playerBProperty1ChoiceBox.getValue());
+        playerBProperty3ChoiceBox.getItems().remove(playerBProperty1ChoiceBox.getValue());
+
+    }
+    @FXML
+    public void playerBProperty2ChoiceBoxSelected(Event e) {
+        String prop1ChoiceBoxVal = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
+        String prop3ChoiceBoxVal = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem();
+        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
+        String newMenuText;
+        if ((prop1ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
+            newMenuText =  prop1ChoiceBoxVal.split(",")[0];
+            newMenuText = newMenuText.concat(" " + playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0]);
+            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
+        }
+        else {
+            newMenuText = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        }
+        playerBMenu.setText(newMenuText);
+        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
+        playerBProperty1ChoiceBox.getItems().remove(playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem());
+        playerBProperty3ChoiceBox.getItems().remove(playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    public void playerBProperty3ChoiceBoxSelected(Event e) {
+        String prop1ChoiceBoxVal = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
+        String prop2ChoiceBoxVal = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem();
+        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
+        String newMenuText;
+        if ((prop1ChoiceBoxVal != null) && (prop2ChoiceBoxVal != null)) {
+            newMenuText =  prop1ChoiceBoxVal.split(",")[0];
+            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
+            newMenuText = newMenuText.concat(" " + playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0]);
+        }
+        else {
+            newMenuText = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        }
+        playerBMenu.setText(newMenuText);
+        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
+        playerBProperty1ChoiceBox.getItems().remove(playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem());
+        playerBProperty2ChoiceBox.getItems().remove(playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem());
+    }
 
 }

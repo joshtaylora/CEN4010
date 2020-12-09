@@ -9,7 +9,7 @@ public class Player{
 	// the variables that are part of the Player class
 	private int account;
 	private Token playerToken;
-	public PropertySet[] playerDeeds;
+	public PropertySet[] playerPropertySetArray;
 	private Tile currentTile;
 	private boolean inJail;
 	private int numRailroads;
@@ -27,20 +27,20 @@ public class Player{
 	 *
 	 * @param initial the amount of money to initialize the player's account with
 	 * @param currentTile the tile that the player will start on
-	 * @param playerDeeds an array of property sets that are initially empty but initialized to hold the correct number
+	 * @param playerPropertySetArray an array of property sets that are initially empty but initialized to hold the correct number
 	 *                    of deeds
 	 */
-	public Player( String name, int initial, Tile currentTile, PropertySet[] playerDeeds) {
-		account = initial;
-		this.playerDeeds = playerDeeds;
+	public Player( String name, int initial, Tile currentTile, PropertySet[] playerPropertySetArray) {
+		this.account = initial;
+		this.playerPropertySetArray = playerPropertySetArray;
 		this.currentTile = currentTile;
 		this.playerName = name;
-		inJail = false;
-		numRailroads = 0;
-		numUtilities = 0;
-		doubles = 0;
-		rollStatus = false;
-		diceRollResults = 0;
+		this.inJail = false;
+		this.numRailroads = 0;
+		this.numUtilities = 0;
+		this.doubles = 0;
+		this.rollStatus = false;
+		this.diceRollResults = 0;
 	}
 	
 	/**
@@ -51,10 +51,11 @@ public class Player{
 	 * @param property
 	 */
 	public void purchaseDeed(Deed property) {
-		playerDeeds[property.getPropertySet()].addProperty(property);
+
+		playerPropertySetArray[property.getPropertySet()].addProperty(property);
 		property.setOwner(this);
 		//checks if player has monopoly and if the monopoly was already checked
-		if((this.getPlayerDeeds()[property.getPropertySet()].checkMonopoly()) && (property.getHouses() < 1)){
+		if((this.getPlayerPropertySetArray()[property.getPropertySet()].checkMonopoly()) && (property.getHouses() < 1)){
 			property.setHouses();
 		}
 
@@ -97,13 +98,13 @@ public class Player{
 
 			//removing the properties from currentPlayer and adding them to tradePlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				this.playerDeeds[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
-				tradePlayer.playerDeeds[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
+				this.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
+				tradePlayer.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
 			}
 			//removing the properties from tradePlayer and adding them to currentPlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				tradePlayer.playerDeeds[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
-				this.playerDeeds[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
+				tradePlayer.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
+				this.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
 			}
 		}
 	}
@@ -118,6 +119,10 @@ public class Player{
 	public int getDoubles() {
 
 		return doubles;
+	}
+
+	public PropertySet[] getPropertySetArray() {
+		return this.playerPropertySetArray;
 	}
 
 	/**
@@ -233,16 +238,16 @@ public class Player{
 	 * returns the current PropertySet of the player
 	 * @return PropertySet[]
 	 */
-	public PropertySet[] getPlayerDeeds() {
-		return playerDeeds;
+	public PropertySet[] getPlayerPropertySetArray() {
+		return playerPropertySetArray;
 	}
 	
 	/**
 	 * sets the player's PropertySet using the deeds param
 	 * @param deeds
 	 */
-	public void setPlayerDeeds(PropertySet[] deeds) {
-		playerDeeds = deeds;
+	public void setPlayerPropertySetArray(PropertySet[] deeds) {
+		playerPropertySetArray = deeds;
 	}
 	
 	/**
