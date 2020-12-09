@@ -87,9 +87,7 @@ public class DeedTests {
                 1);
         int correct = 50;
 
-        assertEquals(correct, test.getHouseCost());
-        // commenting out until merge complete
-        // assertEquals(correct, test.getUpgradeCost());
+         assertEquals(correct, test.getUpgradeCost());
     }
 
     @Test
@@ -109,9 +107,7 @@ public class DeedTests {
                 1);
         int correct = 50;
 
-        assertEquals(correct, test.getHotelCost());
-        // commenting out until merge complete
-        // assertEquals(correct, test.getUpgradeCost());
+         assertEquals(correct, test.getUpgradeCost());
     }
 
     @Test
