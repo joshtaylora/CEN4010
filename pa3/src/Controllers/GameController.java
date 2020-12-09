@@ -198,8 +198,6 @@ public class GameController {
             mainController.addTileTab();
             tileViewController.injectMain(mainController);
 
-            //TODO: add money to receiving player is case of 2
-
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
             if(initDoubles<postDoubles){

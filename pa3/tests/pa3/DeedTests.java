@@ -3,7 +3,6 @@ package pa3;
 import Models.Deed;
 import Models.Player;
 import Models.PropertySet;
-import Models.Token;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -87,27 +86,7 @@ public class DeedTests {
                 1);
         int correct = 50;
 
-        assertEquals(correct, test.getHouseCost());
-    }
-
-    @Test
-    void testGetHotelCost (){
-        Deed test = new Deed(60,
-                0,
-                2,
-                10,
-                30,
-                90,
-                160,
-                250,
-                30,
-                50,
-                50,
-                "Mediterranean Ave.",
-                1);
-        int correct = 50;
-
-        assertEquals(correct, test.getHotelCost());
+        assertEquals(correct, test.getUpgradeCost());
     }
 
     @Test

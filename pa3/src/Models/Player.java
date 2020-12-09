@@ -53,7 +53,8 @@ public class Player{
 	public void purchaseDeed(Deed property) {
 		playerDeeds[property.getPropertySet()].addProperty(property);
 		property.setOwner(this);
-		if(this.getPlayerDeeds()[property.getPropertySet()].checkMonopoly()){
+		//checks if player has monopoly and if the monopoly was already checked
+		if((this.getPlayerDeeds()[property.getPropertySet()].checkMonopoly()) && (property.getHouses() < 1)){
 			property.setHouses();
 		}
 
