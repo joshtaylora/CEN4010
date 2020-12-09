@@ -200,8 +200,6 @@ public class GameController {
                 the addTileTab method internal to MainController
             */
 
-            //TODO: add money to receiving player is case of 2
-
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
             if(initDoubles<postDoubles){

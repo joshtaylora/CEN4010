@@ -76,14 +76,21 @@ public class Deed extends Tile{
         return saleValue;
     }
 
-    //returns the house cost of a property
-    public int getHouseCost(){
-        return houseCost;
-    }
+    /**
+     * returns the upgrade cost of a property, or zero if property cannot be upgraded
+     * (how much to add a house or hotel)
+     */
 
-    //returns the hotel cost of a property
-    public int getHotelCost(){
-        return hotelCost;
+    public int getUpgradeCost(){
+        if(houses < 5 && houses > 0) {
+            return houseCost;
+        }
+        else if(houses == 5) {
+            return hotelCost;
+        }
+        else{
+            return 0;
+        }
     }
     
   //returns owner of space if there is an owner, or returns null if there is no owner
@@ -95,11 +102,15 @@ public class Deed extends Tile{
             return null;
     }
 
+    /**
+     *
+     * @return gives the value of houses, where
+     * 1 = color set achived
+     * 2-5 = number of houses
+     * 6 = hotel
+     */
     public int getHouses(){
-        if(houses >= 1)
-            return houses-1;
-        else
-            return houses;
+        return houses;
     }
 
     public boolean getMortagaged(){
