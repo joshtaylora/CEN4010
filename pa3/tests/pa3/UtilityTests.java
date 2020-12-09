@@ -38,7 +38,7 @@ class UtilityTests {
         Utility test = new Utility("Electric Company" ,12);
         //initialize a random player object
         PropertySet[] arry = new PropertySet[1];
-        Player dummy = new Player(1500, test, arry);
+        Player dummy = new Player(1500, test, arry, "player");
 
         //set ownership to player
         test.setOwner(dummy);

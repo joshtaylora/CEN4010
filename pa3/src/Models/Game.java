@@ -89,9 +89,9 @@ public class Game {
 
 		switch(this.numPlayers) {
 			case(2):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
 				playerList.add(player1);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
 				playerList.add(player2);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
@@ -99,33 +99,33 @@ public class Game {
 				tokenList.add(p2Token);
 				break;
 			case(3):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player3");
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
 				break;
 			case(4):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player3");
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
-				player4 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player4 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player4");
 				playerList.add(player4);
 				p4Token = new Token(player4, tokenImages[3]);
 				tokenList.add(p4Token);
@@ -144,7 +144,7 @@ public class Game {
 	/**
 	 * Method used to perform the roll for the player
 	 */
-	public void playerRoll() {
+	public int playerRoll() {
 		Player rollingPlayer = this.getCurrentPlayer();
 		boolean js = rollingPlayer.getJailStatus();
 		int numDoubles;
@@ -152,8 +152,6 @@ public class Game {
 
 		this.dieImage1 = imgContainer.getDieImage(gameDice.getDiceOneResult());
 		this.dieImage2 = imgContainer.getDieImage(gameDice.getDiceTwoResult());
-
-		//TODO: tile popup(controller needs to get the tile of the player)
 
 		//if: player is currently NOT in jail===========================================================================NOT IN JAIL
 		if(!js) {
@@ -224,6 +222,7 @@ public class Game {
 				rollingPlayer.setRollStatus(true);
 			}
 		}
+		return this.gameDice.getDiceRollValue();
 	}
 
 

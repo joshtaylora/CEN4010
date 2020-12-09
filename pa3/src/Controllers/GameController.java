@@ -46,6 +46,14 @@ public class GameController {
     Label currentPlayerTileLabel;
     @FXML
     Label currentPlayerPropertyListViewLabel;
+    @FXML
+    Label player1Acct;
+    @FXML
+    Label player2Acct;
+    @FXML
+    Label player3Acct;
+    @FXML
+    Label player4Acct;
 
 // =====================================================================================================================
 // ============================================ Board FXML fields ======================================================
@@ -106,12 +114,12 @@ public class GameController {
         }
     }
     */
-    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
-        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
-        String tilePrompt = "Current Tile: ";
-        // set the label for the tile the current player is on
-        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
-    }
+//    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
+//        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
+//        String tilePrompt = "Current Tile: ";
+//        // set the label for the tile the current player is on
+//        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
+//    }
 
 //  Logic for things that must be changed when the next players turn arrives:
 //      - Change the current player in game class
@@ -123,6 +131,25 @@ public class GameController {
         // set the label for the tile the current player is on
         currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
         addPlayerPropertiesToListView(this.game.getCurrentPlayer());
+    }
+
+    private void updateBalance(){
+        switch(currentPlayerIndex){
+            case 0:
+                player1Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
+                break;
+            case 1:
+                player2Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
+                break;
+            case 2:
+                player3Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
+                break;
+            case 3:
+                player4Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
+                break;
+            default:
+                break;
+        }
     }
 
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the
@@ -146,19 +173,37 @@ public class GameController {
         Player rollingPlayer = game.getCurrentPlayer();
         int initDoubles = rollingPlayer.getDoubles();
         int postDoubles;
+        int ownership = 0;
+        int cost = 0;
         // check to make sure that the player hasn't already rolled
         if (!rollingPlayer.getRollStatus()) {
-            game.playerRoll();
+            int result = game.playerRoll();
 
             rollDiceImage1.setImage(game.dieImage1);
             rollDiceImage2.setImage(game.dieImage2);
 
             setActivePlayer();
 
-            //TODO: open tilepop with appropriate elements
-            //mainController.addTileTab();
-            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile().getName());
+            //check ownership if the tile can be owned, and money involved
+            ownership = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[0];
+            cost = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[1];
 
+            //open tilepop with appropriate elements
+            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile().getName(), rollingPlayer.getCurrentTile().getType(), ownership, cost);
+            mainController.addTileTab();
+
+            //TODO: add money to reciveing player is case of 2
+            //get the array detailing how much the player gained or lost, if any
+            int[] paymentInfo = this.tileViewController.getMoneyInfo();
+            //if: player is to lose money or stay the same
+            if(paymentInfo[0] == 0){
+                rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() - paymentInfo[1]);
+            }
+            //else: player is to gain money
+            else{
+                rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() + paymentInfo[1]);
+            }
+            updateBalance();
 
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
@@ -317,6 +362,54 @@ public class GameController {
         return returnImage;
    }
 
+   private int[] checkOwnership(Tile current, Player curplay, int rollResult){
+       //[0] ownership, [1] cost
+       //0= no one owns this, 1=currentPlayer owns this, 2=another player owns this
+       int[] ret = {0, 0};
+       if(curplay.getCurrentTile().getType().equals("Deed")){
+           Deed obj = (Deed) curplay.getCurrentTile();
+           Player check = obj.getOwner();
+           if(check == null){
+               ret[0] = 0;
+           }
+           else if(check.getName().equals(curplay.getName())){
+               ret[0] = 1;
+           }
+           else{
+               ret[0] = 2;
+               ret[1] = obj.calcRent();
+           }
+       }
+       else if(curplay.getCurrentTile().getType().equals("RailRoad")){
+           RailRoad obj = (RailRoad) curplay.getCurrentTile();
+           Player check = obj.getOwner();
+           if(check == null){
+               ret[0] = 0;
+           }
+           else if(check.getName().equals(curplay.getName())){
+               ret[0] = 1;
+           }
+           else{
+               ret[0] = 2;
+               ret[1] = obj.calcRent();
+           }
+       }
+       else if(curplay.getCurrentTile().getType().equals("Utility")){
+           Utility obj = (Utility) curplay.getCurrentTile();
+           Player check = obj.getOwner();
+           if(check == null){
+               ret[0] = 0;
+           }
+           else if(check.getName().equals(curplay.getName())){
+               ret[0] = 1;
+           }
+           else{
+               ret[0] = 2;
+               ret[1] = obj.calcRent(rollResult);
+           }
+       }
+           return ret;
+   }
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 
 //    @FXML

@@ -614,7 +614,7 @@
                                                 <Image url="@../Resources/Images/dog.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="145.0" layoutY="63.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
+                                          <Label fx:id="player1Acct" layoutX="145.0" layoutY="63.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -644,7 +644,7 @@
                                                 <Image url="@../Resources/Images/shoe.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="145.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
+                                          <Label fx:id="player2Acct" layoutX="145.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -674,7 +674,7 @@
                                                 <Image url="@../Resources/Images/racecar.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="148.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
+                                          <Label fx:id="player3Acct" layoutX="148.0" layoutY="64.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="1.0" />
@@ -704,7 +704,7 @@
                                                 <Image url="@../Resources/Images/thimble.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="148.0" layoutY="62.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
+                                          <Label fx:id="player4Acct" layoutX="148.0" layoutY="62.0" styleClass="accountBalance" stylesheets="@CSS/PlayerStyle.css" text="\$1500" />
                                        </children>
                                     </AnchorPane>
                                  </children>

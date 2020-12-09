@@ -4,7 +4,7 @@ package Models;
  * @author Elisha
  * @version 11/5/20
  */
-public class Player {
+public class Player{
 
 	// the variables that are part of the Player class
 	private int account;
@@ -17,6 +17,7 @@ public class Player {
 	private int doubles;
 	private boolean rollStatus;
 	private int diceRollResults;
+	private String playerName;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an
@@ -29,10 +30,11 @@ public class Player {
 	 * @param playerDeeds an array of property sets that are initially empty but initialized to hold the correct number
 	 *                    of deeds
 	 */
-	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds) {
+	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds, String name) {
 		account = initial;
 		this.playerDeeds = playerDeeds;
 		this.currentTile = currentTile;
+		this.playerName = name;
 		inJail = false;
 		numRailroads = 0;
 		numUtilities = 0;
@@ -93,6 +95,9 @@ public class Player {
 		}
 	}
 
+	public String getName(){
+		return playerName;
+	}
 	/**
 	 * basic get method for the doubles variable
 	 * @return int doubles
