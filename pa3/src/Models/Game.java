@@ -1,5 +1,5 @@
 package Models;
-/**
+/*
  * @author Joshua
  * @version 1.0.1
  */
@@ -14,7 +14,7 @@ public class Game {
 
 	// Class variables
 	public Player currentPlayer;
-	public LinkedList<Player> playerList;
+	private LinkedList<Player> playerList;
 	public int numPlayers;
 
 	public long timeLimit;
@@ -89,9 +89,9 @@ public class Game {
 
 		switch(this.numPlayers) {
 			case(2):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
+				player1 = new Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
@@ -99,33 +99,33 @@ public class Game {
 				tokenList.add(p2Token);
 				break;
 			case(3):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
+				player1 = new Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player3");
+				player3 = new  Player("player3", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
 				break;
 			case(4):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player1");
+				player1 = new  Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player2");
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player3");
+				player3 = new  Player("player3", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
-				player4 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer(), "player4");
+				player4 = new  Player("player4", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player4);
 				p4Token = new Token(player4, tokenImages[3]);
 				tokenList.add(p4Token);
@@ -264,6 +264,23 @@ public class Game {
 		return this.playerList.indexOf(player);
 	}
 
+	/**
+	 * Method to get a player from the player list
+	 * @param playerNum the number of the player that should be retrieved i.e 1, 2, 3, or 4
+	 * @return the player object at the specified index
+	 */
+	public Player getPlayer(int playerNum) {
+		Player retPlayer = null;
+		// ensure that the indexed specified is within the range of the playerlist
+		if ((playerNum <= playerList.size()) && (playerNum > 0)) {
+			retPlayer = playerList.get(playerNum - 1);
+		}
+		else {
+			System.out.println("ERROR in method getPlayer of Game class, player number queried is not within the scope of the player list");
+			System.exit(1);
+		}
+		return retPlayer;
+	}
 //	====================================================================================================================
 
 	/**

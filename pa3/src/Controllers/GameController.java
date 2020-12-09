@@ -23,13 +23,13 @@ public class GameController {
 // =====================================================================================================================
 //    Buttons for trading with each player
     @FXML
-    private Button tradeWithPlayer1;
+    private Button player1TradeButton;
     @FXML
-    private Button tradeWithPlayer2;
+    private Button player2TradeButton;
     @FXML
-    private Button tradeWithPlayer3;
+    private Button player3TradeButton;
     @FXML
-    private Button tradeWithPlayer4;
+    private Button player4TradeButton;
     @FXML
     private Button rollDiceButton;
     @FXML
@@ -93,11 +93,9 @@ public class GameController {
 
     }
 
-    void initPlayerTurns(ArrayList<Integer> playerTurnList) {
-        this.playerTurnList = playerTurnList;
-    }
 
     private void startGame() {
+        mainController.initTilePopController();
         currentPlayerIndex = 0;
         this.game = new Game(this.numberOfPlayers, this.timerValue);
         setActivePlayer();
@@ -114,12 +112,12 @@ public class GameController {
         }
     }
     */
-//    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
-//        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
-//        String tilePrompt = "Current Tile: ";
-//        // set the label for the tile the current player is on
-//        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
-//    }
+    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
+        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
+        String tilePrompt = "Current Tile: ";
+        // set the label for the tile the current player is on
+        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
+    }
 
 //  Logic for things that must be changed when the next players turn arrives:
 //      - Change the current player in game class
@@ -194,9 +192,13 @@ public class GameController {
             cost = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[1];
 
             //open tilepop with appropriate elements
-            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
             mainController.addTileTab();
-            tileViewController.injectMain(mainController);
+
+            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
+            /*
+             Removed call to TilePopController method from inside of GameController, added injectMain method call to
+                the addTileTab method internal to MainController
+            */
 
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
@@ -288,73 +290,69 @@ public class GameController {
 
    }
 
+    /**
+     * Event handler method for when Player 1 presses their trade button
+     * @param e the event for when Player 1 clicks the trade button
+     */
+    @FXML
+    void player1TradeButtonClicked(Event e) {
+        String currentPlayerName = game.getCurrentPlayer().getName();
+        if (currentPlayerName.equals("player1")) {
+            return;
+        }
+        // use the main controller to switch the selected tab to the trade view
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
+        // call method in TradeController to populate the fields for the correct players
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(1));
 
-   private String getPathToDiceRollImage(int roll) {
-        String rollImageFileName = null;
-        switch(roll) {
-            case(1):
-                rollImageFileName = "die1.png";
-                break;
-            case(2):
-                rollImageFileName = "die2.png";
-                break;
-            case(3):
-                rollImageFileName = "die3.png";
-                break;
-            case(4):
-                rollImageFileName = "die4.png";
-                break;
-            case(5):
-                rollImageFileName = "die5.png";
-                break;
-            case(6):
-                rollImageFileName = "die6.png";
-                break;
-            default:
-                System.out.println("ERROR: image url for die roll not found");
-                System.exit(1);
-        }
-        return rollImageFileName;
-   }
 
-   private Image getImage(String fileName) {
-        Image returnImage = null;
-        String imagePath = null;
-        ResourceManager resourceManager = new ResourceManager();
-        String sysPath = System.getProperty("user.dir");
-        if (resourceManager.os.equals("windows")) {
-            if (sysPath.contains("pa3")) {
-                imagePath = sysPath.concat("\\src\\Resources\\" + fileName);
-                System.out.println(imagePath);
-            }
-            else {
-                imagePath = sysPath.concat("\\pa3\\src\\Resources\\" + fileName);
-                System.out.println(imagePath);
-           }
+    }
+    /**
+     * Event handler method for when Player 2 presses their trade button
+     * @param e the event for when Player 2 clicks the trade button
+     */
+    @FXML
+    void player2TradeButtonClicked(Event e) {
+        String currentPlayerName = game.getCurrentPlayer().getName();
+
+        if (currentPlayerName.equals("player2")) {
+            return;
         }
-        else if (resourceManager.os.equals("mac")) {
-            if (sysPath.contains("pa3")) {
-                imagePath = sysPath.concat("/src/Resources/" + fileName);
-            }
-            else {
-                imagePath = sysPath.concat("/pa3/src/Resources/" + fileName);
-            }
+        // use the main controller to switch the selected tab to the trade view
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
+        // call method in TradeController to populate the fields for the correct players
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(2));
+    }
+
+    @FXML
+    void player3TradeButtonClicked(Event e) {
+        String currentPlayerName = game.getCurrentPlayer().getName();
+
+        if (currentPlayerName.equals("player3")) {
+            return;
         }
-        else {
-           System.out.println("ERROR: operating system not supported");
-           System.exit(1);
+
+        // use the main controller to switch the selected tab to the trade view
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
+        // call method in TradeController to populate the fields for the correct players
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(3));
+
+    }
+
+    @FXML
+    void player4TradeButtonClicked(Event e) {
+        String currentPlayerName = game.getCurrentPlayer().getName();
+
+        if (currentPlayerName.equals("player4")) {
+            return;
         }
-        try {
-            File imageFile = new File(imagePath);
-            String imageURLString = imageFile.toURI().toURL().toString();
-            returnImage = new Image(imageURLString);
-        } catch (Exception e) {
-            System.out.println("ERROR: dice image file could not be found");
-            System.out.println("path to image file used: " + imagePath);
-            e.printStackTrace();
-        }
-        return returnImage;
-   }
+
+        // use the main controller to switch the selected tab to the trade view
+        this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
+        // call method in TradeController to populate the fields for the correct players
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(4));
+
+    }
 
    private int[] checkOwnership(Tile current, Player curplay, int rollResult){
        //[0] ownership, [1] cost
@@ -408,7 +406,7 @@ public class GameController {
                ret[1] = obj.calcRent(rollResult);
            }
        }
-           return ret;
+       return ret;
    }
     // REMEMBER TO ADD [ onMouseClicked="#addPropertyToTrade" ] back to the GameView.fxml line for the ListView
 

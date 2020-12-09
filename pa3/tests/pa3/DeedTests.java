@@ -9,21 +9,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeedTests {
 
+    static Deed test = new Deed("Mediterranean Ave.",
+            60,
+            0,
+            2,
+            10,
+            30,
+            90,
+            160,
+            250,
+            30,
+            50,
+            50,
+            1);
+
     @Test
     void testGetMortgageValue (){
-        Deed test = new Deed(60,
-                0,
-                2,
-                10,
-                30,
-                90,
-                160,
-                250,
-                30,
-                50,
-                50,
-                "Mediterranean Ave.",
-                1);
         int correct = 30;
 
         assertEquals(correct, test.getMortgageValue());
@@ -31,7 +32,8 @@ public class DeedTests {
 
     @Test
     void testGetPropertySet (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -42,7 +44,6 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         int correct = 0;
 
@@ -51,7 +52,8 @@ public class DeedTests {
 
     @Test
     void testGetPrice (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -62,7 +64,6 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         int correct = 60;
 
@@ -71,7 +72,8 @@ public class DeedTests {
 
     @Test
     void testGetHouseCost (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -82,16 +84,36 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         int correct = 50;
 
-        assertEquals(correct, test.getUpgradeCost());
+         assertEquals(correct, test.getUpgradeCost());
+    }
+
+    @Test
+    void testGetHotelCost (){
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
+                0,
+                2,
+                10,
+                30,
+                90,
+                160,
+                250,
+                30,
+                50,
+                50,
+                1);
+        int correct = 50;
+
+         assertEquals(correct, test.getUpgradeCost());
     }
 
     @Test
     void testGetOwner (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -102,7 +124,6 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         //make sure Player begins as null
         assertNull(test.getOwner());
@@ -110,7 +131,8 @@ public class DeedTests {
 
     @Test
     void testSetOwner (){
-        Deed test = new Deed(60,
+        Deed test = new Deed( "Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -121,11 +143,10 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         //initialize a random player object
         PropertySet[] arry = new PropertySet[1];
-        Player dummy = new Player(1500, test, arry, "player");
+        Player dummy = new Player("player", 1500, test, arry);
 
         //set ownership to player
         test.setOwner(dummy);
@@ -135,7 +156,8 @@ public class DeedTests {
 
     @Test
     void testSetHouses (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -146,7 +168,6 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         int init = 2;
         int after = 4;
@@ -172,7 +193,8 @@ public class DeedTests {
 
     @Test
     void testCalcRent (){
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",
+                60,
                 0,
                 2,
                 10,
@@ -183,7 +205,6 @@ public class DeedTests {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
                 1);
         //confirm all rent values correct
         int init = 2;

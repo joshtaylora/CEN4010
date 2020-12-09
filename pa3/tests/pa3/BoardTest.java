@@ -12,7 +12,8 @@ class BoardTest {
     void testMove(){
         Board game =  new Board();
 
-        Tile input = new Deed(400,
+        Tile input = new Deed("Boardwalk",
+                400,
                 7,
                 50,
                 200,
@@ -23,7 +24,6 @@ class BoardTest {
                 200,
                 200,
                 200,
-                "Boardwalk",
                 39);
         Tile output = new RailRoad("Reading Railroad", 5);
 

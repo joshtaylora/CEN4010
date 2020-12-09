@@ -23,11 +23,11 @@ public class Deed extends Tile{
     private boolean mortgaged = false;
 
     //constructor
-    public Deed(int saleValue, int propertySet, int baseRent,
+    public Deed(String name, int saleValue, int propertySet, int baseRent,
                 int rentWithOneHouse, int rentWithTwoHouses, int rentWithThreeHouses, int rentWithFourHouses,
                 int rentWithHotel, int mortgageValue,
                 int houseCost, int hotelCost,
-                String name, int position){
+                int position){
 
         this.saleValue = saleValue;
         this.propertySet = propertySet;

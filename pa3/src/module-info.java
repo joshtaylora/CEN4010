@@ -5,6 +5,7 @@ module pa3 {
 
 	exports Models;
 	exports Controllers;
+	exports Resources;
 
 	opens Controllers to javafx.fxml;
 }
