@@ -154,13 +154,16 @@ public class GameController {
 
 //  when the turn changes, remove the properties in the list view from the other player and add the properties for the
 //  new current player
+    //TODO: there is some issue with this method not displaying properties correctly
     private void addPlayerPropertiesToListView(Player tradePlayer) {
         int deedArrayLength = tradePlayer.playerDeeds.length;
 
         for (int i = 0; i < deedArrayLength; i++) {
             for (int j = 0; j < tradePlayer.playerDeeds[i].getCurrentNumProperties(); j++) {
-                Deed playerDeed  = tradePlayer.playerDeeds[i].getPropertiesInSet()[i];
-                gamePropertyListView.getItems().add(playerDeed.getName());
+                Deed playerDeed  = tradePlayer.playerDeeds[i].getPropertiesInSet()[j];
+                if(playerDeed != null) {
+                    gamePropertyListView.getItems().add(playerDeed.getName());
+                }
             }
         }
     }
@@ -169,7 +172,9 @@ public class GameController {
    void rollDiceButtonClicked(Event e) {
        if(consecutiveTurn){
            rollDiceButton.setText("Roll Dice");
+           updateBalance();
        }
+
         Player rollingPlayer = game.getCurrentPlayer();
         int initDoubles = rollingPlayer.getDoubles();
         int postDoubles;
@@ -189,21 +194,11 @@ public class GameController {
             cost = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[1];
 
             //open tilepop with appropriate elements
-            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile().getName(), rollingPlayer.getCurrentTile().getType(), ownership, cost);
+            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
             mainController.addTileTab();
+            tileViewController.injectMain(mainController);
 
-            //TODO: add money to reciveing player is case of 2
-            //get the array detailing how much the player gained or lost, if any
-            int[] paymentInfo = this.tileViewController.getMoneyInfo();
-            //if: player is to lose money or stay the same
-            if(paymentInfo[0] == 0){
-                rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() - paymentInfo[1]);
-            }
-            //else: player is to gain money
-            else{
-                rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() + paymentInfo[1]);
-            }
-            updateBalance();
+            //TODO: add money to receiving player is case of 2
 
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
@@ -226,6 +221,7 @@ public class GameController {
    //Player has opted to end their turn
    @FXML
     void endTurnButtonClicked(Event e) {
+       updateBalance();
         //check if game time limit is up
        //if(System.currentTimeMillis() < game.timeLimit) {
            //player cannot end their turn until they have rolled
@@ -367,9 +363,11 @@ public class GameController {
            Player check = obj.getOwner();
            if(check == null){
                ret[0] = 0;
+               ret[1] = obj.getPrice();
            }
            else if(check.getName().equals(curplay.getName())){
                ret[0] = 1;
+               ret[1] = obj.getMortgageValue();
            }
            else{
                ret[0] = 2;
@@ -381,9 +379,11 @@ public class GameController {
            Player check = obj.getOwner();
            if(check == null){
                ret[0] = 0;
+               ret[1] = obj.getPrice();
            }
            else if(check.getName().equals(curplay.getName())){
                ret[0] = 1;
+               ret[1] = obj.getMortgageValue();
            }
            else{
                ret[0] = 2;
@@ -395,9 +395,11 @@ public class GameController {
            Player check = obj.getOwner();
            if(check == null){
                ret[0] = 0;
+               ret[1] = obj.getPrice();
            }
            else if(check.getName().equals(curplay.getName())){
                ret[0] = 1;
+               ret[1] = 0;
            }
            else{
                ret[0] = 2;
