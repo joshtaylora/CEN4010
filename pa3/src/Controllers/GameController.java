@@ -93,11 +93,9 @@ public class GameController {
 
     }
 
-    void initPlayerTurns(ArrayList<Integer> playerTurnList) {
-        this.playerTurnList = playerTurnList;
-    }
 
     private void startGame() {
+        mainController.initTilePopController();
         currentPlayerIndex = 0;
         this.game = new Game(this.numberOfPlayers, this.timerValue);
         setActivePlayer();
@@ -194,9 +192,13 @@ public class GameController {
             cost = checkOwnership(rollingPlayer.getCurrentTile(), rollingPlayer, result)[1];
 
             //open tilepop with appropriate elements
-            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
             mainController.addTileTab();
-            tileViewController.injectMain(mainController);
+
+            this.tileViewController.tileSetup(rollingPlayer.getCurrentTile(), ownership, cost, rollingPlayer);
+            /*
+             Removed call to TilePopController method from inside of GameController, added injectMain method call to
+                the addTileTab method internal to MainController
+            */
 
             //TODO: add money to receiving player is case of 2
 

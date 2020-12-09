@@ -177,6 +177,15 @@ public class TradeController {
                 String deedName = displayDeed.getName();
                 String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
                 playerAProperty1ChoiceBox.getItems().add(displayStr);
+                playerAProperty1MenuItem.setText(deedName);
+            }
+        }
+        for (PropertySet propertySet : exPropertySetArray) {
+            for (Deed displayDeed : propertySet.getPropertiesInSet()) {
+                String deedName = displayDeed.getName();
+                String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
+                playerBProperty1ChoiceBox.getItems().add(displayStr);
+                playerBProperty1MenuItem.setText(deedName);
             }
         }
     }

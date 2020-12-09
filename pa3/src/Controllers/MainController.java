@@ -60,8 +60,28 @@ public class MainController {
 
 
     public void init() {
-        menuViewController.injectMainController(this);
-        menuViewController.init();
+        initMenuController();
+//        menuViewController.injectMainController(this);
+//        menuViewController.init();
+//        removeTileTab();
+    }
+
+    /**
+     * Method to initialize the menu controller by injecting the active instance of MainController
+     */
+    public void initMenuController() {
+        this.menuViewController.injectMainController(this);
+        // now initialize the TurnOrderController so that it is ready for the tab selection switch
+        this.initTurnOrderController();
+//        this.turnOrderViewController.init;
+    }
+
+    public void initTurnOrderController() {
+        this.turnOrderViewController.injectMainController(this);
+    }
+
+    public void initTilePopController() {
+        this.tileViewController.injectMain(this);
         removeTileTab();
     }
 
@@ -71,14 +91,47 @@ public class MainController {
 
 
     public void addTileTab() {
-        tabPane.getTabs().add(tileTab);
-        tileTab.setClosable(false);
-        tabPane.getSelectionModel().select(tileTab);
+        this.tileViewController.injectMain(this);
+        if (!this.tabPane.getTabs().contains(tileTab)) {
+            tabPane.getTabs().add(tileTab);
+            tileTab.setClosable(false);
+            tabPane.getSelectionModel().select(tileTab);
+        }
     }
 
     public void openTradePopup() throws IOException{
         String tradePopupPath = resourceManager.getPathToFile("TradePopup.fxml", "Views");
 
         Parent parent = FXMLLoader.load(getClass().getResource(tradePopupPath));
+    }
+
+    public void selectTurnOrderTab() {
+        this.tabPane.getSelectionModel().select(turnOrderTab);
+    }
+
+    /**
+     * Method to select the Game tab as the active tab
+     */
+    public void selectGameTab() {
+        this.tabPane.getSelectionModel().select(gameTab);
+    }
+
+    /**
+     * Method to close the menu tab once the number of players and time limit has been decided
+     */
+    public void closeMenuTab() {
+        // only close the menu tab if it is not selected
+        if (!this.menuTab.isSelected()) {
+            tabPane.getTabs().remove(menuTab);
+        }
+    }
+
+    /**
+     * Method to close the turn order tab once the players have had their turn order decided
+     */
+    public void closeTurnOrderTab() {
+        if (!this.turnOrderTab.isSelected()) {
+            tabPane.getTabs().remove(turnOrderTab);
+        }
     }
 }

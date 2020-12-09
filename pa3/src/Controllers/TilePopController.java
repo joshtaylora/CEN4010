@@ -29,7 +29,7 @@ public class TilePopController {
     }
 
     /**
-     *
+     * TODO please update JavaDoc comment with the new method arguments
      * @param name name of the tile
      * @param type type of the tile
      * @param ownershipStatus who owns the property
@@ -182,6 +182,10 @@ public class TilePopController {
         }
     }
 
+    /**
+     * TODO please add javadoc for this method explaining what it does and rename so we know what button it is
+     */
+    @FXML
     public void onButtonPress(){
         //don't change ret[1] if constants were set
         if(!(type.equals("LuxuryTax")) && !(type.equals("IncomeTax")) && !(type.equals("GO"))){
@@ -189,9 +193,15 @@ public class TilePopController {
             processProperties();
         }
         processMoneyInfo();
+        // Josh - I added methods in the main controller to switch between tabs
+        mainController.selectGameTab();
         mainController.removeTileTab();
     }
 
+    /**
+     * TODO please add javadoc for this method explaining what it does
+     */
+    @FXML
     public void nothingButton(){
         processMoneyInfo();
         mainController.removeTileTab();
@@ -250,8 +260,7 @@ public class TilePopController {
                 default:
                     break;
             }
-        }
-        //else: player mortgaged a property
+        } //else: player mortgaged a property
         else{
             switch (type) {
                 case "Deed":
