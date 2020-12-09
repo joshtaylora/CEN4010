@@ -38,12 +38,12 @@
                               <Separator prefWidth="200.0" />
                               <AnchorPane>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select from 0 to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select up to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <SplitMenuButton fx:id="playerAMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="No Properties Selected" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <SplitMenuButton fx:id="playerAMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="Select Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <items>
                                         <MenuItem fx:id="playerAProperty1MenuItem" mnemonicParsing="false" text="Property 1">
                                              <graphic>
@@ -90,12 +90,12 @@
                               <Separator prefWidth="200.0" />
                               <AnchorPane>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select from 0 to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select up to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane>
                                  <children>
-                                    <SplitMenuButton fx:id="playerBMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="No Properties Selected" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <SplitMenuButton fx:id="playerBMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="Select Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <items>
                                           <MenuItem fx:id="playerBProperty1MenuItem" mnemonicParsing="false" text="Property 1">
                                              <graphic>

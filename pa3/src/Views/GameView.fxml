@@ -600,7 +600,7 @@
                                  <children>
                                     <AnchorPane fx:id="playerdog" prefHeight="200.0" prefWidth="200.0" styleClass="activePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player1TradeButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" styleClass="activePlayerTradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Button fx:id="player1TradeButton" layoutX="14.0" layoutY="57.0" mnemonicParsing="false" onAction="#player1TradeButtonClicked" styleClass="activePlayerTradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade With" />
                                           <Label fx:id="player1Label" layoutX="14.0" layoutY="14.0" styleClass="playerLabel" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 1" textFill="#282828">
                                              <padding>
                                                 <Insets left="2.0" right="2.0" />
@@ -630,7 +630,7 @@
                                  <children>
                                     <AnchorPane fx:id="playershoe" maxWidth="-Infinity" prefHeight="200.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player2TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Button fx:id="player2TradeButton" layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#player2TradeButtonClicked" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade With" />
                                           <Label fx:id="player2Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 2" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />
@@ -660,7 +660,7 @@
                                  <children>
                                     <AnchorPane fx:id="playercar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player3TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Button fx:id="player3TradeButton" layoutX="14.0" layoutY="58.0" mnemonicParsing="false" onAction="#player3TradeButtonClicked" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade WIth" />
                                           <Label fx:id="player3Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 3" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />
@@ -690,7 +690,7 @@
                                  <children>
                                     <AnchorPane fx:id="playerthim" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" prefWidth="201.0" styleClass="inactivePlayerSection" stylesheets="@CSS/PlayerStyle.css">
                                        <children>
-                                          <Button fx:id="player4TradeButton" layoutX="19.0" layoutY="57.0" mnemonicParsing="false" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade" />
+                                          <Button fx:id="player4TradeButton" layoutX="14.0" layoutY="56.0" mnemonicParsing="false" onAction="#player4TradeButtonClicked" styleClass="tradeButton" stylesheets="@CSS/PlayerBoardIcon.css" text="Trade With" />
                                           <Label fx:id="player4Label" layoutX="14.0" layoutY="14.0" styleClass="playerNum" stylesheets="@CSS/PlayerBoardIcon.css" text="Player 4" textFill="#282828">
                                              <font>
                                                 <Font size="16.0" />

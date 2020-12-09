@@ -3,6 +3,7 @@ package Controllers;
 import Models.Dice;
 import Models.Game;
 //import Resources.OSValidator;
+import Resources.ResourceManager;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,7 +35,7 @@ import java.net.URL;
 
 public class MainController {
 
-    // =====================================================================================================================
+// =====================================================================================================================
 // ========================================= FXML elements for the main TabPane ========================================
     @FXML TabPane tabPane;
 
@@ -55,7 +56,7 @@ public class MainController {
 
 // =====================================================================================================================
 //  ===================================== Class variables needed for start method ======================================
-
+    ResourceManager resourceManager = new ResourceManager();
 
 
     public void init() {
@@ -75,8 +76,9 @@ public class MainController {
         tabPane.getSelectionModel().select(tileTab);
     }
 
+    public void openTradePopup() throws IOException{
+        String tradePopupPath = resourceManager.getPathToFile("TradePopup.fxml", "Views");
 
-
-
-
+        Parent parent = FXMLLoader.load(getClass().getResource(tradePopupPath));
+    }
 }

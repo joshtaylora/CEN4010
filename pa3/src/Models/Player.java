@@ -30,7 +30,7 @@ public class Player{
 	 * @param playerDeeds an array of property sets that are initially empty but initialized to hold the correct number
 	 *                    of deeds
 	 */
-	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds, String name) {
+	public Player( String name, int initial, Tile currentTile, PropertySet[] playerDeeds) {
 		account = initial;
 		this.playerDeeds = playerDeeds;
 		this.currentTile = currentTile;

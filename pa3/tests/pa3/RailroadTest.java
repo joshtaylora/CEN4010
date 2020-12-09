@@ -45,7 +45,7 @@ public class RailroadTest {
         RailRoad test = new RailRoad("Reading Railroad", 5);
         //initialize a random player object
         PropertySet[] array = new PropertySet[1];
-        Player dummy = new Player(1500, test, array, "player");
+        Player dummy = new Player("player", 1500, test, array);
 
         //set ownership to player
         test.setOwner(dummy);
