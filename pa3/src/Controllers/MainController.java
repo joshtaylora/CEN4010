@@ -50,6 +50,9 @@ public class MainController {
     @FXML Tab tileTab;
     @FXML TilePopController tileViewController;
 
+    @FXML Tab tradeTab;
+    @FXML TradeController tradeViewController;
+
 // =====================================================================================================================
 //  ===================================== Class variables needed for start method ======================================
 
@@ -66,7 +69,7 @@ public class MainController {
     }
 
 
-        public void addTileTab() {
+    public void addTileTab() {
         tabPane.getTabs().add(tileTab);
         tileTab.setClosable(false);
         tabPane.getSelectionModel().select(tileTab);

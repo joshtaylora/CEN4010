@@ -114,12 +114,12 @@ public class GameController {
         }
     }
     */
-//    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
-//        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
-//        String tilePrompt = "Current Tile: ";
-//        // set the label for the tile the current player is on
-//        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
-//    }
+    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
+        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
+        String tilePrompt = "Current Tile: ";
+        // set the label for the tile the current player is on
+        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
+    }
 
 //  Logic for things that must be changed when the next players turn arrives:
 //      - Change the current player in game class
@@ -294,6 +294,14 @@ public class GameController {
 
    }
 
+    /**
+     * Event handler method for when Player A presses their trade button
+     * @param e
+     */
+    @FXML
+    void playerATradeButtonClicked(Event e) {
+
+    }
 
    private String getPathToDiceRollImage(int roll) {
         String rollImageFileName = null;

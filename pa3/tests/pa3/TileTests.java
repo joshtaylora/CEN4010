@@ -14,7 +14,19 @@ public class TileTests {
         assertEquals("correct", test1.getName());
         assertNotEquals("", test1.getName());
 
-        Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
+        Deed test2 = new Deed("Mediterranean Ave.",
+                60,
+                0,
+                2,
+                10,
+                30,
+                90,
+                160,
+                250,
+                30,
+                50,
+                50,
+                1);
         assertEquals("Mediterranean Ave.", test2.getName());
         assertNotEquals("", test2.getName());
 
@@ -42,7 +54,19 @@ public class TileTests {
         assertEquals("None", test1.getType());
         assertNotEquals("", test1.getType());
 
-        Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
+        Deed test2 = new Deed("Mediterranean Ave.",
+                60,
+                0,
+                2,
+                10,
+                30,
+                90,
+                160,
+                250,
+                30,
+                50,
+                50,
+                1);
         assertEquals("Deed", test2.getType());
         assertNotEquals("", test2.getType());
 
@@ -70,7 +94,19 @@ public class TileTests {
         assertEquals(0, test1.getPosition());
         assertNotEquals(1, test1.getPosition());
 
-        Deed test2 = new Deed(60, 0, 2,  10, 30, 90, 160, 250, 30, 50, 50, "Mediterranean Ave.",  1);
+        Deed test2 = new Deed("Mediterranean Ave.",
+                60,
+                0,
+                2,
+                10,
+                30,
+                90,
+                160,
+                250,
+                30,
+                50,
+                50,
+                1);
         assertEquals(1, test2.getPosition());
         assertNotEquals(0, test2.getPosition());
 
