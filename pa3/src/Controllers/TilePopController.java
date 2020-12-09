@@ -285,22 +285,7 @@ public class TilePopController {
     private void processProperties() {
         //if: player purchased a property
         if (ownershipStatus == 0) {
-            switch (type) {
-                case "Deed":
-                    Deed obj = (Deed) tile;
-                    rollingPlayer.purchaseDeed(obj);
-                    break;
-                case "RailRoad":
-                    RailRoad obj2 = (RailRoad) tile;
-                    rollingPlayer.purchaseRR(obj2);
-                    break;
-                case "Utility":
-                    Utility obj3 = (Utility) tile;
-                    rollingPlayer.purchaseUtil(obj3);
-                    break;
-                default:
-                    break;
-            }
+            rollingPlayer.purchaseProperty(tile);
         }
         //else: player mortgaged a property
         else{

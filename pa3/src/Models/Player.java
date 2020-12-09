@@ -44,31 +44,37 @@ public class Player{
 	}
 	
 	/**
-	 * This program currently takes in a Deed and removes its cost from the player's
-	 * account and then adds the property to their playerDeeds array. then returns
-	 * the Deed
+	 * Takes in a tile, determines its property type, and sets ownership
 	 *
-	 * @param property
+	 * @param tile the tile being purchased
 	 */
-	public void purchaseDeed(Deed property) {
-		playerDeeds[property.getPropertySet()].addProperty(property);
-		property.setOwner(this);
-		//checks if player has monopoly and if the monopoly was already checked
-		if((this.getPlayerDeeds()[property.getPropertySet()].checkMonopoly()) && (property.getHouses() < 1)){
-			property.setHouses();
+	public void purchaseProperty(Tile tile) {
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				playerDeeds[obj.getPropertySet()].addProperty(obj);
+				obj.setOwner(this);
+				//checks if player has monopoly and if the monopoly was already checked
+				if((this.getPlayerDeeds()[obj.getPropertySet()].checkMonopoly()) && (obj.getHouses() < 1)){
+					obj.setHouses();
+				}
+				break;
+			case "RailRoad":
+				RailRoad rr = (RailRoad) tile;
+				rr.setOwner(this);
+				increaseRailroads();
+				break;
+			case "Utility":
+				Utility util = (Utility) tile;
+				util.setOwner(this);
+				increaseUtilities();
+				break;
+			default:
+				break;
 		}
-
 	}
 
-	public void purchaseRR(RailRoad rr){
-		rr.setOwner(this);
-		increaseRailroads();
-	}
-
-	public void purchaseUtil(Utility util){
-		util.setOwner(this);
-		increaseUtilities();
-	}
 	
 	/**
 	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the
