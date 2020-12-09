@@ -20,6 +20,7 @@ public class Deed extends Tile{
     //ownership variables
     private Player owner = null;
     private int houses = 0;
+    private boolean mortgaged = false;
 
     //constructor
     public Deed(int saleValue, int propertySet, int baseRent,
@@ -101,6 +102,10 @@ public class Deed extends Tile{
             return houses;
     }
 
+    public boolean getMortagaged(){
+        return mortgaged;
+    }
+
     //****************SETTERS************************************
     //sets owner of property
     public void setOwner(Player possessor){
@@ -116,10 +121,21 @@ public class Deed extends Tile{
         }
     }
 
+    public void setUnMortagaged(){
+        mortgaged = false;
+    }
+
+    public void setMortagaged(){
+        mortgaged = true;
+    }
+
 
     //****************METHODS************************************
     //returns the rent amount, depending on the number of houses/hotels present on a property
     public int calcRent(){
+        if(mortgaged){
+            return 0;
+        }
         switch(houses){
             case 1:
                 return rentWithColorSet;

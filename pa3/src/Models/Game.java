@@ -343,46 +343,6 @@ public class Game {
 		}
 	}
 	/*
-	public Tile takeTurnInJail(){
-		Tile temp = null;
-
-    	if(gameDice.checkDoubles()){
-    		temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-    		currentPlayer.setCurrentTile(temp);
-    		currentPlayer.setDoubles();
-    	}
-    	else{
-    		currentPlayer.incrementDoubles();
-    		if(currentPlayer.getDoubles() == 3){
-    			currentPlayer.setAccBalance(currentPlayer.getAccBalance() - 50);
-    			temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-    			currentPlayer.setCurrentTile(temp);
-    			currentPlayer.setDoubles();
-    		}
-    	}
-    	return  temp;
-	}
-	public void buyProperty(){
-		Tile propertyToBuy = this.currentPlayer.getCurrentTile();
-		String tileType = propertyToBuy.getType();
-		switch (tileType) {
-			case "Deed":
-				this.currentPlayer.purchaseDeed(propertyToBuy);
-				currentTile.setOwner(currentPlayer);
-				if (currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()) {
-					currentTile.setHouses();
-				}
-				break;
-			case "RailRoad":
-				currentTile.setOwner(currentPlayer);
-				currentPlayer.increaseRailroads();
-				break;
-			case "Utility":
-				currentTile.setOwner(currentPlayer);
-				currentPlayer.increaseUtilities();
-				break;
-		  }
-	}
 
   public String checkWinner(){
     //Check winner by finding out sum of houses, hotels, properties, and currentMoney

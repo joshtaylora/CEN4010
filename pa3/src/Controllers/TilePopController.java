@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,10 +14,20 @@ public class TilePopController {
     @FXML Button button1;
     @FXML Button button2;
 
+    MainController mainController;
+
     private int[] ret = {0, 0};
     private int cost;
+    private String type;
+    private int ownershipStatus;
+    private Player rollingPlayer;
+    private boolean purchased;
+    private Tile tile;
 
-    //TODO: return array correctly
+    public void injectMain(MainController mainController){
+        this.mainController = mainController;
+    }
+
     /**
      *
      * @param name name of the tile
@@ -26,10 +37,18 @@ public class TilePopController {
      * @return returns an integer array, where [0] indicates adding(1) or subtracting(0) from player account,
      * and [1] indicates the value to be added or subtracted
      */
-    public void tileSetup(String name, String type, int ownershipStatus, int cost) {
+    public void tileSetup(Tile tile, int ownershipStatus, int cost, Player rollingPlayer) {
         button2.setVisible(true);
+        purchased = false;
+
+        this.tile = tile;
         this.cost = cost;
-        tileName.setText(name);
+        this.type = tile.getType();
+        this.ownershipStatus = ownershipStatus;
+        this.rollingPlayer = rollingPlayer;
+
+        tileName.setText(tile.getName());
+
         switch(type){
             case "Deed":
                 if(ownershipStatus == 0){
@@ -40,10 +59,18 @@ public class TilePopController {
                     ret[1] = 0;
                 }
                 else if(ownershipStatus == 1){
-                    tileMessage.setText("Congrats, you own this! Want to mortgage?");
-                    button1.setText("Yes, mortgage!");
+                    Deed obj = (Deed) tile;
+                    if(obj.getMortagaged()){
+                        tileMessage.setText("Congrats, you own this! Want to unmortgage?");
+                        button1.setText("Yes, unmortgage!");
+                        ret[0] = 1;
+                    }
+                    else{
+                        tileMessage.setText("Congrats, you own this! Want to mortgage?");
+                        button1.setText("Yes, mortgage!");
+                        ret[0] = 0;
+                    }
                     button2.setText("No thanks");
-                    ret[0] = 0;
                     ret[1] = 0;
                 }
                 else{
@@ -68,7 +95,7 @@ public class TilePopController {
                 ret[0] = 0;
                 ret[1] = 200;
                 break;
-            case "Go":
+            case "GO":
                 tileMessage.setText("You passed GO! Here's you $200 payday");
                 button1.setText("Continue");
                 button2.setVisible(false);
@@ -83,7 +110,7 @@ public class TilePopController {
                 ret[1] = 0;
                 break;
             case "GoToJail":
-                tileMessage.setText("WEE WOO WE EWOO WEE WOO");
+                tileMessage.setText("WEE WOO WEE WOO WEE WOO");
                 button1.setText("Continue");
                 button2.setVisible(false);
                 ret[0] = 0;
@@ -98,10 +125,18 @@ public class TilePopController {
                     ret[1] = 0;
                 }
                 else if(ownershipStatus == 1){
-                    tileMessage.setText("Congrats, you own this! Want to mortgage?");
-                    button1.setText("Yes, mortgage!");
+                    RailRoad obj2 = (RailRoad) tile;
+                    if(obj2.getMortagaged()){
+                        tileMessage.setText("Congrats, you own this! Want to unmortgage?");
+                        button1.setText("Yes, unmortgage!");
+                        ret[0] = 1;
+                    }
+                    else{
+                        tileMessage.setText("Congrats, you own this! Want to mortgage?");
+                        button1.setText("Yes, mortgage!");
+                        ret[0] = 0;
+                    }
                     button2.setText("No thanks");
-                    ret[0] = 0;
                     ret[1] = 0;
                 }
                 else{
@@ -121,9 +156,9 @@ public class TilePopController {
                     ret[1] = 0;
                 }
                 else if(ownershipStatus == 1){
-                    tileMessage.setText("Congrats, you own this! Want to mortgage?");
-                    button1.setText("Yes, mortgage!");
-                    button2.setText("No thanks");
+                    tileMessage.setText("Congrats, you own this! Whew");
+                    button1.setText("Continue");
+                    button2.setVisible(false);
                     ret[0] = 0;
                     ret[1] = 0;
                 }
@@ -148,10 +183,88 @@ public class TilePopController {
     }
 
     public void onButtonPress(){
+        //don't change ret[1] if constants were set
+        if(!(type.equals("LuxuryTax")) && !(type.equals("IncomeTax")) && !(type.equals("GO"))){
+            ret[1] = cost;
+            processProperties();
+        }
+        processMoneyInfo();
+        mainController.removeTileTab();
+    }
+
+    public void nothingButton(){
+        processMoneyInfo();
+        mainController.removeTileTab();
+    }
+
+    private void processMoneyInfo(){
+        //if: player is to lose money or stay the same
+        if(ret[0] == 0){
+            rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() - ret[1]);
+        }
+        //else: player is to gain money
+        else{
+            rollingPlayer.setAccBalance(rollingPlayer.getAccBalance() + ret[1]);
+        }
+
+        //another player is owed money
+        if(ownershipStatus == 2){
+            switch (type) {
+                case "Deed":
+                    Deed obj = (Deed) tile;
+                    obj.getOwner().setAccBalance(obj.getOwner().getAccBalance() + ret[1]);
+                    break;
+                case "RailRoad":
+                    RailRoad obj2 = (RailRoad) tile;
+                    obj2.getOwner();
+                    obj2.getOwner().setAccBalance(obj2.getOwner().getAccBalance() + ret[1]);
+                    break;
+                case "Utility":
+                    Utility obj3 = (Utility) tile;
+                    obj3.getOwner();
+                    obj3.getOwner().setAccBalance(obj3.getOwner().getAccBalance() + ret[1]);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 
-    public int[] getMoneyInfo(){
-        return ret;
+    private void processProperties() {
+        //if: player purchased a property
+        if (ownershipStatus == 0) {
+            switch (type) {
+                case "Deed":
+                    Deed obj = (Deed) tile;
+                    rollingPlayer.purchaseDeed(obj);
+                    break;
+                case "RailRoad":
+                    RailRoad obj2 = (RailRoad) tile;
+                    rollingPlayer.purchaseRR(obj2);
+                    break;
+                case "Utility":
+                    Utility obj3 = (Utility) tile;
+                    rollingPlayer.purchaseUtil(obj3);
+                    break;
+                default:
+                    break;
+            }
+        }
+        //else: player mortgaged a property
+        else{
+            switch (type) {
+                case "Deed":
+                    Deed obj = (Deed) tile;
+                    obj.setMortagaged();
+                    break;
+                case "RailRoad":
+                    RailRoad obj2 = (RailRoad) tile;
+                    obj2.setMortagaged();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

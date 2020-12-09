@@ -51,10 +51,22 @@ public class Player{
 	 * @param property
 	 */
 	public void purchaseDeed(Deed property) {
-		int cost = property.getPrice();
-		account -= cost;
-		playerDeeds[property.getPropertySet()].addProperty(property); //we need some way of knowing which set is which i.e SOMEVALUE
+		playerDeeds[property.getPropertySet()].addProperty(property);
+		property.setOwner(this);
+		if(this.getPlayerDeeds()[property.getPropertySet()].checkMonopoly()){
+			property.setHouses();
+		}
 
+	}
+
+	public void purchaseRR(RailRoad rr){
+		rr.setOwner(this);
+		increaseRailroads();
+	}
+
+	public void purchaseUtil(Utility util){
+		util.setOwner(this);
+		increaseUtilities();
 	}
 	
 	/**
