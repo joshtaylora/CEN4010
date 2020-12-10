@@ -2,7 +2,7 @@ package Controllers;
 
 import Models.Dice;
 import Models.Game;
-//import Resources.OSValidator;
+import Resources.OSValidator;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

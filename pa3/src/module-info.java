@@ -1,8 +1,10 @@
-module pa3Monopoly {
+module pa3 {
 
-    requires javafx.fxml;
-    requires javafx.controls;
+	requires javafx.fxml;
+	requires javafx.controls;
 
-    exports Controllers;
-    exports Models;
+	exports Models;
+	exports Controllers;
+
+	opens Controllers to javafx.fxml;
 }

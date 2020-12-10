@@ -84,6 +84,22 @@ public class Deed extends Tile{
     public int getHotelCost(){
         return hotelCost;
     }
+    
+  //returns owner of space if there is an owner, or returns null if there is no owner
+    public Player getOwner(){
+        if (owner != null){
+            return owner;
+        }
+        else
+            return null;
+    }
+
+    public int getHouses(){
+        if(houses >= 1)
+            return houses-1;
+        else
+            return houses;
+    }
 
     //****************SETTERS************************************
     //sets owner of property
@@ -95,10 +111,11 @@ public class Deed extends Tile{
     //1 indicates full propertySet
     //6 indicates hotel
     public void setHouses(){
-        if(houses < 7){
+        if(houses < 6){
             houses++;
         }
     }
+
 
     //****************METHODS************************************
     //returns the rent amount, depending on the number of houses/hotels present on a property
@@ -122,12 +139,4 @@ public class Deed extends Tile{
         }
     }
 
-    //returns owner of space if there is an owner, or returns null if there is no owner
-    public Player isOwned(){
-        if (owner != null){
-            return owner;
-        }
-        else
-            return null;
-    }
 }

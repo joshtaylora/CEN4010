@@ -12,5 +12,12 @@ pa3/pa3.iml
 pa3/.idea/
 .project
 /bin/
-*.iml
-.idea/
+.idea/*
+<<<<<<< HEAD
+.idea
+/out
+/lib
+/bin
+=======
+out/
+>>>>>>> Joshua

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane fx:id="tabPane"
+         maxHeight="-Infinity" maxWidth="-Infinity"
+         minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="822.0" prefWidth="994.0"
+         xmlns="http://javafx.com/javafx/11.0.1"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="Controllers.MainController"
+>
+    <tabs>
+        <Tab fx:id="menuTab" text="Main Menu">
+            <fx:include fx:id="menuView" source="MenuView.fxml" />
+        </Tab>
+        <Tab fx:id="turnOrderTab" text="Roll for player turn order">
+            <fx:include fx:id="turnOrderView" source="TurnOrderView.fxml" />
+        </Tab>
+        <Tab fx:id="gameTab" text="Game">
+            <fx:include fx:id="gameView" source="GameView.fxml" />
+        </Tab>
+        <Tab fx:id="tileTab" text="Tile">
+            <fx:include fx:id="tileView" source="TilePopView.fxml" />
+        </Tab>
+    </tabs>
+</TabPane>
