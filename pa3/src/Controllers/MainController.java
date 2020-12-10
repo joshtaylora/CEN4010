@@ -106,14 +106,14 @@ public class MainController {
     }
 
     public void selectTurnOrderTab() {
-        this.tabPane.getSelectionModel().select(turnOrderTab);
+        tabPane.getSelectionModel().select(turnOrderTab);
     }
 
     /**
      * Method to select the Game tab as the active tab
      */
     public void selectGameTab() {
-        this.tabPane.getSelectionModel().select(gameTab);
+        tabPane.getSelectionModel().select(gameTab);
     }
 
     /**
@@ -132,6 +132,16 @@ public class MainController {
     public void closeTurnOrderTab() {
         if (!this.turnOrderTab.isSelected()) {
             tabPane.getTabs().remove(turnOrderTab);
+        }
+    }
+
+    public void closeTradeTab() {
+        if (!this.tradeTab.isSelected()) {
+            tabPane.getTabs().remove(tradeTab);
+        }
+        else {
+            tabPane.getSelectionModel().select(gameTab);
+            tabPane.getTabs().remove(tradeTab);
         }
     }
 }

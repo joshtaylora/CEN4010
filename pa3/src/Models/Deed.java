@@ -77,6 +77,47 @@ public class Deed extends Tile{
         return propertySet;
     }
 
+    public String getPropertySetType() {
+        int pSet = getPropertySet();
+        String pSetType;
+        switch(pSet) {
+            case 0:
+                pSetType = "Purple";
+                break;
+            case 1:
+                pSetType = "Light Blue";
+                break;
+            case 2:
+                pSetType = "Pink";
+                break;
+            case 3:
+                pSetType = "Orange";
+                break;
+            case 4:
+                pSetType = "Red";
+                break;
+            case 5:
+                pSetType = "Yellow";
+                break;
+            case 6:
+                pSetType = "Green";
+                break;
+            case 7:
+                pSetType = "Dark Blue";
+                break;
+            case 8:
+                pSetType = "RailRoad";
+                break;
+            case 9:
+                pSetType = "Utility";
+                break;
+            default:
+                pSetType = null;
+                break;
+        }
+        return pSetType;
+    }
+
     /**
      *
      * @return returns the sale price of a property

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TradeController">
    <children>
       <VBox prefHeight="847.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -95,7 +94,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="78.0" prefWidth="497.0">
                                                    <children>
-                                                      <CheckBox layoutX="200.0" layoutY="3.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="177.0" text="Confirm Trade Offer" />
+                                                      <CheckBox fx:id="playerAConfirmTradeCheckBox" layoutX="200.0" layoutY="3.0" mnemonicParsing="false" onAction="#confirmTradeForPlayerA" prefHeight="72.0" prefWidth="177.0" text="Confirm Trade Offer" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -164,7 +163,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane prefHeight="78.0" prefWidth="497.0">
                                                    <children>
-                                                      <CheckBox layoutX="207.0" layoutY="3.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="177.0" text="Confirm Trade Offer" />
+                                                      <CheckBox fx:id="playerBConfirmTradeCheckBox" layoutX="207.0" layoutY="3.0" mnemonicParsing="false" onAction="#confirmTradeForPlayerB" prefHeight="72.0" prefWidth="177.0" text="Confirm Trade Offer" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>

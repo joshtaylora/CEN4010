@@ -10,14 +10,22 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TradeController {
+    @FXML CheckBox playerAConfirmTradeCheckBox;
+    @FXML CheckBox playerBConfirmTradeCheckBox;
+
+    @FXML ListView<String> playerBTradeOfferList;
+    @FXML ListView<String> playerATradeOfferList;
+
+    @FXML Button completeTradeButton;
+
     @FXML Label playerALabel;
     @FXML Label playerBLabel;
 
     @FXML ChoiceBox<Integer> playerAMoneyBox;
     @FXML ChoiceBox<Integer> playerBMoneyBox;
-
 
     @FXML
     ChoiceBox<String> playerAProperty1ChoiceBox;
@@ -43,8 +51,24 @@ public class TradeController {
 // ============================================ Global Variables =======================================================
 
     MainController mainController;
-    Player initiatingPlayer;
-    Player receivingPlayer;
+    Player playerA;
+    Player playerB;
+
+    String playerAProperty1;
+    String playerAProperty2;
+    String playerAProperty3;
+
+    String playerBProperty1;
+    String playerBProperty2;
+    String playerBProperty3;
+
+    ArrayList<String> playerASelectedDeeds;
+    ArrayList<String> playerADeedOptions;
+    ArrayList<String> playerBSelectedDeeds;
+    ArrayList<String> playerBDeedOptions;
+
+    ArrayList<ChoiceBox<String>> choiceBoxes;
+
 // =====================================================================================================================
 
     public void initTradeController(MenuController menuController) {
@@ -63,19 +87,56 @@ public class TradeController {
     }
 
     void populateTradeView(Player initiatingPlayer, Player receivingPlayer) {
-        this.initiatingPlayer = initiatingPlayer;
-        this.receivingPlayer = receivingPlayer;
-        playerALabel.setText(this.initiatingPlayer.getName());
+        this.playerA = initiatingPlayer;
+        this.playerB = receivingPlayer;
 
-        playerBLabel.setText(this.receivingPlayer.getName());
+        // set the label to show the initiating player's name
+        playerALabel.setText(this.playerA.getName());
 
-        // Add all of the properties that the initiating player owns to the choice boxes for the initiating player
-        initMenuForInitiatingPlayer();
-        // Add all of the properties that the receiving player owns to the choice boxes for the receiving player
-        initMenuForReceivingPlayer();
-        // add options for the players to chose monetary options to add to their trade offers
+        // set the label to show the receiving player's name
+        playerBLabel.setText(this.playerB.getName());
+
+        // initialize the selected and option array lists for player A
+        playerASelectedDeeds = new ArrayList<>();
+        playerADeedOptions = new ArrayList<>();
+
+        // initialize the selected and option array lists for player B
+        playerBSelectedDeeds = new ArrayList<>();
+        playerBDeedOptions = new ArrayList<>();
+
+        // Add all of the properties
+        initDeedOptionsLists(initiatingPlayer);
+        initDeedOptionsLists(receivingPlayer);
+        // initialize the array list of choice boxes
+        choiceBoxes = new ArrayList<>();
+        // add all of player A's choice boxes to the array list
+        choiceBoxes.add(playerAProperty1ChoiceBox);
+        choiceBoxes.add(playerAProperty2ChoiceBox);
+        choiceBoxes.add(playerAProperty3ChoiceBox);
+        // add all of player B's choice boxes to the array list
+        choiceBoxes.add(playerBProperty1ChoiceBox);
+        choiceBoxes.add(playerBProperty2ChoiceBox);
+        choiceBoxes.add(playerBProperty3ChoiceBox);
+
+        // until player A selects a property in the first choice box, hide the other choices
+        playerAProperty2ChoiceBox.setVisible(false);
+        playerAProperty3ChoiceBox.setVisible(false);
+        // until player B selects a property in the first choice box, hide the other choices
+        playerBProperty2ChoiceBox.setVisible(false);
+        playerBProperty3ChoiceBox.setVisible(false);
+
+        // add options for the players to chose monetary contributions to add to their trade offers
         initPlayerMoneyBox(initiatingPlayer);
         initPlayerMoneyBox(receivingPlayer);
+
+        updateChoiceBox(playerA, playerAProperty1ChoiceBox);
+        updateChoiceBox(playerA, playerAProperty2ChoiceBox);
+        updateChoiceBox(playerA, playerAProperty3ChoiceBox);
+
+
+        updateChoiceBox(playerB, playerBProperty1ChoiceBox);
+        updateChoiceBox(playerB, playerBProperty2ChoiceBox);
+        updateChoiceBox(playerB, playerBProperty3ChoiceBox);
 
     }
 
@@ -92,7 +153,7 @@ public class TradeController {
         int option5 = (int)Math.floor(playerMoney * 0.80);
         int option6 = (int)Math.floor(playerMoney * 0.95);
         // Add all of the possible monetary trade offer options to the choice box list of items
-        if (player.getName().equals(this.initiatingPlayer.getName())) {
+        if (player.getName().equals(this.playerA.getName())) {
             playerAMoneyBox.getItems().addAll(option1, option2, option3, option4, option5, option6);
         }
         else {
@@ -101,151 +162,280 @@ public class TradeController {
 
     }
 
-    private void initMenuForInitiatingPlayer() {
-        getDeedToDisplay(this.initiatingPlayer, playerAProperty1ChoiceBox);
-        getDeedToDisplay(this.initiatingPlayer, playerAProperty2ChoiceBox);
-        getDeedToDisplay(this.initiatingPlayer, playerAProperty3ChoiceBox);
-    }
+    private void initDeedOptionsLists(Player tradePlayer) {
+        String tradePlayerName = tradePlayer.getName();
+        String initiatingPlayerName = playerA.getName();
+        String receivingPlayerName = playerB.getName();
 
-    private void initMenuForReceivingPlayer() {
-        getDeedToDisplay(this.receivingPlayer, playerBProperty1ChoiceBox);
-        getDeedToDisplay(this.receivingPlayer, playerBProperty2ChoiceBox);
-        getDeedToDisplay(this.receivingPlayer, playerBProperty3ChoiceBox);
-    }
-
-    /**
-     * Method to display all of the deeds that a player ones in a given choice box for the specified player
-     * @param initiatingPlayer the player whose playerDeedSetArray will be queried
-     * @param playerChoiceBox the choice box for the player that the deeds will be displayed in
-     */
-    private void getDeedToDisplay(Player initiatingPlayer, ChoiceBox<String> playerChoiceBox) {
-        for (PropertySet propertySet : initiatingPlayer.getPlayerPropertySetArray()) {
-            for (Deed displayDeed : propertySet.getPropertiesInSet()) {
-                if (displayDeed != null) {
-                    String deedName = displayDeed.getName();
-                    String displayStr = deedName.concat(", " + displayDeed.getPropertySet());
-                    playerChoiceBox.getItems().add(displayStr);
+        for (PropertySet propertySet : tradePlayer.getPropertySetArray()) {
+            for (Deed deed : propertySet.getPropertiesInSet()) {
+                if (deed != null) {
+                    String deedName = deed.getName();
+                    String displayStr = deedName.concat(", " + deed.getPropertySetType());
+                    if (tradePlayerName.equals(initiatingPlayerName)) {
+                        playerADeedOptions.add(displayStr);
+                    }
+                    else if (tradePlayerName.equals(receivingPlayerName)) {
+                        playerBDeedOptions.add(displayStr);
+                    }
                 }
             }
         }
     }
 
-    private void updatePlayerChoiceBoxDisplay(ChoiceBox<String> playerChoiceBox) {
-        // Store the string value for the item selected by the playerChoiceBox
-        String selectedItem = playerChoiceBox.getSelectionModel().getSelectedItem();
+    public void updateChoiceBox(Player tradePlayer, ChoiceBox<String> playerChoiceBox) {
+        String playerName = tradePlayer.getName();
 
-        String choiceBoxIDStr = playerChoiceBox.getId();
-        String choiceBoxOwner = choiceBoxIDStr.split("Property")[0];
-        System.out.println(choiceBoxOwner);
-        String selectedChoiceBoxNum = choiceBoxIDStr.split("Property")[1];
-        System.out.println(selectedChoiceBoxNum);
-        // Switch depending on what choice box is selected so that we can remove instances of duplicate deed names from
-        // other choice boxes
-        switch (choiceBoxOwner) {
-            case "playerA":
-                updateNotSelectedChoiceBoxes(selectedItem, selectedChoiceBoxNum, playerAProperty2ChoiceBox, playerAProperty3ChoiceBox, playerAProperty1ChoiceBox);
-                break;
-            case "playerB":
-                updateNotSelectedChoiceBoxes(selectedItem, selectedChoiceBoxNum, playerBProperty2ChoiceBox, playerBProperty3ChoiceBox, playerBProperty1ChoiceBox);
-                break;
-
+        playerChoiceBox.getItems().remove(0, playerChoiceBox.getItems().size());
+        if (playerName.equals(playerA.getName())) {
+            for (String deed : playerADeedOptions) {
+                playerChoiceBox.getItems().add(deed);
+            }
+        }
+        else if (playerName.equals(playerB.getName())) {
+            for (String deed : playerBDeedOptions) {
+                playerChoiceBox.getItems().add(deed);
+            }
         }
     }
 
-    private void updateNotSelectedChoiceBoxes(String selectedItem, String selectedChoiceBoxNum, ChoiceBox<String> property2ChoiceBox, ChoiceBox<String> property3ChoiceBox, ChoiceBox<String> property1ChoiceBox) {
-        switch (selectedChoiceBoxNum) {
-            case "1ChoiceBox":
-                // if the selected item from choice box 1 for player A is still in choice boxes 2 and 3,
-                // remove it
-                property2ChoiceBox.getItems().remove(selectedItem);
-                property3ChoiceBox.getItems().remove(selectedItem);
-                break;
-            case "2ChoiceBox":
-                property1ChoiceBox.getItems().remove(selectedItem);
-                property3ChoiceBox.getItems().remove(selectedItem);
-                break;
-            case "3ChoiceBox":
-                property1ChoiceBox.getItems().remove(selectedItem);
-                property2ChoiceBox.getItems().remove(selectedItem);
-                break;
-            default:
-                break;
+    private void updateDeedOptionsList(String playerName, String selectedDeed, ChoiceBox<String> selectedChoiceBox) {
+        if (playerName.equals(playerA.getName())) {
+            // Check if any other PlayerA ChoiceBoxes currently select "selectedDeed"
+            String duplicateSelectCB = checkOtherPlayerAChoiceBoxes(selectedChoiceBox, selectedDeed);
+            if (duplicateSelectCB != null) {
+                switch (duplicateSelectCB) {
+                    case "playerAProperty1ChoiceBox":
+                        playerAProperty1ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    case "playerAProperty2ChoiceBox":
+                        playerAProperty2ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    case "playerAProperty3ChoiceBox":
+                        playerAProperty3ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else {
+                if (!playerASelectedDeeds.contains(selectedDeed)) {
+                    playerASelectedDeeds.add(selectedDeed);
+                }
+            }
+        }
+        else if (playerName.equals(playerB.getName())) {
+            String duplicateSelectCB = checkOtherPlayerBChoiceBoxes(selectedChoiceBox, selectedDeed);
+            if (duplicateSelectCB != null) {
+                switch (duplicateSelectCB) {
+                    case "playerBProperty1ChoiceBox":
+                        playerBProperty1ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    case "playerBProperty2ChoiceBox":
+                        playerBProperty2ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    case "playerBProperty3ChoiceBox":
+                        playerBProperty3ChoiceBox.getSelectionModel().clearSelection();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else {
+                if (!playerBSelectedDeeds.contains(selectedDeed)) {
+                    playerBSelectedDeeds.add(selectedDeed);
+                }
+            }
+        }
+    }
+
+    /**
+     * Method used to check if the other ChoiceBoxes for Player A currently select the same item that has just been
+     *        selected by the choiceBox param
+     * @param choiceBox the ChoiceBox object that has just been selected
+     * @param selectedDeed the string representation of the Deed that has been selected in choiceBox
+     * @return the ID attribute of the ChoiceBox that also selects the same Deed or null if no other CB does
+     */
+    private String checkOtherPlayerAChoiceBoxes(ChoiceBox<String> choiceBox, String selectedDeed) {
+        return getDuplicateSelectionCB(choiceBox,
+                selectedDeed,
+                playerAProperty1ChoiceBox,
+                playerAProperty2ChoiceBox,
+                playerAProperty3ChoiceBox);
+    }
+
+   /**
+     * Method used to check if the other ChoiceBoxes for Player A currently select the same item that has just been
+     *        selected by the choiceBox param
+     * @param choiceBox the ChoiceBox object that has just been selected
+     * @param selectedDeed the string representation of the Deed that has been selected in choiceBox
+     * @return the ID attribute of the ChoiceBox that also selects the same Deed or null if no other CB does
+     */
+   private String checkOtherPlayerBChoiceBoxes(ChoiceBox<String> choiceBox, String selectedDeed) {
+        return getDuplicateSelectionCB(choiceBox,
+                selectedDeed,
+                playerBProperty1ChoiceBox,
+                playerBProperty2ChoiceBox,
+                playerBProperty3ChoiceBox);
+   }
+
+    private String getDuplicateSelectionCB(ChoiceBox<String> choiceBox,
+                                           String selectedDeed,
+                                           ChoiceBox<String> property1ChoiceBox,
+                                           ChoiceBox<String> property2ChoiceBox,
+                                           ChoiceBox<String> property3ChoiceBox)
+    {
+        String choiceBoxID = choiceBox.getId();
+        String returnCondition;
+        if (choiceBoxID.equals(property1ChoiceBox.getId())) {
+            if (getChoiceBoxSelection(property2ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property2ChoiceBox.getId();
+            }
+            else if (getChoiceBoxSelection(property3ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property3ChoiceBox.getId();
+            }
+            else {
+                returnCondition = null;
+            }
+        }
+        else if (choiceBoxID.equals(property2ChoiceBox.getId())) {
+            if(getChoiceBoxSelection(property1ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property1ChoiceBox.getId();
+            }
+            else if (getChoiceBoxSelection(property3ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property3ChoiceBox.getId();
+            }
+            else {
+                returnCondition = null;
+            }
+        }
+        else if (choiceBoxID.equals(property3ChoiceBox.getId())) {
+            if(getChoiceBoxSelection(property1ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property1ChoiceBox.getId();
+            }
+            else if(getChoiceBoxSelection(property2ChoiceBox).equals(selectedDeed)) {
+                returnCondition = property2ChoiceBox.getId();
+            }
+            else {
+                returnCondition = null;
+            }
+        }
+        else {
+            returnCondition = null;
+        }
+        return returnCondition;
+    }
+
+    private String getChoiceBoxSelection(ChoiceBox<String> choiceBox) {
+        return choiceBox.getSelectionModel().getSelectedItem();
+    }
+
+
+    public void updatePlayerASelectedDeeds(String selectedItem) {
+
+        if (!playerASelectedDeeds.contains(selectedItem)) {
+            playerASelectedDeeds.add(selectedItem);
+        }
+        else {
+            playerASelectedDeeds.remove(selectedItem);
         }
     }
 
     @FXML
     public void playerAProperty1ChoiceBoxSelected(Event e) {
-        String newMenuText = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        String selectedItem = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerAProperty1ChoiceBox.setValue(newMenuText);
+        updateDeedOptionsList(playerA.getName(), selectedItem, playerAProperty1ChoiceBox);
+        updateChoiceBox(playerA, playerAProperty1ChoiceBox);
 
-//        playerAProperty1ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerAProperty1ChoiceBox);
+        // display the selected item in the choice box
+        playerAProperty1ChoiceBox.setValue(selectedItem);
 
-//        playerAProperty1ChoiceBox.setDisable(false);
+//        updatePlayerASelectedDeeds(selectedItem);
+        playerAProperty2ChoiceBox.setVisible(true);
 
     }
     @FXML
     public void playerAProperty2ChoiceBoxSelected(Event e) {
-        String newMenuText  = playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];;
+        String selectedItem = playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerAProperty2ChoiceBox.setValue(newMenuText);
 
-//        playerAProperty2ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerAProperty2ChoiceBox);
+        updateDeedOptionsList(playerA.getName(), selectedItem, playerAProperty2ChoiceBox);
+        updateChoiceBox(playerA, playerAProperty2ChoiceBox);
 
-//        playerAProperty2ChoiceBox.setDisable(false);
+        playerAProperty2ChoiceBox.setValue(selectedItem);
 
+//        updatePlayerASelectedDeeds(selectedItem);
+        playerAProperty3ChoiceBox.setVisible(true);
     }
 
     @FXML
     public void playerAProperty3ChoiceBoxSelected(Event e) {
-        String newMenuText = playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        String selectedItem = playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerAProperty3ChoiceBox.setValue(newMenuText);
 
-//        playerAProperty3ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerAProperty3ChoiceBox);
+        updateDeedOptionsList(playerA.getName(), selectedItem, playerAProperty3ChoiceBox);
+        updateChoiceBox(playerA, playerAProperty3ChoiceBox);
 
-//        playerAProperty3ChoiceBox.setDisable(false);
+        playerAProperty3ChoiceBox.setValue(selectedItem);
+
+//        updatePlayerASelectedDeeds(selectedItem);
 
     }
 
+    private void updatePlayerBSelectedDeeds(String selectedItem) {
+       if (!playerBSelectedDeeds.contains(selectedItem)) {
+           playerBSelectedDeeds.add(selectedItem);
+       }
+       else {
+           playerBSelectedDeeds.remove(selectedItem);
+       }
+    }
 
 
     @FXML
     public void playerBProperty1ChoiceBoxSelected(Event e) {
-        String newMenuText = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        String selectedItem = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerBProperty1ChoiceBox.setValue(newMenuText);
 
-//        playerBProperty1ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerBProperty1ChoiceBox);
 
-//        playerBProperty1ChoiceBox.setDisable(false);
+        updateDeedOptionsList(playerB.getName(), selectedItem, playerBProperty1ChoiceBox);
+        updateChoiceBox(playerB, playerBProperty1ChoiceBox);
+
+        playerBProperty1ChoiceBox.setValue(selectedItem);
+
+        playerBProperty2ChoiceBox.setVisible(true);
     }
     @FXML
     public void playerBProperty2ChoiceBoxSelected(Event e) {
-        String newMenuText = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+        String selectedItem = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerBProperty2ChoiceBox.setValue(newMenuText);
+        updateDeedOptionsList(playerB.getName(), selectedItem, playerBProperty2ChoiceBox);
+        updateChoiceBox(playerB, playerBProperty2ChoiceBox);
 
-//        playerBProperty2ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerBProperty2ChoiceBox);
-
-//        playerBProperty2ChoiceBox.setDisable(false);
-
+        playerBProperty2ChoiceBox.setValue(selectedItem);
+        playerBProperty3ChoiceBox.setVisible(true);
     }
 
     @FXML
     public void playerBProperty3ChoiceBoxSelected(Event e) {
-        String newMenuText = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];;
+        String selectedItem = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem();
 
-        playerBProperty3ChoiceBox.setValue(newMenuText);
-//        playerBProperty3ChoiceBox.setDisable(true);
-        updatePlayerChoiceBoxDisplay(playerBProperty3ChoiceBox);
-//        playerBProperty3ChoiceBox.setDisable(false);
+        updateDeedOptionsList(playerB.getName(), selectedItem, playerBProperty3ChoiceBox);
+
+        updateChoiceBox(playerB, playerBProperty3ChoiceBox);
+
+        playerBProperty3ChoiceBox.setValue(selectedItem);
+    }
+
+
+    @FXML
+    public void confirmTradeForPlayerA(Event e) {
 
     }
 
+    @FXML
+    public void confirmTradeForPlayerB(Event e) {
+
+    }
 }
