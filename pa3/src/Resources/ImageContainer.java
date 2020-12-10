@@ -16,10 +16,12 @@ public class ImageContainer {
     String[] dieImageURLs;
     String[] tokenImageURLs;
     String[] tileImageURLs;
+    String[] playerImageURLs;
 
     private static Image[] dieImages;
     private static Image[] tokenImages;
     private static Image[] tileImages;
+    private static Image[] playerImages;
 
     private static Image die1Image = null;
     private static Image die2Image = null;
@@ -27,7 +29,6 @@ public class ImageContainer {
     private static Image die4Image = null;
     private static Image die5Image = null;
     private static Image die6Image = null;
-
 
     private static Image dogTokenImage = null;
     private static Image shoeTokenImage = null;
@@ -45,6 +46,11 @@ public class ImageContainer {
     private static Image waterDeedImage = null;
     private static Image electricDeedImage = null;
 
+    private static Image player1Image = null;
+    private static Image player2Image = null;
+    private static Image player3Image = null;
+    private static Image player4Image = null;
+
     public ImageContainer() {
         // Initialize the ResourceManager object that will be used to retrieve correct working dir path
         this.resourceManager = new ResourceManager();
@@ -54,6 +60,9 @@ public class ImageContainer {
         tokenImages = new Image[4];
 
         tileImages = new Image[10];
+
+        playerImages = new Image[4];
+
         initImageURLCollection();
         initImageObjectCollection();
 
@@ -109,6 +118,17 @@ public class ImageContainer {
         tileImageURLs[7] = dblueFile;
         tileImageURLs[8] = waterFile;
         tileImageURLs[9] = electricFile;
+
+        /* Array for the Strings containing the URLs for the player images */
+        this.playerImageURLs = new String[4];
+        String player1File = resourceManager.getPathToFile("PLAYER1.png", "Resources/Images");
+        String player2File = resourceManager.getPathToFile("PLAYER2.png", "Resources/Images");
+        String player3File = resourceManager.getPathToFile("PLAYER3.png", "Resources/Images");
+        String player4File = resourceManager.getPathToFile("PLAYER4.png", "Resources/Images");
+        playerImageURLs[0] = player1File;
+        playerImageURLs[1] = player2File;
+        playerImageURLs[2] = player3File;
+        playerImageURLs[3] = player4File;
     }
 
     private void initImageObjectCollection() {
@@ -136,6 +156,11 @@ public class ImageContainer {
             dBlueDeedImage =    new Image(tileImageURLs[7]);
             waterDeedImage =    new Image(tileImageURLs[8]);
             electricDeedImage = new Image(tileImageURLs[9]);
+            /* Initialize the elements of the player Image array to the proper images */
+            player1Image = new Image(playerImageURLs[0]);
+            player2Image = new Image(playerImageURLs[1]);
+            player3Image = new Image(playerImageURLs[2]);
+            player4Image = new Image(playerImageURLs[3]);
         } catch(NullPointerException e) {
             for (String dieImageURL : this.dieImageURLs) {
                 System.out.println(dieImageURL);
@@ -169,6 +194,11 @@ public class ImageContainer {
         tileImages[7] = dBlueDeedImage;
         tileImages[8] = waterDeedImage;
         tileImages[9] = electricDeedImage;
+        // add the images directly to the class variable array of player image
+        playerImages[0] = player1Image;
+        playerImages[1] = player2Image;
+        playerImages[2] = player3Image;
+        playerImages[3] = player4Image;
     }
 
     /**
@@ -258,6 +288,25 @@ public class ImageContainer {
                 break;
         }
         return returnTilImg;
+    }
+
+    /**
+     * Function used to get the image for a winning player
+     * @param index the value of the player rolled
+     * @return the Image for the appropriate winner
+     */
+    public Image getPlayerImage(int index) {
+        // Image that will be returned
+        Image returnImage = null;
+
+        if (playerImages[index] == null) {
+            System.out.println("Error with player image retrieval in ImageContainer class");
+            System.exit(1);
+        }
+        else {
+            returnImage = playerImages[index];
+        }
+        return returnImage;
     }
 
 }

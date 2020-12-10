@@ -362,7 +362,6 @@ public class TilePopController {
                 Deed obj = (Deed) tile;
                 tileImages = imgContainer.getTileImage(obj.getPropertySet());
                 tileImage.setImage(tileImages);
-                System.out.println("Deed " + tileImages);
                 break;
             case "Utility":
                Utility obj2 = (Utility) tile;

@@ -177,9 +177,25 @@ public class Player{
 		obj.setHouses();
 	}
 
+	/**
+	 * liquidates players assets
+	 * @return returns the combined rental value of all owned properties plus the account value of the player
+	 */
+	public Integer calcNetWorth(){
+		Integer ret;
+		int sum = account;
+		for (PropertySet ps: playerPropertySetArray){
+			for (Deed deed: ps.getPropertiesInSet()) {
+				if(deed != null){
+					sum += deed.calcRent();
+				}
+			}
+		}
+		account = sum;
+		ret = Integer.valueOf(sum);
+		return ret;
+	}
 
-
-	
 	/**
 	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the
 	 * player they would like to trade with. After that the current players properties and money will pull up and they can choose what they want to trade.

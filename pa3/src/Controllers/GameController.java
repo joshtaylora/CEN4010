@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.*;
+import Resources.ImageContainer;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -51,11 +52,12 @@ public class GameController {
     Label player3Acct;
     @FXML
     Label player4Acct;
+    @FXML
+    GridPane boardGridPane;
 
 // =====================================================================================================================
 // ============================================ Board FXML fields ======================================================
-    @FXML
-    GridPane boardGridPane;
+    @FXML ImageView boardImage;
 
 // =====================================================================================================================
 // ============================================ Player Info FXML fields ================================================
@@ -96,19 +98,9 @@ public class GameController {
         currentPlayerIndex = 0;
         this.game = new Game(this.numberOfPlayers, this.timerValue);
         setActivePlayer();
-        //gameLoop();
-    }
-    /*
-    // loop in which the game is run
-    private void gameLoop() {
-        while(System.currentTimeMillis() < game.timeLimit) {
-            // roll for the player
 
-            // update the board to show the player's new position
-            updateTokenPositionOnBoard(playerRoll);
-        }
     }
-    */
+
     private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
         String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
         String tilePrompt = "Current Tile: ";
@@ -116,9 +108,6 @@ public class GameController {
         currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
     }
 
-//  Logic for things that must be changed when the next players turn arrives:
-//      - Change the current player in game class
-//      - Change the
 
     private void setActivePlayer() {
         String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
@@ -219,7 +208,7 @@ public class GameController {
     void endTurnButtonClicked(Event e) {
        updateBalance();
         //check if game time limit is up
-       //if(System.currentTimeMillis() < game.timeLimit) {
+       if(game.isThereTimeLeft()) {
            //player cannot end their turn until they have rolled
            if (game.getCurrentPlayer().getRollStatus()) {
                //reset player roll status, increment player, and display their information
@@ -279,10 +268,26 @@ public class GameController {
                rollDiceButton.getStyleClass().remove("rollButtonInactive");
                rollDiceButton.getStyleClass().add("rollButtonActive");
            }
-//       }
-//       else{
-//           //TODO:  check  winner and display
-//       }
+       }
+       else{
+           for(int i = 0; i < game.getNumPlayers(); i++){
+               if (currentPlayerIndex < game.getNumPlayers() - 1) {
+                   currentPlayerIndex++;
+               } else {
+                   currentPlayerIndex = 0;
+               }
+
+               updateBalance();
+           }
+
+            int winner = game.checkWinner();
+            ImageContainer imgContainer = new ImageContainer();
+            boardImage.setImage(imgContainer.getPlayerImage(winner));
+
+            rollDiceButton.setVisible(false);
+            endTurnButton.setVisible(false);
+           boardGridPane.setVisible(false);
+       }
 
    }
 
