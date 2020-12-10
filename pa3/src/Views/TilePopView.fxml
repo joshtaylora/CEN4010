@@ -152,8 +152,8 @@
       </AnchorPane>
       <AnchorPane layoutX="686.0" layoutY="210.0" prefHeight="475.0" prefWidth="250.0">
          <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cedfed5f" height="475.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
             <ImageView fx:id="tileImage" fitHeight="412.0" fitWidth="200.0" layoutX="25.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cedfee" height="475.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
          </children>
       </AnchorPane>
    </children>

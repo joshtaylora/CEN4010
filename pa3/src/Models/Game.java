@@ -269,7 +269,7 @@ public class Game {
 	 * @param playerNum the number of the player that should be retrieved i.e 1, 2, 3, or 4
 	 * @return the player object at the specified index
 	 */
-	public Player getPlayer(int playerNum) {
+	public Player getPlayerObject(int playerNum) {
 		Player retPlayer = null;
 		// ensure that the indexed specified is within the range of the playerlist
 		if ((playerNum <= playerList.size()) && (playerNum > 0)) {

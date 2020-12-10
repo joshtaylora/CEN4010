@@ -1,18 +1,15 @@
 package Controllers;
 
 import Models.*;
-import Resources.ResourceManager;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameController {
 
@@ -128,7 +125,12 @@ public class GameController {
         String tilePrompt = "Current Tile: ";
         // set the label for the tile the current player is on
         currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
+        resetPlayerPropertiesListView();
         addPlayerPropertiesToListView(this.game.getCurrentPlayer());
+    }
+
+    private void resetPlayerPropertiesListView() {
+        this.gamePropertyListView.getItems().removeIf(Objects::nonNull);
     }
 
     private void updateBalance(){
@@ -150,15 +152,16 @@ public class GameController {
         }
     }
 
-//  when the turn changes, remove the properties in the list view from the other player and add the properties for the
-//  new current player
-    //TODO: there is some issue with this method not displaying properties correctly
+    /**
+     * Method to update the ListView that displays the properties that a player owns
+     * @param tradePlayer the player
+     */
     private void addPlayerPropertiesToListView(Player tradePlayer) {
-        int deedArrayLength = tradePlayer.playerDeeds.length;
+        int deedArrayLength = tradePlayer.playerPropertySetArray.length;
 
         for (int i = 0; i < deedArrayLength; i++) {
-            for (int j = 0; j < tradePlayer.playerDeeds[i].getCurrentNumProperties(); j++) {
-                Deed playerDeed  = tradePlayer.playerDeeds[i].getPropertiesInSet()[j];
+            for (int j = 0; j < tradePlayer.playerPropertySetArray[i].getCurrentNumProperties(); j++) {
+                Deed playerDeed  = tradePlayer.playerPropertySetArray[i].getPropertiesInSet()[j];
                 if(playerDeed != null) {
                     gamePropertyListView.getItems().add(playerDeed.getName());
                 }
@@ -184,7 +187,7 @@ public class GameController {
             rollDiceImage1.setImage(game.dieImage1);
             rollDiceImage2.setImage(game.dieImage2);
 
-            setActivePlayer();
+//            setActivePlayer();
 
             //check ownership if the tile can be owned, and money involved
             ownership = game.checkOwnership(rollingPlayer);
@@ -192,10 +195,10 @@ public class GameController {
             //open tilepop with appropriate elements
             mainController.addTileTab();
             this.tileViewController.initTile(rollingPlayer.getCurrentTile(), ownership, rollingPlayer, result);
-
+            setActivePlayer();
             //see if player rolled doubles during this turn
             postDoubles = rollingPlayer.getDoubles();
-            if(initDoubles<postDoubles){
+             if(initDoubles < postDoubles){
                 rollDiceButton.setText("Doubles!(" + postDoubles + "/3): Roll Again");
                 consecutiveTurn = true;
             }
@@ -296,7 +299,7 @@ public class GameController {
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
-        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(1));
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayerObject(1));
 
 
     }
@@ -314,7 +317,7 @@ public class GameController {
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
-        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(2));
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayerObject(2));
     }
 
     @FXML
@@ -328,7 +331,7 @@ public class GameController {
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
-        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(3));
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayerObject(3));
 
     }
 
@@ -343,7 +346,7 @@ public class GameController {
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
-        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayer(4));
+        this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayerObject(4));
 
     }
 

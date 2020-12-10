@@ -49,29 +49,38 @@ public class Deed extends Tile{
     }
 
     //****************GETTERS************************************
-    //returns the value of a property's mortgage
+
+    /**
+     *
+     * @return returns the value of a property's mortgage
+     */
     public int getMortgageValue(){
         return mortgageValue;
     }
 
-    /*returns the color set of the property
-     *legend:
-     * 0: brown
-     * 1: light blue
-     * 2: pink
-     * 3: orange
-     * 4: red
-     * 5: yellow
-     * 6: green
-     * 7: dark blue
-     * 8: RR
-     * 9: Utility
+    /**
+     *
+     * @return returns the color set of the property
+     *      *legend:
+     *      * 0: purple
+     *      * 1: light blue
+     *      * 2: pink
+     *      * 3: orange
+     *      * 4: red
+     *      * 5: yellow
+     *      * 6: green
+     *      * 7: dark blue
+     *      * 8: RR
+     *      * 9: Utility
      */
     public int getPropertySet(){
         return propertySet;
     }
 
-    //returns the sale price of a property
+    /**
+     *
+     * @return returns the sale price of a property
+     */
     public int getPrice(){
         return saleValue;
     }
@@ -80,7 +89,6 @@ public class Deed extends Tile{
      * returns the upgrade cost of a property, or zero if property cannot be upgraded
      * (how much to add a house or hotel)
      */
-
     public int getUpgradeCost(){
         if(houses < 5 && houses > 0) {
             return houseCost;
@@ -92,8 +100,10 @@ public class Deed extends Tile{
             return 0;
         }
     }
-    
-  //returns owner of space if there is an owner, or returns null if there is no owner
+
+    /**
+     * returns owner of space if there is an owner, or returns null if there is no owner
+     */
     public Player getOwner(){
         if (owner != null){
             return owner;
@@ -113,19 +123,27 @@ public class Deed extends Tile{
         return houses;
     }
 
-    public boolean getMortagaged(){
+    public boolean getMortgaged(){
         return mortgaged;
     }
 
     //****************SETTERS************************************
-    //sets owner of property
+
+    /**
+     * sets owner of property
+     * @param possessor owner of property
+     */
     public void setOwner(Player possessor){
         owner = possessor;
     }
 
-    //adds a house or hotel to a property
-    //1 indicates full propertySet
-    //6 indicates hotel
+
+
+    /**
+     * adds a house or hotel to a property
+     *  1 indicates full propertySet
+     *  6 indicates hotel
+     */
     public void setHouses(){
         if(houses < 6){
             houses++;
@@ -142,7 +160,11 @@ public class Deed extends Tile{
 
 
     //****************METHODS************************************
-    //returns the rent amount, depending on the number of houses/hotels present on a property
+
+    /**
+     *
+     * @return returns the rent amount, depending on the number of houses/hotels present on a property
+     */
     public int calcRent(){
         if(mortgaged){
             return 0;
