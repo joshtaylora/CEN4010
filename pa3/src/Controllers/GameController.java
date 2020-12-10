@@ -122,22 +122,37 @@ public class GameController {
         this.gamePropertyListView.getItems().removeIf(Objects::nonNull);
     }
 
+    /**
+     * Method to update the balance displayed for all players
+     */
     private void updateBalance(){
-        switch(currentPlayerIndex){
-            case 0:
-                player1Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
-                break;
-            case 1:
-                player2Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
-                break;
-            case 2:
-                player3Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
-                break;
-            case 3:
-                player4Acct.setText("$" + Integer.toString(game.getCurrentPlayer().getAccBalance()));
-                break;
-            default:
-                break;
+        int iterate = currentPlayerIndex;
+
+        //iterate through players
+        for(int i = 0; i < game.getNumPlayers(); i++) {
+            if (iterate < game.getNumPlayers() - 1) {
+                iterate++;
+            } else {
+                iterate = 0;
+            }
+
+            //update player balance
+            switch (iterate) {
+                case 0:
+                    player1Acct.setText("$" + Integer.toString(game.getPlayerObject(1).getAccBalance()));
+                    break;
+                case 1:
+                    player2Acct.setText("$" + Integer.toString(game.getPlayerObject(2).getAccBalance()));
+                    break;
+                case 2:
+                    player3Acct.setText("$" + Integer.toString(game.getPlayerObject(3).getAccBalance()));
+                    break;
+                case 3:
+                    player4Acct.setText("$" + Integer.toString(game.getPlayerObject(4).getAccBalance()));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -270,17 +285,9 @@ public class GameController {
            }
        }
        else{
-           for(int i = 0; i < game.getNumPlayers(); i++){
-               if (currentPlayerIndex < game.getNumPlayers() - 1) {
-                   currentPlayerIndex++;
-               } else {
-                   currentPlayerIndex = 0;
-               }
-
-               updateBalance();
-           }
-
+           //check who won and display winner
             int winner = game.checkWinner();
+            updateBalance();
             ImageContainer imgContainer = new ImageContainer();
             boardImage.setImage(imgContainer.getPlayerImage(winner));
 
