@@ -44,32 +44,141 @@ public class Player{
 	}
 	
 	/**
-	 * This program currently takes in a Deed and removes its cost from the player's
-	 * account and then adds the property to their playerDeeds array. then returns
-	 * the Deed
+	 * Takes in a tile, determines its property type, and sets ownership
 	 *
-	 * @param property
+	 * @param tile the tile being purchased
 	 */
-	public void purchaseDeed(Deed property) {
-
-		playerPropertySetArray[property.getPropertySet()].addProperty(property);
-		property.setOwner(this);
-		//checks if player has monopoly and if the monopoly was already checked
-		if((this.getPlayerPropertySetArray()[property.getPropertySet()].checkMonopoly()) && (property.getHouses() < 1)){
-			property.setHouses();
+	public void purchaseProperty(Tile tile) {
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				playerPropertySetArray[obj.getPropertySet()].addProperty(obj);
+				obj.setOwner(this);
+				//checks if player has monopoly and if the monopoly was already checked
+				if((this.getPlayerPropertySetArray()[obj.getPropertySet()].checkMonopoly()) && (obj.getHouses() < 1)){
+					obj.setHouses();
+				}
+				this.account -= obj.getPrice();
+				break;
+			case "RailRoad":
+				RailRoad rr = (RailRoad) tile;
+				rr.setOwner(this);
+				increaseRailroads();
+				this.account -= rr.getPrice();
+				break;
+			case "Utility":
+				Utility util = (Utility) tile;
+				util.setOwner(this);
+				increaseUtilities();
+				this.account -= util.getPrice();
+				break;
+			default:
+				break;
 		}
-
 	}
 
-	public void purchaseRR(RailRoad rr){
-		rr.setOwner(this);
-		increaseRailroads();
+	/**
+	 * Takes in a tile, determines its property type, and mortgages or unmortgages
+	 *
+	 * @param tile the tile being mortgaged
+	 */
+	public void mortgageProperty(Tile tile){
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				obj.setMortagaged();
+				if(obj.getMortgaged()){
+					this.account -= obj.getMortgageValue();
+				}
+				else{
+					this.account += obj.getMortgageValue();
+				}
+				break;
+			case "RailRoad":
+				RailRoad obj2 = (RailRoad) tile;
+				if(obj2.getMortagaged()){
+					this.account -= obj2.getMortgageValue();
+				}
+				else{
+					this.account += obj2.getMortgageValue();
+				}
+				obj2.setMortagaged();
+				break;
+			default:
+				break;
+		}
 	}
 
-	public void purchaseUtil(Utility util){
-		util.setOwner(this);
-		increaseUtilities();
+	/**
+	 * Takes in a tile, determines its property type, and transferrs rent between players
+	 *
+	 * @param tile the tile that rent is being paid on
+	 */
+	public void rentProperty(Tile tile, int roll){
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				this.account -= obj.calcRent();
+				obj.getOwner().setAccBalance(obj.getOwner().getAccBalance() + obj.calcRent());
+				break;
+			case "RailRoad":
+				RailRoad obj2 = (RailRoad) tile;
+				this.account -= obj2.calcRent();
+				obj2.getOwner().setAccBalance(obj2.getOwner().getAccBalance() + obj2.calcRent());
+				break;
+			case "Utility":
+				Utility obj3 = (Utility) tile;
+				this.account -= obj3.calcRent(roll);
+				obj3.getOwner().setAccBalance(obj3.getOwner().getAccBalance() + obj3.calcRent(roll));
+				break;
+			default:
+				break;
+		}
 	}
+
+	/**
+	 * Takes in a tile, determines its tax type, and subtracts tax from player account
+	 *
+	 * @param tile the tile being taxed
+	 */
+	public void payTax(Tile tile){
+		String type = tile.getType();
+		switch (type) {
+			case "LuxuryTax":
+				account -= 75;
+				break;
+			case "IncomeTax":
+				account -= 200;
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Adds 200 dollars to player account
+	 *
+	 */
+	public void passGO(){
+		account += 200;
+	}
+
+	/**
+	 * Takes in a tile, casts it to a Deed, and upgrades it
+	 *
+	 * @param tile the tile being upgraded
+	 */
+	public void upgradeProperty(Tile tile){
+		Deed obj = (Deed) tile;
+		account -= obj.getUpgradeCost();
+		obj.setHouses();
+	}
+
+
+
 	
 	/**
 	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the

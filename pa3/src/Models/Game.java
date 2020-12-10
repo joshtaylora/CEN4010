@@ -359,6 +359,55 @@ public class Game {
 			this.currentPlayer = playerList.get(0);
 		}
 	}
+
+	/**
+	 *
+	 * @param rollingPlayer the player who is taking their turn currently
+	 * @return ownership of a tile, where
+	 * 0= no one owns this, 1=currentPlayer owns this, 2=another player owns this
+	 */
+	public int checkOwnership(Player rollingPlayer){
+		if(rollingPlayer.getCurrentTile().getType().equals("Deed")){
+			Deed obj = (Deed) rollingPlayer.getCurrentTile();
+			Player tileOwner = obj.getOwner();
+			if(tileOwner == null){
+				return 0;
+			}
+			else if(tileOwner.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		else if(rollingPlayer.getCurrentTile().getType().equals("RailRoad")){
+			RailRoad obj = (RailRoad) rollingPlayer.getCurrentTile();
+			Player check = obj.getOwner();
+			if(check == null){
+				return 0;
+			}
+			else if(check.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		else if(rollingPlayer.getCurrentTile().getType().equals("Utility")){
+			Utility obj = (Utility) rollingPlayer.getCurrentTile();
+			Player check = obj.getOwner();
+			if(check == null){
+				return 0;
+			}
+			else if(check.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		return 0;
+	}
 	/*
 
   public String checkWinner(){
