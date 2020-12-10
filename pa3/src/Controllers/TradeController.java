@@ -15,39 +15,21 @@ public class TradeController {
     @FXML Label playerALabel;
     @FXML Label playerBLabel;
 
-    @FXML
-    SplitMenuButton playerAMenu;
+    @FXML ChoiceBox<Integer> playerAMoneyBox;
+    @FXML ChoiceBox<Integer> playerBMoneyBox;
 
-    @FXML
-    MenuItem playerAProperty1MenuItem;
+
     @FXML
     ChoiceBox<String> playerAProperty1ChoiceBox;
-
-    @FXML
-    MenuItem playerAProperty2MenuItem;
     @FXML
     ChoiceBox<String> playerAProperty2ChoiceBox;
-
-    @FXML
-    MenuItem playerAProperty3MenuItem;
     @FXML
     ChoiceBox<String> playerAProperty3ChoiceBox;
 
     @FXML
-    SplitMenuButton playerBMenu;
-
-    @FXML
-    MenuItem playerBProperty1MenuItem;
-    @FXML
     ChoiceBox<String> playerBProperty1ChoiceBox;
-
-    @FXML
-    MenuItem playerBProperty2MenuItem;
     @FXML
     ChoiceBox<String> playerBProperty2ChoiceBox;
-
-    @FXML
-    MenuItem playerBProperty3MenuItem;
     @FXML
     ChoiceBox<String> playerBProperty3ChoiceBox;
 // =====================================================================================================================
@@ -91,6 +73,32 @@ public class TradeController {
         initMenuForInitiatingPlayer();
         // Add all of the properties that the receiving player owns to the choice boxes for the receiving player
         initMenuForReceivingPlayer();
+        // add options for the players to chose monetary options to add to their trade offers
+        initPlayerMoneyBox(initiatingPlayer);
+        initPlayerMoneyBox(receivingPlayer);
+
+    }
+
+    /**
+     * Populate the combo box with possible values that the player can select to add to their trade offer
+     * @param player the initiating player for the trade
+     */
+    private void initPlayerMoneyBox(Player player) {
+        int playerMoney = player.getAccBalance();
+        int option1 = (int)Math.floor(playerMoney * 0.20);
+        int option2 = (int)Math.floor(playerMoney * 0.35);
+        int option3 = (int)Math.floor(playerMoney * 0.50);
+        int option4 = (int)Math.floor(playerMoney * 0.65);
+        int option5 = (int)Math.floor(playerMoney * 0.80);
+        int option6 = (int)Math.floor(playerMoney * 0.95);
+        // Add all of the possible monetary trade offer options to the choice box list of items
+        if (player.getName().equals(this.initiatingPlayer.getName())) {
+            playerAMoneyBox.getItems().addAll(option1, option2, option3, option4, option5, option6);
+        }
+        else {
+            playerBMoneyBox.getItems().addAll(option1, option2, option3, option4, option5, option6);
+        }
+
     }
 
     private void initMenuForInitiatingPlayer() {
@@ -105,6 +113,11 @@ public class TradeController {
         getDeedToDisplay(this.receivingPlayer, playerBProperty3ChoiceBox);
     }
 
+    /**
+     * Method to display all of the deeds that a player ones in a given choice box for the specified player
+     * @param initiatingPlayer the player whose playerDeedSetArray will be queried
+     * @param playerChoiceBox the choice box for the player that the deeds will be displayed in
+     */
     private void getDeedToDisplay(Player initiatingPlayer, ChoiceBox<String> playerChoiceBox) {
         for (PropertySet propertySet : initiatingPlayer.getPlayerPropertySetArray()) {
             for (Deed displayDeed : propertySet.getPropertiesInSet()) {
@@ -117,41 +130,84 @@ public class TradeController {
         }
     }
 
+    private void updatePlayerChoiceBoxDisplay(ChoiceBox<String> playerChoiceBox) {
+        // Store the string value for the item selected by the playerChoiceBox
+        String selectedItem = playerChoiceBox.getSelectionModel().getSelectedItem();
+
+        String choiceBoxIDStr = playerChoiceBox.getId();
+        String choiceBoxOwner = choiceBoxIDStr.split("Property")[0];
+        System.out.println(choiceBoxOwner);
+        String selectedChoiceBoxNum = choiceBoxIDStr.split("Property")[1];
+        System.out.println(selectedChoiceBoxNum);
+        // Switch depending on what choice box is selected so that we can remove instances of duplicate deed names from
+        // other choice boxes
+        switch (choiceBoxOwner) {
+            case "playerA":
+                updateNotSelectedChoiceBoxes(selectedItem, selectedChoiceBoxNum, playerAProperty2ChoiceBox, playerAProperty3ChoiceBox, playerAProperty1ChoiceBox);
+                break;
+            case "playerB":
+                updateNotSelectedChoiceBoxes(selectedItem, selectedChoiceBoxNum, playerBProperty2ChoiceBox, playerBProperty3ChoiceBox, playerBProperty1ChoiceBox);
+                break;
+
+        }
+    }
+
+    private void updateNotSelectedChoiceBoxes(String selectedItem, String selectedChoiceBoxNum, ChoiceBox<String> property2ChoiceBox, ChoiceBox<String> property3ChoiceBox, ChoiceBox<String> property1ChoiceBox) {
+        switch (selectedChoiceBoxNum) {
+            case "1ChoiceBox":
+                // if the selected item from choice box 1 for player A is still in choice boxes 2 and 3,
+                // remove it
+                property2ChoiceBox.getItems().remove(selectedItem);
+                property3ChoiceBox.getItems().remove(selectedItem);
+                break;
+            case "2ChoiceBox":
+                property1ChoiceBox.getItems().remove(selectedItem);
+                property3ChoiceBox.getItems().remove(selectedItem);
+                break;
+            case "3ChoiceBox":
+                property1ChoiceBox.getItems().remove(selectedItem);
+                property2ChoiceBox.getItems().remove(selectedItem);
+                break;
+            default:
+                break;
+        }
+    }
+
     @FXML
     public void playerAProperty1ChoiceBoxSelected(Event e) {
-        String prop2ChoiceBoxVal = playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem();
-        String prop3ChoiceBoxVal = playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem();
-        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
-        String newMenuText;
-        if ((prop2ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
-            newMenuText =  playerAProperty1ChoiceBox.getValue().split(",")[0];
-            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
-            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
-        }
-        else {
-            newMenuText = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
-        }
-        playerAMenu.setText(newMenuText);
-        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
-        playerAProperty2ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
-        playerAProperty3ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
+        String newMenuText = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+
+        playerAProperty1ChoiceBox.setValue(newMenuText);
+
+//        playerAProperty1ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerAProperty1ChoiceBox);
+
+//        playerAProperty1ChoiceBox.setDisable(false);
 
     }
     @FXML
     public void playerAProperty2ChoiceBoxSelected(Event e) {
-        playerAMenu.setText(playerAProperty2ChoiceBox.getValue().split(",")[0]);
-        // Remove the property selected in Property1ChoiceBox from the Property 1 and 3 ChoiceBoxes
-        playerAProperty1ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
-        playerAProperty3ChoiceBox.getItems().remove(playerAProperty3ChoiceBox.getValue());
+        String newMenuText  = playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];;
+
+        playerAProperty2ChoiceBox.setValue(newMenuText);
+
+//        playerAProperty2ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerAProperty2ChoiceBox);
+
+//        playerAProperty2ChoiceBox.setDisable(false);
 
     }
 
     @FXML
     public void playerAProperty3ChoiceBoxSelected(Event e) {
-        playerAMenu.setText(playerAProperty3ChoiceBox.getValue().split(",")[0]);
-        // Remove the property selected in Property1ChoiceBox from the Property 1 and 3 ChoiceBoxes
-        playerAProperty1ChoiceBox.getItems().remove(playerAProperty1ChoiceBox.getValue());
-        playerAProperty3ChoiceBox.getItems().remove(playerAProperty3ChoiceBox.getValue());
+        String newMenuText = playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+
+        playerAProperty3ChoiceBox.setValue(newMenuText);
+
+//        playerAProperty3ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerAProperty3ChoiceBox);
+
+//        playerAProperty3ChoiceBox.setDisable(false);
 
     }
 
@@ -159,62 +215,37 @@ public class TradeController {
 
     @FXML
     public void playerBProperty1ChoiceBoxSelected(Event e) {
-        String prop2ChoiceBoxVal = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem();
-        String prop3ChoiceBoxVal = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem();
-        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
-        String newMenuText;
-        if ((prop2ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
-            newMenuText =  playerBProperty1ChoiceBox.getValue().split(",")[0];
-            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
-            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
-        }
-        else {
-            newMenuText = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
-        }
-        playerBMenu.setText(newMenuText);
-        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
-        playerBProperty2ChoiceBox.getItems().remove(playerBProperty1ChoiceBox.getValue());
-        playerBProperty3ChoiceBox.getItems().remove(playerBProperty1ChoiceBox.getValue());
+        String newMenuText = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
 
+        playerBProperty1ChoiceBox.setValue(newMenuText);
+
+//        playerBProperty1ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerBProperty1ChoiceBox);
+
+//        playerBProperty1ChoiceBox.setDisable(false);
     }
     @FXML
     public void playerBProperty2ChoiceBoxSelected(Event e) {
-        String prop1ChoiceBoxVal = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
-        String prop3ChoiceBoxVal = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem();
-        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
-        String newMenuText;
-        if ((prop1ChoiceBoxVal != null) && (prop3ChoiceBoxVal != null)) {
-            newMenuText =  prop1ChoiceBoxVal.split(",")[0];
-            newMenuText = newMenuText.concat(" " + playerAProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0]);
-            newMenuText = newMenuText.concat(" " + prop3ChoiceBoxVal.split(",")[0]);
-        }
-        else {
-            newMenuText = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
-        }
-        playerBMenu.setText(newMenuText);
-        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
-        playerBProperty1ChoiceBox.getItems().remove(playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem());
-        playerBProperty3ChoiceBox.getItems().remove(playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem());
+        String newMenuText = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
+
+        playerBProperty2ChoiceBox.setValue(newMenuText);
+
+//        playerBProperty2ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerBProperty2ChoiceBox);
+
+//        playerBProperty2ChoiceBox.setDisable(false);
+
     }
 
     @FXML
     public void playerBProperty3ChoiceBoxSelected(Event e) {
-        String prop1ChoiceBoxVal = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
-        String prop2ChoiceBoxVal = playerBProperty2ChoiceBox.getSelectionModel().getSelectedItem();
-        // If the player has already selected items in the other 2 choice boxes, concatenate the output string to reflect that
-        String newMenuText;
-        if ((prop1ChoiceBoxVal != null) && (prop2ChoiceBoxVal != null)) {
-            newMenuText =  prop1ChoiceBoxVal.split(",")[0];
-            newMenuText = newMenuText.concat(" " + prop2ChoiceBoxVal.split(",")[0]);
-            newMenuText = newMenuText.concat(" " + playerAProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0]);
-        }
-        else {
-            newMenuText = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];
-        }
-        playerBMenu.setText(newMenuText);
-        // Remove the property selected in Property1ChoiceBox from the Property 2 and 3 ChoiceBoxes
-        playerBProperty1ChoiceBox.getItems().remove(playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem());
-        playerBProperty2ChoiceBox.getItems().remove(playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem());
+        String newMenuText = playerBProperty3ChoiceBox.getSelectionModel().getSelectedItem().split(",")[0];;
+
+        playerBProperty3ChoiceBox.setValue(newMenuText);
+//        playerBProperty3ChoiceBox.setDisable(true);
+        updatePlayerChoiceBoxDisplay(playerBProperty3ChoiceBox);
+//        playerBProperty3ChoiceBox.setDisable(false);
+
     }
 
 }
