@@ -1,11 +1,12 @@
 package Controllers;
 
 import Models.*;
+import Resources.ImageContainer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -39,6 +40,7 @@ public class TilePopController {
     private int ownershipStatus;
     private Player rollingPlayer;
     private int rollSum;
+    private boolean canBuy;
 
 
     public void injectMain(MainController mainController){
@@ -59,7 +61,9 @@ public class TilePopController {
         this.ownershipStatus = ownershipStatus;
         this.rollingPlayer = rollingPlayer;
         this.rollSum = rollSum;
+        this.canBuy = (rollingPlayer.getAccBalance() > 0);
 
+        button1.setVisible(true);
         button2.setVisible(true);
         button3.setVisible(false);
         housePane.setVisible(false);
@@ -72,6 +76,7 @@ public class TilePopController {
 
     private void tileSetup() {
         tileName.setText(tile.getName());
+        setTileImage();
         switch(type){
             case "Deed":
                 tileSetupDeed();
@@ -109,6 +114,21 @@ public class TilePopController {
         Deed obj = (Deed) tile;
         housePane.setVisible(true);
         upgradeCircles(obj.getHouses());
+        //if player does not have money
+        if(!canBuy){
+            if(ownershipStatus == 1 && !(obj.getMortgaged())){
+                tileMessage.setText("Congrats, you own this! Want to mortgage for $" + obj.getMortgageValue() + "?");
+                button1.setText("Yes, mortgage!");
+                button2.setText("No thanks");
+                return;
+            }
+            tileMessage.setText("You have no money!");
+            button2.setText("Continue");
+            button1.setVisible(false);
+            return;
+        }
+
+        //if player does have money
         if(ownershipStatus == 0){
             tileMessage.setText("No one owns this. Want to buy it for $" + obj.getPrice() + "?");
             button1.setText("Yes, buy it!");
@@ -138,15 +158,32 @@ public class TilePopController {
             button1.setText("Pay Rent");
             button2.setVisible(false);
         }
+
     }
 
     private void tileSetupLuxuryTax() {
+        //if player has no money
+        if(!canBuy){
+            tileMessage.setText("You have no money!");
+            button2.setText("Continue");
+            button1.setVisible(false);
+            return;
+        }
+        //if player does have money
         tileMessage.setText("Time to pay your taxes! That'll be $75");
         button1.setText("Pay Tax");
         button2.setVisible(false);
     }
 
     private void tileSetupIncomeTax() {
+        //if player has no money
+        if(!canBuy){
+            tileMessage.setText("You have no money!");
+            button2.setText("Continue");
+            button1.setVisible(false);
+            return;
+        }
+        //if player does have money
         tileMessage.setText("Time to pay your taxes! That'll be $200");
         button1.setText("Pay Tax");
         button2.setVisible(false);
@@ -172,6 +209,22 @@ public class TilePopController {
 
     private void tileSetupRailRoad() {
         RailRoad obj2 = (RailRoad) tile;
+
+        //if player does not have money
+        if(!canBuy){
+            if(ownershipStatus == 1 && !(obj2.getMortagaged())){
+                tileMessage.setText("Congrats, you own this! Want to mortgage for $" + obj2.getMortgageValue() + "?");
+                button1.setText("Yes, mortgage!");
+                button2.setText("No thanks");
+                return;
+            }
+            tileMessage.setText("You have no money!");
+            button2.setText("Continue");
+            button1.setVisible(false);
+            return;
+        }
+
+        //if player does have money
         if(ownershipStatus == 0){
             tileMessage.setText("No one owns this. Want to buy it for $" + obj2.getPrice() + "?");
             button1.setText("Yes, buy it!");
@@ -196,6 +249,12 @@ public class TilePopController {
     }
 
     private void tileSetupUtility() {
+        if(!canBuy){
+            tileMessage.setText("You have no money!");
+            button2.setText("Continue");
+            button1.setVisible(false);
+            return;
+        }
         Utility util = (Utility) tile;
         if(ownershipStatus == 0){
             tileMessage.setText("No one owns this. Want to buy it for $" + util.getPrice() + "?");
@@ -293,4 +352,30 @@ public class TilePopController {
                 break;
         }
     }
+
+    @FXML
+    private void setTileImage(){
+        ImageContainer imgContainer = new ImageContainer();
+        Image tileImages = null;
+        switch(type){
+            case "Deed":
+                Deed obj = (Deed) tile;
+                tileImages = imgContainer.getTileImage(obj.getPropertySet());
+                tileImage.setImage(tileImages);
+                break;
+            case "Utility":
+               Utility obj2 = (Utility) tile;
+               if(obj2.getName().equals("Electric Company")){
+                   tileImage.setImage(imgContainer.getTileImage(9));
+               }
+               else{
+                   tileImage.setImage(imgContainer.getTileImage(8));
+               }
+                break;
+            default:
+                tileImage.setImage(null);
+                break;
+        }
+    }
+
 }

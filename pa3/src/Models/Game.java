@@ -7,6 +7,8 @@ package Models;
 import Resources.ImageContainer;
 import javafx.scene.image.Image;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -23,7 +25,6 @@ public class Game {
 
 	public Board gameBoard;
 	public Dice gameDice;
-	public long gameTimer;
 	public ArrayList<Token> tokenList;
 	public int initialAccountBalance = 1500;
 
@@ -52,7 +53,7 @@ public class Game {
 		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
 		this.timeLimit = (long) timeLimit * minuteToMilliS;
-		// this.endTime = this.timeLimit + startTime;
+		this.endTime = this.timeLimit + startTime;
 
 		// initialize the board to a new board object
 		this.gameBoard = new Board();
@@ -137,8 +138,6 @@ public class Game {
 		this.currentPlayer = playerList.get(0);
 
 		this.gameDice = new Dice();
-		// while the timer has not run out ...
-        //checkWinner();
 	}
 
 	/**
@@ -233,10 +232,6 @@ public class Game {
 	public Tile advancePlayerTile(int spaces) {
 		this.currentPlayer.setCurrentTile(this.gameBoard.move(this.currentPlayer.getCurrentTile(), spaces));
 		return this.currentPlayer.getCurrentTile();
-	}
-
-	public void endCurrentPlayerTurn() {
-
 	}
 
 	/**
@@ -408,70 +403,50 @@ public class Game {
 		}
 		return 0;
 	}
-	/*
 
-  public String checkWinner(){
-    //Check winner by finding out sum of houses, hotels, properties, and currentMoney
-    //propertySum is the method to use
-    //make an array to store the property set array
-    int sum = 0;
-    PropertySet[] tempArray = currentPlayer.getPlayerDeeds();
-    String winner = "Player" + this.playerList.indexOf(this.currentPlayer);
-    for(int i = 0; i < 9; i++){
-      sum = sum + tempArray[i].propertySum();
-    }
-    int sum1 = 0;
-    currentPlayer = this.playerList.get(1 + (this.playerList.indexOf(this.currentPlayer)));
-    String temp1 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum1 = sum1 + tempArray[i].propertySum;
-    }
-    int sum2;
-    currentPlayer = currentPlayer.next();
-    String temp2 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum2 = sum2 + tempArray[i].propertySum;
-    }
-    int sum3;
-    currentPlayer = currentPlayer.next();
-    String temp3 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum3 = sum3 + tempArray[i].propertySum;
-    }
-    if(sum > sum1){
-      if(sum > sum2){
-        if(sum > sum3){
-          return winner;
-        }
-      }
-    }
-    if( sum1 > sum){
-      if(sum1 > sum2){
-        if(sum1 > sum3){
-          return temp1;
-        }
-      }
-    }
-    if( sum2 > sum){
-      if(sum2 > sum1){
-        if(sum2 > sum3){
-          return temp2;
-        }
-      }
-    }
-    if(sum3 > sum){
-      if(sum3 > sum1){
-        if(sum3 > sum2){
-          return temp3;
-        }
-      }
-    }
-  }
+	/**
+	 *
+	 * @return true if there is time left in the game, false if the time is up
+	 */
+	public boolean isThereTimeLeft() {
+		if (endTime > System.currentTimeMillis()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
- */
+	/**
+	 *
+	 * @returns the index of the winning player. If multiple players have the max net worth,
+	 * the first player in the list with the max net worth wins
+	 */
+	public int checkWinner(){
+		//index of player with greatest net worth
+		int maxIndex = 0;
+		//array of player's net worth
+		Integer[] sums = {0, 0, 0, 0};
+		int index =  0;
+
+		//calculate net worth of each player and store it in sum array
+		for (Player player: playerList) {
+			sums[index] = player.calcNetWorth();
+			index++;
+		}
+
+		int max = Collections.max(Arrays.asList(sums));
+		for (int i: sums) {
+			if(max > i){
+				maxIndex++;
+			}
+			else
+				break;
+		}
+
+		return maxIndex;
+	}
+
+
 
 //	====================================================================================================================
 
