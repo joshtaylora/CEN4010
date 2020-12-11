@@ -49,15 +49,18 @@ class UtilityTests {
     @Test
     void testCalcRent (){
         Utility test = new Utility("Electric Company" ,12);
+        Player testPlayer = new Player("",0,null,null);
+        test.setOwner(testPlayer);
+        testPlayer.increaseUtilities();
         int onerent = 4;
         int tworent = 10;
 
         //make sure rent is correct for test rolls
-        for(int i=1; i<13; i++){
+        for(int i=2; i<13; i++){
             assertEquals(onerent*i, test.calcRent(i));
         }
-
-        for(int i=1; i<13; i++){
+        testPlayer.increaseUtilities();
+        for(int i=2; i<13; i++){
             assertEquals(tworent*i, test.calcRent(i));
         }
     }

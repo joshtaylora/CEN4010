@@ -79,11 +79,11 @@ public class RailRoad extends Tile {
 		else{
 			int rrs = getOwner().getNumRailroads();
 			switch (rrs) {
-				case 1:
-					return rentWithTwo;
 				case 2:
-					return rentWithThree;
+					return rentWithTwo;
 				case 3:
+					return rentWithThree;
+				case 4:
 					return rentWithFour;
 				default:
 					return baseRent;
