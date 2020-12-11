@@ -7,6 +7,7 @@ public class RailRoad extends Tile {
 
 	// ownership variables
 	private Player owner = null;
+	private boolean mortgaged = false;
 
 	// constructor
 	public RailRoad(String name, int position) {
@@ -43,12 +44,23 @@ public class RailRoad extends Tile {
 			return null;
 	}
 
+	public boolean getMortagaged(){
+		return mortgaged;
+	}
+
 	// ****************SETTERS************************************
 	// sets owner of property
 	public void setOwner(Player possessor) {
 		owner = possessor;
 	}
 
+	public void setUnMortagaged(){
+		mortgaged = false;
+	}
+
+	public void setMortagaged(){
+		mortgaged = true;
+	}
 	// ****************METHODS************************************
 	// returns the rent amount, depending on the number of houses/hotels present on
 	// a property
@@ -59,6 +71,9 @@ public class RailRoad extends Tile {
 		final int rentWithFour = 200;
 
 		if(getOwner() == null){
+			return 0;
+		}
+		if(mortgaged){
 			return 0;
 		}
 		else{

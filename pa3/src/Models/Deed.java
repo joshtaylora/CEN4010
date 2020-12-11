@@ -20,13 +20,14 @@ public class Deed extends Tile{
     //ownership variables
     private Player owner = null;
     private int houses = 0;
+    private boolean mortgaged = false;
 
     //constructor
-    public Deed(int saleValue, int propertySet, int baseRent,
+    public Deed(String name, int saleValue, int propertySet, int baseRent,
                 int rentWithOneHouse, int rentWithTwoHouses, int rentWithThreeHouses, int rentWithFourHouses,
                 int rentWithHotel, int mortgageValue,
                 int houseCost, int hotelCost,
-                String name, int position){
+                int position){
 
         this.saleValue = saleValue;
         this.propertySet = propertySet;
@@ -48,44 +49,61 @@ public class Deed extends Tile{
     }
 
     //****************GETTERS************************************
-    //returns the value of a property's mortgage
+
+    /**
+     *
+     * @return returns the value of a property's mortgage
+     */
     public int getMortgageValue(){
         return mortgageValue;
     }
 
-    /*returns the color set of the property
-     *legend:
-     * 0: brown
-     * 1: light blue
-     * 2: pink
-     * 3: orange
-     * 4: red
-     * 5: yellow
-     * 6: green
-     * 7: dark blue
-     * 8: RR
-     * 9: Utility
+    /**
+     *
+     * @return returns the color set of the property
+     *      *legend:
+     *      * 0: purple
+     *      * 1: light blue
+     *      * 2: pink
+     *      * 3: orange
+     *      * 4: red
+     *      * 5: yellow
+     *      * 6: green
+     *      * 7: dark blue
+     *      * 8: RR
+     *      * 9: Utility
      */
     public int getPropertySet(){
         return propertySet;
     }
 
-    //returns the sale price of a property
+    /**
+     *
+     * @return returns the sale price of a property
+     */
     public int getPrice(){
         return saleValue;
     }
 
-    //returns the house cost of a property
-    public int getHouseCost(){
-        return houseCost;
+    /**
+     * returns the upgrade cost of a property, or zero if property cannot be upgraded
+     * (how much to add a house or hotel)
+     */
+    public int getUpgradeCost(){
+        if(houses < 5 && houses > 0) {
+            return houseCost;
+        }
+        else if(houses == 5) {
+            return hotelCost;
+        }
+        else{
+            return 0;
+        }
     }
 
-    //returns the hotel cost of a property
-    public int getHotelCost(){
-        return hotelCost;
-    }
-    
-  //returns owner of space if there is an owner, or returns null if there is no owner
+    /**
+     * returns owner of space if there is an owner, or returns null if there is no owner
+     */
     public Player getOwner(){
         if (owner != null){
             return owner;
@@ -94,32 +112,63 @@ public class Deed extends Tile{
             return null;
     }
 
+    /**
+     *
+     * @return gives the value of houses, where
+     * 1 = color set achived
+     * 2-5 = number of houses
+     * 6 = hotel
+     */
     public int getHouses(){
-        if(houses >= 1)
-            return houses-1;
-        else
-            return houses;
+        return houses;
+    }
+
+    public boolean getMortgaged(){
+        return mortgaged;
     }
 
     //****************SETTERS************************************
-    //sets owner of property
+
+    /**
+     * sets owner of property
+     * @param possessor owner of property
+     */
     public void setOwner(Player possessor){
         owner = possessor;
     }
 
-    //adds a house or hotel to a property
-    //1 indicates full propertySet
-    //6 indicates hotel
+
+
+    /**
+     * adds a house or hotel to a property
+     *  1 indicates full propertySet
+     *  6 indicates hotel
+     */
     public void setHouses(){
         if(houses < 6){
             houses++;
         }
     }
 
+    public void setUnMortagaged(){
+        mortgaged = false;
+    }
+
+    public void setMortagaged(){
+        mortgaged = true;
+    }
+
 
     //****************METHODS************************************
-    //returns the rent amount, depending on the number of houses/hotels present on a property
+
+    /**
+     *
+     * @return returns the rent amount, depending on the number of houses/hotels present on a property
+     */
     public int calcRent(){
+        if(mortgaged){
+            return 0;
+        }
         switch(houses){
             case 1:
                 return rentWithColorSet;

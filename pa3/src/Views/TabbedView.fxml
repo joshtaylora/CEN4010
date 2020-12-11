@@ -24,5 +24,8 @@
         <Tab fx:id="tileTab" text="Tile">
             <fx:include fx:id="tileView" source="TilePopView.fxml" />
         </Tab>
+        <Tab fx:id="tradeTab" text="Trade">
+            <fx:include fx:id="tradeView" source="TradeView.fxml"/>
+        </Tab>
     </tabs>
 </TabPane>

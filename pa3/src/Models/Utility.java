@@ -39,6 +39,7 @@ public class Utility extends Tile {
 			return null;
 	}
 
+
 	// ****************SETTERS************************************
 	// sets owner of property
 	public void setOwner(Player possessor) {
@@ -53,6 +54,7 @@ public class Utility extends Tile {
 		if(getOwner() == null){
 			return 0;
 		}
+
 		else {
 			int us = getOwner().getNumUtilities();
 			switch (us) {

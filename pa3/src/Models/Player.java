@@ -4,12 +4,12 @@ package Models;
  * @author Elisha
  * @version 11/5/20
  */
-public class Player {
+public class Player{
 
 	// the variables that are part of the Player class
 	private int account;
 	private Token playerToken;
-	public PropertySet[] playerDeeds;
+	public PropertySet[] playerPropertySetArray;
 	private Tile currentTile;
 	private boolean inJail;
 	private int numRailroads;
@@ -17,6 +17,7 @@ public class Player {
 	private int doubles;
 	private boolean rollStatus;
 	private int diceRollResults;
+	private String playerName;
 
 	/**
 	 * The constructor for the player class. Takes in Token, Tile to help setup an
@@ -26,35 +27,175 @@ public class Player {
 	 *
 	 * @param initial the amount of money to initialize the player's account with
 	 * @param currentTile the tile that the player will start on
-	 * @param playerDeeds an array of property sets that are initially empty but initialized to hold the correct number
+	 * @param playerPropertySetArray an array of property sets that are initially empty but initialized to hold the correct number
 	 *                    of deeds
 	 */
-	public Player(int initial, Tile currentTile, PropertySet[] playerDeeds) {
-		account = initial;
-		this.playerDeeds = playerDeeds;
+	public Player( String name, int initial, Tile currentTile, PropertySet[] playerPropertySetArray) {
+		this.account = initial;
+		this.playerPropertySetArray = playerPropertySetArray;
 		this.currentTile = currentTile;
-		inJail = false;
-		numRailroads = 0;
-		numUtilities = 0;
-		doubles = 0;
-		rollStatus = false;
-		diceRollResults = 0;
+		this.playerName = name;
+		this.inJail = false;
+		this.numRailroads = 0;
+		this.numUtilities = 0;
+		this.doubles = 0;
+		this.rollStatus = false;
+		this.diceRollResults = 0;
 	}
 	
 	/**
-	 * This program currently takes in a Deed and removes its cost from the player's
-	 * account and then adds the property to their playerDeeds array. then returns
-	 * the Deed
+	 * Takes in a tile, determines its property type, and sets ownership
 	 *
-	 * @param property
+	 * @param tile the tile being purchased
 	 */
-	public void purchaseDeed(Deed property) {
-		int cost = property.getPrice();
-		account -= cost;
-		playerDeeds[property.getPropertySet()].addProperty(property); //we need some way of knowing which set is which i.e SOMEVALUE
-
+	public void purchaseProperty(Tile tile) {
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				playerPropertySetArray[obj.getPropertySet()].addProperty(obj);
+				obj.setOwner(this);
+				//checks if player has monopoly and if the monopoly was already checked
+				if((this.getPlayerPropertySetArray()[obj.getPropertySet()].checkMonopoly()) && (obj.getHouses() < 1)){
+					obj.setHouses();
+				}
+				this.account -= obj.getPrice();
+				break;
+			case "RailRoad":
+				RailRoad rr = (RailRoad) tile;
+				rr.setOwner(this);
+				increaseRailroads();
+				this.account -= rr.getPrice();
+				break;
+			case "Utility":
+				Utility util = (Utility) tile;
+				util.setOwner(this);
+				increaseUtilities();
+				this.account -= util.getPrice();
+				break;
+			default:
+				break;
+		}
 	}
-	
+
+	/**
+	 * Takes in a tile, determines its property type, and mortgages or unmortgages
+	 *
+	 * @param tile the tile being mortgaged
+	 */
+	public void mortgageProperty(Tile tile){
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				obj.setMortagaged();
+				if(obj.getMortgaged()){
+					this.account -= obj.getMortgageValue();
+				}
+				else{
+					this.account += obj.getMortgageValue();
+				}
+				break;
+			case "RailRoad":
+				RailRoad obj2 = (RailRoad) tile;
+				if(obj2.getMortagaged()){
+					this.account -= obj2.getMortgageValue();
+				}
+				else{
+					this.account += obj2.getMortgageValue();
+				}
+				obj2.setMortagaged();
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Takes in a tile, determines its property type, and transferrs rent between players
+	 *
+	 * @param tile the tile that rent is being paid on
+	 */
+	public void rentProperty(Tile tile, int roll){
+		String type = tile.getType();
+		switch (type) {
+			case "Deed":
+				Deed obj = (Deed) tile;
+				this.account -= obj.calcRent();
+				obj.getOwner().setAccBalance(obj.getOwner().getAccBalance() + obj.calcRent());
+				break;
+			case "RailRoad":
+				RailRoad obj2 = (RailRoad) tile;
+				this.account -= obj2.calcRent();
+				obj2.getOwner().setAccBalance(obj2.getOwner().getAccBalance() + obj2.calcRent());
+				break;
+			case "Utility":
+				Utility obj3 = (Utility) tile;
+				this.account -= obj3.calcRent(roll);
+				obj3.getOwner().setAccBalance(obj3.getOwner().getAccBalance() + obj3.calcRent(roll));
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Takes in a tile, determines its tax type, and subtracts tax from player account
+	 *
+	 * @param tile the tile being taxed
+	 */
+	public void payTax(Tile tile){
+		String type = tile.getType();
+		switch (type) {
+			case "LuxuryTax":
+				account -= 75;
+				break;
+			case "IncomeTax":
+				account -= 200;
+				break;
+			default:
+				break;
+		}
+	}
+
+	/**
+	 * Adds 200 dollars to player account
+	 *
+	 */
+	public void passGO(){
+		account += 200;
+	}
+
+	/**
+	 * Takes in a tile, casts it to a Deed, and upgrades it
+	 *
+	 * @param tile the tile being upgraded
+	 */
+	public void upgradeProperty(Tile tile){
+		Deed obj = (Deed) tile;
+		account -= obj.getUpgradeCost();
+		obj.setHouses();
+	}
+
+	/**
+	 * liquidates players assets
+	 * @return returns the combined rental value of all owned properties plus the account value of the player
+	 */
+	public Integer calcNetWorth(){
+		Integer ret;
+		int sum = account;
+		for (PropertySet ps: playerPropertySetArray){
+			for (Deed deed: ps.getPropertiesInSet()) {
+				if(deed != null){
+					sum += deed.calcRent();
+				}
+			}
+		}
+		account = sum;
+		ret = Integer.valueOf(sum);
+		return ret;
+	}
+
 	/**
 	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the
 	 * player they would like to trade with. After that the current players properties and money will pull up and they can choose what they want to trade.
@@ -82,17 +223,20 @@ public class Player {
 
 			//removing the properties from currentPlayer and adding them to tradePlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				this.playerDeeds[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
-				tradePlayer.playerDeeds[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
+				this.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
+				tradePlayer.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
 			}
 			//removing the properties from tradePlayer and adding them to currentPlayer
 			for (i = 0; i < cDeedsSize; i++) {
-				tradePlayer.playerDeeds[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
-				this.playerDeeds[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
+				tradePlayer.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
+				this.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
 			}
 		}
 	}
 
+	public String getName(){
+		return playerName;
+	}
 	/**
 	 * basic get method for the doubles variable
 	 * @return int doubles
@@ -100,6 +244,10 @@ public class Player {
 	public int getDoubles() {
 
 		return doubles;
+	}
+
+	public PropertySet[] getPropertySetArray() {
+		return this.playerPropertySetArray;
 	}
 
 	/**
@@ -215,16 +363,16 @@ public class Player {
 	 * returns the current PropertySet of the player
 	 * @return PropertySet[]
 	 */
-	public PropertySet[] getPlayerDeeds() {
-		return playerDeeds;
+	public PropertySet[] getPlayerPropertySetArray() {
+		return playerPropertySetArray;
 	}
 	
 	/**
 	 * sets the player's PropertySet using the deeds param
 	 * @param deeds
 	 */
-	public void setPlayerDeeds(PropertySet[] deeds) {
-		playerDeeds = deeds;
+	public void setPlayerPropertySetArray(PropertySet[] deeds) {
+		playerPropertySetArray = deeds;
 	}
 	
 	/**

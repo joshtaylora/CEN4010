@@ -15,9 +15,13 @@ public class ImageContainer {
     
     String[] dieImageURLs;
     String[] tokenImageURLs;
+    String[] tileImageURLs;
+    String[] playerImageURLs;
 
     private static Image[] dieImages;
     private static Image[] tokenImages;
+    private static Image[] tileImages;
+    private static Image[] playerImages;
 
     private static Image die1Image = null;
     private static Image die2Image = null;
@@ -26,11 +30,26 @@ public class ImageContainer {
     private static Image die5Image = null;
     private static Image die6Image = null;
 
-
     private static Image dogTokenImage = null;
     private static Image shoeTokenImage = null;
     private static Image racecarTokenImage = null;
     private static Image thimbleTokenImage = null;
+
+    private static Image purpleDeedImage = null;
+    private static Image lBlueDeedImage = null;
+    private static Image pinkDeedImage = null;
+    private static Image orangeDeedImage = null;
+    private static Image redDeedImage = null;
+    private static Image yellowDeedImage = null;
+    private static Image greenDeedImage = null;
+    private static Image dBlueDeedImage = null;
+    private static Image waterDeedImage = null;
+    private static Image electricDeedImage = null;
+
+    private static Image player1Image = null;
+    private static Image player2Image = null;
+    private static Image player3Image = null;
+    private static Image player4Image = null;
 
     public ImageContainer() {
         // Initialize the ResourceManager object that will be used to retrieve correct working dir path
@@ -38,8 +57,12 @@ public class ImageContainer {
         // The arrays that will hold the Image objects themselves
         dieImages = new Image[6];
 
-
         tokenImages = new Image[4];
+
+        tileImages = new Image[10];
+
+        playerImages = new Image[4];
+
         initImageURLCollection();
         initImageObjectCollection();
 
@@ -61,6 +84,7 @@ public class ImageContainer {
         dieImageURLs[3] = die4File;
         dieImageURLs[4] = die5File;
         dieImageURLs[5] = die6File;
+
         /* Array for the Strings containing the URLs for the token images */
         this.tokenImageURLs = new String[4];
         String dogFile = resourceManager.getPathToFile("dog.png", "Resources/Images");
@@ -72,6 +96,39 @@ public class ImageContainer {
         tokenImageURLs[2] = racecarFile;
         tokenImageURLs[3] = thimbleFile;
 
+        /* Array for the Strings containing the URLs for the tile images */
+        this.tileImageURLs = new String[10];
+        String purpleFile = resourceManager.getPathToFile("PurpleDeed.png", "Resources/Images");
+        String lblueFile = resourceManager.getPathToFile("LightBlueDeed.png", "Resources/Images");
+        String pinkFile = resourceManager.getPathToFile("PinkDeed.png", "Resources/Images");
+        String orangeFile = resourceManager.getPathToFile("OrangeDeed.png", "Resources/Images");
+        String redFile = resourceManager.getPathToFile("RedDeed.png", "Resources/Images");
+        String yellowFile = resourceManager.getPathToFile("YellowDeed.png", "Resources/Images");
+        String greenFile = resourceManager.getPathToFile("GreenDeed.png", "Resources/Images");
+        String dblueFile = resourceManager.getPathToFile("DarkBlueDeed.png", "Resources/Images");
+        String waterFile = resourceManager.getPathToFile("WaterWorks.png", "Resources/Images");
+        String electricFile = resourceManager.getPathToFile("ElectricCompany.png", "Resources/Images");
+        tileImageURLs[0] = purpleFile;
+        tileImageURLs[1] = lblueFile;
+        tileImageURLs[2] = pinkFile;
+        tileImageURLs[3] = orangeFile;
+        tileImageURLs[4] = redFile;
+        tileImageURLs[5] = yellowFile;
+        tileImageURLs[6] = greenFile;
+        tileImageURLs[7] = dblueFile;
+        tileImageURLs[8] = waterFile;
+        tileImageURLs[9] = electricFile;
+
+        /* Array for the Strings containing the URLs for the player images */
+        this.playerImageURLs = new String[4];
+        String player1File = resourceManager.getPathToFile("PLAYER1.png", "Resources/Images");
+        String player2File = resourceManager.getPathToFile("PLAYER2.png", "Resources/Images");
+        String player3File = resourceManager.getPathToFile("PLAYER3.png", "Resources/Images");
+        String player4File = resourceManager.getPathToFile("PLAYER4.png", "Resources/Images");
+        playerImageURLs[0] = player1File;
+        playerImageURLs[1] = player2File;
+        playerImageURLs[2] = player3File;
+        playerImageURLs[3] = player4File;
     }
 
     private void initImageObjectCollection() {
@@ -88,6 +145,22 @@ public class ImageContainer {
             shoeTokenImage = new Image(tokenImageURLs[1]);
             racecarTokenImage = new Image(tokenImageURLs[2]);
             thimbleTokenImage = new Image(tokenImageURLs[3]);
+            /* Initialize the elements of the tile Image array to the proper images */
+            purpleDeedImage =   new Image(tileImageURLs[0]);
+            lBlueDeedImage =    new Image(tileImageURLs[1]);
+            pinkDeedImage =     new Image(tileImageURLs[2]);
+            orangeDeedImage =   new Image(tileImageURLs[3]);
+            redDeedImage =      new Image(tileImageURLs[4]);
+            yellowDeedImage =   new Image(tileImageURLs[5]);
+            greenDeedImage =    new Image(tileImageURLs[6]);
+            dBlueDeedImage =    new Image(tileImageURLs[7]);
+            waterDeedImage =    new Image(tileImageURLs[8]);
+            electricDeedImage = new Image(tileImageURLs[9]);
+            /* Initialize the elements of the player Image array to the proper images */
+            player1Image = new Image(playerImageURLs[0]);
+            player2Image = new Image(playerImageURLs[1]);
+            player3Image = new Image(playerImageURLs[2]);
+            player4Image = new Image(playerImageURLs[3]);
         } catch(NullPointerException e) {
             for (String dieImageURL : this.dieImageURLs) {
                 System.out.println(dieImageURL);
@@ -110,6 +183,22 @@ public class ImageContainer {
         tokenImages[1] = shoeTokenImage;
         tokenImages[2] = racecarTokenImage;
         tokenImages[3] = thimbleTokenImage;
+        // add the images directly to the class variable array of tile image objects
+        tileImages[0] = purpleDeedImage;
+        tileImages[1] = lBlueDeedImage;
+        tileImages[2] = pinkDeedImage;
+        tileImages[3] = orangeDeedImage;
+        tileImages[4] = redDeedImage;
+        tileImages[5] = yellowDeedImage;
+        tileImages[6] = greenDeedImage;
+        tileImages[7] = dBlueDeedImage;
+        tileImages[8] = waterDeedImage;
+        tileImages[9] = electricDeedImage;
+        // add the images directly to the class variable array of player image
+        playerImages[0] = player1Image;
+        playerImages[1] = player2Image;
+        playerImages[2] = player3Image;
+        playerImages[3] = player4Image;
     }
 
     /**
@@ -155,6 +244,69 @@ public class ImageContainer {
                 break;
         }
         return returnTokImg;
+    }
+
+    /**
+     * Method that can be used to get an image object for a specific tile
+     * @param tileName the name of the tile
+     * @return the Image object for the tile specified
+     */
+    public Image getTileImage(int tileName){
+        Image returnTilImg = null;
+        switch(tileName) {
+            case 0:
+                returnTilImg = tileImages[0];
+                break;
+            case 1:
+                returnTilImg = tileImages[1];
+                break;
+            case 2:
+                returnTilImg = tileImages[2];
+                break;
+            case 3:
+                returnTilImg = tileImages[3];
+                break;
+            case 4:
+                returnTilImg = tileImages[4];
+                break;
+            case 5:
+                returnTilImg = tileImages[5];
+                break;
+            case 6:
+                returnTilImg = tileImages[6];
+                break;
+            case 7:
+                returnTilImg = tileImages[7];
+                break;
+            case 8:
+                returnTilImg = tileImages[8];
+                break;
+            case 9:
+                returnTilImg = tileImages[9];
+                break;
+            default:
+                break;
+        }
+        return returnTilImg;
+    }
+
+    /**
+     * Function used to get the image for a winning player
+     * @param index the value of the player rolled
+     * @return the Image for the appropriate winner
+     */
+    public Image getPlayerImage(int index) {
+        // Image that will be returned
+        Image returnImage = null;
+
+        if (playerImages[index] == null) {
+            System.out.println("Error with player image retrieval in ImageContainer class");
+            System.exit(1);
+        }
+        else {
+            returnImage = playerImages[index];
+        }
+        return returnImage;
     }
 
 }

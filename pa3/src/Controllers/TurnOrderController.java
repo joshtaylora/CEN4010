@@ -44,15 +44,16 @@ public class TurnOrderController {
     @FXML private ImageView tokFour;
 
     private int numberOfPlayers;
-
+    private MainController mainController;
     private MenuController menuController;
 
     ImageContainer imgContainer = new ImageContainer();
 
     static Image[] diceImageArray;
 
-    public void injectMenuController(MenuController menuController) {
-        this.menuController = menuController;
+    public void injectMainController(MainController mainController) {
+        this.mainController = mainController;
+        this.menuController = this.mainController.menuViewController;
     }
 
 
@@ -189,93 +190,8 @@ public class TurnOrderController {
         return sort;
     }
 
-//    private Image die(int rollVal) throws MalformedURLException {
-//        return getImage(rollVal);
-//    }
-
-//    private static Image[] initializeDiceImageArray() {
-//        // store the system path as a string
-//        String sysPath = System.getProperty("user.dir");
-//        //System.out.println(sysPath);
-//        ResourceManager osValidator = new ResourceManager();
-//        String os = osValidator.os;
-//        Image[] diceImageArray = null;
-//        try {
-//            diceImageArray = new Image[6];
-//            File oneFile = new File(osValidator.getPathToFile("die1.png", "Resources.Images"));
-//            String oneURL = oneFile.toURI().toURL().toString();
-//
-//            File twoFile = new File(osValidator.getPathToFile("die2.png", "Resources.Images"));
-//            String twoURL = twoFile.toURI().toURL().toString();
-//
-//            File threeFile = new File(osValidator.getPathToFile("die3.png", "Resources.Images"));
-//            String threeURL = threeFile.toURI().toURL().toString();
-//
-//            File fourFile = new File(osValidator.getPathToFile("die4.png", "Resources.Images"));
-//            String fourURL = fourFile.toURI().toURL().toString();
-//
-//            File fiveFile = new File(osValidator.getPathToFile("die5.png", "Resources.Images"));
-//            String fiveURL = fiveFile.toURI().toURL().toString();
-//
-//            File sixFile = new File(osValidator.getPathToFile("die6.png", "Resources.Images"));
-//            String sixURL = sixFile.toURI().toURL().toString();
-//
-//            diceImageArray[0] = new Image(oneURL);
-//            diceImageArray[1] = new Image(twoURL);
-//            diceImageArray[2] = new Image(threeURL);
-//            diceImageArray[3] = new Image(fourURL);
-//            diceImageArray[4] = new Image(fiveURL);
-//            diceImageArray[6] = new Image(sixURL);
-//        } catch(MalformedURLException malformedURLException) {
-//            malformedURLException.printStackTrace();
-//        }
-//        return diceImageArray;
-//    }
-
-
-//    private static Image getImage(int rollVal) throws MalformedURLException {
-//
-//        switch(rollVal){
-//            case 1:
-//                return diceImageArray[0];
-//            case 2:
-//                return diceImageArray[1];
-//            case 3:
-//                return diceImageArray[2];
-//            case 4:
-//                return diceImageArray[3];
-//            case 5:
-//                return diceImageArray[4];
-//            default:
-//                return diceImageArray[5];
-//        }
-//    }
-
     //updates labels, token images, and adds player to player list
     private void labeling(Label label, ImageView imageViewContent, int position) throws MalformedURLException {
-//        // store the system path as a string
-//        String sysPath = System.getProperty("user.dir");
-//        /* Use the ResourceManager class to get the right URL path for the working directory */
-//        ResourceManager osValidator = new ResourceManager();
-//        String os = osValidator.os;
-//        String diePath = null;
-//
-//        File oneFile = new File(osValidator.getPathToFile("dog.png", "Resources/Images"));
-//        String oneURL = oneFile.toURI().toURL().toString();
-//
-//        File twoFile = new File(osValidator.getPathToFile("shoe.png", "Resources/Images"));
-//        String twoURL = twoFile.toURI().toURL().toString();
-//
-//        File threeFile = new File(osValidator.getPathToFile("racecar.png", "Resources/Images"));
-//        String threeURL = threeFile.toURI().toURL().toString();
-//
-//        File fourFile = new File(osValidator.getPathToFile("thimble.png", "Resources/Images"));
-//        String fourURL = fourFile.toURI().toURL().toString();
-//
-//        Image one = new Image(oneURL);
-//        Image two = new Image(twoURL);
-//        Image thr = new Image(threeURL);
-//        Image fou = new Image(fourURL);
         Image one = imgContainer.getTokenImage("dog");
         Image two = imgContainer.getTokenImage("shoe");
         Image thr = imgContainer.getTokenImage("racecar");
@@ -305,7 +221,8 @@ public class TurnOrderController {
     @FXML
     public void continueToGameButtonClicked(Event e) {
         this.menuController.initGameViewController();
-        this.menuController.switchToGameTab();
+        this.mainController.selectGameTab();
+        this.mainController.closeTurnOrderTab();
     }
 
 }

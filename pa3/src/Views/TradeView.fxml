@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TradeController">
+   <children>
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefHeight="822.0" prefWidth="994.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="199.0" layoutY="107.0" prefHeight="822.0" prefWidth="497.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="playerALabel" alignment="CENTER" prefHeight="57.0" prefWidth="518.0" text="Player A" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <AnchorPane>
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select up to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <SplitMenuButton fx:id="playerAMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="Select Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <items>
+                                        <MenuItem fx:id="playerAProperty1MenuItem" mnemonicParsing="false" text="Property 1">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerAProperty1ChoiceBox" prefWidth="150.0" onAction="#playerAProperty1ChoiceBoxSelected" />
+                                             </graphic>
+                                          </MenuItem>
+                                        <MenuItem fx:id="playerAProperty2MenuItem" mnemonicParsing="false" text="Property 2">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerAProperty2ChoiceBox" prefWidth="150.0" onAction="#playerAProperty2ChoiceBoxSelected" />
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem fx:id="playerAProperty3MenuItem" mnemonicParsing="false" text="Property 3">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerAProperty3ChoiceBox" prefWidth="150.0" onAction="#playerAProperty3ChoiceBoxSelected" />
+                                             </graphic>
+                                          </MenuItem>
+                                      </items>
+                                    </SplitMenuButton>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="129.0" prefWidth="497.0">
+                                 <children>
+                                    <ComboBox layoutX="200.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0" />
+                                    <Label alignment="CENTER_RIGHT" layoutX="113.0" layoutY="40.0" prefHeight="25.0" prefWidth="87.0" text="Add $">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <VBox prefHeight="822.0" prefWidth="497.0">
+                           <children>
+                              <Label fx:id="playerBLabel" alignment="CENTER" prefHeight="57.0" prefWidth="518.0" text="Player B" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <AnchorPane>
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="497.0" text="Select up to 3 Properties to Trade" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane>
+                                 <children>
+                                    <SplitMenuButton fx:id="playerBMenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="497.0" text="Select Properties" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <items>
+                                          <MenuItem fx:id="playerBProperty1MenuItem" mnemonicParsing="false" text="Property 1">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerBProperty1ChoiceBox" prefWidth="150.0" onAction="#playerBProperty1ChoiceBoxSelected" />
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem fx:id="playerBProperty2MenuItem" mnemonicParsing="false" text="Property 2">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerBProperty2ChoiceBox" prefWidth="150.0" onAction="#playerBProperty2ChoiceBoxSelected"/>
+                                             </graphic>
+                                          </MenuItem>
+                                          <MenuItem fx:id="playerBProperty3MenuItem" mnemonicParsing="false" text="Property 3">
+                                             <graphic>
+                                                <ChoiceBox fx:id="playerBProperty3ChoiceBox" prefWidth="150.0" onAction="#playerBProperty3ChoiceBoxSelected"/>
+                                             </graphic>
+                                          </MenuItem>
+                                       </items>
+                                    </SplitMenuButton>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="129.0" prefWidth="497.0">
+                                 <children>
+                                    <ComboBox layoutX="200.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0" />
+                                    <Label alignment="CENTER_RIGHT" layoutX="113.0" layoutY="40.0" prefHeight="25.0" prefWidth="87.0" text="Add $">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

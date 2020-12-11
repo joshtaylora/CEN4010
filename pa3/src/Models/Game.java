@@ -1,5 +1,5 @@
 package Models;
-/**
+/*
  * @author Joshua
  * @version 1.0.1
  */
@@ -7,6 +7,8 @@ package Models;
 import Resources.ImageContainer;
 import javafx.scene.image.Image;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ public class Game {
 
 	// Class variables
 	public Player currentPlayer;
-	public LinkedList<Player> playerList;
+	private LinkedList<Player> playerList;
 	public int numPlayers;
 
 	public long timeLimit;
@@ -23,7 +25,6 @@ public class Game {
 
 	public Board gameBoard;
 	public Dice gameDice;
-	public long gameTimer;
 	public ArrayList<Token> tokenList;
 	public int initialAccountBalance = 1500;
 
@@ -52,7 +53,7 @@ public class Game {
 		// initialize to the number of minutes specified * the number of milliseconds in a minute
 		int minuteToMilliS = 60000;
 		this.timeLimit = (long) timeLimit * minuteToMilliS;
-		// this.endTime = this.timeLimit + startTime;
+		this.endTime = this.timeLimit + startTime;
 
 		// initialize the board to a new board object
 		this.gameBoard = new Board();
@@ -89,9 +90,9 @@ public class Game {
 
 		switch(this.numPlayers) {
 			case(2):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
@@ -99,33 +100,33 @@ public class Game {
 				tokenList.add(p2Token);
 				break;
 			case(3):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player3 = new  Player("player3", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
 				break;
 			case(4):
-				player1 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player1 = new  Player("player1", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player1);
 				p1Token = new Token(player1, this.tokenImages[0]);
 				tokenList.add(p1Token);
-				player2 = new  Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player2 = new  Player("player2", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player2);
 				p2Token = new Token(player2, this.tokenImages[1]);
 				tokenList.add(p2Token);
-				player3 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player3 = new  Player("player3", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player3);
 				p3Token = new Token(player3, tokenImages[2]);
 				tokenList.add(p3Token);
-				player4 = new Player(initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
+				player4 = new  Player("player4", initialAccountBalance, this.gameBoard.searchTile("GO"), propertySetInitializer());
 				playerList.add(player4);
 				p4Token = new Token(player4, tokenImages[3]);
 				tokenList.add(p4Token);
@@ -137,14 +138,12 @@ public class Game {
 		this.currentPlayer = playerList.get(0);
 
 		this.gameDice = new Dice();
-		// while the timer has not run out ...
-        //checkWinner();
 	}
 
 	/**
 	 * Method used to perform the roll for the player
 	 */
-	public void playerRoll() {
+	public int playerRoll() {
 		Player rollingPlayer = this.getCurrentPlayer();
 		boolean js = rollingPlayer.getJailStatus();
 		int numDoubles;
@@ -152,8 +151,6 @@ public class Game {
 
 		this.dieImage1 = imgContainer.getDieImage(gameDice.getDiceOneResult());
 		this.dieImage2 = imgContainer.getDieImage(gameDice.getDiceTwoResult());
-
-		//TODO: tile popup(controller needs to get the tile of the player)
 
 		//if: player is currently NOT in jail===========================================================================NOT IN JAIL
 		if(!js) {
@@ -224,6 +221,7 @@ public class Game {
 				rollingPlayer.setRollStatus(true);
 			}
 		}
+		return this.gameDice.getDiceRollValue();
 	}
 
 
@@ -234,10 +232,6 @@ public class Game {
 	public Tile advancePlayerTile(int spaces) {
 		this.currentPlayer.setCurrentTile(this.gameBoard.move(this.currentPlayer.getCurrentTile(), spaces));
 		return this.currentPlayer.getCurrentTile();
-	}
-
-	public void endCurrentPlayerTurn() {
-
 	}
 
 	/**
@@ -265,6 +259,23 @@ public class Game {
 		return this.playerList.indexOf(player);
 	}
 
+	/**
+	 * Method to get a player from the player list
+	 * @param playerNum the number of the player that should be retrieved i.e 1, 2, 3, or 4
+	 * @return the player object at the specified index
+	 */
+	public Player getPlayerObject(int playerNum) {
+		Player retPlayer = null;
+		// ensure that the indexed specified is within the range of the playerlist
+		if ((playerNum <= playerList.size()) && (playerNum > 0)) {
+			retPlayer = playerList.get(playerNum - 1);
+		}
+		else {
+			System.out.println("ERROR in method getPlayer of Game class, player number queried is not within the scope of the player list");
+			System.exit(1);
+		}
+		return retPlayer;
+	}
 //	====================================================================================================================
 
 	/**
@@ -343,110 +354,99 @@ public class Game {
 			this.currentPlayer = playerList.get(0);
 		}
 	}
-	/*
-	public Tile takeTurnInJail(){
-		Tile temp = null;
 
-    	if(gameDice.checkDoubles()){
-    		temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-    		currentPlayer.setCurrentTile(temp);
-    		currentPlayer.setDoubles();
-    	}
-    	else{
-    		currentPlayer.incrementDoubles();
-    		if(currentPlayer.getDoubles() == 3){
-    			currentPlayer.setAccBalance(currentPlayer.getAccBalance() - 50);
-    			temp = gameBoard.move(currentPlayer.getCurrentTile(), spaces);
-    			currentPlayer.setCurrentTile(temp);
-    			currentPlayer.setDoubles();
-    		}
-    	}
-    	return  temp;
+	/**
+	 *
+	 * @param rollingPlayer the player who is taking their turn currently
+	 * @return ownership of a tile, where
+	 * 0= no one owns this, 1=currentPlayer owns this, 2=another player owns this
+	 */
+	public int checkOwnership(Player rollingPlayer){
+		if(rollingPlayer.getCurrentTile().getType().equals("Deed")){
+			Deed obj = (Deed) rollingPlayer.getCurrentTile();
+			Player tileOwner = obj.getOwner();
+			if(tileOwner == null){
+				return 0;
+			}
+			else if(tileOwner.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		else if(rollingPlayer.getCurrentTile().getType().equals("RailRoad")){
+			RailRoad obj = (RailRoad) rollingPlayer.getCurrentTile();
+			Player check = obj.getOwner();
+			if(check == null){
+				return 0;
+			}
+			else if(check.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		else if(rollingPlayer.getCurrentTile().getType().equals("Utility")){
+			Utility obj = (Utility) rollingPlayer.getCurrentTile();
+			Player check = obj.getOwner();
+			if(check == null){
+				return 0;
+			}
+			else if(check.getName().equals(rollingPlayer.getName())){
+				return 1;
+			}
+			else{
+				return 2;
+			}
+		}
+		return 0;
 	}
-	public void buyProperty(){
-		Tile propertyToBuy = this.currentPlayer.getCurrentTile();
-		String tileType = propertyToBuy.getType();
-		switch (tileType) {
-			case "Deed":
-				this.currentPlayer.purchaseDeed(propertyToBuy);
-				currentTile.setOwner(currentPlayer);
-				if (currentPlayer.getPlayerDeeds()[currentTile.getPropertySet()].checkMonopoly()) {
-					currentTile.setHouses();
-				}
-				break;
-			case "RailRoad":
-				currentTile.setOwner(currentPlayer);
-				currentPlayer.increaseRailroads();
-				break;
-			case "Utility":
-				currentTile.setOwner(currentPlayer);
-				currentPlayer.increaseUtilities();
-				break;
-		  }
+
+	/**
+	 *
+	 * @return true if there is time left in the game, false if the time is up
+	 */
+	public boolean isThereTimeLeft() {
+		if (endTime > System.currentTimeMillis()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-  public String checkWinner(){
-    //Check winner by finding out sum of houses, hotels, properties, and currentMoney
-    //propertySum is the method to use
-    //make an array to store the property set array
-    int sum = 0;
-    PropertySet[] tempArray = currentPlayer.getPlayerDeeds();
-    String winner = "Player" + this.playerList.indexOf(this.currentPlayer);
-    for(int i = 0; i < 9; i++){
-      sum = sum + tempArray[i].propertySum();
-    }
-    int sum1 = 0;
-    currentPlayer = this.playerList.get(1 + (this.playerList.indexOf(this.currentPlayer)));
-    String temp1 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum1 = sum1 + tempArray[i].propertySum;
-    }
-    int sum2;
-    currentPlayer = currentPlayer.next();
-    String temp2 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum2 = sum2 + tempArray[i].propertySum;
-    }
-    int sum3;
-    currentPlayer = currentPlayer.next();
-    String temp3 = currentPlayer.name();
-    tempArray = currentPlayer.getPlayerDeeds();
-    for(int i = 0; i < 9; i++){
-      sum3 = sum3 + tempArray[i].propertySum;
-    }
-    if(sum > sum1){
-      if(sum > sum2){
-        if(sum > sum3){
-          return winner;
-        }
-      }
-    }
-    if( sum1 > sum){
-      if(sum1 > sum2){
-        if(sum1 > sum3){
-          return temp1;
-        }
-      }
-    }
-    if( sum2 > sum){
-      if(sum2 > sum1){
-        if(sum2 > sum3){
-          return temp2;
-        }
-      }
-    }
-    if(sum3 > sum){
-      if(sum3 > sum1){
-        if(sum3 > sum2){
-          return temp3;
-        }
-      }
-    }
-  }
+	/**
+	 *
+	 * @returns the index of the winning player. If multiple players have the max net worth,
+	 * the first player in the list with the max net worth wins
+	 */
+	public int checkWinner(){
+		//index of player with greatest net worth
+		int maxIndex = 0;
+		//array of player's net worth
+		Integer[] sums = {0, 0, 0, 0};
+		int index =  0;
 
- */
+		//calculate net worth of each player and store it in sum array
+		for (Player player: playerList) {
+			sums[index] = player.calcNetWorth();
+			index++;
+		}
+
+		int max = Collections.max(Arrays.asList(sums));
+		for (int i: sums) {
+			if(max > i){
+				maxIndex++;
+			}
+			else
+				break;
+		}
+
+		return maxIndex;
+	}
+
+
 
 //	====================================================================================================================
 
