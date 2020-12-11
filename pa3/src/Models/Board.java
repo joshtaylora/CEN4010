@@ -8,7 +8,7 @@ public class Board {
 		// create all tiles here
 		tiles[0] = new Tile("GO", "GO", 0);
 		tiles[1] = new Deed("Mediterranean Ave.",
-				0,
+				60,
 				0,
 				2,
 				10,

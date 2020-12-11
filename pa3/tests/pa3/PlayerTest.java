@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 
-//TODO mortgageProperety, rentProperty, payTax, passGo, upgradeProperty, calcNetWorth
+//TODO mortgageProperty, rentProperty, payTax, passGo, upgradeProperty, calcNetWorth
 
 class PlayerTest {
     int initial = 1500;
@@ -120,7 +120,8 @@ class PlayerTest {
     }
 
     @Test
-    void decreaseUtilities() { Player testPlayer = new Player("",0, null, null);
+    void decreaseUtilities() {
+        Player testPlayer = new Player("",0, null, null);
         boolean testUtil;
         testPlayer.increaseUtilities();
         testPlayer.increaseUtilities();
@@ -132,6 +133,62 @@ class PlayerTest {
             testUtil = false;
         }
         assertTrue(testUtil);
+    }
+
+    //TODO mortgageProperty, rentProperty, payTax, passGo, upgradeProperty, calcNetWorth
+
+    @Test
+    void testMortgageProperty(){
+        Player testPlayer = new Player("", 0, null, null);
+        testPlayer.mortgageProperty(testBoard.searchTile("Baltic Ave."));
+        assertEquals(30, testPlayer.getAccBalance());
+
+    }
+
+    @Test
+    void testRentProperty(){
+        Player testPlayer = new Player("", 100, null, propertySetInitializer());
+        Player testPlayer2 = new Player("", 100, null, propertySetInitializer());
+        testPlayer2.purchaseProperty(testBoard.searchTile("Baltic Ave."));
+        testPlayer.rentProperty(testBoard.searchTile("Baltic Ave."), 2);
+        assertEquals(96, testPlayer.getAccBalance());
+    }
+
+    @Test
+    void testPayTax(){
+        Player testPlayer = new Player("", 1000, null, null);
+        testPlayer.payTax(testBoard.searchTile("Income Tax"));
+        assertEquals(800, testPlayer.getAccBalance());
+    }
+
+    @Test
+    void testPassGO(){
+        Player testPlayer = new Player("", 0, null, null);
+        testPlayer.passGO();
+        assertEquals(200, testPlayer.getAccBalance());
+    }
+
+    @Test
+    void testUpgradeProperty(){
+        Player testPlayer = new Player("", 1000, null, propertySetInitializer());
+
+        Tile testTile = testBoard.searchTile("Baltic Ave.");
+        Tile testTile2 = testBoard.searchTile("Mediterranean Ave.");
+        testPlayer.purchaseProperty(testTile);
+        testPlayer.purchaseProperty(testTile2);
+        Deed testDeed2 = (Deed) testTile ;
+        testDeed2.setHouses();
+        testPlayer.upgradeProperty(testTile);
+
+        assertEquals(830, testPlayer.getAccBalance());
+    }
+
+    @Test
+    void testCalcNetWorth(){
+        Player testPlayer = new Player("", 1000, null, propertySetInitializer());
+        testPlayer.purchaseProperty(testBoard.searchTile("Baltic Ave."));
+        testPlayer.purchaseProperty(testBoard.searchTile("Mediterranean Ave."));
+        assertEquals(888, testPlayer.calcNetWorth());
     }
 
 
