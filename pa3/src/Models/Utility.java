@@ -54,7 +54,7 @@ public class Utility extends Tile {
 			return 0;
 		}
 		else {
-			int us = getOwner().getNumRailroads();
+			int us = getOwner().getNumUtilities();
 			switch (us) {
 				case 1:
 					return baseRentMult * roll;

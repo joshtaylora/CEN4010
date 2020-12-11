@@ -55,11 +55,15 @@ public class RailroadTest {
 
     @Test
     void testCalcRent (){
+        Player testPlayer = new Player(0,null,null);
         RailRoad test = new RailRoad("Reading Railroad", 5);
+        test.setOwner(testPlayer);
+
         int rent = 25;
 
         //make sure rent is correct for each level of railroad ownership
         for(int i=0; i<4; i++){
+            testPlayer.increaseRailroads();
             assertEquals(rent, test.calcRent());
             rent *= 2;
         }

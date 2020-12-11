@@ -127,8 +127,8 @@ class PlayerTest {
         boolean testUtil;
         testPlayer.increaseUtilities();
         testPlayer.increaseUtilities();
-        testPlayer.increaseUtilities();
-        if(testPlayer.getNumUtilities() == 2){
+        testPlayer.decreaseUtilities();
+        if(testPlayer.getNumUtilities() == 1){
             testUtil = true;
         }
         else{
