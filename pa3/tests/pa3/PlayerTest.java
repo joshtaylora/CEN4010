@@ -1,7 +1,6 @@
 package pa3;
 
-import Models.PropertySet;
-import Models.Token;
+import Models.*;
 import Resources.ResourceManager;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -81,9 +81,9 @@ public class TradeController {
      * @param playerA player that initiated the trade
      * @param playerB player that is the recipient of the initial trade interaction from playerA
      */
-    @FXML
-    void performTrade(Player playerA, Player playerB) throws IOException {
-        Parent parentNode = FXMLLoader.load(getClass().getResource("TradePopup.fxml"));
+    void performTrade(Player playerA, Player playerB) {
+        // Possibly make Trade Model class that will be used so that we can return Trade's to the Game Controller to
+        // update the game
     }
 
     void populateTradeView(Player initiatingPlayer, Player receivingPlayer) {
@@ -341,6 +341,9 @@ public class TradeController {
         }
     }
 
+// ====================================================================================================================
+// =============================================== Player A Controls ==================================================
+
     @FXML
     public void playerAProperty1ChoiceBoxSelected(Event e) {
         String selectedItem = playerAProperty1ChoiceBox.getSelectionModel().getSelectedItem();
@@ -383,21 +386,11 @@ public class TradeController {
 
     }
 
-    private void updatePlayerBSelectedDeeds(String selectedItem) {
-       if (!playerBSelectedDeeds.contains(selectedItem)) {
-           playerBSelectedDeeds.add(selectedItem);
-       }
-       else {
-           playerBSelectedDeeds.remove(selectedItem);
-       }
-    }
-
-
+// ====================================================================================================================
+// =============================================== Player B Controls ==================================================
     @FXML
     public void playerBProperty1ChoiceBoxSelected(Event e) {
         String selectedItem = playerBProperty1ChoiceBox.getSelectionModel().getSelectedItem();
-
-
 
         updateDeedOptionsList(playerB.getName(), selectedItem, playerBProperty1ChoiceBox);
         updateChoiceBox(playerB, playerBProperty1ChoiceBox);
