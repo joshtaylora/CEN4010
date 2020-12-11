@@ -282,7 +282,7 @@ public class TilePopController {
     private void tileSetupJail() {
         tileName.setVisible(false);
         hideDeedLabels();
-        tileMessage.setText("Don't forget that prison is legal slavery!");
+        tileMessage.setText("Are you in Jail or just visiting? Quick, figure it out before the guards come!");
         button1.setText("Continue");
         button2.setVisible(false);
     }
@@ -306,8 +306,8 @@ public class TilePopController {
         rentWith2HousesLabel.setText("PURCHASE PRICE $200");
         rentWith3HousesLabel.setText("Rent                    $25");
         rentWith4HousesLabel.setText("If 2 R.R.'s are owned   $50");
-        rentWithHotelLabel.setText("If 3 \" \" \"          $100");
-        mortgageValueLabel.setText("If 4 \" \" \"          $200");
+        rentWithHotelLabel.setText("If 3 R.R.'s are owned  $100");
+        mortgageValueLabel.setText("If 4 R.R.'s are owned  $200");
         hotelCostLabel.setText("Mortgage Value         $100");
         rentWith2HousesLabel.setVisible(true);
         rentWith3HousesLabel.setVisible(true);
@@ -357,7 +357,14 @@ public class TilePopController {
     private void tileSetupUtility() {
         hideDeedLabels();
         //tileName.setVisible(true);
-        
+        if (tile.getName().equals("Water Works")) {
+            tileName.setVisible(false);
+            railRoadLabel.setVisible(true);
+            railRoadLabel.setText("Water Works");
+        }
+        else {
+            //tileName.setVisible(true);
+        }
 
         if(!canBuy){
             tileMessage.setText("You have no money!");

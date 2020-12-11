@@ -209,11 +209,11 @@ public class Deed extends Tile{
         }
     }
 
-    public void setUnMortagaged(){
+    public void setUnMortgaged(){
         mortgaged = false;
     }
 
-    public void setMortagaged(){
+    public void setMortgaged(){
         mortgaged = true;
     }
 

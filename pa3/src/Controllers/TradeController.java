@@ -77,6 +77,7 @@ public class TradeController {
 
     public void initTradeController(MenuController menuController) {
         this.mainController = menuController.mainController;
+        mainController.tradeTab.setClosable(false);
 //        playerAProperty1ChoiceBox.getItems().add();
     }
 
@@ -482,6 +483,8 @@ public class TradeController {
         }
     }
 
+
+
     private void disablePlayerControls(ChoiceBox<String> property1ChoiceBox,
                                        ChoiceBox<String> property2ChoiceBox,
                                        ChoiceBox<String> property3ChoiceBox,
@@ -520,7 +523,11 @@ public class TradeController {
         }
         performTrade(playerA, playerB, playerATradeDeeds, playerBTradeDeeds, pAMoney, pBMoney);
 
+        // After the trade has been performed, we can enable the controls again
+        enableTradeView();
+
         mainController.selectGameTab();
+        mainController.tradeTab.setClosable(true);
         mainController.closeTradeTab();
     }
 
@@ -555,4 +562,87 @@ public class TradeController {
             }
         }
 	}
+
+	public void enableTradeView() {
+        // re-enable playerA's controls
+        enablePlayerControls(playerAProperty1ChoiceBox,
+                playerAProperty2ChoiceBox,
+                playerAProperty3ChoiceBox,
+                playerAMoneyBox,
+                playerASelectedDeeds,
+                playerATradeOfferList,
+                playerAConfirmTradeCheckBox);
+
+        // re-enable playerB's controls
+        enablePlayerControls(playerBProperty1ChoiceBox,
+                playerBProperty2ChoiceBox,
+                playerBProperty3ChoiceBox,
+                playerBMoneyBox,
+                playerBSelectedDeeds,
+                playerBTradeOfferList,
+                playerBConfirmTradeCheckBox);
+    }
+/**
+     * Once the trade has been completed, we need to re-enable the controls for the next trade
+     * @param property1ChoiceBox ChoiceBox control for property1
+     * @param property2ChoiceBox ChoiceBox control for property2
+     * @param property3ChoiceBox ChoiceBox control for property3
+     * @param moneyBox ChoiceBox control for the money choice
+     * @param selectedDeeds ArrayList of deeds selected by the player
+     * @param tradeOfferList ListView control for the summary of the trade
+     * @param tradeReadyCheck CheckBox indicating that the player is ready to go through with the trade offer at hand
+     */
+    private void enablePlayerControls(ChoiceBox<String> property1ChoiceBox,
+                                      ChoiceBox<String> property2ChoiceBox,
+                                      ChoiceBox<String> property3ChoiceBox,
+                                      ChoiceBox<Integer> moneyBox,
+                                      ArrayList<String> selectedDeeds,
+                                      ListView<String> tradeOfferList,
+                                      CheckBox tradeReadyCheck) {
+        // re-enable the ChoiceBox options
+        clearChoiceBox(property1ChoiceBox);
+        clearChoiceBox(property2ChoiceBox);
+        clearChoiceBox(property3ChoiceBox);
+
+        // re-enable the moneyBox ChoiceBox
+        clearMoneyBox(moneyBox);
+
+
+        ArrayList<String> removeList = new ArrayList<>();
+        // remove deeds from the selectedDeeds array list
+        for (String input : selectedDeeds) {
+            removeList.add(input);
+        }
+        selectedDeeds.removeAll(removeList);
+
+        // re-enable the ListView of Strings from the trade offer
+        clearTradeOfferList(tradeOfferList);
+
+        clearTradeCheckBox(tradeReadyCheck);
+    }
+
+    private void clearTradeCheckBox(CheckBox tradeReadyCheck) {
+        tradeReadyCheck.setDisable(false);
+        tradeReadyCheck.setSelected(false);
+    }
+
+    private void clearMoneyBox(ChoiceBox<Integer> moneyBox) {
+        moneyBox.setDisable(false);
+        moneyBox.getSelectionModel().clearSelection();
+        moneyBox.getItems().clear();
+    }
+
+    private void clearChoiceBox(ChoiceBox<String> propertyChoiceBox) {
+        propertyChoiceBox.setDisable(false);
+        propertyChoiceBox.getSelectionModel().clearSelection();
+        propertyChoiceBox.getItems().clear();
+    }
+
+    private void clearTradeOfferList(ListView<String> tradeOfferList) {
+        // clear out the ListView
+        tradeOfferList.setDisable(false); /* re-enable the ListView control */
+        tradeOfferList.getSelectionModel().clearSelection(); /* Clear the selected items */
+        tradeOfferList.getItems().clear(); /* Clear out the items in the ListView */
+
+    }
 }

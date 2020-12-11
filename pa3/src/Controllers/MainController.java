@@ -60,10 +60,11 @@ public class MainController {
 
 
     public void init() {
+        tabPane.getSelectionModel().select(menuTab);
         initMenuController();
 //        menuViewController.injectMainController(this);
 //        menuViewController.init();
-        removeTileTab();
+//        removeTileTab();
     }
 
     /**
@@ -87,6 +88,7 @@ public class MainController {
     }
 
     public void removeTileTab(){
+        tabPane.getSelectionModel().select(gameTab);
         tabPane.getTabs().remove(tileTab);
     }
 
@@ -100,11 +102,6 @@ public class MainController {
         }
     }
 
-    public void openTradePopup() throws IOException{
-        String tradePopupPath = resourceManager.getPathToFile("TradePopup.fxml", "Views");
-
-        Parent parent = FXMLLoader.load(getClass().getResource(tradePopupPath));
-    }
 
     public void selectTurnOrderTab() {
         tabPane.getSelectionModel().select(turnOrderTab);
@@ -133,6 +130,15 @@ public class MainController {
     public void closeTurnOrderTab() {
         if (!this.turnOrderTab.isSelected()) {
             tabPane.getTabs().remove(turnOrderTab);
+        }
+    }
+
+    /**
+     * Method that checks to see if the Trade tab is in the tabPane tab collection and if not, it adds it in
+     */
+    public void addTradeTab() {
+        if (!tabPane.getTabs().contains(tradeTab)) {
+            tabPane.getTabs().add(tradeTab);
         }
     }
 

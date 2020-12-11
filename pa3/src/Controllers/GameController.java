@@ -100,12 +100,12 @@ public class GameController {
 
     }
 
-    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
-        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
-        String tilePrompt = "Current Tile: ";
-        // set the label for the tile the current player is on
-        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
-    }
+//    private void updateTokenPositionOnBoard(int spacesToAdvanceToken) {
+//        String playerTile = this.game.getCurrentPlayer().getCurrentTile().getName();
+//        String tilePrompt = "Current Tile: ";
+//        // set the label for the tile the current player is on
+//        currentPlayerTileLabel.textProperty().setValue(tilePrompt.concat(playerTile));
+//    }
 
 
     private void setActivePlayer() {
@@ -307,6 +307,7 @@ public class GameController {
         if (currentPlayerName.equals("player1")) {
             return;
         }
+        this.mainController.addTradeTab();
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
@@ -325,6 +326,7 @@ public class GameController {
         if (currentPlayerName.equals("player2")) {
             return;
         }
+        this.mainController.addTradeTab();
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
@@ -338,7 +340,7 @@ public class GameController {
         if (currentPlayerName.equals("player3")) {
             return;
         }
-
+        this.mainController.addTradeTab();
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
@@ -353,7 +355,7 @@ public class GameController {
         if (currentPlayerName.equals("player4")) {
             return;
         }
-
+        this.mainController.addTradeTab();
         // use the main controller to switch the selected tab to the trade view
         this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
         // call method in TradeController to populate the fields for the correct players
