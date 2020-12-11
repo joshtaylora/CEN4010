@@ -404,9 +404,6 @@ public class Game {
 		return 0;
 	}
 
-
-
-
 	/**
 	 *
 	 * @return true if there is time left in the game, false if the time is up
