@@ -179,7 +179,6 @@ public class Deed extends Tile{
     }
 
 
-
     /**
      * adds a house or hotel to a property
      *  1 indicates full propertySet
@@ -191,12 +190,8 @@ public class Deed extends Tile{
         }
     }
 
-    public void setUnMortagaged(){
-        mortgaged = false;
-    }
-
-    public void setMortagaged(){
-        mortgaged = true;
+    public void setMortgaged(){
+        mortgaged = !mortgaged;
     }
 
 
