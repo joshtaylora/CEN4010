@@ -61,6 +61,8 @@ public class TurnOrderController {
     public void rollDiceButtonClicked(Event e) throws MalformedURLException {
         this.numberOfPlayers = this.menuController.numberOfPlayers;
         displayDice();
+        rollButton.setVisible(false);
+        rollButton.setDisable(true);
     }
 
 

@@ -75,7 +75,7 @@ public class GameController {
 // ============================================ Global Variables =======================================================
     MainController mainController;
     TilePopController tileViewController;
-    private Game game;
+    Game game;
     private int numberOfPlayers;
     private int timerValue;
     int currentPlayerIndex;
@@ -89,7 +89,6 @@ public class GameController {
         this.mainController = menuController.mainController;
         this.tileViewController = menuController.mainController.tileViewController;
         startGame();
-
     }
 
 
@@ -293,7 +292,7 @@ public class GameController {
 
             rollDiceButton.setVisible(false);
             endTurnButton.setVisible(false);
-           boardGridPane.setVisible(false);
+            boardGridPane.setVisible(false);
        }
 
    }

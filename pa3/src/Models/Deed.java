@@ -126,6 +126,24 @@ public class Deed extends Tile{
         return saleValue;
     }
 
+    public int getBaseRent() {
+        return baseRent;
+    }
+
+    public int getRentWithOneHouse() { return rentWithOneHouse; }
+
+    public int getRentWithTwoHouses() { return rentWithTwoHouses; }
+
+    public int getRentWithThreeHouses() { return rentWithThreeHouses; }
+
+    public int getRentWithFourHouses() { return rentWithFourHouses; }
+
+    public int getRentWithHotel() { return rentWithHotel; }
+
+    public int getHouseCost() { return houseCost; }
+
+    public int getHotelCost() { return hotelCost; }
+
     /**
      * returns the upgrade cost of a property, or zero if property cannot be upgraded
      * (how much to add a house or hotel)

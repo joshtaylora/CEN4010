@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="822.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TilePopController">
+   <children>
+      <AnchorPane layoutX="66.0" layoutY="25.0" prefHeight="639.0" prefWidth="551.0">
+         <children>
+            <ImageView fx:id="tileImage" fitHeight="648.0" fitWidth="556.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Images/RailRoad.png" />
+               </image>
+            </ImageView>
+            <GridPane layoutY="-2.0" prefHeight="639.0" prefWidth="556.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="305.0" minHeight="10.0" prefHeight="294.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="372.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="136.0" prefWidth="556.0">
+                     <children>
+                        <Label fx:id="tileName" alignment="CENTER" layoutX="98.0" layoutY="51.0" prefHeight="36.0" prefWidth="360.0" text="[Tile Name]" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <StackPane GridPane.rowIndex="1">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="556.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane>
+                                       <children>
+                                          <Label fx:id="purchasePriceLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="PURCHASE PRICE $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0">
+                                       <children>
+                                          <Label fx:id="rentLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="Rent $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="40.0">
+                                       <children>
+                                          <Label fx:id="rentWith1HouseLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" stylesheets="@CSS/PlayerBoardIcon.css" text="With 1 House    $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="70.0">
+                                       <children>
+                                          <Label fx:id="rentWith2HousesLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="With 2 Houses   $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="100.0">
+                                       <children>
+                                          <Label fx:id="rentWith3HousesLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="With 3 Houses   $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="130.0">
+                                       <children>
+                                          <Label fx:id="rentWith4HousesLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="With 4 Houses   $" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <Label fx:id="rentWithHotelLabel" alignment="CENTER" prefHeight="17.0" prefWidth="556.0" text="With HOTEL       $">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="mortgageValueLabel" alignment="CENTER" layoutX="10.0" layoutY="190.0" prefHeight="17.0" prefWidth="556.0" text="Mortgage Value $">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="houseCostLabel" alignment="CENTER" layoutX="10.0" layoutY="220.0" prefHeight="17.0" prefWidth="556.0" text="Houses cost $">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="hotelCostLabel" alignment="CENTER" layoutX="10.0" layoutY="250.0" prefHeight="17.0" prefWidth="556.0" text="Hotel cost $">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane layoutX="153.0" layoutY="44.0">
+                                 <children>
+                                    <Label fx:id="railRoadLabel" alignment="CENTER" prefHeight="36.0" prefWidth="250.0" text="RailRoad">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+                  <AnchorPane prefHeight="38.0" prefWidth="556.0" GridPane.rowIndex="3">
+                     <children>
+                        <AnchorPane layoutX="217.0" layoutY="19.0" />
+                        <AnchorPane layoutX="110.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="300.0">
+                           <children>
+                              <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="556.0" GridPane.rowIndex="2">
+                     <children>
+                        <AnchorPane layoutX="109.0" layoutY="52.0" />
+                        <AnchorPane layoutX="82.0" layoutY="37.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="650.0" layoutY="25.0" prefHeight="648.0" prefWidth="102.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3d1f83" height="648.0" stroke="BLACK" strokeType="INSIDE" width="122.0" />
+            <GridPane fx:id="housePane" prefHeight="639.0" prefWidth="122.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="64.0" prefWidth="108.0">
+                     <children>
+                        <Circle fx:id="circle1" fill="#ff1f1f" layoutX="61.0" layoutY="67.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="33.0" layoutY="111.0" text="COLOR SET">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Circle fx:id="circle2" fill="#ff1f1f" layoutX="61.0" layoutY="67.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="39.0" layoutY="111.0" text="HOUSE 1">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Circle fx:id="circle3" fill="#ff1f1f" layoutX="61.0" layoutY="66.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="39.0" layoutY="102.0" text="HOUSE 2">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Circle fx:id="circle4" fill="#ff1f1f" layoutX="61.0" layoutY="66.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="39.0" layoutY="102.0" text="HOUSE 3">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <Circle fx:id="circle5" fill="#ff1f1f" layoutX="61.0" layoutY="66.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="39.0" layoutY="102.0" text="HOUSE 4">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+                  <AnchorPane prefHeight="55.0" prefWidth="97.0" GridPane.rowIndex="5">
+                     <children>
+                        <Circle fx:id="circle6" fill="#ff1f1f" layoutX="62.0" layoutY="66.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label layoutX="45.0" layoutY="102.0" text="HOTEL">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="818.0" layoutY="57.0" />
+      <AnchorPane layoutX="818.0" layoutY="130.0" />
+      <AnchorPane layoutX="828.0" layoutY="399.0" />
+      <Button fx:id="button2" layoutX="821.0" layoutY="421.0" mnemonicParsing="false" onAction="#onButtonTwo" prefHeight="20.0" prefWidth="122.0" text="Button" />
+      <Button fx:id="button1" layoutX="821.0" layoutY="333.0" mnemonicParsing="false" onAction="#onButtonOne" prefHeight="25.0" prefWidth="122.0" text="Button" />
+      <Button fx:id="button3" layoutX="821.0" layoutY="507.0" mnemonicParsing="false" onAction="#onButtonThree" prefWidth="122.0" text="Button" />
+      <Label fx:id="houseHotelMessage" alignment="CENTER" layoutX="766.0" layoutY="266.0" prefHeight="20.0" prefWidth="232.0" text="am I?">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="787.0" layoutY="182.0" />
+      <TextArea fx:id="tileMessage" layoutX="787.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></TextArea>
+   </children>
+</AnchorPane>

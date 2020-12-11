@@ -55,3 +55,20 @@
     -fx-border-color: #9d0006;
     -fx-border-width: 2px;
 }
+
+.disableCompleteTradeButton {
+    -fx-background-color: #9d0006;
+    -fx-text-fill: black;
+    -fx-font-style: oblique;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+
+.activeCompleteTradeButton {
+    -fx-background-color: #689d6a;
+    -fx-text-fill: black;
+    -fx-font-style: oblique;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}

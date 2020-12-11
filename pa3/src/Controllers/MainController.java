@@ -78,6 +78,7 @@ public class MainController {
 
     public void initTurnOrderController() {
         this.turnOrderViewController.injectMainController(this);
+        this.tradeViewController.initTradeController(this.menuViewController);
     }
 
     public void initTilePopController() {
@@ -136,12 +137,9 @@ public class MainController {
     }
 
     public void closeTradeTab() {
-        if (!this.tradeTab.isSelected()) {
-            tabPane.getTabs().remove(tradeTab);
-        }
-        else {
+        if (this.tradeTab.isSelected()) {
             tabPane.getSelectionModel().select(gameTab);
-            tabPane.getTabs().remove(tradeTab);
         }
+        tabPane.getTabs().remove(tradeTab);
     }
 }

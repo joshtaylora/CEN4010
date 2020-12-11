@@ -44,7 +44,14 @@ public class ImageContainer {
     private static Image greenDeedImage = null;
     private static Image dBlueDeedImage = null;
     private static Image waterDeedImage = null;
-    private static Image electricDeedImage = null;
+    private static Image blankDeedImage = null;
+    private static Image railRoadImage = null;
+    private static Image chanceImage = null;
+    private static Image communityChestImage = null;
+    private static Image electricCompanyImage = null;
+    private static Image goImage = null;
+    private static Image goToJailImage = null;
+    private static Image jailImage = null;
 
     private static Image player1Image = null;
     private static Image player2Image = null;
@@ -59,7 +66,7 @@ public class ImageContainer {
 
         tokenImages = new Image[4];
 
-        tileImages = new Image[10];
+        tileImages = new Image[17];
 
         playerImages = new Image[4];
 
@@ -97,7 +104,7 @@ public class ImageContainer {
         tokenImageURLs[3] = thimbleFile;
 
         /* Array for the Strings containing the URLs for the tile images */
-        this.tileImageURLs = new String[10];
+        this.tileImageURLs = new String[17];
         String purpleFile = resourceManager.getPathToFile("PurpleDeed.png", "Resources/Images");
         String lblueFile = resourceManager.getPathToFile("LightBlueDeed.png", "Resources/Images");
         String pinkFile = resourceManager.getPathToFile("PinkDeed.png", "Resources/Images");
@@ -107,7 +114,14 @@ public class ImageContainer {
         String greenFile = resourceManager.getPathToFile("GreenDeed.png", "Resources/Images");
         String dblueFile = resourceManager.getPathToFile("DarkBlueDeed.png", "Resources/Images");
         String waterFile = resourceManager.getPathToFile("WaterWorks.png", "Resources/Images");
-        String electricFile = resourceManager.getPathToFile("ElectricCompany.png", "Resources/Images");
+        String blankDeedFile = resourceManager.getPathToFile("blankTile.png", "Resources/Images");
+        String railRoadFile = resourceManager.getPathToFile("RailRoad.png", "Resources/Images");
+        String chanceFile = resourceManager.getPathToFile("Chance.png", "Resources/Images");
+        String communityChestFile = resourceManager.getPathToFile("CommunityChest.png", "Resources/Images");
+        String electricCompanyFile = resourceManager.getPathToFile("Electric.png", "Resources/Images");
+        String goFile = resourceManager.getPathToFile("Go.png", "Resources/Images");
+        String goToJailFile = resourceManager.getPathToFile("GoToJail.png", "Resources/Images");
+        String jailFile = resourceManager.getPathToFile("Jail.png", "Resources/Images");
         tileImageURLs[0] = purpleFile;
         tileImageURLs[1] = lblueFile;
         tileImageURLs[2] = pinkFile;
@@ -117,7 +131,14 @@ public class ImageContainer {
         tileImageURLs[6] = greenFile;
         tileImageURLs[7] = dblueFile;
         tileImageURLs[8] = waterFile;
-        tileImageURLs[9] = electricFile;
+        tileImageURLs[9] = blankDeedFile;
+        tileImageURLs[10] = railRoadFile;
+        tileImageURLs[11] = chanceFile;
+        tileImageURLs[12] = communityChestFile;
+        tileImageURLs[13] = electricCompanyFile;
+        tileImageURLs[14] = goFile;
+        tileImageURLs[15] = goToJailFile;
+        tileImageURLs[16] = jailFile;
 
         /* Array for the Strings containing the URLs for the player images */
         this.playerImageURLs = new String[4];
@@ -146,16 +167,24 @@ public class ImageContainer {
             racecarTokenImage = new Image(tokenImageURLs[2]);
             thimbleTokenImage = new Image(tokenImageURLs[3]);
             /* Initialize the elements of the tile Image array to the proper images */
-            purpleDeedImage =   new Image(tileImageURLs[0]);
-            lBlueDeedImage =    new Image(tileImageURLs[1]);
-            pinkDeedImage =     new Image(tileImageURLs[2]);
-            orangeDeedImage =   new Image(tileImageURLs[3]);
-            redDeedImage =      new Image(tileImageURLs[4]);
-            yellowDeedImage =   new Image(tileImageURLs[5]);
-            greenDeedImage =    new Image(tileImageURLs[6]);
-            dBlueDeedImage =    new Image(tileImageURLs[7]);
-            waterDeedImage =    new Image(tileImageURLs[8]);
-            electricDeedImage = new Image(tileImageURLs[9]);
+            purpleDeedImage =       new Image(tileImageURLs[0]);
+            lBlueDeedImage =        new Image(tileImageURLs[1]);
+            pinkDeedImage =         new Image(tileImageURLs[2]);
+            orangeDeedImage =       new Image(tileImageURLs[3]);
+            redDeedImage =          new Image(tileImageURLs[4]);
+            yellowDeedImage =       new Image(tileImageURLs[5]);
+            greenDeedImage =        new Image(tileImageURLs[6]);
+            dBlueDeedImage =        new Image(tileImageURLs[7]);
+            waterDeedImage =        new Image(tileImageURLs[8]);
+            blankDeedImage =     new Image(tileImageURLs[9]);
+            railRoadImage =         new Image(tileImageURLs[10]);
+            chanceImage =           new Image(tileImageURLs[11]);
+            communityChestImage =   new Image(tileImageURLs[12]);
+            electricCompanyImage =  new Image(tileImageURLs[13]);
+            goImage =               new Image(tileImageURLs[14]);
+            goToJailImage =         new Image(tileImageURLs[15]);
+            jailImage =             new Image(tileImageURLs[16]);
+
             /* Initialize the elements of the player Image array to the proper images */
             player1Image = new Image(playerImageURLs[0]);
             player2Image = new Image(playerImageURLs[1]);
@@ -193,7 +222,16 @@ public class ImageContainer {
         tileImages[6] = greenDeedImage;
         tileImages[7] = dBlueDeedImage;
         tileImages[8] = waterDeedImage;
-        tileImages[9] = electricDeedImage;
+        tileImages[9] = blankDeedImage;
+        tileImages[10] = railRoadImage;
+        tileImages[11] = chanceImage;
+        tileImages[12] = communityChestImage;
+        tileImages[13] = electricCompanyImage;
+        tileImages[14] = goImage;
+        tileImages[15] = goToJailImage;
+        tileImages[16] = jailImage;
+
+
         // add the images directly to the class variable array of player image
         playerImages[0] = player1Image;
         playerImages[1] = player2Image;
@@ -283,6 +321,27 @@ public class ImageContainer {
                 break;
             case 9:
                 returnTilImg = tileImages[9];
+                break;
+            case 10:
+                returnTilImg = tileImages[10];
+                break;
+            case 11:
+                returnTilImg = tileImages[11];
+                break;
+            case 12:
+                returnTilImg = tileImages[12];
+                break;
+            case 13:
+                returnTilImg = tileImages[13];
+                break;
+            case 14:
+                returnTilImg = tileImages[14];
+                break;
+            case 15:
+                returnTilImg = tileImages[15];
+                break;
+            case 16:
+                returnTilImg = tileImages[16];
                 break;
             default:
                 break;

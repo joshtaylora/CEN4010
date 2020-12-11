@@ -192,7 +192,7 @@ public class Player{
 			}
 		}
 		account = sum;
-		ret = Integer.valueOf(sum);
+		ret = sum;
 		return ret;
 	}
 

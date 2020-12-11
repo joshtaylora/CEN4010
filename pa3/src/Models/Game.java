@@ -34,7 +34,7 @@ public class Game {
 	public Image dieImage2;
 
 
-	public static ImageContainer imgContainer = new ImageContainer();
+	public ImageContainer imgContainer = new ImageContainer();
 
 //	====================================================================================================================
 	/**
@@ -283,7 +283,7 @@ public class Game {
 	 * @param numPlayers integer specifying the number of players that will need images for their tokens
 	 * @return the array of images with the number of images specified by the number of players
 	 */
-	private static Image[] tokenImageArrayInitializer(int numPlayers) {
+	private Image[] tokenImageArrayInitializer(int numPlayers) {
 		// Initialize values to null so that we can reference them outside the scope of the try/catch
 		Image[] tokenImages = null;
 		// Wrap the image creation in a try/catch block to catch MalformedURLException
@@ -404,6 +404,9 @@ public class Game {
 		return 0;
 	}
 
+
+
+
 	/**
 	 *
 	 * @return true if there is time left in the game, false if the time is up
@@ -418,7 +421,7 @@ public class Game {
 
 	/**
 	 *
-	 * @returns the index of the winning player. If multiple players have the max net worth,
+	 * @return the index of the winning player. If multiple players have the max net worth,
 	 * the first player in the list with the max net worth wins
 	 */
 	public int checkWinner(){

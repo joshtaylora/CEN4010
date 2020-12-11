@@ -11,9 +11,16 @@ import java.util.ArrayList;
 //TODO CHECK BOARD TEST METHODS commented below
 
 //TODO ADD BOARD TEST METHODS checkOwnership, isThereTimeLeft, checkWinner
-class GameTest {
-/*
+class GameTest implements Runnable{
 	Board testBoard = new Board();
+
+	public void run() {
+
+	}
+
+	public static void main(String[] args) {
+
+	}
 
 	@Test
 	void testConstructor() {
@@ -26,12 +33,13 @@ class GameTest {
 
 	@Test
 	void testAdvancePlayerTile(){
-		Player testPlayer = new Player(0, testBoard.searchTile("Go"), null);
-		Game testGame = new Game(2, 30);
+		Player testPlayer = new Player("",0, testBoard.searchTile("Go"), null);
+		Game testGame;
+		testGame = new Game(2,
+				30);
 		testGame.advancePlayerTile(1);
 		assertEquals("Mediterranean Ave.", testPlayer.getCurrentTile().getName());
 	}
 
-*/
 
 }

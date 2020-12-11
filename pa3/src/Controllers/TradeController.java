@@ -47,6 +47,7 @@ public class TradeController {
     ChoiceBox<String> tradePlayerChoiceBox;
     @FXML
     Button initiateTradeButton;
+
 // =====================================================================================================================
 // ============================================ Global Variables =======================================================
 
@@ -64,8 +65,11 @@ public class TradeController {
 
     ArrayList<String> playerASelectedDeeds;
     ArrayList<String> playerADeedOptions;
+    ArrayList<Deed> playerATradeDeeds;
+
     ArrayList<String> playerBSelectedDeeds;
     ArrayList<String> playerBDeedOptions;
+    ArrayList<Deed> playerBTradeDeeds;
 
     ArrayList<ChoiceBox<String>> choiceBoxes;
 
@@ -76,19 +80,14 @@ public class TradeController {
 //        playerAProperty1ChoiceBox.getItems().add();
     }
 
-    /**
-     * Method to perform a trade between Player A and Player B
-     * @param playerA player that initiated the trade
-     * @param playerB player that is the recipient of the initial trade interaction from playerA
-     */
-    void performTrade(Player playerA, Player playerB) {
-        // Possibly make Trade Model class that will be used so that we can return Trade's to the Game Controller to
-        // update the game
-    }
+
 
     void populateTradeView(Player initiatingPlayer, Player receivingPlayer) {
         this.playerA = initiatingPlayer;
         this.playerB = receivingPlayer;
+
+        // Disable the confirm trade button from being used until both players have checked their confirm trade checkboxes
+        completeTradeButton.setDisable(true);
 
         // set the label to show the initiating player's name
         playerALabel.setText(this.playerA.getName());
@@ -103,6 +102,9 @@ public class TradeController {
         // initialize the selected and option array lists for player B
         playerBSelectedDeeds = new ArrayList<>();
         playerBDeedOptions = new ArrayList<>();
+
+        playerATradeDeeds = new ArrayList<>();
+        playerBTradeDeeds = new ArrayList<>();
 
         // Add all of the properties
         initDeedOptionsLists(initiatingPlayer);
@@ -146,6 +148,7 @@ public class TradeController {
      */
     private void initPlayerMoneyBox(Player player) {
         int playerMoney = player.getAccBalance();
+        int option0 = 0;
         int option1 = (int)Math.floor(playerMoney * 0.20);
         int option2 = (int)Math.floor(playerMoney * 0.35);
         int option3 = (int)Math.floor(playerMoney * 0.50);
@@ -154,10 +157,12 @@ public class TradeController {
         int option6 = (int)Math.floor(playerMoney * 0.95);
         // Add all of the possible monetary trade offer options to the choice box list of items
         if (player.getName().equals(this.playerA.getName())) {
-            playerAMoneyBox.getItems().addAll(option1, option2, option3, option4, option5, option6);
+            playerAMoneyBox.getItems().addAll(option0, option1, option2, option3, option4, option5, option6);
+            playerAMoneyBox.getSelectionModel().select(0);
         }
         else {
-            playerBMoneyBox.getItems().addAll(option1, option2, option3, option4, option5, option6);
+            playerBMoneyBox.getItems().addAll(option0, option1, option2, option3, option4, option5, option6);
+            playerBMoneyBox.getSelectionModel().select(0);
         }
 
     }
@@ -195,6 +200,22 @@ public class TradeController {
         else if (playerName.equals(playerB.getName())) {
             for (String deed : playerBDeedOptions) {
                 playerChoiceBox.getItems().add(deed);
+            }
+        }
+    }
+
+    private void addDeedToTrade(Player tradePlayer, String deedToTrade) {
+        for (PropertySet propertySet : tradePlayer.getPlayerPropertySetArray()) {
+            for (Deed deed : propertySet.getPropertiesInSet()) {
+                if (deed != null) {
+                    if (deed.getName().equals(deedToTrade.split(",")[0])) {
+                        if (tradePlayer.getName().equals(playerA.getName())) {
+                            playerATradeDeeds.add(deed);
+                        } else if (tradePlayer.getName().equals(playerB.getName())) {
+                            playerBTradeDeeds.add(deed);
+                        }
+                    }
+                }
             }
         }
     }
@@ -421,14 +442,117 @@ public class TradeController {
         playerBProperty3ChoiceBox.setValue(selectedItem);
     }
 
-
+    /**
+     * Event Listener for when player A checks the confirm trade checkbox. Once checked, it disables player A's
+     * inputs so that they can be prepared for the trading mechanism
+     * @param e the checkbox being checked or unchecked
+     */
     @FXML
     public void confirmTradeForPlayerA(Event e) {
-
+        if (playerAConfirmTradeCheckBox.isSelected()) {
+            disablePlayerControls(playerAProperty1ChoiceBox,
+                    playerAProperty2ChoiceBox,
+                    playerAProperty3ChoiceBox,
+                    playerAMoneyBox,
+                    playerASelectedDeeds,
+                    playerATradeOfferList);
+            // Check if both players are ready to complete trade
+            if (checkIfPlayersAreReadyToTrade()) {
+                completeTradeButton.setDisable(false);
+            }
+        }
     }
 
     @FXML
     public void confirmTradeForPlayerB(Event e) {
+        if (playerBConfirmTradeCheckBox.isSelected()) {
+            disablePlayerControls(playerBProperty1ChoiceBox,
+                    playerBProperty2ChoiceBox,
+                    playerBProperty3ChoiceBox,
+                    playerBMoneyBox,
+                    playerBSelectedDeeds,
+                    playerBTradeOfferList);
+            // Check if both players are ready to complete trade
+            if (checkIfPlayersAreReadyToTrade()) {
+                completeTradeButton.setDisable(false);
+                completeTradeButton.getStyleClass().remove("disableCompleteTradeButton");
+                completeTradeButton.getStyleClass().add("activeCompleteTradeButton");
 
+            }
+        }
     }
+
+    private void disablePlayerControls(ChoiceBox<String> property1ChoiceBox,
+                                       ChoiceBox<String> property2ChoiceBox,
+                                       ChoiceBox<String> property3ChoiceBox,
+                                       ChoiceBox<Integer> moneyBox,
+                                       ArrayList<String> selectedDeeds,
+                                       ListView<String> tradeOfferList) {
+        // If the checkbox is selected, disable the controls so we can lock in the trade offer
+        property1ChoiceBox.setDisable(true);
+        property2ChoiceBox.setDisable(true);
+        property3ChoiceBox.setDisable(true);
+        moneyBox.setDisable(true);
+        for (String input : selectedDeeds) {
+            tradeOfferList.getItems().add(input);
+        }
+        tradeOfferList.getItems().add("$ " + Integer.toString(moneyBox.getValue()));
+    }
+
+    /**
+     * Method that is used to check if both checkboxes have been checked to indicate both players are ready to trade
+     * @return boolean indicating if both checkboxes are checked
+     */
+    public boolean checkIfPlayersAreReadyToTrade() {
+        return playerAConfirmTradeCheckBox.isSelected() && playerBConfirmTradeCheckBox.isSelected();
+    }
+
+    @FXML
+    public void completeTrade(Event e) {
+        completeTradeButton.setDisable(true);
+        int pAMoney = playerAMoneyBox.getValue();
+        int pBMoney = playerBMoneyBox.getValue();
+        for (String pADeedStr : playerASelectedDeeds) {
+            addDeedToTrade(playerA, pADeedStr);
+        }
+        for (String pBDeedStr : playerBSelectedDeeds) {
+            addDeedToTrade(playerB, pBDeedStr);
+        }
+        performTrade(playerA, playerB, playerATradeDeeds, playerBTradeDeeds, pAMoney, pBMoney);
+
+        mainController.selectGameTab();
+        mainController.closeTradeTab();
+    }
+
+    public void performTrade(Player playerA,
+							 Player playerB,
+							 ArrayList<Deed> pADeeds,
+							 ArrayList<Deed> pBDeeds,
+							 int pAMoney,
+							 int pBMoney) {
+        playerA.setAccBalance(playerA.getAccBalance() - pAMoney);
+        playerB.setAccBalance(playerB.getAccBalance() + pAMoney);
+
+        playerB.setAccBalance(playerB.getAccBalance() - pBMoney);
+        playerA.setAccBalance(playerB.getAccBalance() + pBMoney);
+
+		// Remove deeds from player A first and add them to player B
+		transferDeedsFromPlayer(playerA, playerB, pADeeds);
+		transferDeedsFromPlayer(playerB, playerA, pBDeeds);
+    }
+    public void transferDeedsFromPlayer(Player removingPlayer, Player addingPlayer, ArrayList<Deed> playerDeeds) {
+		for (Deed removeDeed : playerDeeds) {
+            if (removeDeed != null) {
+                int removeDeedPSet = removeDeed.getPropertySet();
+                // remove the deed from the player's property set
+                removingPlayer.getPropertySetArray()[removeDeedPSet].removeProperty(removeDeed);
+                System.out.println("Successfully removed deed: " + removeDeed.getName()  + " from " + removingPlayer.getName());
+                addingPlayer.getPropertySetArray()[removeDeedPSet].addProperty(removeDeed);
+
+                System.out.println("Successfully traded deed: " + removeDeed.getName()  + " to " + addingPlayer.getName());
+
+                removeDeed.setOwner(addingPlayer);
+            }
+        }
+	}
 }

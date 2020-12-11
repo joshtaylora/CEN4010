@@ -84,7 +84,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <ChoiceBox fx:id="playerAMoneyBox" layoutX="199.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" />
+                                                      <ChoiceBox fx:id="playerAMoneyBox" layoutX="199.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0"  value="0"/>
                                                    </children>
                                                 </AnchorPane>
                                                 <AnchorPane>
@@ -153,7 +153,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <ChoiceBox fx:id="playerBMoneyBox" layoutX="200.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" />
+                                                      <ChoiceBox fx:id="playerBMoneyBox" layoutX="200.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" value="0" />
                                                    </children>
                                                 </AnchorPane>
                                                 <AnchorPane>
@@ -180,7 +180,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="189.0" prefWidth="994.0">
                <children>
-                  <Button fx:id="completeTradeButton" layoutX="409.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="177.0" styleClass="activePlayerSection" stylesheets="@CSS/PlayerStyle.css" text="Complete Trade">
+                  <Button fx:id="completeTradeButton" layoutX="409.0" mnemonicParsing="false" onAction="#completeTrade" prefHeight="72.0" prefWidth="177.0" styleClass="disableCompleteTradeButton" stylesheets="@CSS/PlayerStyle.css" text="Complete Trade">
                      <font>
                         <Font size="20.0" />
                      </font>

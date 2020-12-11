@@ -1,6 +1,7 @@
 
 .playerNum {
     -fx-border-color: black;
+    -fx-font-size: 16px;
     -fx-border-width: thick;
     -fx-color: #282828;
     -fx-background-color: #a89984;
@@ -15,4 +16,9 @@
 .gameBoard {
     -fx-border-width: 4px;
     -fx-border-color: black;
+}
+
+.railRoad {
+    -fx-font-size: 20;
+    -fx-font-style: oblique;
 }
