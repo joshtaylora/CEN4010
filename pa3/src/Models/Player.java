@@ -192,47 +192,14 @@ public class Player{
 			}
 		}
 		account = sum;
-		ret = sum;
+		ret = Integer.valueOf(sum);
 		return ret;
 	}
 
-	/**
-	 * this method is to initiate a trade to another player, trading properties, money or both. Starts off by prompting the player for the object of the
-	 * player they would like to trade with. After that the current players properties and money will pull up and they can choose what they want to trade.
-	 * After that the other players properties and money will pop up and the current player then chooses what they want to trade in return. Then all the
-	 * trade information will be sent to the other player using a method through the Controller. They the other player either accepts or rejects.
-	 * Upon accepting the method will transfer all properties and money. Upon rejection the method will just return.
-	 * @param tradePlayer
-	 * @param cPlayerMoney
-	 * @param tPlayerMoney
-	 * @param cPlayerDeeds
-	 * @param tPlayerDeeds
-	 */
-	public void performTrade(Player tradePlayer, int cPlayerMoney, int tPlayerMoney, Deed[] cPlayerDeeds, Deed[] tPlayerDeeds, boolean tradeResults) {
-		int i;
-		int cDeedsSize = cPlayerDeeds.length;
-		int tDeedsSize = tPlayerDeeds.length;
-		int tAccount = tradePlayer.getAccBalance();
-
-		if (tradeResults) {
-			account += tPlayerMoney;
-			account -= cPlayerMoney;
-			tAccount += cPlayerMoney;
-			tAccount -= tPlayerMoney;
-			tradePlayer.setAccBalance(tAccount);
-
-			//removing the properties from currentPlayer and adding them to tradePlayer
-			for (i = 0; i < cDeedsSize; i++) {
-				this.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].removeProperty(cPlayerDeeds[i]);
-				tradePlayer.playerPropertySetArray[cPlayerDeeds[i].getPropertySet()].addProperty(cPlayerDeeds[i]);
-			}
-			//removing the properties from tradePlayer and adding them to currentPlayer
-			for (i = 0; i < cDeedsSize; i++) {
-				tradePlayer.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].removeProperty(tPlayerDeeds[i]);
-				this.playerPropertySetArray[tPlayerDeeds[i].getPropertySet()].addProperty(tPlayerDeeds[i]);
-			}
-		}
-	}
+	/*
+	* REMOVED tradePlayer METHOD
+	* method removed because Player Objects do not directly interact with each other
+	*/
 
 	public String getName(){
 		return playerName;
