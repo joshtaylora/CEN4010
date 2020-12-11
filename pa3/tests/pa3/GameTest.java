@@ -35,16 +35,6 @@ class GameTest {
 		assertEquals("Mediterranean Ave.", testPlayer.getCurrentTile().getName());
 	}
 
-
-	@Test
-	void testTokenImageArrayInitializer(){
-		//make sure array indexes are not equal to null
-	}
-
-	@Test
-	void testPropertySetInitializer(){
-		//make sure array indexes are not equal to null
-	}
-
+	
 
 }
