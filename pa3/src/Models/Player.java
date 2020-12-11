@@ -88,13 +88,14 @@ public class Player{
 		switch (type) {
 			case "Deed":
 				Deed obj = (Deed) tile;
-				obj.setMortagaged();
+
 				if(obj.getMortgaged()){
 					this.account -= obj.getMortgageValue();
 				}
 				else{
 					this.account += obj.getMortgageValue();
 				}
+				obj.setMortagaged();
 				break;
 			case "RailRoad":
 				RailRoad obj2 = (RailRoad) tile;

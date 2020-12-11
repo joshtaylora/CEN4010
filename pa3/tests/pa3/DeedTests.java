@@ -72,6 +72,7 @@ public class DeedTests {
 
     @Test
     void testGetHouseCost (){
+        Player testPlayer = new Player("", 200, null, propertySetInitializer());
         Deed test = new Deed("Mediterranean Ave.",
                 60,
                 0,
@@ -85,6 +86,8 @@ public class DeedTests {
                 50,
                 50,
                 1);
+        testPlayer.purchaseProperty(test);
+        test.setHouses();
         int correct = 50;
 
          assertEquals(correct, test.getUpgradeCost());
@@ -92,6 +95,7 @@ public class DeedTests {
 
     @Test
     void testGetHotelCost (){
+        Player testPlayer = new Player("", 200, null, propertySetInitializer());
         Deed test = new Deed("Mediterranean Ave.",
                 60,
                 0,
@@ -105,6 +109,8 @@ public class DeedTests {
                 50,
                 50,
                 1);
+        testPlayer.purchaseProperty(test);
+        test.setHouses();
         int correct = 50;
 
          assertEquals(correct, test.getUpgradeCost());
@@ -241,6 +247,23 @@ public class DeedTests {
         //indicate that hotel owned
         test.setHouses();
         assertEquals(test.calcRent(), hotel);
+    }
+
+    private PropertySet[] propertySetInitializer() {
+        // initialize all of the property sets that will go in the array
+        PropertySet brown = new PropertySet(2);
+        PropertySet lightBlue = new PropertySet(3);
+        PropertySet pink = new PropertySet(3);
+        PropertySet orange = new PropertySet(3);
+        PropertySet red = new PropertySet(3);
+        PropertySet yellow = new PropertySet(3);
+        PropertySet green = new PropertySet(3);
+        PropertySet darkBlue = new PropertySet(2);
+        PropertySet railRoad = new PropertySet(4);
+        PropertySet utility = new PropertySet(2);
+
+        return new PropertySet[]{ brown, lightBlue, pink, orange, red, yellow, green, darkBlue, railRoad,
+                utility };
     }
 
 }
