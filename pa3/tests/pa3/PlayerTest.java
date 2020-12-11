@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 
+//TODO mortgageProperety, rentProperty, payTax, passGo, upgradeProperty, calcNetWorth
+
 class PlayerTest {
     int initial = 1500;
     String sysPath = System.getProperty("user.dir");
@@ -29,10 +31,10 @@ class PlayerTest {
 
     @Test
     void testPurchaseDeed() {
-        Player testPlayer = new Player(initial, testBoard.searchTile("Mediterranean Ave."), propertySetInitializer());
+        Player testPlayer = new Player("", initial, testBoard.searchTile("Mediterranean Ave."), propertySetInitializer());
         boolean buyDeed;
-        Deed testDeed2 = new Deed(60, 0, 2, 10, 30, 90,160,250,30,50,50,"Mediterranean Ave.", 1);
-        testPlayer.purchaseDeed(testDeed2);
+        Deed testDeed2 = new Deed("Mediterranean Ave.",60, 0, 2, 10, 30, 90,160,250,30,50,50, 1);
+        testPlayer.purchaseProperty(testBoard.searchTile("Mediterranean Ave."));
         int testBal = 1440;
         if( testPlayer.getAccBalance() == 1440){
             buyDeed = true;
@@ -47,7 +49,7 @@ class PlayerTest {
 
     @Test
     void resetDoubles() {
-        Player testPlayer = new Player(0, null, null);
+        Player testPlayer = new Player("",0, null, null);
         //Increment to ensure the value is reset
         boolean testDoubles;
         testPlayer.incrementDoubles();
@@ -63,7 +65,7 @@ class PlayerTest {
 
     @Test
     void incrementDoubles() {
-        Player testPlayer = new Player(0, null, null);
+        Player testPlayer = new Player("",0, null, null);
         boolean testInc;
         testPlayer.incrementDoubles();
         if(testPlayer.getDoubles() == 1){
@@ -79,7 +81,7 @@ class PlayerTest {
 
     @Test
     void increaseRailroads() {
-        Player testPlayer = new Player(0, null, null);
+        Player testPlayer = new Player("",0, null, null);
         boolean testRail;
         testPlayer.increaseRailroads();
         if(testPlayer.getNumRailroads() == 1){
@@ -93,7 +95,7 @@ class PlayerTest {
 
     @Test
     void decreaseRailroads() {
-        Player testPlayer = new Player(0, null, null);
+        Player testPlayer = new Player("",0, null, null);
         boolean testRail;
         testPlayer.increaseRailroads();
         testPlayer.increaseRailroads();
@@ -110,7 +112,7 @@ class PlayerTest {
 
     @Test
     void increaseUtilities() {
-        Player testPlayer = new Player(0, null, null);
+        Player testPlayer = new Player("",0, null, null);
         boolean testUtil;
         testPlayer.increaseUtilities();
         if(testPlayer.getNumUtilities() == 1){
@@ -123,7 +125,7 @@ class PlayerTest {
     }
 
     @Test
-    void decreaseUtilities() { Player testPlayer = new Player(0, null, null);
+    void decreaseUtilities() { Player testPlayer = new Player("",0, null, null);
         boolean testUtil;
         testPlayer.increaseUtilities();
         testPlayer.increaseUtilities();

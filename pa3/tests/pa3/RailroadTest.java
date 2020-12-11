@@ -55,7 +55,7 @@ public class RailroadTest {
 
     @Test
     void testCalcRent (){
-        Player testPlayer = new Player(0,null,null);
+        Player testPlayer = new Player("", 0,null,null);
         RailRoad test = new RailRoad("Reading Railroad", 5);
         test.setOwner(testPlayer);
 

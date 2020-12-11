@@ -13,7 +13,7 @@ class PropertySetTest {
     @Test
     void addProperty() {
         PropertySet testProperty = new PropertySet(2);
-        Deed testDeed2 = new Deed(60, 0, 2, 10, 30, 90,160,250,30,50,50,"Mediterranean Ave.", 1);
+        Deed testDeed2 = new Deed("Mediterranean Ave.",60, 0, 2, 10, 30, 90,160,250,30,50,50, 1);
         testProperty.addProperty(testDeed2);
         boolean testProp;
         if(testProperty.getCurrentNumProperties() == 1){
@@ -29,7 +29,7 @@ class PropertySetTest {
     @Test
     void searchProperties() {
         PropertySet testProperty = new PropertySet(2);
-        Deed test = new Deed(60,
+        Deed test = new Deed("Mediterranean Ave.",60,
                 0,
                 2,
                 10,
@@ -40,7 +40,7 @@ class PropertySetTest {
                 30,
                 50,
                 50,
-                "Mediterranean Ave.",
+
                 1);
         testProperty.addProperty(test);
         boolean testProp;
@@ -50,8 +50,8 @@ class PropertySetTest {
     @Test
     void removeProperty() {
         PropertySet testProperty = new PropertySet(2);
-        Deed testDeed1 = new Deed(60, 0, 4, 20, 60, 180, 320, 450, 30, 50, 50, "Baltic Ave.", 3);
-        Deed testDeed2 = new Deed(60, 0, 2, 10, 30, 90,160,250,30,50,50,"Mediterranean Ave.", 1);
+        Deed testDeed1 = new Deed("Baltic Ave.", 60, 0, 4, 20, 60, 180, 320, 450, 30, 50, 50,  3);
+        Deed testDeed2 = new Deed("Mediterranean Ave.",60, 0, 2, 10, 30, 90,160,250,30,50,50, 1);
         testProperty.addProperty(testDeed1);
         testProperty.addProperty(testDeed2);
         testProperty.removeProperty(testDeed1);
@@ -68,8 +68,8 @@ class PropertySetTest {
     @Test
     void checkMonopoly() {
         PropertySet testProperty = new PropertySet(2);
-        Deed testDeed1 = new Deed(60, 0, 4, 20, 60, 180, 320, 450, 30, 50, 50, "Baltic Ave.", 3);
-        Deed testDeed2 = new Deed(60, 0, 2, 10, 30, 90,160,250,30,50,50,"Mediterranean Ave.", 1);
+        Deed testDeed1 = new Deed("Baltic Ave.",60, 0, 4, 20, 60, 180, 320, 450, 30, 50, 50,  3);
+        Deed testDeed2 = new Deed("Mediterranean Ave.",60, 0, 2, 10, 30, 90,160,250,30,50,50, 1);
         testProperty.addProperty(testDeed1);
         testProperty.addProperty(testDeed2);
         assertTrue(testProperty.checkMonopoly());

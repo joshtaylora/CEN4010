@@ -49,7 +49,7 @@ class UtilityTests {
     @Test
     void testCalcRent (){
         Utility test = new Utility("Electric Company" ,12);
-        Player testPlayer = new Player(0,null,null);
+        Player testPlayer = new Player("",0,null,null);
         test.setOwner(testPlayer);
         testPlayer.increaseUtilities();
         int onerent = 4;

@@ -9,8 +9,11 @@ import Models.Board;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+//TODO CHECK BOARD TEST METHODS commented below
 
+//TODO ADD BOARD TEST METHODS checkOwnership, isThereTimeLeft, checkWinner
 class GameTest {
+/*
 	Board testBoard = new Board();
 
 	@Test
@@ -30,6 +33,6 @@ class GameTest {
 		assertEquals("Mediterranean Ave.", testPlayer.getCurrentTile().getName());
 	}
 
-
+*/
 
 }
