@@ -81,7 +81,7 @@ public class GameController {
     int currentPlayerIndex;
     boolean consecutiveTurn = false;
     ArrayList<Integer> playerTurnList;
-
+    ImageContainer imgContainer = new ImageContainer();
 //  Injects the menu controller into the game controller and begins the game
     void injectMenuController(MenuController menuController) {
         this.numberOfPlayers = menuController.numberOfPlayers;
@@ -287,7 +287,7 @@ public class GameController {
            //check who won and display winner
             int winner = game.checkWinner();
             updateBalance();
-            ImageContainer imgContainer = new ImageContainer();
+
             boardImage.setImage(imgContainer.getPlayerImage(winner));
 
             rollDiceButton.setVisible(false);
@@ -328,7 +328,7 @@ public class GameController {
         }
         this.mainController.addTradeTab();
         // use the main controller to switch the selected tab to the trade view
-        this.mainController.tabPane.getSelectionModel().select(this.mainController.tradeTab);
+        this.mainController.selectTradeTab();
         // call method in TradeController to populate the fields for the correct players
         this.mainController.tradeViewController.populateTradeView(game.getCurrentPlayer(), game.getPlayerObject(2));
     }

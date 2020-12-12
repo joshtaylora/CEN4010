@@ -55,8 +55,7 @@ public class MainController {
     @FXML TradeController tradeViewController;
 
 // =====================================================================================================================
-//  ===================================== Class variables needed for start method ======================================
-    ResourceManager resourceManager = new ResourceManager();
+
 
 
     public void init() {
@@ -112,6 +111,10 @@ public class MainController {
      */
     public void selectGameTab() {
         tabPane.getSelectionModel().select(gameTab);
+    }
+
+    public void selectTradeTab() {
+        tabPane.getSelectionModel().select(tradeTab);
     }
 
     /**

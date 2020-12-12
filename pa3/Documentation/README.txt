@@ -48,4 +48,7 @@ both Player's indicating they wish to perform the trade, and then subsequently c
 Button, it is then that the controller takes the Deeds and monetary amounts that both players involved in
 the trade are offering, and performs the necessary operations on the Player objects to result in the trade
 being successful.
+   Overall, the MVC pattern we utilized during project 3 ensured that project 4's focus on the facade
+structural pattern was a very easy transition for us once we got all of the PA3 components up and running.
+Because the interactions between
 

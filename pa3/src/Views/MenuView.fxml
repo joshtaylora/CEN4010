@@ -49,7 +49,8 @@
                   <ChoiceBox fx:id="timerChoiceBox" layoutX="99.0" layoutY="46.0" prefWidth="150.0" value="30 Minutes">
                       <items>
                           <FXCollections fx:factory="observableArrayList" >
-                              <String fx:value="1 Minute" />
+                              <String fx:value="5 Minutes" />
+                              <String fx:value="10 Minutes" />
                               <String fx:value="20 Minutes" />
                               <String fx:value="30 Minutes" />
                               <String fx:value="45 Minutes" />
